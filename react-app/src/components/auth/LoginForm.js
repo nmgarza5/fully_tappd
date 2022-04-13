@@ -5,7 +5,6 @@ import { login } from "../../store/session";
 
 const LoginForm = () => {
     const [errors, setErrors] = useState([]);
-    const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const user = useSelector((state) => state.session.user);
@@ -13,7 +12,7 @@ const LoginForm = () => {
 
     const onLogin = async (e) => {
         e.preventDefault();
-        const data = await dispatch(login(username, email, password));
+        const data = await dispatch(login(username, password));
         if (data) {
             setErrors(data);
         }
@@ -30,17 +29,6 @@ const LoginForm = () => {
                     <div key={ind}>{error}</div>
                 ))}
             </div>
-            <div>
-                <label htmlFor="email">Email</label>
-                <input
-                    name="email"
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            or
             <div>
                 <label htmlFor="username">Username</label>
                 <input
