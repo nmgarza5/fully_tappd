@@ -8,13 +8,13 @@ import styles from "./NavBar.module.css";
 import { showModal, setCurrentModal } from "../../store/modal";
 import ProfileDropdown from "../ProfileDropdown"
 
+
 const NavBar = () => {
     const sessionUser = useSelector((state) => state.session.user);
 
     const dispatch = useDispatch();
 
     const showLoginForm = () => {
-        console.log('SHOWEE')
         dispatch(setCurrentModal(LoginForm));
         dispatch(showModal());
     };
@@ -34,6 +34,7 @@ const NavBar = () => {
             <nav className={styles.container}>
                 <div className={styles.logo}>
                     <NavLink to="/" exact={true} className={styles.home_link}>
+                        <i className="fa-brands fa-untappd"></i>
                         {/* <Logo />  */}
                         <span>FullyTappd</span>
                     </NavLink>
