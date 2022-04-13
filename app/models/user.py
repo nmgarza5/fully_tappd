@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
     profile_image = db.relationship(
-        'Image', back_populates="users")
+        'Image', back_populates="users", cascade="all, delete-orphan", single_parent=True)
     breweries = db.relationship(
         'Brewery', back_populates="owner", cascade="all, delete-orphan")
 

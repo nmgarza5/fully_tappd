@@ -25,7 +25,8 @@ class Brewery(db.Model):
     updated_at = db.Column(
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    profile_image = db.relationship('Image', back_populates="breweries")
+    profile_image = db.relationship(
+        'Image', back_populates="breweries", cascade="all, delete-orphan", single_parent=True)
     owner = db.relationship("User", back_populates="breweries")
 
     def to_dict(self):

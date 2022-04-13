@@ -120,3 +120,11 @@ images = [
         image: "https://images.squarespace-cdn.com/content/v1/54613e97e4b00403fdda207f/1642450215996-ZWKKRZVR2NWTMG0V27RG/IMG_6569.jpg",
     },
 ];
+
+$.ajax({
+    url: "https://randomuser.me/api/",
+    dataType: "json",
+    success: function (data) {
+        console.log(data);
+    },
+});

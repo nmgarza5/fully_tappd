@@ -1,7 +1,7 @@
 from flask.cli import AppGroup
 
-from .images import seed_images
-from .breweries import seed_breweries
+from .images import seed_images, undo_images
+from .breweries import seed_breweries, undo_breweries
 from .users import seed_users, undo_users
 
 # Creates a seed group to hold our commands
@@ -22,7 +22,7 @@ def seed():
 
 @seed_commands.command('undo')
 def undo():
-    seed_images()
-    # seed_breweries()
-    # undo_users()
+    undo_images()
+    undo_breweries()
+    undo_users()
     # Add other undo functions here
