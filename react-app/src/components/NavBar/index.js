@@ -6,6 +6,7 @@ import SignUpForm from "../auth/SignUpForm";
 import styles from "./NavBar.module.css";
 
 import { showModal, setCurrentModal } from "../../store/modal";
+import ProfileDropdown from "../ProfileDropdown"
 
 const NavBar = () => {
     const sessionUser = useSelector((state) => state.session.user);
@@ -13,6 +14,7 @@ const NavBar = () => {
     const dispatch = useDispatch();
 
     const showLoginForm = () => {
+        console.log('SHOWEE')
         dispatch(setCurrentModal(LoginForm));
         dispatch(showModal());
     };
@@ -38,8 +40,7 @@ const NavBar = () => {
                 </div>
                 <div className={styles.right}>
                     <div className={styles.profile_icon}>
-                        {/* <ProfileDropdown /> */}
-                        Profile Icon
+                        <ProfileDropdown />
                     </div>
                 </div>
             </nav>
@@ -60,12 +61,12 @@ const NavBar = () => {
                 </div>
                 <div className={styles.right}>
                     <div>
-                        <div className={styles.signin} onClick={showLoginForm}>
+                        <div role='button' className={styles.signin} onClick={showLoginForm}>
                             Log In
                         </div>
                     </div>
                     <div>
-                        <div className={styles.signup} onClick={showSignUpForm}>
+                        <div role='button' className={styles.signup} onClick={showSignUpForm}>
                             Sign Up
                         </div>
                     </div>

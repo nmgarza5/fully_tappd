@@ -11,13 +11,13 @@
     z-index: 100;
   }
 
-  .logo {
+.logo {
     display: flex;
     justify-content: flex-start;
     padding-left: 40px;
   }
 
-.home_link {
+  .home_link {
     text-decoration: none;
     color: black;
     font-family: brandon-grotesque, sans-serif;
@@ -26,7 +26,7 @@
     align-items: center;
   }
 
-  .right {
+.right {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,3 +35,47 @@
     width: fit-content;
     justify-content: space-between;
   }
+
+  .signup {
+  background-color: #247f9e;
+  color: white;
+  text-decoration: none;
+  border-radius: 2px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-family: brandon-grotesque, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+.profile_icon {
+  cursor: pointer;
+}
+
+.calendar_icon {
+  cursor: pointer;
+}
+
+.signup:hover {
+    background-color: #2ba6ce;
+}
+
+.signin {
+  text-decoration: none;
+  border-radius: 2px;
+  padding: 5px 10px;
+  color: black;
+  box-shadow:0px 0px 0px 1px gray inset;
+  font-size: 14px;
+  font-family: brandon-grotesque, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+.signin:hover {
+  background-color: rgb(213, 213, 213);
+}
