@@ -1,39 +1,41 @@
 const CREATED_BREWERY = "/breweries/createdBrewery"
 const RECEIVED_BREWERIES = "/breweries/receivedBreweries"
-const RECEIVED__ONE_BREWERY = "/breweries/receivedOneBrewery"
-const UPDATED_BREWERY = "/breweries/updateddBrewery"
-const DELETE_BREWERY = "/breweries/deletedBrewery"
+// const RECEIVED__ONE_BREWERY = "/breweries/receivedOneBrewery"
+// const UPDATED_BREWERY = "/breweries/updateddBrewery"
+// const DELETE_BREWERY = "/breweries/deletedBrewery"
 
-const createdBrewery = (payload) => {
-    return {
-        type: CREATED_BREWERY,
-        payload,
-    }
-}
+// const createdBrewery = (payload) => {
+//     return {
+//         type: CREATED_BREWERY,
+//         payload,
+//     }
+// }
+
 const receivedBreweries = (payload) => {
     return {
         type: RECEIVED_BREWERIES,
         payload,
     }
 }
-const receivedOneBrewery = (payload) => {
-    return {
-        type: RECEIVED__ONE_BREWERY,
-        payload,
-    }
-}
-const updatedBrewery = (payload) => {
-    return {
-        type: UPDATED_BREWERY,
-        payload,
-    }
-}
-const deletedBrewery = (payload) => {
-    return {
-        type: DELETE_BREWERY,
-        payload,
-    }
-}
+
+// const receivedOneBrewery = (payload) => {
+//     return {
+//         type: RECEIVED__ONE_BREWERY,
+//         payload,
+//     }
+// }
+// const updatedBrewery = (payload) => {
+//     return {
+//         type: UPDATED_BREWERY,
+//         payload,
+//     }
+// }
+// const deletedBrewery = (payload) => {
+//     return {
+//         type: DELETE_BREWERY,
+//         payload,
+//     }
+// }
 
 export const receiveBreweries = () => async (dispatch) => {
 	const res = await fetch("/api/breweries/");

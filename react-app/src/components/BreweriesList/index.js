@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import styles from "./BreweriesList.module.css";
 
 
 const BreweriesList = () => {
-    const history = useHistory()
+    // const history = useHistory()
     const breweries = useSelector((state) => Object.values(state.breweries))
 
     console.log('BREWERIES', breweries)
