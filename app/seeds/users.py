@@ -1,21 +1,37 @@
 from app.models import db, User
+from werkzeug.security import generate_password_hash
+from faker import Faker
+from random import randint
+fake = Faker()
 
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
-
+        business_user=True,
+        username='keith-stone',
+        first_name='Keith',
+        last_name='Stone',
+        email='demo@demo.com',
+        password='password',
+        profile_image_id=41,
+        header='Always Smooth',
+        bio='The human embodiment of smoothness. Never without my case of ice cold stones and smooth pick up lines.')
     db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
 
+    for i in range(1, 19):
+        owners = User(
+            business_user=True,
+            username=f'{fake.first_name()} {randint(1,5)} {randint(1,5)} {randint(1,5)}',
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            email=fake.unique.email(),
+            hashed_password=generate_password_hash(fake.password()),
+            profile_image_id=range(42, 61),
+            header=fake.text(),
+            bio=fake.text())
+        db.session.add(owners)
     db.session.commit()
-
 
 # Uses a raw SQL query to TRUNCATE the users table.
 # SQLAlchemy doesn't have a built in function to do this
