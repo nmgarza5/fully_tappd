@@ -14,9 +14,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     header = db.Column(db.String(255), nullable=False)
-    bio = db.Column(db.Text)
+    bio = db.Column(db.Text, nullable=False)
     profile_image_id = db.Column(
-        db.Integer, db.ForeignKey('images.id'), nullable=False)
+        db.Integer, db.ForeignKey('images.id'))
     # banner_image_id = db.Column(db.Integer, db.ForeignKey('images.id'), nullable=True)
     # FORMAT: 2022-04-02 13:27:25.457314
     created_at = db.Column(db.DateTime, default=db.func.now())
@@ -48,5 +48,5 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'header': self.header,
             'bio': self.bio,
-            'profile_image': self.profile_image
+            # 'profile_image': self.profile_image
         }
