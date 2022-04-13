@@ -20,10 +20,11 @@ def seed_users():
     db.session.add(demo)
 
     for i in range(42, 61):
+        name = fake.first_name()
         owners = User(
             business_user=True,
-            username=f'{fake.first_name()}{randint(1,5)}{randint(1,5)}{randint(1,5)}',
-            first_name=fake.first_name(),
+            username=f'{name}{randint(1,5)}{randint(1,5)}{randint(1,5)}',
+            first_name=name,
             last_name=fake.last_name(),
             email=fake.unique.email(),
             hashed_password=generate_password_hash(fake.password()),
