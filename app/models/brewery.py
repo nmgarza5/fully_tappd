@@ -1,12 +1,13 @@
 from .db import db
 
 
-class Brewery(db.model):
+class Brewery(db.Model):
     __tablename__ = 'breweries'
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    profile_image_id = db.Column(db.Integer, db.ForeignKey('images.id'), nullable=False)
+    profile_image_id = db.Column(
+        db.Integer, db.ForeignKey('images.id'), nullable=False)
     # banner_image_id = db.Column(db.Integer, db.ForeignKey('images.id'), nullable=True)
     name = db.Column(db.String(255), nullable=False)
     header = db.Column(db.String(255), nullable=False)
@@ -16,13 +17,15 @@ class Brewery(db.model):
     city = db.Column(db.String(255), nullable=False)
     state = db.Column(db.String(255), nullable=False)
     postal_code = db.Column(db.String(10), nullable=False)
-    country = db.Column(db.String(10), nullable=False)
+    country = db.Column(db.String(255), nullable=False)
     phone = db.Column(db.String(10), nullable=False)
     website_url = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=db.func.now()) # FORMAT: 2022-04-02 13:27:25.457314
-    updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
+    # FORMAT: 2022-04-02 13:27:25.457314
+    created_at = db.Column(db.DateTime, default=db.func.now())
+    updated_at = db.Column(
+        db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    profile_image = db.relationship('Image', back_populates="breweries", cascade="all, delete-orphan")
+    profile_image = db.relationship('Image', back_populates="breweries")
     owner = db.relationship("User", back_populates="breweries")
 
     def to_dict(self):

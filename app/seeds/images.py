@@ -125,13 +125,18 @@ images = [
         "image": "https://images.squarespace-cdn.com/content/v1/54613e97e4b00403fdda207f/1642450215996-ZWKKRZVR2NWTMG0V27RG/IMG_6569.jpg",
     },
 
-];
+]
+
 
 def seed_images():
     for image in images:
-        new_image = Image(image=image)
+        new_image = Image(image=image['image'])
         db.session.add(new_image)
+
+
+
     db.session.commit()
+
 
 def undo_images():
     db.session.execute('TRUNCATE images RESTART IDENTITY CASCADE;')

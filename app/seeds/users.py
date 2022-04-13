@@ -19,15 +19,15 @@ def seed_users():
         bio='The human embodiment of smoothness. Never without my case of ice cold stones and smooth pick up lines.')
     db.session.add(demo)
 
-    for i in range(1, 19):
+    for i in range(42, 61):
         owners = User(
             business_user=True,
-            username=f'{fake.first_name()} {randint(1,5)} {randint(1,5)} {randint(1,5)}',
+            username=f'{fake.first_name()}{randint(1,5)}{randint(1,5)}{randint(1,5)}',
             first_name=fake.first_name(),
             last_name=fake.last_name(),
             email=fake.unique.email(),
             hashed_password=generate_password_hash(fake.password()),
-            profile_image_id=range(42, 61),
+            profile_image_id=i,
             header=fake.text(),
             bio=fake.text())
         db.session.add(owners)
@@ -38,6 +38,8 @@ def seed_users():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
+
+
 def undo_users():
     db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
     db.session.commit()
