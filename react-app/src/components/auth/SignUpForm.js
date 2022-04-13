@@ -1,94 +1,146 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { signUp } from "../../store/session";
 
 const SignUpForm = () => {
-  const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
-  const user = useSelector(state => state.session.user);
-  const dispatch = useDispatch();
+    const user = useSelector((state) => state.session.user);
 
-  const onSignUp = async (e) => {
-    e.preventDefault();
-    if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
-      if (data) {
-        setErrors(data)
-      }
+    const [errors, setErrors] = useState([]);
+    const [username, setUsername] = useState("");
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirm_password, setConfirmPassword] = useState("");
+    const [profile_image, setProfilePicture] = useState("");
+    const [header, setHeader] = useState("");
+    const [bio, setBio] = useState("");
+    const dispatch = useDispatch();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const userData = {
+            username,
+            first_name,
+            last_name,
+            email,
+            password,
+            confirm_password,
+            header,
+            bio,
+            profile_image,
+        };
+
+        console.log(userData);
+        if (password === confirm_password) {
+            console.group("PASSOWRD MATCH");
+            const data = await dispatch(signUp(userData));
+            if (data) {
+                setErrors(data);
+            }
+        }
+    };
+
+    if (user) {
+        return <Redirect to="/" />;
     }
-  };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
-  };
-
-  if (user) {
-    return <Redirect to='/' />;
-  }
-
-  return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label>User Name</label>
-        <input
-          type='text'
-          name='username'
-          onChange={updateUsername}
-          value={username}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
-    </form>
-  );
+    return (
+        <form>
+            <div>
+                {errors.map((error, ind) => (
+                    <div key={ind}>{error}</div>
+                ))}
+            </div>
+            <div>
+                <label>Profile Picture</label>
+                <input
+                    type="text"
+                    name="profile_image"
+                    onChange={(e) => setProfilePicture(e.target.value)}
+                    placeholder="Please enter the url to your Profile Picture"
+                    value={profile_image}
+                ></input>
+            </div>
+            <div>
+                <label>First Name</label>
+                <input
+                    type="text"
+                    name="first_name"
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={first_name}
+                ></input>
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input
+                    type="text"
+                    name="last_name"
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={last_name}
+                ></input>
+            </div>
+            <div>
+                <label>User Name</label>
+                <input
+                    type="text"
+                    name="username"
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                ></input>
+            </div>
+            <div>
+                <label>Email</label>
+                <input
+                    type="text"
+                    name="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                ></input>
+            </div>
+            <div>
+                <label>Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                ></input>
+            </div>
+            <div>
+                <label>Confirm Password</label>
+                <input
+                    type="password"
+                    name="confirm_password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    value={confirm_password}
+                    required={true}
+                ></input>
+            </div>
+            <div>
+                <label>Header</label>
+                <input
+                    type="text"
+                    name="header"
+                    onChange={(e) => setHeader(e.target.value)}
+                    value={header}
+                    required={true}
+                ></input>
+            </div>
+            <div>
+                <label>Bio</label>
+                <input
+                    type="text"
+                    name="bio"
+                    onChange={(e) => setBio(e.target.value)}
+                    value={bio}
+                    required={true}
+                ></input>
+            </div>
+            <button onClick={handleSubmit}>Sign Up</button>
+        </form>
+    );
 };
 
 export default SignUpForm;
