@@ -1,7 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import styles from "./Navbar.module.css";
+import LoginForm from "../auth/LoginForm";
+import SignUpForm from "../auth/SignUpForm";
+import styles from "./NavBar.module.css";
+
+import { showModal, setCurrentModal } from "../../store/modal";
 
 const NavBar = () => {
     const sessionUser = useSelector((state) => state.session.user);
@@ -70,3 +74,5 @@ const NavBar = () => {
         );
     }
 };
+
+export default NavBar;
