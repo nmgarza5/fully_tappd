@@ -8,32 +8,33 @@ const SignUpForm = () => {
 
     const [errors, setErrors] = useState([]);
     const [username, setUsername] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [profilePicture, setProfilePicture] = useState("");
+    const [confirm_password, setConfirmPassword] = useState("");
+    const [profile_image, setProfilePicture] = useState("");
     const [header, setHeader] = useState("");
     const [bio, setBio] = useState("");
     const dispatch = useDispatch();
 
-    const onSignUp = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
         const userData = {
-            profilePicture,
             username,
-            firstName,
-            lastName,
+            first_name,
+            last_name,
             email,
             password,
-            confirmPassword,
+            confirm_password,
             header,
             bio,
+            profile_image,
         };
 
-        if (password === confirmPassword) {
+        console.log(userData);
+        if (password === confirm_password) {
+            console.group("PASSOWRD MATCH");
             const data = await dispatch(signUp(userData));
             if (data) {
                 setErrors(data);
@@ -46,7 +47,7 @@ const SignUpForm = () => {
     }
 
     return (
-        <form onSubmit={onSignUp}>
+        <form>
             <div>
                 {errors.map((error, ind) => (
                     <div key={ind}>{error}</div>
@@ -56,28 +57,28 @@ const SignUpForm = () => {
                 <label>Profile Picture</label>
                 <input
                     type="text"
-                    name="username"
+                    name="profile_image"
                     onChange={(e) => setProfilePicture(e.target.value)}
                     placeholder="Please enter the url to your Profile Picture"
-                    value={profilePicture}
+                    value={profile_image}
                 ></input>
             </div>
             <div>
                 <label>First Name</label>
                 <input
                     type="text"
-                    name="firstName"
+                    name="first_name"
                     onChange={(e) => setFirstName(e.target.value)}
-                    value={firstName}
+                    value={first_name}
                 ></input>
             </div>
             <div>
                 <label>Last Name</label>
                 <input
                     type="text"
-                    name="lastName"
+                    name="last_name"
                     onChange={(e) => setLastName(e.target.value)}
-                    value={lastName}
+                    value={last_name}
                 ></input>
             </div>
             <div>
@@ -113,7 +114,7 @@ const SignUpForm = () => {
                     type="password"
                     name="confirm_password"
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    value={confirmPassword}
+                    value={confirm_password}
                     required={true}
                 ></input>
             </div>
@@ -137,7 +138,7 @@ const SignUpForm = () => {
                     required={true}
                 ></input>
             </div>
-            <button type="submit">Sign Up</button>
+            <button onClick={handleSubmit}>Sign Up</button>
         </form>
     );
 };
