@@ -6,12 +6,11 @@ import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
-import User from "./components/User";
 import { authenticate } from "./store/session";
 import { PageWrapper } from "../src/components/PageWrapper";
 import Modal from "./components/Modal/Modal";
 import { Splashpage } from "./components/Splashpage";
+import { receiveBreweries } from "./store/breweries";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -20,6 +19,7 @@ function App() {
     useEffect(() => {
         (async () => {
             await dispatch(authenticate());
+            await dispatch(receiveBreweries())
             setLoaded(true);
         })();
     }, [dispatch]);

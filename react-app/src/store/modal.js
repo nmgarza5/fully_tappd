@@ -27,7 +27,6 @@ const initialState = {
     display: false
 }
 export default function modals (state = initialState, action) {
-    console.log('ACTION ----', action.payload)
     switch(action.type) {
         case SHOW_MODAL: {
             return {

@@ -32,8 +32,10 @@ class Brewery(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'owner': self.owner,
-            'profile_image': self.profile_image,
+            'name': self.name,
+            'owner_id': self.owner_id,
+            'owner': self.owner.to_dict(),
+            'profile_image': self.profile_image.image,
             'header': self.header,
             'description': self.description,
             'brewery_type': self.brewery_type,
