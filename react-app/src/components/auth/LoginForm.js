@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
+import { setCurrentModal, hideModal } from "../../store/modal";
 
 const LoginForm = () => {
     const [errors, setErrors] = useState([]);
@@ -16,6 +17,7 @@ const LoginForm = () => {
         if (data) {
             setErrors(data);
         }
+        dispatch(hideModal());
     };
 
     if (user) {

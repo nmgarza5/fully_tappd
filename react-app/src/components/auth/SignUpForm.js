@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { setCurrentModal, hideModal } from "../../store/modal";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 
@@ -32,13 +33,13 @@ const SignUpForm = () => {
             profile_image,
         };
 
-        console.log(userData);
         if (password === confirm_password) {
             console.group("PASSOWRD MATCH");
             const data = await dispatch(signUp(userData));
             if (data) {
                 setErrors(data);
             }
+            dispatch(hideModal());
         }
     };
 
