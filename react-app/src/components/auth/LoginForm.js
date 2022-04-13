@@ -11,7 +11,7 @@ const LoginForm = () => {
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
 
-    const onLogin = async (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(username, password));
         if (data) {
@@ -25,7 +25,7 @@ const LoginForm = () => {
     }
 
     return (
-        <form onSubmit={onLogin}>
+        <form >
             <div>
                 {errors.map((error, ind) => (
                     <div key={ind}>{error}</div>
@@ -50,7 +50,7 @@ const LoginForm = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit">Login</button>
+                <div role='button' onClick={handleClick}>Login</div>
             </div>
         </form>
     );
