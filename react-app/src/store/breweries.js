@@ -77,7 +77,7 @@ export const receiveOneBrewery = (breweryId) => async (dispatch) => {
 export const updateBrewery =
 	({ formData, id }) =>
 	async (dispatch) => {
-		const res = await fetch(`/api/brewery/${id}`, {
+		const res = await fetch(`/api/breweries/${id}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(formData),

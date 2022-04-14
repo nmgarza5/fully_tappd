@@ -68,6 +68,8 @@ def breweryUpdate(id):
       image = Image.query.filter(Image.image == profile_image).first()
       profile_image = Image.query.get(image.id)
 
+    print('\n\nBEFore - SUCCESS', brewery, '\n\n')
+
     if form.validate_on_submit():
         brewery.owner_id = current_user.id,
         brewery.name = form.data['name'],
@@ -83,7 +85,7 @@ def breweryUpdate(id):
         brewery.website_url = form.data['website_url']
         brewery.profile_image = profile_image
         db.session.commit()
-      # print('\n\nREST - SUCCESS', restaurant, '\n\n')
+        print('\n\nREST - SUCCESS', brewery, '\n\n')
         return brewery.to_dict()
     else:
       return {'errors': error_generator(form.errors)}, 400
