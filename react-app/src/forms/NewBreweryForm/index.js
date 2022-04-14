@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { createBrewery, updateBrewery } from "../../store/breweries"
+import { createBrewery} from "../../store/breweries"
 import styles from "./NewBreweryForm.module.css"
 import { hideModal } from "../../store/modal"
 
