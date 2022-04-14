@@ -7,10 +7,10 @@ class Brewery(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     profile_image = db.Column(db.String(2048), nullable=False)
-    banner_image_id = db.Column(db.String(2048), nullable=False)
+    banner_image = db.Column(db.String(2048), nullable=True)
     name = db.Column(db.String(255), nullable=False)
     header = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.Text)
+    description = db.Column(db.Text, nullable=False)
     brewery_type = db.Column(db.String(50), nullable=False)
     street = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(255), nullable=False)
@@ -24,7 +24,6 @@ class Brewery(db.Model):
     updated_at = db.Column(
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    profile_image = db.relationship('Image', back_populates="brewery_image", cascade="all, delete-orphan", single_parent=True)
     owner = db.relationship("User", back_populates="breweries")
 
     def to_dict(self):
