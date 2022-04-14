@@ -51,3 +51,39 @@ def create_brewery():
     return new_brewery.to_dict()
   else:
     return {'errors': error_generator(form.errors)}, 400
+
+
+
+@brewery_routes.route('/<int:id>', methods=['PUT'])
+def breweryUpdate(id):
+    form = BreweryForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    req_image = request.json['profile_image']
+    # print('\n\nREQUEST--------', request.json, '\n\n')
+    brewery = Brewery.query.get(id)
+
+    if brewery.profile_image != req_image:
+      profile_image = Image(image=profile_image)
+    else:
+      image = Image.query.filter(Image.image == profile_image).first()
+      profile_image = Image.query.get(image.id)
+
+    if form.validate_on_submit():
+        brewery.owner_id = current_user.id,
+        brewery.name = form.data['name'],
+        brewery.header = form.data['header'],
+        brewery.description = form.data['description'],
+        brewery.brewery_type = form.data['brewery_type'],
+        brewery.street = form.data['street'],
+        brewery.city = form.data['city'],
+        brewery.state = form.data['state'],
+        brewery.postal_code = form.data['postal_code'],
+        brewery.country = form.data['country'],
+        brewery.phone = form.data['phone'],
+        brewery.website_url = form.data['website_url']
+        brewery.profile_image = profile_image
+        db.session.commit()
+      # print('\n\nREST - SUCCESS', restaurant, '\n\n')
+        return brewery.to_dict()
+    else:
+      return {'errors': error_generator(form.errors)}, 400
