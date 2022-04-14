@@ -12,7 +12,6 @@ import { hideModal } from "../../store/modal"
 export const BreweryForm = ({brewery}) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-
     const [name, setName] = useState(brewery?.name || "");
 	const [header, setHeader] = useState(brewery?.header || "");
 	const [description, setDescription] = useState(brewery?.description || "");
