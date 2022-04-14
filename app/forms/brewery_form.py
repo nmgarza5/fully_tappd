@@ -37,6 +37,6 @@ class BreweryForm(FlaskForm):
     city = StringField('City', validators=[DataRequired(), Length(min=0, max=255)])
     postal_code = StringField('Postal Code', validators=[DataRequired()])
     country = StringField('Country', validators=[DataRequired(), Length(min=0, max=255)])
-    phone_number = StringField('Phone Number', validators=[DataRequired(), valid_phone_number])
+    phone = StringField('Phone Number', validators=[DataRequired(), valid_phone_number])
     website_url = StringField('Website', validators=[Length(min=0, max=2048)])
     submit = SubmitField('Submit')

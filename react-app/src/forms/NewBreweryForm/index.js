@@ -19,12 +19,12 @@ const NewBreweryForm = () => {
 
 	const [header, setHeader] = useState("");
 	const [description, setDescription] = useState("");
-	const [brewery_type, setBreweryType] = useState("Micro")
+	const [brewery_type, setBreweryType] = useState("")
 	const [street, setStreet] = useState("");
 	const [city, setCity] = useState("");
 	const [postal_code, setPostalCode] = useState("");
 	const [country, setCountry] = useState("");
-	const [phone_number, setPhoneNumber] = useState("");
+	const [phone, setPhone] = useState("");
 	const [website_url, setWebsiteUrl] = useState("");
 	const [profile_image, setProfileImage] = useState("");
 
@@ -46,7 +46,7 @@ const NewBreweryForm = () => {
 			city,
 			postal_code,
 			country,
-			phone_number,
+			phone,
 			website_url,
 			profile_image
 		}
@@ -55,7 +55,7 @@ const NewBreweryForm = () => {
 			? setErrors(["Please provide your Brewery name."])
 			: !profile_image
 			? setErrors(["Please provide a url for your image."])
-			: !phone_number
+			: !phone
 			? setErrors(["Please provide your phone number."])
 			: !street
 			? setErrors(["Please provide your street address."])
@@ -137,10 +137,10 @@ const NewBreweryForm = () => {
 							selected={brewery_type}
 							onChange={(e) => setBreweryType(e.target.value)}
 						>
-							<option value="micro">Micro</option>
-							<option value="brewpub">BrewPub</option>
-							<option value="regional">Regional</option>
-							<option value="large">Large</option>
+							<option value="micro">micro</option>
+							<option value="brewpub">brewPub</option>
+							<option value="regional">regional</option>
+							<option value="large">large</option>
 						</select>
 					</div>
 					<div className={styles.input_container}>
@@ -196,16 +196,16 @@ const NewBreweryForm = () => {
 						></input>
 					</div>
 					<div className={styles.input_container}>
-						<label htmlFor="phone_number">
+						<label htmlFor="phone">
 							Phone Number
 						</label>
 						<input
 							type="text"
-							name="phone_number"
-							value={phone_number}
+							name="phone"
+							value={phone}
 							placeholder="Please enter 10 numbers. No special characters."
 							required
-							onChange={(e) => setPhoneNumber(e.target.value)}
+							onChange={(e) => setPhone(e.target.value)}
 						></input>
 					</div>
 					<div className={styles.input_container}>
