@@ -18,14 +18,16 @@ def breweries():
   breweries = Brewery.query.all()
   return {'breweries': [brewery.to_dict() for brewery in breweries]}
 
+
+@brewery_routes.route('/<int:id>', methods=["GET"])
+def brewery(id):
+  brewery = Brewery.query.get(id)
+  return brewery.to_dict()
+
 @brewery_routes.route('/', methods=['POST'])
 def create_brewery():
   form = BreweryForm()
   profile_image = request.json['profile_image']
-
-  print('REQ ----', request.json, '\n\n')
-  print('REQ ----', form.data['brewery_type'], '\n\n')
-
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     new_image = Image(image=profile_image)
@@ -37,6 +39,7 @@ def create_brewery():
       brewery_type = form.data['brewery_type'],
       street = form.data['street'],
       city = form.data['city'],
+      state = form.data['state'],
       postal_code = form.data['postal_code'],
       country = form.data['country'],
       phone = form.data['phone'],

@@ -1,22 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styles from "./BreweriesList.module.css";
-import NewBreweryForm from "../../forms/NewBreweryForm";
+import { CreateBrewery } from "../CreateBrewery"
 import { showModal, setCurrentModal } from "../../store/modal";
 
 
 
 const BreweriesList = () => {
-    // const history = useHistory()
+    const history = useHistory()
 	const dispatch = useDispatch()
     const breweries = useSelector((state) => Object.values(state.breweries))
-
-
-	const createBrewery = () => {
-		dispatch(setCurrentModal(NewBreweryForm))
-		dispatch(showModal());
-	}
+	const createBrewery = () => history.push('/new-brewery')
 
 	return (
 		<div className={styles.container}>

@@ -40,6 +40,7 @@ class Brewery(db.Model):
             'brewery_type': self.brewery_type,
             'street': self.street,
             'city': self.city,
+            'state': self.state,
             'postal_code': self.postal_code,
             'country': self.country,
             'phone': self.phone,

@@ -2,14 +2,14 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { createBrewery} from "../../store/breweries"
-import styles from "./NewBreweryForm.module.css"
+import styles from "./BreweryForm.module.css"
 import { hideModal } from "../../store/modal"
 
 
 
 
 
-const NewBreweryForm = () => {
+export const BreweryForm = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -22,6 +22,7 @@ const NewBreweryForm = () => {
 	const [brewery_type, setBreweryType] = useState("")
 	const [street, setStreet] = useState("");
 	const [city, setCity] = useState("");
+	const [state, setState] = useState("");
 	const [postal_code, setPostalCode] = useState("");
 	const [country, setCountry] = useState("");
 	const [phone, setPhone] = useState("");
@@ -44,6 +45,7 @@ const NewBreweryForm = () => {
 			brewery_type,
 			street,
 			city,
+			state,
 			postal_code,
 			country,
 			phone,
@@ -78,6 +80,7 @@ const NewBreweryForm = () => {
 			if (newBrewery.errors) {
 				setErrors(newBrewery.errors);
 			} else {
+				dispatch(hideModal());
 				history.push(`/breweries/${newBrewery.id}`);
 			}
 	};
@@ -86,7 +89,6 @@ const NewBreweryForm = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.form_entries}>
-				<h2>Brewery Information</h2>
 				<ul>
 					{errors &&
 						errors.map((error) => (
@@ -170,6 +172,17 @@ const NewBreweryForm = () => {
 						></input>
 					</div>
 					<div className={styles.input_container}>
+						<label htmlFor="state">State</label>
+						<input
+							name="state"
+							type="text"
+							placeholder="What state are you in?."
+							value={state}
+							required
+							onChange={(e) => setState(e.target.value)}
+						></input>
+					</div>
+					<div className={styles.input_container}>
 						<label htmlFor="postal_code">
 							Zip Code
 						</label>
@@ -185,7 +198,7 @@ const NewBreweryForm = () => {
 						></input>
 					</div>
 					<div className={styles.input_container}>
-						<label htmlFor="country">County</label>
+						<label htmlFor="country">Country</label>
 						<input
 							name="country"
 							type="text"
@@ -258,4 +271,4 @@ const NewBreweryForm = () => {
 	)
 }
 
-export default NewBreweryForm
+// export default BreweryForm
