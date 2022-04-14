@@ -10,6 +10,7 @@ class Image(db.Model):
     brewery_image = db.relationship('Brewery', back_populates="profile_image", cascade="all, delete-orphan")
     user_image = db.relationship('User', back_populates="profile_image", cascade="all, delete-orphan")
 
+
     def to_dict(self):
         return {
             'id': self.id,
