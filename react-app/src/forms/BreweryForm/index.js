@@ -25,6 +25,7 @@ export const BreweryForm = ({brewery}) => {
 	const [phone, setPhone] = useState(brewery?.phone || "");
 	const [website_url, setWebsiteUrl] = useState(brewery?.website_url || "");
 	const [profile_image, setProfileImage] = useState(brewery?.profile_image || "");
+	const [banner_image, setBannerImage] = useState(brewery?.banner_image || "");
 	const [errors, setErrors] = useState([]);
 
 	const handleClick_Edit = () => {
@@ -50,7 +51,8 @@ export const BreweryForm = ({brewery}) => {
 			country,
 			phone,
 			website_url,
-			profile_image
+			profile_image,
+			banner_image
 		}
 
 		!name
@@ -242,6 +244,18 @@ export const BreweryForm = ({brewery}) => {
 							required
 							onChange={(e) =>
 								setProfileImage(e.target.value)
+							}
+						></input>
+					</div>
+					<div className={styles.input_container}>
+						<label htmlFor="banner_image">Banner Image</label>
+						<input
+							type="banner_image"
+							name="banner_image"
+							placeholder='Image format must be ".jpg" ".jpeg" or ".png" or ".gif".'
+							value={banner_image}
+							onChange={(e) =>
+								setBannerImage(e.target.value)
 							}
 						></input>
 					</div>

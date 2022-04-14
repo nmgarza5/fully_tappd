@@ -22,7 +22,6 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    profile_image = db.relationship('Image', back_populates="user_image")
     breweries = db.relationship('Brewery', back_populates="owner")
 
     @property
@@ -53,5 +52,6 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'header': self.header,
             'bio': self.bio,
-            'profile_image': self.profile_image.image
+            'profile_image': self.profile_image,
+            'banner_image': self.banner_image
         }
