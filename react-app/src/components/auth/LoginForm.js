@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
-import { hideModal } from "../../store/modal";
+import SignUpForm from "./SignUpForm";
+import { setCurrentModal, hideModal } from "../../store/modal";
+import styles from "./Auth.module.css";
 
 const LoginForm = () => {
     const [errors, setErrors] = useState([]);
@@ -11,7 +13,7 @@ const LoginForm = () => {
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
 
-    const handleClick = async (e) => {
+    const onLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(username, password));
         if (data) {
@@ -20,39 +22,74 @@ const LoginForm = () => {
         dispatch(hideModal());
     };
 
+    const loginDemo = async (e) => {
+		e.preventDefault();
+		const data = await dispatch(login("keith-stone", "password"));
+		if (data) return setErrors(data);
+		dispatch(hideModal());
+	};
+
+    const showSignUpForm = () => {
+		dispatch(setCurrentModal(SignUpForm));
+	};
+
     if (user) {
         return <Redirect to="/" />;
     }
 
     return (
-        <form >
-            <div>
-                {errors.map((error, ind) => (
-                    <div key={ind}>{error}</div>
-                ))}
-            </div>
-            <div>
-                <label htmlFor="username">Username</label>
-                <input
-                    name="username"
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Password</label>
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <div role='button' onClick={handleClick}>Login</div>
-            </div>
-        </form>
+        <div className={styles.parent}>
+            <h4>Welcome back! Please login.</h4>
+            <form className={styles.form_element}>
+                {errors.length > 0 && (
+                    <div className={styles.error_container}>
+                        {errors.map((error, i) => (
+                            <div key={i}>{error}</div>
+                        ))}
+                    </div>
+                )}
+                <div className={styles.fields}>
+                    <div >
+                        <label htmlFor="username" >Username</label>
+                        <input
+                            name="username"
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <div
+					className={styles.div_button}
+					onClick={onLogin}
+				>
+					Login
+				</div>
+				<div
+					className={styles.div_button}
+					onClick={loginDemo}
+				>
+					Demo User
+				</div>
+				<div
+					className={styles.switch}
+					onClick={showSignUpForm}
+				>
+					Don't have an account? Sign up!
+				</div>
+            </form>
+        </div>
     );
 };
 
