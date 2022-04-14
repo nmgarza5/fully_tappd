@@ -22,7 +22,6 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    breweries = db.relationship('Brewery', back_populates="owner")
 
     @property
     def password(self):
