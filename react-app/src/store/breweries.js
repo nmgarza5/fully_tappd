@@ -1,8 +1,8 @@
 const CREATED_BREWERY = "/breweries/createdBrewery"
 const RECEIVED_BREWERIES = "/breweries/receivedBreweries"
-// const RECEIVED__ONE_BREWERY = "/breweries/receivedOneBrewery"
-// const UPDATED_BREWERY = "/breweries/updateddBrewery"
-// const DELETE_BREWERY = "/breweries/deletedBrewery"
+const RECEIVED__ONE_BREWERY = "/breweries/receivedOneBrewery"
+const UPDATED_BREWERY = "/breweries/updateddBrewery"
+const DELETED_BREWERY = "/breweries/deletedBrewery"
 
 const createdBrewery = (payload) => {
     return {
@@ -18,24 +18,26 @@ const receivedBreweries = (payload) => {
     }
 }
 
-// const receivedOneBrewery = (payload) => {
-//     return {
-//         type: RECEIVED__ONE_BREWERY,
-//         payload,
-//     }
-// }
-// const updatedBrewery = (payload) => {
-//     return {
-//         type: UPDATED_BREWERY,
-//         payload,
-//     }
-// }
-// const deletedBrewery = (payload) => {
-//     return {
-//         type: DELETE_BREWERY,
-//         payload,
-//     }
-// }
+const receivedOneBrewery = (payload) => {
+    return {
+        type: RECEIVED__ONE_BREWERY,
+        payload,
+    }
+}
+
+const updatedBrewery = (payload) => {
+    return {
+        type: UPDATED_BREWERY,
+        payload,
+    }
+}
+
+const deletedBrewery = (payload) => {
+    return {
+        type: DELETED_BREWERY,
+        payload,
+    }
+}
 
 export const receiveBreweries = () => async (dispatch) => {
 	const res = await fetch("/api/breweries/");
@@ -47,14 +49,11 @@ export const receiveBreweries = () => async (dispatch) => {
 };
 
 export const createBrewery = (data) => async (dispatch) => {
-	console.log('DATA---', data)
 	const res = await fetch("/api/breweries/", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(data),
 	});
-
-	console.log('RES', res)
 	const newBrewery = await res.json();
 	if (newBrewery.errors) {
 		return newBrewery;
@@ -64,15 +63,44 @@ export const createBrewery = (data) => async (dispatch) => {
 	}
 };
 
-// export const receiveOneRestaurant = (restaurantId) => async (dispatch) => {
-// 	const res = await fetch(`/api/restaurants/${restaurantId}`);
+export const receiveOneBrewery = (breweryId) => async (dispatch) => {
+	const res = await fetch(`/api/breweries/${breweryId}`);
+		const brewery = await res.json();
+		if (brewery.errors) {
+			return brewery
+		} else {
+			dispatch(receivedOneBrewery(brewery));
+			return brewery;
+		}
+};
 
-// 	if (res.ok) {
-// 		const restaurant = await res.json();
-// 		dispatch(oneRestaurantReceived(restaurant));
-// 		return restaurant;
-// 	}
-// };
+export const updateBrewery =
+	({ formData, id }) =>
+	async (dispatch) => {
+		const res = await fetch(`/api/breweries/${id}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(formData),
+		});
+
+		const update = await res.json();
+		if (update.errors) {
+			return update
+		} else {
+			dispatch(updatedBrewery(update));
+			return update;
+		}
+	};
+
+	export const deleteBrewery = (breweryId) => async (dispatch) => {
+		const res = await fetch(`/api/breweries/${breweryId}`, {
+			method: "DELETE",
+		});
+		const removedBrewery = await res.json();
+		dispatch(deletedBrewery(removedBrewery));
+		return removedBrewery;
+	};
+
 
 const breweriesReducer = (state = {}, action) => {
 	const newState = { ...state };
@@ -86,6 +114,18 @@ const breweriesReducer = (state = {}, action) => {
 			action.payload.forEach(
 				(restaurant) => (newState[restaurant.id] = restaurant)
 			);
+			return newState;
+		}
+		case RECEIVED__ONE_BREWERY: {
+			newState[action.payload.id] = action.payload;
+			return newState;
+		}
+		case UPDATED_BREWERY: {
+			newState[action.payload?.id] = action.payload;
+			return newState;
+		}
+		case DELETED_BREWERY: {
+			delete newState[action.payload.brewery.id];
 			return newState;
 		}
 		default:
