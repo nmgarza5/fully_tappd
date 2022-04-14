@@ -62,8 +62,6 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('\n\n P IMG --', form.data, '\n\n')
-    print('\n\n ERROR --', form.errors, '\n\n')
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
@@ -76,9 +74,6 @@ def sign_up():
             profile_image=form.data['profile_image'],
             banner_image=form.data['banner_image']
         )
-
-        print('\n\n USER --\n', user, '\n\n')
-
         db.session.add(user)
         db.session.commit()
         login_user(user)

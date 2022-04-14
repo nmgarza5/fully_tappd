@@ -1,7 +1,7 @@
 const CREATED_BREWERY = "/breweries/createdBrewery"
 const RECEIVED_BREWERIES = "/breweries/receivedBreweries"
 const RECEIVED__ONE_BREWERY = "/breweries/receivedOneBrewery"
-const UPDATED_BREWERY = "/breweries/updateddBrewery"
+const UPDATED_BREWERY = "/breweries/updatedBrewery"
 const DELETED_BREWERY = "/breweries/deletedBrewery"
 
 const createdBrewery = (payload) => {
@@ -112,7 +112,7 @@ const breweriesReducer = (state = {}, action) => {
 		}
 		case RECEIVED_BREWERIES: {
 			action.payload.forEach(
-				(restaurant) => (newState[restaurant.id] = restaurant)
+				(brewery) => (newState[brewery.id] = brewery)
 			);
 			return newState;
 		}
@@ -125,6 +125,9 @@ const breweriesReducer = (state = {}, action) => {
 			return newState;
 		}
 		case DELETED_BREWERY: {
+			console.log('ACTION.PAYLOAD--',action.payload)
+			console.log('ACTION.PAYLOAD.BREWERY--',action.payload.brewery)
+			console.log('ACTION.PAYLOAD.BREWERY.ID--',action.payload.brewery.id)
 			delete newState[action.payload.brewery.id];
 			return newState;
 		}

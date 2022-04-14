@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Select from 'react-select'
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { createBrewery, updateBrewery} from "../../store/breweries"
@@ -16,7 +17,7 @@ export const BreweryForm = ({brewery}) => {
     const [name, setName] = useState(brewery?.name || "");
 	const [header, setHeader] = useState(brewery?.header || "");
 	const [description, setDescription] = useState(brewery?.description || "");
-	const [brewery_type, setBreweryType] = useState(brewery?.brewery_type || "")
+	const [brewery_type, setBreweryType] = useState(brewery?.brewery_type || "micro")
 	const [street, setStreet] = useState(brewery?.street || "");
 	const [city, setCity] = useState(brewery?.city || "");
 	const [state, setState] = useState(brewery?.name || "");
@@ -88,6 +89,13 @@ export const BreweryForm = ({brewery}) => {
 	};
 	}
 
+	const brewery_types = [
+		{value: "micro", label: "micro"},
+		{value: "brewpub", label: "brewpub"},
+		{value: "regional", label: "regional"},
+		{value: "large", label: "large"}
+	];
+
 
 	return (
 		<div className={styles.container}>
@@ -136,12 +144,19 @@ export const BreweryForm = ({brewery}) => {
 					</div>
 					<div className={styles.input_container}>
 						<label htmlFor="brewery_type">Brewery Type</label>
+						{/* <Select
+							value = {brewery_types.value}
+							options = {brewery_types}
+							defaultValue={brewery_types[0]}
+							onChange={(e) => setBreweryType(e.target.value)}
+							/> */}
 						<select
 							name="brewery_type"
 							value={brewery_type}
-							selected={brewery_type}
+							// selected={brewery_type}
 							onChange={(e) => setBreweryType(e.target.value)}
 						>
+							<option value="none" selected disabled hidden>Please choose a brewery type</option>
 							<option value="micro">micro</option>
 							<option value="brewpub">brewPub</option>
 							<option value="regional">regional</option>
