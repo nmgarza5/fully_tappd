@@ -24,7 +24,7 @@ def valid_phone_number(form, field):
 
 def valid_image(form, field):
   url = field.data
-  if not (url.endswith('.jpg') or url.endswith('.jpeg') or url.endswith('.png') or url.endswith('.gif')):
+  if url and not (url.endswith('.jpg') or url.endswith('.jpeg') or url.endswith('.png') or url.endswith('.gif')):
     raise ValidationError('Image format must be .jpg, .jpeg, .png, or .gif')
 
 class BreweryForm(FlaskForm):
@@ -40,4 +40,6 @@ class BreweryForm(FlaskForm):
     country = StringField('Country', validators=[DataRequired(), Length(min=0, max=255)])
     phone = StringField('Phone Number', validators=[DataRequired(), valid_phone_number])
     website_url = StringField('Website', validators=[Length(min=0, max=2048)])
+    profile_image = StringField('Profile Image', validators=[DataRequired(), Length(min=0, max=2048), valid_image])
+    banner_image = StringField('Banner Image', validators=[Length(min=0, max=2048), valid_image])
     submit = SubmitField('Submit')

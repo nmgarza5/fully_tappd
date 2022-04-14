@@ -12,11 +12,10 @@ import { hideModal } from "../../store/modal"
 export const BreweryForm = ({brewery}) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-
     const [name, setName] = useState(brewery?.name || "");
 	const [header, setHeader] = useState(brewery?.header || "");
 	const [description, setDescription] = useState(brewery?.description || "");
-	const [brewery_type, setBreweryType] = useState(brewery?.brewery_type || "")
+	const [brewery_type, setBreweryType] = useState(brewery?.brewery_type || "micro")
 	const [street, setStreet] = useState(brewery?.street || "");
 	const [city, setCity] = useState(brewery?.city || "");
 	const [state, setState] = useState(brewery?.name || "");
@@ -25,6 +24,7 @@ export const BreweryForm = ({brewery}) => {
 	const [phone, setPhone] = useState(brewery?.phone || "");
 	const [website_url, setWebsiteUrl] = useState(brewery?.website_url || "");
 	const [profile_image, setProfileImage] = useState(brewery?.profile_image || "");
+	const [banner_image, setBannerImage] = useState(brewery?.banner_image || "");
 	const [errors, setErrors] = useState([]);
 
 	const handleClick_Edit = () => {
@@ -50,7 +50,8 @@ export const BreweryForm = ({brewery}) => {
 			country,
 			phone,
 			website_url,
-			profile_image
+			profile_image,
+			banner_image
 		}
 
 		!name
@@ -134,6 +135,12 @@ export const BreweryForm = ({brewery}) => {
 					</div>
 					<div className={styles.input_container}>
 						<label htmlFor="brewery_type">Brewery Type</label>
+						{/* <Select
+							value = {brewery_types.value}
+							options = {brewery_types}
+							defaultValue={brewery_types[0]}
+							onChange={(e) => setBreweryType(e.target.value)}
+							/> */}
 						<select
 							name="brewery_type"
 							value={brewery_type}
@@ -242,6 +249,18 @@ export const BreweryForm = ({brewery}) => {
 							required
 							onChange={(e) =>
 								setProfileImage(e.target.value)
+							}
+						></input>
+					</div>
+					<div className={styles.input_container}>
+						<label htmlFor="banner_image">Banner Image</label>
+						<input
+							type="banner_image"
+							name="banner_image"
+							placeholder='Image format must be ".jpg" ".jpeg" or ".png" or ".gif".'
+							value={banner_image}
+							onChange={(e) =>
+								setBannerImage(e.target.value)
 							}
 						></input>
 					</div>

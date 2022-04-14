@@ -6,12 +6,11 @@ class Brewery(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    profile_image_id = db.Column(
-        db.Integer, db.ForeignKey('images.id'), nullable=True)
-    # banner_image_id = db.Column(db.Integer, db.ForeignKey('images.id'), nullable=True)
+    profile_image = db.Column(db.String(2048), nullable=False)
+    banner_image = db.Column(db.String(2048), nullable=True)
     name = db.Column(db.String(255), nullable=False)
     header = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.Text)
+    description = db.Column(db.Text, nullable=False)
     brewery_type = db.Column(db.String(50), nullable=False)
     street = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(255), nullable=False)
@@ -25,7 +24,6 @@ class Brewery(db.Model):
     updated_at = db.Column(
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    profile_image = db.relationship('Image', back_populates="brewery_image", cascade="all, delete-orphan", single_parent=True)
     owner = db.relationship("User", back_populates="breweries")
 
     def to_dict(self):
@@ -33,8 +31,9 @@ class Brewery(db.Model):
             'id': self.id,
             'name': self.name,
             'owner_id': self.owner_id,
-            'owner': self.owner.to_dict(),
-            'profile_image': self.profile_image.image,
+            'owner_name': f'{self.owner.first_name} {self.owner.last_name}',
+            'profile_image': self.profile_image,
+            'banner_image': self.banner_image,
             'header': self.header,
             'description': self.description,
             'brewery_type': self.brewery_type,
