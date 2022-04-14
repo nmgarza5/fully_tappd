@@ -4,6 +4,7 @@ from .db import db
 class Brewery(db.Model):
     __tablename__ = 'breweries'
 
+
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     profile_image = db.Column(db.String(2048), nullable=False)
