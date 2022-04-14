@@ -4,12 +4,12 @@ const RECEIVED_BREWERIES = "/breweries/receivedBreweries"
 // const UPDATED_BREWERY = "/breweries/updateddBrewery"
 // const DELETE_BREWERY = "/breweries/deletedBrewery"
 
-// const createdBrewery = (payload) => {
-//     return {
-//         type: CREATED_BREWERY,
-//         payload,
-//     }
-// }
+const createdBrewery = (payload) => {
+    return {
+        type: CREATED_BREWERY,
+        payload,
+    }
+}
 
 const receivedBreweries = (payload) => {
     return {
@@ -43,6 +43,21 @@ export const receiveBreweries = () => async (dispatch) => {
 		const breweries = await res.json();
 		dispatch(receivedBreweries(Object.values(breweries)[0]));
 		return breweries;
+	}
+};
+
+export const createBrewery = (data) => async (dispatch) => {
+	const res = await fetch("/api/restaurants/", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(data),
+	});
+	const newBrewery = await res.json();
+	if (newBrewery.errors) {
+		return newBrewery;
+	} else {
+		dispatch(createdBrewery(newBrewery));
+		return newBrewery;
 	}
 };
 

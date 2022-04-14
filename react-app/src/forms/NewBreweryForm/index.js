@@ -10,6 +10,8 @@ import { hideModal } from "../../store/modal"
 
 
 const NewBreweryForm = () => {
+	const dispatch = useDispatch();
+	const history = useHistory();
 
     // const [name, setName] = useState(brewery?.name || "");
 
@@ -28,6 +30,58 @@ const NewBreweryForm = () => {
 
 
 	const [errors, setErrors] = useState([]);
+
+	const handleClick_New = () => {
+		dispatch(hideModal());
+	};
+
+	const onSubmit = async (e) => {
+		e.preventDefault();
+		const formData = {
+			name,
+			header,
+			description,
+			brewery_type,
+			street,
+			city,
+			postal_code,
+			country,
+			phone_number,
+			website_url,
+			profile_image
+		}
+
+		!name
+			? setErrors(["Please provide your Brewery name."])
+			: !profile_image
+			? setErrors(["Please provide a url for your image."])
+			: !phone_number
+			? setErrors(["Please provide your phone number."])
+			: !street
+			? setErrors(["Please provide your street address."])
+			: setErrors([]);
+
+		// conditional checking if there is a restaurant already created. If so, send a put request. Else send a post request.
+		// if (brewery) {
+		// 	const id = brewery?.id;
+		// 	const updateData = { formData, id };
+		// 	const updatedRestaurant = await dispatch(
+		// 		updateBrewery(updateData)
+		// 	);
+		// 	if (updatedBrewery.errors) {
+		// 		setErrors(updatedBrewery.errors);
+		// 	} else {
+		// 		dispatch(hideModal());
+		// 	}
+		// } else {
+			const newBrewery = await dispatch(createBrewery(formData));
+			if (newBrewery.errors) {
+				setErrors(newBrewery.errors);
+			} else {
+				history.push(`/breweries/${newBrewery.id}`);
+			}
+	};
+
 
 	return (
 		<div className={styles.container}>
@@ -176,6 +230,27 @@ const NewBreweryForm = () => {
 								setProfileImage(e.target.value)
 							}
 						></input>
+					</div>
+					<div className={styles.button_container}>
+						<div onClick={onSubmit} className={styles.button}>
+							Submit
+						</div>
+						{/* {brewery ? (
+							<div
+								onClick={handleClick_Edit}
+								className={styles.button}
+							>
+								Cancel
+							</div>
+						) : ( */}
+						<div
+							onClick={handleClick_New}
+							className={styles.button}
+						>
+							Cancel
+						</div>
+
+						{/* )} */}
 					</div>
 				</form>
 			</div>
