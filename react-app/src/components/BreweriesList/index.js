@@ -23,7 +23,7 @@ const BreweriesList = () => {
 
 			<div className={styles.all_container}>
                 Breweries Page
-				<div role='button' onClick={createBrewery}>
+				<div role='button' onClick={createBrewery} className={styles.button}>
 					Create New Brewery
 				</div>
 				{breweries.map((brewery) => (
@@ -37,10 +37,12 @@ const BreweriesList = () => {
 						</div>
 						<div className={styles.info}>
 							<h3>
-								{brewery?.name?.length > 20
+								{/* {brewery?.name?.length > 20
 									? brewery?.name?.slice(0, 20) + "..."
-									: brewery?.name}
+									: brewery?.name} */}
+									{brewery.name}
 							</h3>
+							<p>{brewery.header}</p>
 						</div>
 					</div>
 				))}

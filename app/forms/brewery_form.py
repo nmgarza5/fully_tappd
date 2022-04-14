@@ -32,7 +32,7 @@ class BreweryForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255)])
     header = StringField('Header', validators=[DataRequired(), Length(min=0, max=255)])
     description = TextAreaField('Description')
-    brewery_type = SelectField('Brewery Type', choices=["micro", "brewpub", "large", "regional"], validators=[DataRequired()])
+    brewery_type = SelectField('Brewery Type', choices=["micro", "brewpub","large", "regional"], validators=[DataRequired()])
     street = StringField('Street', validators=[DataRequired(), Length(min=0, max=255)])
     city = StringField('City', validators=[DataRequired(), Length(min=0, max=255)])
     postal_code = StringField('Postal Code', validators=[DataRequired()])
