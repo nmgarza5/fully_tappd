@@ -1,18 +1,31 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import styles from "./BreweriesList.module.css";
+import NewBreweryForm from "../../forms/NewBreweryForm";
+import { showModal, setCurrentModal } from "../../store/modal";
+
 
 
 const BreweriesList = () => {
     // const history = useHistory()
+	const dispatch = useDispatch()
     const breweries = useSelector((state) => Object.values(state.breweries))
 
-    console.log('BREWERIES', breweries)
+
+	const createBrewery = () => {
+		dispatch(setCurrentModal(NewBreweryForm))
+		dispatch(showModal());
+	}
+
 	return (
 		<div className={styles.container}>
+
 			<div className={styles.all_container}>
                 Breweries Page
+				<div role='button' onClick={createBrewery} className={styles.button}>
+					Create New Brewery
+				</div>
 				{breweries.map((brewery) => (
 					<div
 						// onClick={() => goToBrewery(brewery.id)}
@@ -24,10 +37,12 @@ const BreweriesList = () => {
 						</div>
 						<div className={styles.info}>
 							<h3>
-								{brewery?.name?.length > 20
+								{/* {brewery?.name?.length > 20
 									? brewery?.name?.slice(0, 20) + "..."
-									: brewery?.name}
+									: brewery?.name} */}
+									{brewery.name}
 							</h3>
+							<p>{brewery.header}</p>
 						</div>
 					</div>
 				))}

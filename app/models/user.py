@@ -39,6 +39,14 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def user_status(self):
+        if not self.business_user:
+             self.business_user = True
+        elif not bool(self.breweries):
+             self.business_user = False
+        else:
+            self.business_user = True
+
     def to_dict(self):
         return {
             'id': self.id,
