@@ -1,7 +1,7 @@
 const CREATED_BREWERY = "/breweries/createdBrewery"
 const RECEIVED_BREWERIES = "/breweries/receivedBreweries"
 const RECEIVED__ONE_BREWERY = "/breweries/receivedOneBrewery"
-// const UPDATED_BREWERY = "/breweries/updateddBrewery"
+const UPDATED_BREWERY = "/breweries/updateddBrewery"
 // const DELETE_BREWERY = "/breweries/deletedBrewery"
 
 const createdBrewery = (payload) => {
@@ -25,12 +25,13 @@ const receivedOneBrewery = (payload) => {
     }
 }
 
-// const updatedBrewery = (payload) => {
-//     return {
-//         type: UPDATED_BREWERY,
-//         payload,
-//     }
-// }
+const updatedBrewery = (payload) => {
+    return {
+        type: UPDATED_BREWERY,
+        payload,
+    }
+}
+
 // const deletedBrewery = (payload) => {
 //     return {
 //         type: DELETE_BREWERY,
@@ -72,6 +73,25 @@ export const receiveOneBrewery = (breweryId) => async (dispatch) => {
 			return brewery;
 		}
 };
+
+export const updateBrewery =
+	({ formData, id }) =>
+	async (dispatch) => {
+		const res = await fetch(`/api/brewery/${id}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(formData),
+		});
+
+		const update = await res.json();
+		if (update.errors) {
+			return update
+		} else {
+			dispatch(updatedBrewery(update));
+			return update;
+		}
+	};
+
 
 const breweriesReducer = (state = {}, action) => {
 	const newState = { ...state };
