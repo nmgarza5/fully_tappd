@@ -22,6 +22,10 @@ def breweries():
 def create_brewery():
   form = BreweryForm()
   profile_image = request.json['profile_image']
+
+  print('REQ ----', request.json, '\n\n')
+  print('REQ ----', form.data['brewery_type'], '\n\n')
+
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     new_image = Image(image=profile_image)
@@ -35,7 +39,7 @@ def create_brewery():
       city = form.data['city'],
       postal_code = form.data['postal_code'],
       country = form.data['country'],
-      phone_number = form.data['phone_number'],
+      phone = form.data['phone'],
       website_url = form.data['website_url'])
     new_brewery.profile_image = new_image
     current_user.user_status()

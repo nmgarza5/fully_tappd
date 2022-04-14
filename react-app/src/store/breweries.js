@@ -47,11 +47,14 @@ export const receiveBreweries = () => async (dispatch) => {
 };
 
 export const createBrewery = (data) => async (dispatch) => {
-	const res = await fetch("/api/restaurants/", {
+	console.log('DATA---', data)
+	const res = await fetch("/api/breweries/", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(data),
 	});
+
+	console.log('RES', res)
 	const newBrewery = await res.json();
 	if (newBrewery.errors) {
 		return newBrewery;
