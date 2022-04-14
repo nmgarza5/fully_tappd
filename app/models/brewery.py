@@ -24,7 +24,7 @@ class Brewery(db.Model):
     updated_at = db.Column(
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    owner = db.relationship("User", back_ref="breweries")
+    owner = db.relationship("User", backref="breweries")
 
     def to_dict(self):
         return {
