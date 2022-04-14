@@ -14,6 +14,7 @@ const NewBreweryForm = () => {
     // const [name, setName] = useState(brewery?.name || "");
 
     const [name, setName] = useState("");
+
 	const [header, setHeader] = useState("");
 	const [description, setDescription] = useState("");
 	const [brewery_type, setBreweryType] = useState("Micro")
