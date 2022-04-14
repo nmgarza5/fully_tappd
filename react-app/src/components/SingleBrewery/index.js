@@ -6,6 +6,7 @@ import styles from "./SingleBrewery.module.css";
 // import { receiveOneBrewery } from "../../store/breweries";
 import { UpdateBrewery } from "../UpdateBrewery";
 import { PageContainer } from "../PageContainer";
+import { DeleteBrewery } from "../DeleteBrewery";
 
 export const SingleBrewery = () => {
     // const dispatch = useDispatch
@@ -22,7 +23,10 @@ export const SingleBrewery = () => {
         <PageContainer>
             <div>
                 {isOwner &&
-                <UpdateBrewery brewery={brewery} />
+                <>
+                    <UpdateBrewery brewery={brewery} />
+                    <DeleteBrewery brewery_id={brewery.id} />
+                </>
                 }
                 <div className={styles.card_img}>
                     <img src={brewery.profile_image} alt="brewery" />

@@ -2,7 +2,7 @@ const CREATED_BREWERY = "/breweries/createdBrewery"
 const RECEIVED_BREWERIES = "/breweries/receivedBreweries"
 const RECEIVED__ONE_BREWERY = "/breweries/receivedOneBrewery"
 const UPDATED_BREWERY = "/breweries/updateddBrewery"
-// const DELETE_BREWERY = "/breweries/deletedBrewery"
+const DELETED_BREWERY = "/breweries/deletedBrewery"
 
 const createdBrewery = (payload) => {
     return {
@@ -32,12 +32,12 @@ const updatedBrewery = (payload) => {
     }
 }
 
-// const deletedBrewery = (payload) => {
-//     return {
-//         type: DELETE_BREWERY,
-//         payload,
-//     }
-// }
+const deletedBrewery = (payload) => {
+    return {
+        type: DELETED_BREWERY,
+        payload,
+    }
+}
 
 export const receiveBreweries = () => async (dispatch) => {
 	const res = await fetch("/api/breweries/");
@@ -92,6 +92,15 @@ export const updateBrewery =
 		}
 	};
 
+	export const deleteBrewery = (breweryId) => async (dispatch) => {
+		const res = await fetch(`/api/breweries/${breweryId}`, {
+			method: "DELETE",
+		});
+		const removedBrewery = await res.json();
+		dispatch(deletedBrewery(removedBrewery));
+		return removedBrewery;
+	};
+
 
 const breweriesReducer = (state = {}, action) => {
 	const newState = { ...state };
@@ -109,6 +118,14 @@ const breweriesReducer = (state = {}, action) => {
 		}
 		case RECEIVED__ONE_BREWERY: {
 			newState[action.payload.id] = action.payload;
+			return newState;
+		}
+		case UPDATED_BREWERY: {
+			newState[action.payload?.id] = action.payload;
+			return newState;
+		}
+		case DELETED_BREWERY: {
+			delete newState[action.payload.brewery.id];
 			return newState;
 		}
 		default:

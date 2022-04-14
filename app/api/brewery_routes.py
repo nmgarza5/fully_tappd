@@ -59,13 +59,13 @@ def breweryUpdate(id):
     form = BreweryForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     req_image = request.json['profile_image']
-    # print('\n\nREQUEST--------', request.json, '\n\n')
+    print('\n\nREQUEST--------', request.json, '\n\n')
     brewery = Brewery.query.get(id)
 
     if brewery.profile_image != req_image:
-      profile_image = Image(image=profile_image)
+      profile_image = Image(image=req_image)
     else:
-      image = Image.query.filter(Image.image == profile_image).first()
+      image = Image.query.filter(Image.image == req_image).first()
       profile_image = Image.query.get(image.id)
 
     print('\n\nBEFore - SUCCESS', brewery, '\n\n')
@@ -89,3 +89,12 @@ def breweryUpdate(id):
         return brewery.to_dict()
     else:
       return {'errors': error_generator(form.errors)}, 400
+
+
+@brewery_routes.route('/<int:id>', methods=['DELETE'])
+def breweryDelete(id):
+  data = {}
+  brewery = Brewery.query.get(id)
+  data['restaurant'] = brewery.to_dict()
+  db.session.delete(brewery)
+  db.session.commit()
