@@ -5,7 +5,7 @@ class Image(db.Model):
     __tablename__ = 'images'
 
     id = db.Column(db.Integer, primary_key=True)
-    image = db.Column(db.String(2048), nullable=False)
+    image = db.Column(db.String(2048), nullable=True)
 
     brewery_images = db.relationship('Brewery', back_populates="profile_image", cascade="all, delete-orphan")
     user_images = db.relationship('User', back_populates="profile_image", cascade="all, delete-orphan")

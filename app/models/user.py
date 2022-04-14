@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     header = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.Text, nullable=False)
-    profile_image_id = db.Column(db.Integer, db.ForeignKey('images.id'))
+    profile_image_id = db.Column(db.Integer, db.ForeignKey('images.id'), nullable=True)
     # banner_image_id = db.Column(db.Integer, db.ForeignKey('images.id'), nullable=True)
     # FORMAT: 2022-04-02 13:27:25.457314
     created_at = db.Column(db.DateTime, default=db.func.now())
