@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user
-from app.models import Brewery, db, User, Image
+from app.models import Brewery, db, User
 from app.forms import BreweryForm
 
 brewery_routes = Blueprint('breweries', __name__)
@@ -27,10 +27,9 @@ def brewery(id):
 @brewery_routes.route('/', methods=['POST'])
 def create_brewery():
   form = BreweryForm()
-  profile_image = request.json['profile_image']
   form['csrf_token'].data = request.cookies['csrf_token']
+
   if form.validate_on_submit():
-    new_image = Image(image=profile_image)
     new_brewery =Brewery(
       owner_id = current_user.id,
       name = form.data['name'],
@@ -43,8 +42,9 @@ def create_brewery():
       postal_code = form.data['postal_code'],
       country = form.data['country'],
       phone = form.data['phone'],
-      website_url = form.data['website_url'])
-    new_brewery.profile_image = new_image
+      website_url = form.data['website_url'],
+      profile_image = form.data['profile_image'],
+      banner_image = form.data['banner_image'])
     current_user.user_status()
     db.session.add(new_brewery)
     db.session.commit()
@@ -58,18 +58,7 @@ def create_brewery():
 def breweryUpdate(id):
     form = BreweryForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    req_image = request.json['profile_image']
-    print('\n\nREQUEST--------', request.json, '\n\n')
     brewery = Brewery.query.get(id)
-
-    if brewery.profile_image != req_image:
-      profile_image = Image(image=req_image)
-    else:
-      image = Image.query.filter(Image.image == req_image).first()
-      profile_image = Image.query.get(image.id)
-
-    print('\n\nBEFore - SUCCESS', brewery, '\n\n')
-
     if form.validate_on_submit():
         brewery.owner_id = current_user.id,
         brewery.name = form.data['name'],
@@ -83,9 +72,8 @@ def breweryUpdate(id):
         brewery.country = form.data['country'],
         brewery.phone = form.data['phone'],
         brewery.website_url = form.data['website_url']
-        brewery.profile_image = profile_image
+        brewery.profile_image = form.data['profile_image']
         db.session.commit()
-        print('\n\nREST - SUCCESS', brewery, '\n\n')
         return brewery.to_dict()
     else:
       return {'errors': error_generator(form.errors)}, 400
@@ -93,8 +81,10 @@ def breweryUpdate(id):
 
 @brewery_routes.route('/<int:id>', methods=['DELETE'])
 def breweryDelete(id):
+  print('\n\n req --', request.json, '\n\n')
   data = {}
   brewery = Brewery.query.get(id)
-  data['restaurant'] = brewery.to_dict()
+  data['brewery'] = brewery.to_dict()
   db.session.delete(brewery)
   db.session.commit()
+  return data
