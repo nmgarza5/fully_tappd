@@ -19,7 +19,7 @@ const SignUpForm = () => {
     const [bio, setBio] = useState("");
     const dispatch = useDispatch();
 
-    const handleSubmit = async (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
         const userData = {
             username,
@@ -139,7 +139,7 @@ const SignUpForm = () => {
                     required={true}
                 ></input>
             </div>
-            <button onClick={handleSubmit}>Sign Up</button>
+            <div role='button' onClick={handleClick}>Sign Up</div>
         </form>
     );
 };
