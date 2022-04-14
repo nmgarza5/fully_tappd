@@ -15,7 +15,8 @@ const SignUpForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
-    const [profile_image, setProfilePicture] = useState("");
+    const [banner_image, setBannerImage] = useState("");
+    const [profile_image, setProfileImage] = useState("");
     const [header, setHeader] = useState("");
     const [bio, setBio] = useState("");
     const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const SignUpForm = () => {
             header,
             bio,
             profile_image,
+			banner_image
         };
 
         if (password === confirm_password) {
@@ -40,7 +42,9 @@ const SignUpForm = () => {
             if (data) {
                 setErrors(data);
             }
-            dispatch(hideModal());
+            else {
+                dispatch(hideModal());
+            }
         }
     };
 
@@ -134,13 +138,23 @@ const SignUpForm = () => {
                             ></input>
                     </div>
                     <div>
-                        <label>Profile Picture</label>
+                        <label>Profile Image</label>
                         <input
                             type="text"
                             name="profile_image"
-                            onChange={(e) => setProfilePicture(e.target.value)}
+                            onChange={(e) => setProfileImage(e.target.value)}
                             placeholder="Please enter the url to your Profile Picture"
                             value={profile_image}
+                            ></input>
+                    </div>
+                    <div>
+                        <label>Banner Image</label>
+                        <input
+                            type="text"
+                            name="banner_image"
+                            onChange={(e) => setBannerImage(e.target.value)}
+                            placeholder="Please enter the url to your Profile Picture"
+                            value={banner_image}
                             ></input>
                     </div>
                     <div role='button' onClick={handleClick} className={styles.div_button}>Sign Up</div>

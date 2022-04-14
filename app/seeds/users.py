@@ -62,9 +62,6 @@ images = [
     {
         "image": "https://i.imgur.com/T46dDXs.png",
     },
-    {
-        "image": "https://i.imgur.com/AwZdvAY.png",
-    },
 ]
 
 

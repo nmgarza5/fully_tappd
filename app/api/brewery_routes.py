@@ -28,7 +28,6 @@ def brewery(id):
 def create_brewery():
   form = BreweryForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  print('\n\n P IMG --', form.data, '\n\n')
 
   if form.validate_on_submit():
     new_brewery =Brewery(
