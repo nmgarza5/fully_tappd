@@ -7,8 +7,8 @@ class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     image = db.Column(db.String(2048), nullable=False)
 
-    breweries = db.relationship('Brewery', back_populates="profile_image")
-    users = db.relationship('User', back_populates="profile_image")
+    brewery_image = db.relationship('Brewery', back_populates="profile_image", cascade="all, delete-orphan")
+    user_image = db.relationship('User', back_populates="profile_image", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
