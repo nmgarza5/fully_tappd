@@ -4,7 +4,16 @@ from wtforms import (StringField, TextAreaField, BooleanField, SelectField, Subm
 from wtforms.validators import DataRequired, ValidationError, Length
 
 
-'''Dont forget to put in a w website validator'''
+'''Dont forget to put in a validators for:
+
+- WEBSITE
+- STREET ADDRESS FORMAT
+- ADDRESS FORMAT
+- POSTAL CODE FORMAT
+-
+
+
+'''
 
 def valid_phone_number(form, field):
   phone_number = field.data
@@ -23,8 +32,11 @@ class BreweryForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255)])
     header = StringField('Header', validators=[DataRequired(), Length(min=0, max=255)])
     description = TextAreaField('Description')
-    brewery_type = SelectField('Price Rating', choices=["micro", "brewpub", "large", "regional"], validators=[DataRequired()])
-    street = StringField('Street Address', validators=[DataRequired(), Length(min=0, max=255)])
+    brewery_type = SelectField('Brewery Type', choices=["micro", "brewpub", "large", "regional"], validators=[DataRequired()])
+    street = StringField('Street', validators=[DataRequired(), Length(min=0, max=255)])
+    city = StringField('City', validators=[DataRequired(), Length(min=0, max=255)])
+    postal_code = StringField('Postal Code', validators=[DataRequired()])
+    country = StringField('Country', validators=[DataRequired(), Length(min=0, max=255)])
     phone_number = StringField('Phone Number', validators=[DataRequired(), valid_phone_number])
-    website = StringField('Website', validators=[Length(min=0, max=2048)])
-    profile_imgage = StringField('Image URL', validators=[DataRequired(), Length(min=0, max=2048), valid_image])
+    website_url = StringField('Website', validators=[Length(min=0, max=2048)])
+    submit = SubmitField('Submit')
