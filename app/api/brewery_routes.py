@@ -84,7 +84,7 @@ def breweryDelete(id):
   print('\n\n req --', request.json, '\n\n')
   data = {}
   brewery = Brewery.query.get(id)
-  data['restaurant'] = brewery.to_dict()
+  data['brewery'] = brewery.to_dict()
   db.session.delete(brewery)
   db.session.commit()
   return data

@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import Select from 'react-select'
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { createBrewery, updateBrewery} from "../../store/breweries"
@@ -89,13 +88,6 @@ export const BreweryForm = ({brewery}) => {
 	};
 	}
 
-	const brewery_types = [
-		{value: "micro", label: "micro"},
-		{value: "brewpub", label: "brewpub"},
-		{value: "regional", label: "regional"},
-		{value: "large", label: "large"}
-	];
-
 
 	return (
 		<div className={styles.container}>
@@ -153,10 +145,9 @@ export const BreweryForm = ({brewery}) => {
 						<select
 							name="brewery_type"
 							value={brewery_type}
-							// selected={brewery_type}
+							selected={brewery_type}
 							onChange={(e) => setBreweryType(e.target.value)}
 						>
-							<option value="none" selected disabled hidden>Please choose a brewery type</option>
 							<option value="micro">micro</option>
 							<option value="brewpub">brewPub</option>
 							<option value="regional">regional</option>

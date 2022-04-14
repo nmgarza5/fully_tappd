@@ -111,6 +111,8 @@ const breweriesReducer = (state = {}, action) => {
 			return newState;
 		}
 		case RECEIVED_BREWERIES: {
+
+			console.log('RECEIVE--', action.payload)
 			action.payload.forEach(
 				(brewery) => (newState[brewery.id] = brewery)
 			);
@@ -125,9 +127,6 @@ const breweriesReducer = (state = {}, action) => {
 			return newState;
 		}
 		case DELETED_BREWERY: {
-			console.log('ACTION.PAYLOAD--',action.payload)
-			console.log('ACTION.PAYLOAD.BREWERY--',action.payload.brewery)
-			console.log('ACTION.PAYLOAD.BREWERY.ID--',action.payload.brewery.id)
 			delete newState[action.payload.brewery.id];
 			return newState;
 		}
