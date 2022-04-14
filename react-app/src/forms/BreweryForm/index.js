@@ -5,10 +5,6 @@ import { createBrewery, updateBrewery} from "../../store/breweries"
 import styles from "./BreweryForm.module.css"
 import { hideModal } from "../../store/modal"
 
-
-
-
-
 export const BreweryForm = ({brewery}) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
