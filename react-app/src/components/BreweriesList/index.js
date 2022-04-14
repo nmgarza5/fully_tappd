@@ -1,22 +1,20 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useSelector} from "react-redux";
+import { useHistory } from "react-router-dom";
 import styles from "./BreweriesList.module.css";
-import NewBreweryForm from "../../forms/NewBreweryForm";
-import { showModal, setCurrentModal } from "../../store/modal";
 
 
 
 const BreweriesList = () => {
-    // const history = useHistory()
-	const dispatch = useDispatch()
+    const history = useHistory()
+	// const dispatch = useDispatch()
     const breweries = useSelector((state) => Object.values(state.breweries))
+	const createBrewery = () => history.push('/new-brewery')
 
-
-	const createBrewery = () => {
-		dispatch(setCurrentModal(NewBreweryForm))
-		dispatch(showModal());
-	}
+	const goToBrewery = (id) => {
+		history.push(`/breweries/${id}`);
+		return;
+	};
 
 	return (
 		<div className={styles.container}>
@@ -28,7 +26,7 @@ const BreweriesList = () => {
 				</div>
 				{breweries.map((brewery) => (
 					<div
-						// onClick={() => goToBrewery(brewery.id)}
+						onClick={() => goToBrewery(brewery.id)}
 						className={styles.each_container}
 						key={brewery.id}
 					>

@@ -1,37 +1,38 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { createBrewery} from "../../store/breweries"
-import styles from "./NewBreweryForm.module.css"
+import { createBrewery, updateBrewery} from "../../store/breweries"
+import styles from "./BreweryForm.module.css"
 import { hideModal } from "../../store/modal"
 
 
 
 
 
-const NewBreweryForm = () => {
+export const BreweryForm = ({brewery}) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-    // const [name, setName] = useState(brewery?.name || "");
-
-    const [name, setName] = useState("");
-
-	const [header, setHeader] = useState("");
-	const [description, setDescription] = useState("");
-	const [brewery_type, setBreweryType] = useState("")
-	const [street, setStreet] = useState("");
-	const [city, setCity] = useState("");
-	const [postal_code, setPostalCode] = useState("");
-	const [country, setCountry] = useState("");
-	const [phone, setPhone] = useState("");
-	const [website_url, setWebsiteUrl] = useState("");
-	const [profile_image, setProfileImage] = useState("");
-
-
+    const [name, setName] = useState(brewery?.name || "");
+	const [header, setHeader] = useState(brewery?.header || "");
+	const [description, setDescription] = useState(brewery?.description || "");
+	const [brewery_type, setBreweryType] = useState(brewery?.brewery_type || "")
+	const [street, setStreet] = useState(brewery?.street || "");
+	const [city, setCity] = useState(brewery?.city || "");
+	const [state, setState] = useState(brewery?.name || "");
+	const [postal_code, setPostalCode] = useState(brewery?.postal_code || "");
+	const [country, setCountry] = useState(brewery?.country || "");
+	const [phone, setPhone] = useState(brewery?.phone || "");
+	const [website_url, setWebsiteUrl] = useState(brewery?.website_url || "");
+	const [profile_image, setProfileImage] = useState(brewery?.profile_image || "");
 	const [errors, setErrors] = useState([]);
 
+	const handleClick_Edit = () => {
+		dispatch(hideModal());
+	};
+
 	const handleClick_New = () => {
+		history.push("/");
 		dispatch(hideModal());
 	};
 
@@ -44,6 +45,7 @@ const NewBreweryForm = () => {
 			brewery_type,
 			street,
 			city,
+			state,
 			postal_code,
 			country,
 			phone,
@@ -62,31 +64,32 @@ const NewBreweryForm = () => {
 			: setErrors([]);
 
 		// conditional checking if there is a restaurant already created. If so, send a put request. Else send a post request.
-		// if (brewery) {
-		// 	const id = brewery?.id;
-		// 	const updateData = { formData, id };
-		// 	const updatedRestaurant = await dispatch(
-		// 		updateBrewery(updateData)
-		// 	);
-		// 	if (updatedBrewery.errors) {
-		// 		setErrors(updatedBrewery.errors);
-		// 	} else {
-		// 		dispatch(hideModal());
-		// 	}
-		// } else {
+		if (brewery) {
+			const id = brewery?.id;
+			const updateData = { formData, id };
+			const updatedBrewery = await dispatch(
+				updateBrewery(updateData)
+			);
+			if (updatedBrewery.errors) {
+				setErrors(updatedBrewery.errors);
+			} else {
+				dispatch(hideModal());
+			}
+		} else {
 			const newBrewery = await dispatch(createBrewery(formData));
 			if (newBrewery.errors) {
 				setErrors(newBrewery.errors);
 			} else {
+				dispatch(hideModal());
 				history.push(`/breweries/${newBrewery.id}`);
 			}
 	};
+	}
 
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.form_entries}>
-				<h2>Brewery Information</h2>
 				<ul>
 					{errors &&
 						errors.map((error) => (
@@ -170,6 +173,17 @@ const NewBreweryForm = () => {
 						></input>
 					</div>
 					<div className={styles.input_container}>
+						<label htmlFor="state">State</label>
+						<input
+							name="state"
+							type="text"
+							placeholder="What state are you in?."
+							value={state}
+							required
+							onChange={(e) => setState(e.target.value)}
+						></input>
+					</div>
+					<div className={styles.input_container}>
 						<label htmlFor="postal_code">
 							Zip Code
 						</label>
@@ -185,7 +199,7 @@ const NewBreweryForm = () => {
 						></input>
 					</div>
 					<div className={styles.input_container}>
-						<label htmlFor="country">County</label>
+						<label htmlFor="country">Country</label>
 						<input
 							name="country"
 							type="text"
@@ -235,14 +249,14 @@ const NewBreweryForm = () => {
 						<div onClick={onSubmit} className={styles.button}>
 							Submit
 						</div>
-						{/* {brewery ? (
+						{brewery ? (
 							<div
 								onClick={handleClick_Edit}
 								className={styles.button}
 							>
 								Cancel
 							</div>
-						) : ( */}
+						) : (
 						<div
 							onClick={handleClick_New}
 							className={styles.button}
@@ -250,7 +264,7 @@ const NewBreweryForm = () => {
 							Cancel
 						</div>
 
-						{/* )} */}
+						 )}
 					</div>
 				</form>
 			</div>
@@ -258,4 +272,4 @@ const NewBreweryForm = () => {
 	)
 }
 
-export default NewBreweryForm
+// export default BreweryForm
