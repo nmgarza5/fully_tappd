@@ -6,9 +6,8 @@ class Brewery(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    profile_image_id = db.Column(
-        db.Integer, db.ForeignKey('images.id'), nullable=False)
-    # banner_image_id = db.Column(db.Integer, db.ForeignKey('images.id'), nullable=True)
+    profile_image = db.Column(db.String(2048), nullable=False)
+    banner_image_id = db.Column(db.String(2048), nullable=False)
     name = db.Column(db.String(255), nullable=False)
     header = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text)
