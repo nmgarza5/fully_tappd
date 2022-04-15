@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import session from './session'
 import modals from './modal'
 import breweriesReducer from './breweries';
+import beerReducer from './beer';
 
 const rootReducer = combineReducers({
   session,
   breweries: breweriesReducer,
+  beer: beerReducer,
   modals
 });
 

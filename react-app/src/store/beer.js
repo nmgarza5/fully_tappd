@@ -44,7 +44,8 @@ export const receiveBeer = () => async (dispatch) => {
 	if (res.ok) {
 		const beer = await res.json();
 		console.log("BEER --", beer)
-		dispatch(receivedBeer(Object.values(beer)[0]));
+		console.log("BEER OBJECT --", Object.values(beer)[0])
+		dispatch(receivedBeer(beer));
 		return beer;
 	}
 };
@@ -104,7 +105,7 @@ export const updateBeer =
 
 
 const beerReducer = (state = {}, action) => {
-	const newState = { ...state };
+	let newState = { ...state };
 
     switch (action.type) {
 		case CREATED_BEER: {
@@ -112,11 +113,7 @@ const beerReducer = (state = {}, action) => {
 			return newState;
 		}
 		case RECEIVED_BEER: {
-			console.log('action.payload: ', action.payload)
-			console.log('action.payload[0]: ', action.payload[0])
-			action.payload.forEach(
-				(beer) => (newState[beer.id] = beer)
-			);
+			newState = action.payload
 			return newState;
 		}
 		case RECEIVED__ONE_BEER: {

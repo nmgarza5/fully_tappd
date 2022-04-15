@@ -43,7 +43,7 @@ export const receiveBreweries = () => async (dispatch) => {
 	const res = await fetch("/api/breweries/");
 	if (res.ok) {
 		const breweries = await res.json();
-		dispatch(receivedBreweries(Object.values(breweries)[0]));
+		dispatch(receivedBreweries(breweries));
 		return breweries;
 	}
 };
@@ -103,7 +103,7 @@ export const updateBrewery =
 
 
 const breweriesReducer = (state = {}, action) => {
-	const newState = { ...state };
+	let newState = { ...state };
 
     switch (action.type) {
 		case CREATED_BREWERY: {
@@ -111,9 +111,7 @@ const breweriesReducer = (state = {}, action) => {
 			return newState;
 		}
 		case RECEIVED_BREWERIES: {
-			action.payload.forEach(
-				(brewery) => (newState[brewery.id] = brewery)
-			);
+			newState = action.payload
 			return newState;
 		}
 		case RECEIVED__ONE_BREWERY: {

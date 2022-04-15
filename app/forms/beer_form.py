@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, ValidationError, Length
 
 beer_choices = [
     "Altbier", "Amber Ale", "Barley Wine", "Berliner Weisse", "Blonde Ale", "Bock", "Brown Ale", "Cream Ale", "Dopplebock",
-    "Doppelbock", "English Bitter", "English Mild", "Gose", "Gueze", "Hefeweizen", "Helles Bock", "India Pale Ale", "Kolsch",
+    "English Bitter", "English Mild", "Gose", "Gueze", "Hefeweizen", "Helles Bock", "India Pale Ale", "Kolsch",
     "Lager", "Lambic", "Oktoberfestbier", "Pale Ale", "Pilsner", "Porter", "Red Ale", "Saison", "Stout", "Witbier",
 ]
 
@@ -24,10 +24,10 @@ def valid_image(form, field):
 class BeerForm(FlaskForm):
 
     name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255)])
-    style = SelectField('Brewery Type', choices=beer_choices, validators=[DataRequired()])
+    style = SelectField('Beer Style', choices=beer_choices, validators=[DataRequired()])
     description = TextAreaField('Description')
     price = DecimalField('Price', places=2, validators=[DataRequired()])
-    abv = DecimalField('Price', places=2, validators=[DataRequired()])
-    ibu = IntegerField('Price', validators=[DataRequired()])
+    abv = DecimalField('ABV', places=2, validators=[DataRequired()])
+    ibu = IntegerField('IBU', validators=[DataRequired()])
     # beer_image = StringField('Beer Image', validators=[DataRequired(), Length(min=0, max=2048), valid_image])
     submit = SubmitField('Submit')

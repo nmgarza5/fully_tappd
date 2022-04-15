@@ -12,6 +12,7 @@ import Modal from "./components/Modal/Modal";
 import { Splashpage } from "./components/Splashpage";
 import { SingleBrewery } from "./components/SingleBrewery";
 import { CreateBrewery } from "./components/CreateBrewery";
+import { CreateBeer } from "./components/Beer/CreateBeer";
 import BreweriesList from "./components/BreweriesList";
 import BeerList from "./components/Beer/BeerList";
 import { Footer } from "./components/Footer";
@@ -54,6 +55,9 @@ function App() {
                     </Route>
                     <ProtectedRoute exact path="/new-brewery">
 						<CreateBrewery />
+					</ProtectedRoute>
+                    <ProtectedRoute exact path="/new-beer">
+						<CreateBeer />
 					</ProtectedRoute>
                     <Route>
 						<ErrorPage />

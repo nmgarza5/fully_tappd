@@ -9,7 +9,7 @@ import styles from "./BeerList.module.css";
 const BeerList = () => {
     const history = useHistory()
 	// const dispatch = useDispatch()
-    const allBeer = useSelector((state) => Object.values(state.beers))
+    const allBeer = useSelector((state) => Object.values(state.beer))
 	const createBeer = () => history.push('/new-beer')
 
 	const goToBeer = (id) => {
@@ -39,7 +39,6 @@ const BeerList = () => {
 									{beer?.name?.length > 20
 										? beer?.name?.slice(0, 20) + "..."
 										: beer?.name}
-										{beer.name}
 								</h3>
 								<p>{beer.description}</p>
 							</div>
