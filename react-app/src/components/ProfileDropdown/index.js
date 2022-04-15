@@ -32,6 +32,7 @@ const Profile = () => {
 		history.push("/");
 	  };
 
+
 	return (
 		<div className={styles.profileOuterContainer}>
 			<div className={styles.profileIconContainer} onClick={(() => setShowBox(!showBox))}>
