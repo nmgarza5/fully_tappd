@@ -55,7 +55,7 @@ export const Splashpage = () => {
               </div>
           </div>
         </div>
-        <span lassName={styles.search_container}>
+        <span className={styles.search_container}>
           <div className={styles.button}>
               <i className="fa-solid fa-magnifying-glass"></i>
               <form>

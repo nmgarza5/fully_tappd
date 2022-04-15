@@ -45,5 +45,5 @@ class Brewery(db.Model):
             'country': self.country,
             'phone': self.phone,
             'website_url': self.website_url,
-            # 'beers': self.beer.to_dict()
+            'beer': {beer.id: beer.to_dict() for beer in self.beer}
         }

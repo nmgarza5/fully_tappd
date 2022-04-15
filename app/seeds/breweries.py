@@ -323,6 +323,7 @@ breweries = [
     },
 ]
 
+# print(breweries)
 
 def seed_breweries():
     for brewery in breweries:

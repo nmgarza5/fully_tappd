@@ -1,6 +1,6 @@
 import profile
 from flask_wtf import FlaskForm
-from wtforms import (StringField, TextAreaField, BooleanField, SelectField, SubmitField, DecimalField)
+from wtforms import (StringField, TextAreaField, BooleanField, SelectField, SubmitField, DecimalField, IntegerField)
 from wtforms.validators import DataRequired, ValidationError, Length
 
 
@@ -28,6 +28,6 @@ class BeerForm(FlaskForm):
     description = TextAreaField('Description')
     price = DecimalField('Price', places=2, validators=[DataRequired()])
     abv = DecimalField('Price', places=2, validators=[DataRequired()])
-    ibu = DecimalField('Price', places=2, validators=[DataRequired()])
-    beer_image = StringField('Beer Image', validators=[DataRequired(), Length(min=0, max=2048), valid_image])
+    ibu = IntegerField('Price', validators=[DataRequired()])
+    # beer_image = StringField('Beer Image', validators=[DataRequired(), Length(min=0, max=2048), valid_image])
     submit = SubmitField('Submit')

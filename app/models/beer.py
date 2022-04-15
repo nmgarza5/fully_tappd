@@ -7,13 +7,13 @@ class Beer(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     brewery_id = db.Column(db.Integer, db.ForeignKey('breweries.id'), nullable=False)
-    beer_image = db.Column(db.String(2048), nullable=False)
+    # beer_image = db.Column(db.String(2048), nullable=False)
     name = db.Column(db.String(255), nullable=False)
     style = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
     abv = db.Column(db.Float, nullable=False)
-    ibu = db.Column(db.Float, nullable=False)
+    ibu = db.Column(db.Integer, nullable=False)
     # FORMAT: 2022-04-02 13:27:25.457314
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(
@@ -30,7 +30,7 @@ class Beer(db.Model):
             'name': self.name,
             'brewery_id': self.brewery_id,
             'brewery_name': self.brewery.name,
-            'beer_image': self.beer_image,
+            'beer_image': self.brewery.profile_image,
             'description': self.description,
             'style': self.style,
             'price': self.price,
