@@ -44,5 +44,6 @@ class Brewery(db.Model):
             'postal_code': self.postal_code,
             'country': self.country,
             'phone': self.phone,
-            'website_url': self.website_url
+            'website_url': self.website_url,
+            # 'beers': self.beer.to_dict()
         }
