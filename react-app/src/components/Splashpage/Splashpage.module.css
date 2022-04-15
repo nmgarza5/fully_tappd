@@ -1,5 +1,6 @@
 .banner_container {
     width: 100%;
+    margin: 0;
     height: 600px;
     position: relative;
     top: 57px;
@@ -11,6 +12,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    margin: 0;
     z-index: -9;
 }
 
@@ -20,6 +22,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    margin: 0;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: -8;
     /* z-index: 9; */
@@ -89,4 +92,5 @@
 
   .search_container {
       margin: 0;
+      width: 100%;
   }

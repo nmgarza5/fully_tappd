@@ -33,7 +33,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            {/* <PageWrapper> */}
+            <PageWrapper>
                 <NavBar />
                 <Modal />
                 <Switch>
@@ -46,6 +46,9 @@ function App() {
                     <Route exact path="/breweries" >
                         <BreweriesList />
                     </Route>
+                    {/* <Route exact path="/beer" >
+                        <BeerList />
+                    </Route> */}
                     <ProtectedRoute exact path="/new-brewery">
 						<CreateBrewery />
 					</ProtectedRoute>
@@ -54,7 +57,7 @@ function App() {
 					</Route>
                 </Switch>
                 <Footer />
-            {/* </PageWrapper> */}
+            </PageWrapper>
         </BrowserRouter>
     );
 }
