@@ -10,5 +10,4 @@ export const PageWrapper = styled.div`
     top: 0;
     flex-direction: column;
     align-items: center;
-    z-index: -11;
-`;
+    `;

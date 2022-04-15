@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const PageContainer = styled.div`
 	width: 85vw;
 	min-height: 750px;
-	margin: auto
+	margin: auto;
 	height: auto;
 	display: flex;
 	flex-direction: column;
-	top: 55px;
+	padding-top: 57px;
 	align-items: center;
 	background-color: white;
 	padding-bottom: 65px;

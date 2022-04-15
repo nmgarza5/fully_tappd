@@ -16,6 +16,16 @@ const Profile = () => {
 		setShowBox(false);
 		return;
 	};
+	const goToBreweries = () => {
+		history.push("/breweries");
+		setShowBox(false);
+		return;
+	};
+	const goToBeers = () => {
+		history.push("/beers");
+		setShowBox(false);
+		return;
+	};
 
 	const onLogout = async (e) => {
 		await dispatch(logout());
@@ -32,9 +42,13 @@ const Profile = () => {
 					className={styles.dropdown}
 				>
 					<h3>Hello {sessionUser.first_name}!</h3>
+					<div role='button' className={styles.button} onClick={onLogout}> Recent Activity</div>
 					<div role='button' className={styles.button} onClick={goToProfile}>
 						My Profile
 					</div>
+					<div role='button' className={styles.button} onClick={onLogout}> Brewhub</div>
+					<div role='button' className={styles.button} onClick={goToBreweries}> Breweries</div>
+					<div role='button' className={styles.button} onClick={goToBeers}> Beer</div>
 					<div role='button' className={styles.button} onClick={onLogout}>Sign Out</div>
 				</div>
 			)}
