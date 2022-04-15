@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const PageContainer = styled.div`
 	width: 85vw;
 	min-height: 750px;
+	margin: auto
 	height: auto;
 	display: flex;
 	flex-direction: column;

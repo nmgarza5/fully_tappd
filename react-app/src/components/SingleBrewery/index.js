@@ -21,7 +21,7 @@ export const SingleBrewery = () => {
 
     return (
         <PageContainer>
-            <div>
+            <div className={styles.profile_container}>
                 {isOwner &&
                 <>
                     <UpdateBrewery brewery={brewery} />

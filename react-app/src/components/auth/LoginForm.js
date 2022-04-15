@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import modal_bottles from "../../images/modal_bottles.png"
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
@@ -39,6 +40,11 @@ const LoginForm = () => {
 
     return (
         <div className={styles.parent}>
+            <div className={styles.info}>
+                <img src={modal_bottles} alt="bottles" className={styles.bottles}/>
+                <h2>FullyTappd</h2>
+                <p></p>
+            </div>
             <h4>Welcome back! Please login.</h4>
             <form className={styles.form_element}>
                 {errors.length > 0 && (
@@ -70,23 +76,25 @@ const LoginForm = () => {
                         />
                     </div>
                 </div>
-                <div
-					className={styles.div_button}
-					onClick={onLogin}
-				>
-					Login
-				</div>
-				<div
-					className={styles.div_button}
-					onClick={loginDemo}
-				>
-					Demo User
-				</div>
-				<div
-					className={styles.switch}
-					onClick={showSignUpForm}
-				>
-					Don't have an account? Sign up!
+                <div className={styles.button_container}>
+                    <div
+                        className={styles.button}
+                        onClick={onLogin}
+                    >
+                        Login
+                    </div>
+                    <div
+                        className={styles.button}
+                        onClick={loginDemo}
+                    >
+                        Demo User
+                    </div>
+                </div>
+				<div>
+                    Don't have an account?
+                    <div  className={styles.signup} onClick={showSignUpForm}>
+                    Sign Up!
+                    </div>
 				</div>
             </form>
         </div>

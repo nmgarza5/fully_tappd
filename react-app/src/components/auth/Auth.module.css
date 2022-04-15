@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .error_container {
@@ -41,21 +42,45 @@
     margin-left: 20px;
 }
 
-.div_button {
+.button_container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #7D2C3B;
-    cursor: pointer;
-    border-radius: 3px;
-    color: white;
-    padding: 5px 10px;
-    margin: 10px;
+    flex-direction: row;
+    margin-bottom: 15px;
 }
 
-.div_button:hover {
-    background-color: #983937;
+.button {
+    height: 45px;
+    width: 120px;
+    color: white;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: white solid;
+    background-color: #000000;
+    border-radius: 5px;
+    font-weight: 400;
+    transition: all 0.5s ease 0s;
+  }
+
+  .button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    border: #000000 solid;
+    color: black;
+  }
+
+  .signup {
+    color: #14213D;
+    text-align: center;
 }
+.signup:hover {
+    cursor: pointer;
+    color: #0051ff;
+    font-weight: bolder;
+}
+
 
 /* SIGN UP */
 
@@ -70,4 +95,45 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+}
+
+.button_logout{
+    height: 45px;
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.5s ease 0s;
+  }
+
+
+
+  .button_logout:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: black;
+  }
+
+  .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .info h1 {
+    font-size: 50px;
+    margin-bottom: 0;
+}
+.info p {
+    width: 100px;
+    border-bottom: #F3AC38 solid thick;
+    margin-bottom: 0;
+}
+
+.bottles {
+    height: 150px;
 }

@@ -11,6 +11,9 @@ import Modal from "./components/Modal/Modal";
 import { Splashpage } from "./components/Splashpage";
 import { SingleBrewery } from "./components/SingleBrewery";
 import { CreateBrewery } from "./components/CreateBrewery";
+import BreweriesList from "./components/BreweriesList";
+import { Footer } from "./components/Footer";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -30,7 +33,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <PageWrapper>
+            {/* <PageWrapper> */}
                 <NavBar />
                 <Modal />
                 <Switch>
@@ -40,11 +43,18 @@ function App() {
                     <Route exact path="/" >
                         <Splashpage />
                     </Route>
+                    <Route exact path="/breweries" >
+                        <BreweriesList />
+                    </Route>
                     <ProtectedRoute exact path="/new-brewery">
 						<CreateBrewery />
 					</ProtectedRoute>
+                    <Route>
+						<ErrorPage />
+					</Route>
                 </Switch>
-            </PageWrapper>
+                <Footer />
+            {/* </PageWrapper> */}
         </BrowserRouter>
     );
 }
