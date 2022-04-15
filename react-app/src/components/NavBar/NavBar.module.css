@@ -8,6 +8,7 @@
     align-items: center;
     background-color: #fff;
     border-top: #F3AC38 solid thick;
+    border-bottom: #d1d1d1 solid thin;
     z-index: 100;
   }
 
