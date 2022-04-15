@@ -157,7 +157,7 @@ const SignUpForm = () => {
                             value={banner_image}
                             ></input>
                     </div>
-                    <div role='button' onClick={handleClick} className={styles.div_button}>Sign Up</div>
+                    <div role='button' onClick={handleClick} className={styles.button}>Sign Up</div>
                 </div>
             </form>
         </div>
