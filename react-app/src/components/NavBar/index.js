@@ -35,8 +35,7 @@ const NavBar = () => {
                 <div className={styles.logo}>
                     <NavLink to="/" exact={true} className={styles.home_link}>
                         <i className="fa-brands fa-untappd"></i>
-                        {/* <Logo />  */}
-                        <span>FullyTappd</span>
+                        <h1>FullyTappd</h1>
                     </NavLink>
                 </div>
                 <div className={styles.right}>
@@ -56,19 +55,19 @@ const NavBar = () => {
                         className={styles.home_link}
                         activeClassName="active"
                     >
-                        {/* <Logo /> */}
+                        <i className="fa-brands fa-untappd"></i>
                         <span>FullyTappd</span>
                     </NavLink>
                 </div>
                 <div className={styles.right}>
                     <div>
-                        <div role='button' className={styles.signin} onClick={showLoginForm}>
-                            Log In
+                        <div role='button' className={styles.button_login} onClick={showLoginForm}>
+                            SIGN IN
                         </div>
                     </div>
                     <div>
-                        <div role='button' className={styles.signup} onClick={showSignUpForm}>
-                            Sign Up
+                        <div role='button' className={styles.button} onClick={showSignUpForm}>
+                            CREATE AN ACCOUNT
                         </div>
                     </div>
                 </div>

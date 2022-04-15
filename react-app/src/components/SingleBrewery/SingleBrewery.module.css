@@ -5,3 +5,12 @@
 	object-fit:contain;
 	border-radius: 0;
 }
+
+
+.profile_container {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+
+
+}
