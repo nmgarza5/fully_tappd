@@ -52,5 +52,6 @@ class User(db.Model, UserMixin):
             'header': self.header,
             'bio': self.bio,
             'profile_image': self.profile_image,
-            'banner_image': self.banner_image
+            'banner_image': self.banner_image,
+            'breweries': {brewery.id: brewery.to_dict() for brewery in self.breweries}
         }

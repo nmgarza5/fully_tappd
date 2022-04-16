@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'
-import {PageContainer} from '../PageContainer'
+// import {PageContainer} from '../PageContainer'
 import styles from './Splashpage.module.css'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -55,7 +55,7 @@ export const Splashpage = () => {
               </div>
           </div>
         </div>
-        <span lassName={styles.search_container}>
+        <span className={styles.search_container}>
           <div className={styles.button}>
               <i className="fa-solid fa-magnifying-glass"></i>
               <form>

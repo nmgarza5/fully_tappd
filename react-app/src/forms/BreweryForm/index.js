@@ -23,14 +23,6 @@ export const BreweryForm = ({brewery}) => {
 	const [banner_image, setBannerImage] = useState(brewery?.banner_image || "");
 	const [errors, setErrors] = useState([]);
 
-	const handleClick_Edit = () => {
-		dispatch(hideModal());
-	};
-
-	const handleClick_New = () => {
-		history.push("/");
-		dispatch(hideModal());
-	};
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
@@ -80,9 +72,17 @@ export const BreweryForm = ({brewery}) => {
 				dispatch(hideModal());
 				history.push(`/breweries/${newBrewery.id}`);
 			}
-	};
+		};
 	}
 
+	const handleClick_Edit = () => {
+		dispatch(hideModal());
+	};
+
+	const handleClick_New = () => {
+		history.push("/breweries");
+		dispatch(hideModal());
+	};
 
 	return (
 		<div className={styles.container}>
