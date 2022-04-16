@@ -3,7 +3,7 @@ from app.models import db, Brewery
 breweries = [
     {
         "name": "Seven Stills",
-        "owner_id": 1,
+        "owner_id": 8,
         "profile_image": "https://sfbeerweek.org/assets/14/14-fb1b134df7f7cbfa5f5ee4e495185.jpg",
         "banner_image": "https://thecraftycask.com/wp-content/uploads/2019/05/IMG_5646-1080x675_1e7961afb0e86b8f45b9f5c9e5969465_2000.jpg",
         "header": "Warehouse-style destination featuring a whiskey distillery, plus small plates, cocktails & beer.",
@@ -115,7 +115,7 @@ breweries = [
     },
     {
         "name": "Cellarmaker Brewing Company",
-        "owner_id": 8,
+        "owner_id": 1,
         "profile_image": "https://pbs.twimg.com/profile_images/804035762555469824/smxXVED7_400x400.jpg",
         "banner_image": "https://viatravelers.com/wp-content/uploads/2021/11/Cellarmaker-Brewing-Company.jpg",
         "header": "Contemporary exposed-brick tasting room offering a rotating selection of small-batch brews on tap.",

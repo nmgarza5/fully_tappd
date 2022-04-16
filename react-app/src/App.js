@@ -15,6 +15,7 @@ import { CreateBrewery } from "./components/CreateBrewery";
 import { CreateBeer } from "./components/Beer/CreateBeer";
 import BreweriesList from "./components/BreweriesList";
 import BeerList from "./components/Beer/BeerList";
+import { SingleBeer } from "./components/Beer/SingleBeer";
 import { Footer } from "./components/Footer";
 import ErrorPage from "./components/ErrorPage";
 
@@ -43,6 +44,9 @@ function App() {
                 <Switch>
                     <Route exact path="/breweries/:id">
 						<SingleBrewery />
+					</Route>
+                    <Route exact path="/beer/:id">
+						<SingleBeer />
 					</Route>
                     <Route exact path="/" >
                         <Splashpage />

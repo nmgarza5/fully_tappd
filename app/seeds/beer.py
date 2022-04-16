@@ -41,7 +41,7 @@ beer_list = [
   },
   {
     "name": 'Pilsen Lager',
-    "brewery_id": 1,
+    "brewery_id": 8,
     "description": 'Our Unleash the Yeast series was an epic experiment into the differences in aroma and flavour provided by switching up your yeast. We brewed up a wort with a light caramel note and some toasty biscuit flavour, and hopped it with Amarillo and Centennial for a citrusy bitterness. Everything else is down to the yeast. Pilsner yeast ferments with no fruity esters or spicy phenols, although it can add a hint of butterscotch.',
     "style": beer_choices[randint(0, 27)],
     "price": 7,
@@ -104,7 +104,7 @@ beer_list = [
   },
   {
     "name": 'Misspent Youth',
-    "brewery_id": 1,
+    "brewery_id": 8,
     "description": 'The brainchild of our small batch brewer, George Woods. A dangerously drinkable milk sugar- infused Scotch Ale.',
     "style": beer_choices[randint(0, 27)],
     "price": 7,
@@ -221,7 +221,7 @@ beer_list = [
   },
   {
     "name": 'The End Of History',
-    "brewery_id": 18,
+    "brewery_id": 8,
     "description": 'The End of History: The name derives from the famous work of philosopher Francis Fukuyama, this is to beer what democracy is to history. Complexity defined. Floral, grapefruit, caramel and cloves are intensified by boozy heat.',
     "style": beer_choices[randint(0, 27)],
     "price": 7,
@@ -230,7 +230,7 @@ beer_list = [
   },
   {
     "name": 'Bad Pixie',
-    "brewery_id": 1,
+    "brewery_id": 8,
     "description": '2008 Prototype beer, a 4.7% wheat ale with crushed juniper berries and citrus peel.',
     "style": beer_choices[randint(0, 27)],
     "price": 7,

@@ -29,6 +29,7 @@ class Beer(db.Model):
             'id': self.id,
             'name': self.name,
             'brewery_id': self.brewery_id,
+            'owner_id': self.brewery.owner_id,
             'brewery_name': self.brewery.name,
             'beer_image': self.brewery.profile_image,
             'description': self.description,

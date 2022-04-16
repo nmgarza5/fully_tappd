@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { createBeer, updateBeer} from "../../store/beer"
 import styles from "./BeerForm.module.css"
@@ -14,14 +14,20 @@ export const BeerForm = ({beer}) => {
 	const [price, setPrice] = useState(beer?.price || "0");
 	const [abv, setAbv] = useState(beer?.abv || "0");
 	const [ibu, setIbu] = useState(beer?.ibu || "0");
+	const [brewery_id, setBreweryId] = useState(beer?.brewery_id || "1");
 	const [errors, setErrors] = useState([]);
+
+	const userBreweries = useSelector((state) => state?.session?.user.breweries);
+	Object.entries(userBreweries).map(([key, brew]) => {
+		console.log(brew.name)
+	})
 
 	const handleClick_Edit = () => {
 		dispatch(hideModal());
 	};
 
 	const handleClick_New = () => {
-		history.push("/");
+		history.push("/beer");
 		dispatch(hideModal());
 	};
 
@@ -34,6 +40,7 @@ export const BeerForm = ({beer}) => {
 			price,
 			abv,
 			ibu,
+			brewery_id
 		}
 
 		!name
@@ -96,6 +103,18 @@ export const BeerForm = ({beer}) => {
 						></input>
 					</div>
 					<div className={styles.input_container}>
+						<label htmlFor="brewery">Brewery</label>
+						<select
+							name="brewery"
+							value={brewery_id}
+							selected={brewery_id}
+							onChange={(e) => setBreweryId(e.target.value)}
+						>
+						{Object.entries(userBreweries).map(([key, brew]) => (
+							<option  key={key} value={key}>{brew.name}</option>
+						))}
+						</select>
+					<div className={styles.input_container}>
 						<label htmlFor="style">Beer Style</label>
 						<select
 							name="style"
@@ -107,6 +126,7 @@ export const BeerForm = ({beer}) => {
 							<option  key={i} value={style}>{style}</option>
 						))}
 						</select>
+					</div>
 					</div>
 					<div className={styles.input_container}>
 						<label htmlFor="description">Description</label>
@@ -122,6 +142,14 @@ export const BeerForm = ({beer}) => {
 					<div className={styles.input_container}>
 						<label htmlFor="price">Price</label>
 						<input style={{width: '150px'}} type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
+					</div>
+					<div className={styles.input_container}>
+						<label htmlFor="price">ABV</label>
+						<input style={{width: '150px'}} type="number" value={abv} onChange={(e) => setAbv(e.target.value)}/>
+					</div>
+					<div className={styles.input_container}>
+						<label htmlFor="price">IBUs</label>
+						<input style={{width: '150px'}} type="number" value={ibu} onChange={(e) => setIbu(e.target.value)}/>
 					</div>
 					<div className={styles.button_container}>
 						<div onClick={onSubmit} className={styles.button}>
