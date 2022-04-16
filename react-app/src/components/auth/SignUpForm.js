@@ -4,7 +4,9 @@ import { setCurrentModal, hideModal } from "../../store/modal";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 import styles from "./SignUpForm.module.css"
-import DatePicker from 'react-date-picker';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const SignUpForm = () => {
     const user = useSelector((state) => state.session.user);
@@ -67,7 +69,7 @@ const SignUpForm = () => {
                 <p></p>
                 <div className={styles.brewery_signup}>
                     <div className={styles.smallish_text}>
-                    Are you a brewery that's trying to get added to Untappd, claim and manage your brewery page?
+                    Are you a brewery that's trying to get added to FullyTappd, claim and manage your brewery page?
                     </div>
                     <div  className={styles.signup} onClick={showSignUpForm}>Click Here!</div>
                 </div>
@@ -154,19 +156,19 @@ const SignUpForm = () => {
                         </div>
                     </div>
                     <div className={styles.lower_container}>
-                        <div className={styles.field}>
+                        <div className={styles.small_text}>You must be over the age of 21 to sign up for FullyTappd.</div>
+                        <div className={styles.date}>
                             <label>Birthdate</label>
                             <DatePicker
-                            className={styles.input}
-                            onChange={setBirthdate}
+                            className={styles.calendar}
+                            selected={birthdate}
+                            placeholder='Example: 12/12/1994'
                             value={birthdate}
-                            format="MM-yyyy"
                             required='true'
-
-                            />
+                            onChange={(date) => setBirthdate(date)} />
                         </div>
                         <div className={styles.lower_field}>
-                            Header
+                            <label>Header</label>
                             <input
                             className={styles.lower_input}
                                 type="text"
@@ -178,7 +180,7 @@ const SignUpForm = () => {
                                 ></input>
                         </div>
                         <div className={styles.lower_field}>
-                            Profile Image
+                            <label>Profile Image</label>
                             <input
                             className={styles.lower_input}
                                 type="text"
@@ -189,7 +191,7 @@ const SignUpForm = () => {
                                 ></input>
                         </div>
                         <div className={styles.lower_field}>
-                            Banner Image
+                            <label>Banner Image</label>
                             <input
                             className={styles.lower_input}
                                 type="text"
