@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./ProfileDropdown.module.css";
 import { logout } from "../../store/session";

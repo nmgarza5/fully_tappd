@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'
-import {PageContainer} from '../PageContainer'
+// import {PageContainer} from '../PageContainer'
 import styles from './Splashpage.module.css'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'

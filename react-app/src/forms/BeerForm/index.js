@@ -18,9 +18,6 @@ export const BeerForm = ({beer}) => {
 	const [errors, setErrors] = useState([]);
 
 	const userBreweries = useSelector((state) => state?.session?.user.breweries);
-	Object.entries(userBreweries).map(([key, brew]) => {
-		console.log(brew.name)
-	})
 
 	const handleClick_Edit = () => {
 		dispatch(hideModal());
