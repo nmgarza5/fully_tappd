@@ -1,0 +1,36 @@
+.card_img img {
+	width: 200px;
+	height: 200px;
+    /* border-radius: 10px; */
+	object-fit:contain;
+	border-radius: 0;
+}
+
+
+.profile_container {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+}
+
+.button {
+    height: 45px;
+    width: 150px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: white solid;
+    background-color: #000000;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.5s ease 0s;
+
+  }
+
+  .button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+	border: black solid;
+    color: black;
+  }
