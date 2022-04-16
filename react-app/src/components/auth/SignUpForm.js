@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { hideModal } from "../../store/modal";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
-import styles from "./Auth.module.css"
+import styles from "./SignUpForm.module.css"
+import DatePicker from 'react-date-picker';
 
 const SignUpForm = () => {
     const user = useSelector((state) => state.session.user);
@@ -12,6 +13,7 @@ const SignUpForm = () => {
     const [username, setUsername] = useState("");
     const [first_name, setFirstName] = useState("");
     const [last_name, setLastName] = useState("");
+    const [birthdate, setBirthdate] = useState(new Date());
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
@@ -27,6 +29,7 @@ const SignUpForm = () => {
             username,
             first_name,
             last_name,
+            birthdate,
             email,
             password,
             confirm_password,
@@ -54,7 +57,11 @@ const SignUpForm = () => {
 
     return (
         <div className={styles.parent}>
-            <h4>Welcome to FullyTappd!</h4>
+            <div className={styles.info}>
+                <h1>FullyTappd</h1>
+                <div className={styles.drink}>DRINK SOCIALLY</div>
+                <p></p>
+            </div>
             <form className={styles.signup_form}>
                 <div>
                     {errors.map((error, ind) => (
@@ -62,41 +69,61 @@ const SignUpForm = () => {
                     ))}
                 </div>
                 <div className={styles.fields}>
-                    <div>
-                        <label>User Name</label>
-                        <input
-                            type="text"
-                            name="username"
-                            onChange={(e) => setUsername(e.target.value)}
-                            value={username}
-                        ></input>
+                    <div className={styles.field_row}>
+                        <div className={styles.field}>
+                            <i className="fa-solid fa-user"></i>
+                            <input
+                                className={styles.input}
+                                type="text"
+                                name="username"
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder='Username'
+                                >
+                            </input>
+                        </div>
+                        <div className={styles.field}>
+                            <i className="fa-solid fa-envelope"></i>
+                            <input
+                            className={styles.input}
+                                type="text"
+                                name="email"
+                                placeholder='Email'
+                                onChange={(e) => setEmail(e.target.value)}
+                            ></input>
+                        </div>
+
+                    </div>
+                    <div className={styles.field_row}>
+                        <div className={styles.field}>
+                            <input
+                                className={styles.input}
+                                placeholder='First Name'
+                                type="text"
+                                name="first_name"
+                                onChange={(e) => setFirstName(e.target.value)}
+                                value={first_name}
+                            ></input>
+                        </div>
+                        <div className={styles.field}>
+                            <input
+                                className={styles.input}
+                                placeholder='Last Name'
+                                type="text"
+                                name="last_name"
+                                onChange={(e) => setLastName(e.target.value)}
+                                value={last_name}
+                            ></input>
+                        </div>
                     </div>
                     <div>
-                        <label>First Name</label>
-                        <input
-                            type="text"
-                            name="first_name"
-                            onChange={(e) => setFirstName(e.target.value)}
-                            value={first_name}
-                        ></input>
-                    </div>
-                    <div>
-                        <label>Last Name</label>
-                        <input
-                            type="text"
-                            name="last_name"
-                            onChange={(e) => setLastName(e.target.value)}
-                            value={last_name}
-                        ></input>
-                    </div>
-                    <div>
-                        <label>Email</label>
-                        <input
-                            type="text"
-                            name="email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                        ></input>
+                        <label>Birthdate</label>
+                        <DatePicker
+                        onChange={setBirthdate}
+                        value={birthdate}
+                        format="MM-yyyy"
+                        required='true'
+
+                         />
                     </div>
                     <div>
                         <label>Password</label>

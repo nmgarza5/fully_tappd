@@ -1,6 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+import datetime
 
 
 class User(db.Model, UserMixin):
@@ -11,16 +12,16 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
+    birthdate = db.Column(db.DateTime, nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     header = db.Column(db.String(255), nullable=False)
-    bio = db.Column(db.Text, nullable=True)
+    # bio = db.Column(db.Text, nullable=True)
     profile_image = db.Column(db.String(2048), nullable=False)
     banner_image = db.Column(db.String(2048), nullable=True)
     # FORMAT: 2022-04-02 13:27:25.457314
-    created_at = db.Column(db.DateTime, default=db.func.now())
-    updated_at = db.Column(
-        db.DateTime, default=db.func.now(), onupdate=db.func.now())
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
 
 
     @property
@@ -50,7 +51,7 @@ class User(db.Model, UserMixin):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'header': self.header,
-            'bio': self.bio,
+            # 'bio': self.bio,
             'profile_image': self.profile_image,
             'banner_image': self.banner_image,
             'breweries': {brewery.id: brewery.to_dict() for brewery in self.breweries}
