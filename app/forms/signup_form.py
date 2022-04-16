@@ -26,18 +26,18 @@ def valid_image(form, field):
   if url and not (url.endswith('.jpg') or url.endswith('.jpeg') or url.endswith('.png') or url.endswith('.gif')):
     raise ValidationError('Image format must be .jpg, .jpeg, .png, or .gif')
 
-def calculate_age(form, field):
-        born = field.data
-        today = date.today()
-        age_difference = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
-        if age_difference < 21:
-            raise ValidationError('You must be 21 or older to join FullyTappd')
+# def calculate_age(form, field):
+#         born = field.data
+#         today = date.today()
+#         age_difference = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+#         if age_difference < 21:
+#             raise ValidationError('You must be 21 or older to join FullyTappd')
 
 class SignUpForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     first_name = StringField('First Name', validators=[DataRequired()])
     last_name = StringField('Last Name', validators=[DataRequired()])
-    birthdate = DateTime("Birthdate", validators=[DataRequired(), calculate_age])
+    # birthdate = DateTime("Birthdate")
     email = StringField('Email', validators=[DataRequired(), user_exists, Email()])
     password = StringField('Password', validators=[DataRequired(), EqualTo('confirm_password', message="Passwords do not match.")])
     confirm_password = StringField('Confirm Password', validators=[DataRequired()])
