@@ -21,6 +21,7 @@ import ActivityPage from "./components/ActivityPage";
 import ProfilePage from "./components/ProfilePage";
 import Brewhub from "./components/Brewhub";
 import SignUpPage from "./components/SignUpPage";
+import SplashConditional from "./components/Splashpage/SplashConditional";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -63,9 +64,9 @@ function App() {
                     <Route exact path="/brewhub" >
                         <Brewhub />
                     </Route>
-                    <Route exact path="/" >
+                    <SplashConditional exact path="/" >
                         <Splashpage />
-                    </Route>
+                    </SplashConditional>
                     <Route exact path="/breweries" >
                         <BreweriesList />
                     </Route>
