@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { showModal, setCurrentModal } from "../../store/modal";
 import SignUpForm from "../auth/SignUpForm";
+import SearchSection from '../SearchSection'
 
 
 import banner from "../../images/beer-toast.jpg"
@@ -55,8 +56,8 @@ export const Splashpage = () => {
               </div>
           </div>
         </div>
-        <span className={styles.search_container}>
-          <div className={styles.button}>
+        {/* <div className={styles.search_container}>
+          <div className={styles.search_button}>
               <i className="fa-solid fa-magnifying-glass"></i>
               <form>
                 <input
@@ -71,7 +72,8 @@ export const Splashpage = () => {
                 </div>
               </form>
           </div>
-        </span>
+        </div> */}
+        <SearchSection />
       </>
   )
 }

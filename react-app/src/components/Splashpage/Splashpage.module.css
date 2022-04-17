@@ -91,6 +91,29 @@
   }
 
   .search_container {
-      margin: 0;
+      height:70px;
+      background-color: aqua;
+      margin-top: 57px;
       width: 100%;
+      text-align: center;
+  }
+
+  .search_button {
+    height: 45px;
+    width: 150px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: white solid;
+    background-color: #000000;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.5s ease 0s;
+  }
+
+  .search_button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: black;
   }

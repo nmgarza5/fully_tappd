@@ -18,7 +18,6 @@ import BeerList from "./components/Beer/BeerList";
 import { SingleBeer } from "./components/Beer/SingleBeer";
 import { Footer } from "./components/Footer";
 import ErrorPage from "./components/ErrorPage";
-import BusinessUserForm from "./components/auth/BusinessUserForm";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -58,9 +57,6 @@ function App() {
                     <Route exact path="/beer" >
                         <BeerList />
                     </Route>
-                    <Route exact path="/new-business">
-						<BusinessUserForm />
-					</Route>
                     <ProtectedRoute exact path="/new-brewery">
 						<CreateBrewery />
 					</ProtectedRoute>
