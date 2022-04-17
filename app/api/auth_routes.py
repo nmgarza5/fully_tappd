@@ -62,18 +62,23 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    business_user = request.json['business_user']
+
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
+            business_user=business_user,
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
+            birthdate=form.data['birthdate'],
             email=form.data['email'],
             password=form.data['password'],
             header=form.data['header'],
-            bio=form.data['bio'],
+            # bio=form.data['bio'],
             profile_image=form.data['profile_image'],
             banner_image=form.data['banner_image']
         )
+        print("\n\n DATE --", user.birthdate, "\n\n")
         db.session.add(user)
         db.session.commit()
         login_user(user)

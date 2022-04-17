@@ -35,14 +35,14 @@ const LoginForm = () => {
 	};
 
     if (user) {
-        return <Redirect to="/" />;
+        return <Redirect to="/activity" />;
     }
 
     return (
         <div className={styles.parent}>
             <div className={styles.info}>
                 <img src={modal_bottles} alt="bottles" className={styles.bottles}/>
-                <h2>FullyTappd</h2>
+                <h1>FullyTappd</h1>
                 <p></p>
             </div>
             <h4>Welcome back! Please login.</h4>
@@ -55,25 +55,28 @@ const LoginForm = () => {
                     </div>
                 )}
                 <div className={styles.fields}>
-                    <div >
-                        <label htmlFor="username" >Username</label>
+                    <div className={styles.field}>
+                        <i className="fa-solid fa-user"></i>
                         <input
-                            name="username"
+                            className={styles.input}
                             type="text"
-                            placeholder="Username"
+                            name="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                        />
+                            placeholder='Username'
+                            >
+                        </input>
                     </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
+                    <div className={styles.field}>
+                        <i className="fa-solid fa-lock"></i>
                         <input
-                            name="password"
-                            type="password"
+                            className={styles.input}
                             placeholder="Password"
-                            value={password}
+                            type="password"
+                            name="password"
                             onChange={(e) => setPassword(e.target.value)}
-                        />
+                            value={password}
+                            ></input>
                     </div>
                 </div>
                 <div className={styles.button_container}>
@@ -90,8 +93,9 @@ const LoginForm = () => {
                         Demo User
                     </div>
                 </div>
+                <div className={styles.grey_line}></div>
 				<div>
-                    Don't have an account?
+                    New around here?
                     <div  className={styles.signup} onClick={showSignUpForm}>
                     Sign Up!
                     </div>
