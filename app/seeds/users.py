@@ -4,6 +4,14 @@ from faker import Faker
 from random import randint
 fake = Faker()
 
+
+# now = func.now();
+# birthdate = '2022-04-15T16:29:17.000Z'
+
+# print(now)
+# print(birthdate)
+
+
 images = [
     {
         "image": "https://cdn.drawception.com/images/avatars/647493-B9E.png",
@@ -72,12 +80,13 @@ def seed_users():
         username='keith-stone',
         first_name='Keith',
         last_name='Stone',
+        birthdate= '1994-04-15T16:29:17.000Z',
         email='demo@demo.com',
         password='password',
         profile_image = "https://pbs.twimg.com/profile_images/2521709236/image_400x400.jpg",
         banner_image = "https://freight.cargo.site/t/original/i/cae1c483c916f1ce2f25ccafec7b64f0f4a5075bdf8c74dae0909534a6a82851/Limit_A.jpg",
-        header='Always Smooth',
-        bio='The human embodiment of smoothness. Never without my case of ice cold stones and smooth pick up lines.')
+        header='Always Smooth')
+        # bio='The human embodiment of smoothness. Never without my case of ice cold stones and smooth pick up lines.')
     db.session.add(demo)
 
     for image in images:
@@ -87,12 +96,13 @@ def seed_users():
             username=f'{name}{randint(1,5)}{randint(1,5)}{randint(1,5)}',
             first_name=name,
             last_name=fake.last_name(),
+            birthdate= '1994-04-15T16:29:17.000Z',
             email=fake.unique.email(),
             hashed_password=generate_password_hash(fake.password()),
             profile_image= image["image"],
             banner_image= "https://aristocratpub.com/wp-content/uploads/2017/05/banner.jpg",
-            header=fake.text(),
-            bio=fake.text())
+            header=fake.text())
+            # bio=fake.text())
         db.session.add(owner)
     db.session.commit()
 

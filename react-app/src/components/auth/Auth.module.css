@@ -122,11 +122,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
   }
 
-  .info h1 {
-    font-size: 50px;
+  .info h2 {
+    font-size: 30px;
     margin-bottom: 0;
+
 }
 .info p {
     width: 100px;
@@ -136,4 +138,27 @@
 
 .bottles {
     height: 150px;
+}
+
+.field {
+    display: flex;
+    width: 220px;
+    height: 30px;
+    align-items: center;
+    border: rgb(190, 190, 190) solid thin;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.input {
+    margin-left: 7px;
+    padding-left: 7px;
+    border: none;
+    border-left: rgb(190, 190, 190) solid thin;
+}
+
+.grey_line {
+    border-bottom: rgb(190, 190, 190) solid thin;
+    width: 240px;
+    margin-bottom: 10px;
 }

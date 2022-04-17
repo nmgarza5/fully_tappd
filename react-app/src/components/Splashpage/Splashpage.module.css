@@ -90,7 +90,142 @@
     color: black;
   }
 
-  .search_container {
-      margin: 0;
-      width: 100%;
+  .feature_container {
+    height:350px;
+    /* border-top: #828282 solid thin; */
+    top: 57px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* margin-bottom: -20px; */
+  }
+
+  .feature {
+    width: 400px;
+    height: 320px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+  }
+
+  .inner_feature {
+      width: 350px;
+      height: 170px;
+      background: #F3AC38;
+  }
+
+  .feature h3, .feature h4 {
+      margin: 10px;
+  }
+
+  .other_feature_container {
+    height:400px;
+    border-top: #828282 solid thin;
+    top: 57px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .other_feature_container h2 {
+    /* margin-top: 30px; */
+    margin-bottom: -10px;
+  }
+
+  .business_container {
+    height: 400px;
+    border-top: #828282 solid thin;
+    top: 57px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .business_feature {
+    width: 450px;
+    height: 350px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: center;
+  }
+
+  .list {
+      width: 500px;
+      margin-left: -20px;
+  }
+
+  .business_feature h2 {
+    margin-bottom: -5px;
+  }
+  .business_feature h4 {
+    margin-bottom: -5px;
+  }
+
+  .business_feature p {
+    width: 100px;
+    border-bottom: #F3AC38 solid thick;
+    margin-bottom: 0;
+  }
+
+  .brewhub {
+      width:500px;
+      height:500px;
+      background: #F3AC38;
+  }
+
+  .claim_container {
+    height:125px;
+    border-top: #828282 solid thin;
+    top: 57px;
+    margin-top: -20px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+  }
+
+  .claim_container h2 {
+      margin-top: -10px;
+      color: white;
+  }
+
+  .claim_button {
+    height: 45px;
+    width: 300px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: white solid;
+    background-color: #000000;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.5s ease 0s;
+
+  }
+
+  .claim_button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: black;
+  }
+
+  .claim_button i {
+      margin-left: 5px;
   }
