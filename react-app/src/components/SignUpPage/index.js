@@ -1,7 +1,7 @@
 import React from "react";
 import SignUpForm from "../auth/SignUpForm";
 import { PageContainer } from "../PageContainer";
-import styles from "./SignUpPage.module.css";
+// import styles from "./SignUpPage.module.css";
 
 
 

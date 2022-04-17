@@ -1,7 +1,7 @@
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 // import {PageContainer} from '../PageContainer'
 import styles from './Splashpage.module.css'
-import { useState } from 'react'
+// import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { showModal, setCurrentModal } from "../../store/modal";
 import SignUpForm from "../auth/SignUpForm";
@@ -12,31 +12,13 @@ import banner from "../../images/beer-toast.jpg"
 import bottles from "../../images/bottles.png"
 
 export const Splashpage = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-	const history = useHistory();
+	// const history = useHistory();
   const dispatch = useDispatch();
 
   const showSignUpForm = () => {
     dispatch(setCurrentModal(SignUpForm));
     dispatch(showModal());
   };
-
-  const handleSubmit = (e) => {
-		e.preventDefault();
-
-		if (searchQuery.includes("%")) {
-			alert(
-				`Please do not use the "percent" symbol in your search query.`
-			);
-			setSearchQuery("");
-		} else if (searchQuery) {
-			history.push(`/search/${searchQuery}`);
-		} else {
-			alert(`Please enter a search query.`);
-		}
-		return;
-	};
-
 
   return (
       <>

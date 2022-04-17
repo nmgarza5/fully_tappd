@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentModal, hideModal } from "../../store/modal";
-import { Redirect, useHistory } from "react-router-dom";
+import { hideModal } from "../../store/modal";
+import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 import styles from "./SignUpForm.module.css"
 import DatePicker from "react-datepicker";
@@ -11,7 +11,7 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 const SignUpForm = () => {
     const user = useSelector((state) => state.session.user);
 
-    const history = useHistory();
+    // const history = useHistory();
     const [errors, setErrors] = useState([]);
     const [business_user, setBusinessUser] = useState(false);
     const [username, setUsername] = useState("");
