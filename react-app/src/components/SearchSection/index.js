@@ -37,7 +37,7 @@ const SearchSection = () => {
 						type="text"
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
-						placeholder="Search for Breweries, Beer"
+						placeholder="Search for Breweries or Beers"
 					/>
 				</div>
 				<div onClick={handleSubmit} className={styles.button}>

@@ -6,7 +6,6 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
 import { receiveBreweries } from "./store/breweries";
 import { receiveBeer } from "./store/beer";
-
 import { PageWrapper } from "../src/components/PageWrapper";
 import Modal from "./components/Modal/Modal";
 import { Splashpage } from "./components/Splashpage";
@@ -18,6 +17,10 @@ import BeerList from "./components/Beer/BeerList";
 import { SingleBeer } from "./components/Beer/SingleBeer";
 import { Footer } from "./components/Footer";
 import ErrorPage from "./components/ErrorPage";
+import ActivityPage from "./components/ActivityPage";
+import ProfilePage from "./components/ProfilePage";
+import Brewhub from "./components/Brewhub";
+import SignUpPage from "./components/SignUpPage";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -42,12 +45,24 @@ function App() {
                 <NavBar />
                 <Modal />
                 <Switch>
+                    <Route exact path="/sign-up">
+						<SignUpPage />
+					</Route>
                     <Route exact path="/breweries/:id">
 						<SingleBrewery />
 					</Route>
                     <Route exact path="/beer/:id">
 						<SingleBeer />
 					</Route>
+                    <Route exact path="/activity" >
+                        <ActivityPage />
+                    </Route>
+                    <Route exact path="/my-profile" >
+                        <ProfilePage />
+                    </Route>
+                    <Route exact path="/brewhub" >
+                        <Brewhub />
+                    </Route>
                     <Route exact path="/" >
                         <Splashpage />
                     </Route>
