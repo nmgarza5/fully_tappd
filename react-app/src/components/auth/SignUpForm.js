@@ -79,7 +79,7 @@ const SignUpForm = () => {
             <form className={styles.signup_form}>
                 <div>
                     {errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
+                        <div key={ind} className={styles.errors}>{error.charAt(0).toUpperCase() + error.slice(1).replace("_", " ")}</div>
                     ))}
                 </div>
                 <div className={styles.fields}>

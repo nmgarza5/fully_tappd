@@ -52,21 +52,20 @@ def calculate_age(form, field):
         birthdate  = datetime.fromisoformat(next)
         current_time = datetime.utcnow()
         delta = (birthdate - current_time).days
-        # add 5 to offset to correct date
+        # add 5 to offset to correct date shift from leap years
         age_difference = delta + 21*365 + 5
         print("\n\n age-def ------", age_difference, '\n\n')
         # this part is weird but if 'age_difference' > 0 the user is younger than 21 years old
         if age_difference >= 0:
-            raise ValidationError('You must be over 21 to sign up for FullyTappd')
+            raise ValidationError('You must be over the age of 21 to sign up for FullyTappd')
 
 class SignUpForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), username_exists])
-    business_user = Boolean('Business Owner')
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
+    first_name = StringField('First Name', validators=[DataRequired(), Length(min=0, max=50)])
+    last_name = StringField('Last Name', validators=[DataRequired(), Length(min=0, max=50)])
     birthdate = StringField("Birthdate", validators=[DataRequired(), calculate_age])
-    email = StringField('Email', validators=[DataRequired(), user_exists, Email()])
-    password = StringField('Password', validators=[DataRequired(), EqualTo('confirm_password', message="Passwords do not match.")])
+    email = StringField('Email', validators=[DataRequired(), user_exists, Email(), Length(min=0, max=255)])
+    password = StringField('Password', validators=[DataRequired(), EqualTo('confirm_password', message="Passwords do not match."), Length(min=0, max=50)])
     confirm_password = StringField('Confirm Password', validators=[DataRequired()])
     header = StringField('Header', validators=[Length(min=0, max=255)])
     # bio = TextAreaField('Bio')
