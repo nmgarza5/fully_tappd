@@ -75,7 +75,7 @@ export const Splashpage = () => {
               <div className={styles.inner_feature}>
               </div>
               <h3>AWS UPLOADS</h3>
-              <h4>FullyTappd utilizes Amazon Web services to ensure your photos are proper data storage and delivery.</h4>
+              <h4>FullyTappd utilizes Amazon Web services to securely store and deliver your images.</h4>
             </div>
           </div>
         </div>

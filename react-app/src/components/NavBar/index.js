@@ -1,5 +1,6 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../auth/SignUpForm";
@@ -11,8 +12,27 @@ import ProfileDropdown from "../ProfileDropdown"
 
 const NavBar = () => {
     const sessionUser = useSelector((state) => state.session.user);
-
     const dispatch = useDispatch();
+    const [searchQuery, setSearchQuery] = useState("");
+	const history = useHistory();
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if (searchQuery.includes("%")) {
+			alert(
+				`Please do not use the "percent" symbol in your search query.`
+			);
+			setSearchQuery("");
+		} else if (searchQuery) {
+			history.push(`/search/${searchQuery}`);
+		} else {
+			alert(`Please enter a search query.`);
+		}
+
+		// dispatch(hideModal());
+		return;
+	};
 
     const showLoginForm = () => {
         dispatch(setCurrentModal(LoginForm));
@@ -32,16 +52,32 @@ const NavBar = () => {
     if (sessionUser) {
         return (
             <nav className={styles.container}>
-                <div className={styles.logo}>
+                <div className={styles.left}>
                     <NavLink to="/" exact={true} className={styles.home_link}>
                         <i className="fa-brands fa-untappd"></i>
                         <h1>FullyTappd</h1>
+                    </NavLink>
+                    <NavLink to="/beer" exact={true} className={styles.nav_link}>
+                        Beer
+                    </NavLink>
+                    <NavLink to="/breweries" exact={true} className={styles.nav_link}>
+                        Breweries
                     </NavLink>
                 </div>
                 <div className={styles.right}>
                     <div className={styles.profile_icon}>
                         <ProfileDropdown />
                     </div>
+                    <div>
+					<input
+						className={styles.search_box_field}
+						type="text"
+						value={searchQuery}
+						onChange={(e) => setSearchQuery(e.target.value)}
+						placeholder="Search for Breweries or Beers"
+					/>
+					<i onClick={handleSubmit} className="fa-solid fa-magnifying-glass"></i>
+				</div>
                 </div>
             </nav>
         );
