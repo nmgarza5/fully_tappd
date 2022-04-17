@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    # birthdate = db.Column(db.DateTime, nullable=False)
+    birthdate = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     header = db.Column(db.String(255), nullable=False)
@@ -20,8 +20,9 @@ class User(db.Model, UserMixin):
     profile_image = db.Column(db.String(2048), nullable=False)
     banner_image = db.Column(db.String(2048), nullable=True)
     # FORMAT: 2022-04-02 13:27:25.457314
-    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
-    updated_at = db.Column(db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
+    created_at = db.Column(db.DateTime, default=db.func.now())
+    updated_at = db.Column(
+        db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
 
     @property
@@ -35,13 +36,13 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def user_status(self):
-        if not self.business_user:
-             self.business_user = True
-        elif not bool(self.breweries):
-             self.business_user = False
-        else:
-            self.business_user = True
+    # def user_status(self):
+    #     if not self.business_user:
+    #          self.business_user = True
+    #     elif not bool(self.breweries):
+    #          self.business_user = False
+    #     else:
+    #         self.business_user = True
 
     def to_dict(self):
         return {

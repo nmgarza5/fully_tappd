@@ -6,6 +6,12 @@
     align-items: center;
 }
 
+.welcome {
+  /* font-size: 50px;
+  margin-bottom: 0; */
+  text-align: center;
+}
+
 .info {
     display: flex;
     flex-direction: column;
@@ -29,7 +35,7 @@
 }
 
 .brewery_signup {
-    background-color:rgb(255, 235, 181);
+    background-color:rgb(251, 255, 181);
     border-radius: 5px;
     width: 400px;
 
@@ -195,5 +201,11 @@
     text-align: center;
     border: none;
     border-left: rgb(190, 190, 190) solid thin;
+  }
 
+  .brewery_signup label {
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 0, 205);
+    font-size: 13px
   }

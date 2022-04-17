@@ -4,6 +4,14 @@ from faker import Faker
 from random import randint
 fake = Faker()
 
+
+# now = func.now();
+# birthdate = '2022-04-15T16:29:17.000Z'
+
+# print(now)
+# print(birthdate)
+
+
 images = [
     {
         "image": "https://cdn.drawception.com/images/avatars/647493-B9E.png",
@@ -72,7 +80,7 @@ def seed_users():
         username='keith-stone',
         first_name='Keith',
         last_name='Stone',
-        # birthdate=
+        birthdate= '1994-04-15T16:29:17.000Z',
         email='demo@demo.com',
         password='password',
         profile_image = "https://pbs.twimg.com/profile_images/2521709236/image_400x400.jpg",
@@ -88,6 +96,7 @@ def seed_users():
             username=f'{name}{randint(1,5)}{randint(1,5)}{randint(1,5)}',
             first_name=name,
             last_name=fake.last_name(),
+            birthdate= '1994-04-15T16:29:17.000Z',
             email=fake.unique.email(),
             hashed_password=generate_password_hash(fake.password()),
             profile_image= image["image"],
