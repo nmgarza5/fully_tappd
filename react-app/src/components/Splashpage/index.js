@@ -5,6 +5,7 @@ import styles from './Splashpage.module.css'
 import { useDispatch } from 'react-redux'
 import { showModal, setCurrentModal } from "../../store/modal";
 import SignUpForm from "../auth/SignUpForm";
+import LoginForm from "../auth/LoginForm";
 import SearchSection from '../SearchSection'
 
 
@@ -19,10 +20,24 @@ export const Splashpage = () => {
     dispatch(setCurrentModal(SignUpForm));
     dispatch(showModal());
   };
+  const showLoginForm = () => {
+    dispatch(setCurrentModal(LoginForm));
+    dispatch(showModal());
+};
+
+
 
   return (
       <>
         <div className={styles.banner_container}>
+          <div className={styles.right}>
+                <div role='button' className={styles.button_top} onClick={showLoginForm}>
+                    SIGN IN
+                </div>
+                <div role='button' className={styles.button_top} onClick={showSignUpForm}>
+                    CREATE AN ACCOUNT
+                </div>
+          </div>
           <img src={banner} alt="Toast!" className={styles.banner} />
           <div className={styles.overlay}></div>
           <div className={styles.banner_info}>
