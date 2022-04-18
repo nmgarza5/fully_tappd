@@ -38,21 +38,18 @@ def date_format(form, field):
             next = new[0:19]
             # change to date format
             birthdate  = datetime.fromisoformat(next)
+            print("\n\n FROM-ISOFORMAT ------", birthdate, '\n\n')
+            return birthdate
         except:
             raise ValidationError('You must enter a valid birthdate')
 
 def calculate_age(form, field):
-        date_format(form, field)
-        # receive date as string
-        birthdate_str = field.data
-        # replace characters to create date format
-        new = birthdate_str.replace("T", " ")
-        next = new[0:19]
-        # change to date format
-        birthdate  = datetime.fromisoformat(next)
+        birthdate = date_format(form, field)
         current_time = datetime.utcnow()
+        print("\n\n current_time ------", current_time, '\n\n')
         delta = (birthdate - current_time).days
-        # add 5 to offset to correct date shift from leap years
+        print("\n\n delta ------", delta, '\n\n')
+        # add 5 to offset to correct date, shift from leap years
         age_difference = delta + 21*365 + 5
         print("\n\n age-def ------", age_difference, '\n\n')
         # this part is weird but if 'age_difference' > 0 the user is younger than 21 years old

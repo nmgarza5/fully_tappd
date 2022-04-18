@@ -1,0 +1,139 @@
+.container {
+    width: 1000px;
+    /* background: burlywood; */
+    height: 100vh;
+}
+
+.select_container {
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    justify-content: space-evenly;
+    background: #f7f0f0;
+    border-radius: 5px;
+	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
+}
+
+.input_container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+
+}
+
+.input_container select {
+    margin-left: 10px
+}
+
+
+
+.info {
+    margin: 20px;
+	border-radius: 5px;
+	width: 500px;
+	height: auto;
+	background: #f7f0f0;
+	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
+	contain: layout;
+}
+
+.first_info {
+	height: 200px;
+	padding: 10px;
+	/* background: lightcoral; */
+	display: flex;
+	flex-direction: row;
+}
+
+.card_img img {
+	width: 150px;
+	height: 150px;
+	border-radius: 10px;
+	object-fit:contain;
+	/* border-radius: 10%; */
+	margin-top: 15px;
+}
+
+.middle {
+	margin-left: 15px;
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.middle div {
+	font-size: 14px;
+}
+
+.third_info {
+	width: 100%;
+	height: 100px;
+	justify-content: center;
+}
+
+.third_info h3{
+	text-align: center;
+	margin-bottom: 0;;
+}
+
+.show {
+	padding: 10px;
+}
+.show div:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.no_show {
+	padding: 10px;
+}
+
+.show div {
+	margin-top: 5px;
+	float: right;
+	color: rgb(163, 47, 47)
+}
+.no_show div {
+	margin-top: 5px;
+	float: right;
+	color: rgb(163, 47, 47)
+}
+
+.no_show div:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.button_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom:10px
+}
+
+.button {
+    margin-left: 20px;
+    height: 35px;
+    width: 120px;
+    font-size: 12px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: white solid; */
+    background-color: #000000;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.5s ease 0s;
+    /* margin-right: 20px; */
+  }
+
+  .button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: black;
+    border: #000000 solid thin;
+  }
