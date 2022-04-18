@@ -1,16 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector} from "react-redux";
 import styles from "./SingleBrewery.module.css";
 // import { receiveOneBrewery } from "../../store/breweries";
-import { UpdateBrewery } from "../UpdateBrewery";
+// import { UpdateBrewery } from "../UpdateBrewery";
 import { PageContainer } from "../PageContainer";
-import { DeleteBrewery } from "../DeleteBrewery";
+// import { DeleteBrewery } from "../DeleteBrewery";
 
 export const SingleBrewery = () => {
     // const dispatch = useDispatch
-	const sessionUser = useSelector((state) => state?.session?.user);
+	// const sessionUser = useSelector((state) => state?.session?.user);
 	const { id } = useParams();
 	const brewery = useSelector((state) => state.breweries)[`${id}`];
     const [showMore, setShowMore] = useState(false)
@@ -25,10 +25,10 @@ export const SingleBrewery = () => {
 
     // "brewpub" ? "Brewpub" : "regional" ? "Regional" : "large" ? "Large" : null
 
-    let isOwner = false;
-	sessionUser && brewery?.owner_id === sessionUser.id
-    ? (isOwner = true)
-    : (isOwner = false);
+    // let isOwner = false;
+	// sessionUser && brewery?.owner_id === sessionUser.id
+    // ? (isOwner = true)
+    // : (isOwner = false);
 
     return (
         <PageContainer>

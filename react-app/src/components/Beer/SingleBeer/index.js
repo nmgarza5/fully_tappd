@@ -1,13 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector} from "react-redux";
 import styles from "./SingleBeer.module.css";
 import { PageContainer } from "../../PageContainer";
 
 export const SingleBeer = () => {
     // const dispatch = useDispatch
-	const sessionUser = useSelector((state) => state?.session?.user);
+	// const sessionUser = useSelector((state) => state?.session?.user);
 	const { id } = useParams();
 	const beer = useSelector((state) => state.beer)[`${id}`];
     const [showMore, setShowMore] = useState(false)
@@ -21,10 +21,10 @@ export const SingleBeer = () => {
 
     // "brewpub" ? "Brewpub" : "regional" ? "Regional" : "large" ? "Large" : null
 
-    let isOwner = false;
-	sessionUser && beer?.owner_id === sessionUser.id
-    ? (isOwner = true)
-    : (isOwner = false);
+    // let isOwner = false;
+	// sessionUser && beer?.owner_id === sessionUser.id
+    // ? (isOwner = true)
+    // : (isOwner = false);
 
     return (
         <PageContainer>
