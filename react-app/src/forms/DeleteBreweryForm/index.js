@@ -18,7 +18,7 @@ export const DeleteBreweryForm = ({ brewery_id }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await dispatch(hideModal());
-		await history.push(`/`);
+		// await history.push(`/`);
 		await dispatch(deleteBrewery(brewery_id));
 		setErrors([]);
 	};

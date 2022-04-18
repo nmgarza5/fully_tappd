@@ -10,8 +10,8 @@ import { PageWrapper } from "../src/components/PageWrapper";
 import Modal from "./components/Modal/Modal";
 import { Splashpage } from "./components/Splashpage";
 import { SingleBrewery } from "./components/SingleBrewery";
-import { CreateBrewery } from "./components/CreateBrewery";
-import { CreateBeer } from "./components/Beer/CreateBeer";
+// import { CreateBrewery } from "./components/CreateBrewery";
+// import { CreateBeer } from "./components/Beer/CreateBeer";
 import BreweriesList from "./components/BreweriesList";
 import BeerList from "./components/Beer/BeerList";
 import { SingleBeer } from "./components/Beer/SingleBeer";
@@ -74,12 +74,12 @@ function App() {
                     <Route exact path="/beer" >
                         <BeerList />
                     </Route>
-                    <ProtectedRoute exact path="/new-brewery">
+                    {/* <ProtectedRoute exact path="/new-brewery">
 						<CreateBrewery />
-					</ProtectedRoute>
-                    <ProtectedRoute exact path="/new-beer">
+					</ProtectedRoute> */}
+                    {/* <ProtectedRoute exact path="/new-beer">
 						<CreateBeer />
-					</ProtectedRoute>
+					</ProtectedRoute> */}
                     <Route>
 						<ErrorPage />
 					</Route>

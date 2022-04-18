@@ -5,7 +5,7 @@ import { createBeer, updateBeer} from "../../store/beer"
 import styles from "./BeerForm.module.css"
 import { hideModal } from "../../store/modal"
 
-export const BeerForm = ({beer}) => {
+export const BeerForm = ({beer, breweryId}) => {
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -15,10 +15,10 @@ export const BeerForm = ({beer}) => {
 	const [price, setPrice] = useState(beer?.price || "0");
 	const [abv, setAbv] = useState(beer?.abv || "0");
 	const [ibu, setIbu] = useState(beer?.ibu || "0");
-	const [brewery_id, setBreweryId] = useState(beer?.brewery_id || "1");
+	const [brewery_id, setBreweryId] = useState(breweryId);
 	const [errors, setErrors] = useState([]);
 
-	const userBreweries = useSelector((state) => state?.session?.user.breweries);
+	// const userBreweries = useSelector((state) => state?.session?.user.breweries);
 
 	const handleClick_Edit = () => {
 		dispatch(hideModal());
@@ -100,7 +100,7 @@ export const BeerForm = ({beer}) => {
 							onChange={(e) => setName(e.target.value)}
 						></input>
 					</div>
-					<div className={styles.input_container}>
+					{/* <div className={styles.input_container}>
 						<label htmlFor="brewery">Brewery</label>
 						<select
 							name="brewery"
@@ -111,7 +111,7 @@ export const BeerForm = ({beer}) => {
 						{Object.entries(userBreweries).map(([key, brew]) => (
 							<option  key={key} value={key}>{brew.name}</option>
 						))}
-						</select>
+						</select> */}
 					<div className={styles.input_container}>
 						<label htmlFor="style">Beer Style</label>
 						<select
@@ -125,7 +125,7 @@ export const BeerForm = ({beer}) => {
 						))}
 						</select>
 					</div>
-					</div>
+					{/* </div> */}
 					<div className={styles.input_container}>
 						<label htmlFor="description">Description</label>
 						<textarea

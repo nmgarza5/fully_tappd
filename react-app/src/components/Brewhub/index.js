@@ -7,31 +7,46 @@ import { UpdateBrewery } from "../UpdateBrewery";
 import { DeleteBrewery } from "../DeleteBrewery";
 import {DeleteBeer} from "../Beer/DeleteBeer"
 import { BeerForm } from "../../forms/BeerForm";
+import { CreateBrewery } from "../CreateBrewery";
+import { receiveOneBeer } from "../../store/beer";
+import { receiveOneBrewery } from "../../store/breweries";
 
 
 const Brewhub = () => {
+	const dispatch = useDispatch()
 	const sessionUser = useSelector((state) => state.session.user);
-	const userBreweries = Object?.values(sessionUser.breweries)
-	const [currentBrewery, setCurrentBrewery] = useState(userBreweries[0])
-	const breweryBeers = Object?.values(currentBrewery?.beer)
-	const [currentBeerId, setCurrentBeerId] = useState(breweryBeers[0].id)
-	const [showMore, setShowMore] = useState(false)
+	const userBreweries = Object?.values(sessionUser?.breweries)
+	const [currentBreweryId, setCurrentBreweryId] = useState(userBreweries[0]?.id)
+	const selectedBrewery = userBreweries.find(brewery => brewery.id === +currentBreweryId)
+	const breweryBeers = selectedBrewery.beer ? Object?.values(selectedBrewery?.beer) : [""];
 
+	const [currentBeerId, setCurrentBeerId] = useState(breweryBeers[0]?.id || "")
 	const selectedBeer = breweryBeers.find(beer => beer.id === +currentBeerId)
-	console.log('Selected BEER', selectedBeer)
+	const [showMoreBrewery, setShowMoreBrewery] = useState(false)
+	const [showMoreBeer, setShowMoreBeer] = useState(false)
+	useEffect(() => {
+	},[selectedBeer, selectedBrewery])
 
 	// useEffect(() => {
+    //     (async () => {
+    //         await dispatch(receiveOneBrewery(currentBreweryId))
+    //         await dispatch(receiveOneBeer(currentBeerId))
+    //         // setLoaded(true);
+    //     })();
+    // }, [dispatch]);
 
-	// },[currentBeer, currentBrewery])
 
-	const dispatch = useDispatch()
 
     const showDeleteBeerForm = () => {
         dispatch(setCurrentModal(() => (<DeleteBeer beer_id={currentBeerId} />)));
         dispatch(showModal());
       }
     const showEditBeerForm = () => {
-        dispatch(setCurrentModal(() => (<BeerForm beer={selectedBeer} />)));
+        dispatch(setCurrentModal(() => (<BeerForm beer={selectedBeer} breweryId={currentBreweryId}/>)));
+        dispatch(showModal());
+      }
+    const showNewBeerForm = () => {
+        dispatch(setCurrentModal(() => (<BeerForm breweryId={currentBreweryId} />)));
         dispatch(showModal());
       }
 
@@ -46,15 +61,16 @@ const Brewhub = () => {
 	return (
 		<PageContainer>
 			<div className={styles.container}>
+				<h1>Welcome to the Brewhub!</h1>
 				<div className={styles.select_container}>
-					<div>
+				{selectedBrewery &&  <div>
 						<div className={styles.input_container}>
-							<label htmlFor="currentBrewery">Select Brewery</label>
+							<label htmlFor="currentBreweryId">Select Brewery</label>
 							<select
-								name="currentBrewery"
-								value={currentBrewery}
-								selected={currentBrewery}
-								onChange={(e) => setCurrentBrewery(e.target.value)}
+								name="currentBreweryId"
+								value={currentBreweryId}
+								selected={currentBreweryId}
+								onChange={(e) => setCurrentBreweryId(e.target.value)}
 							>
 								{userBreweries.map((brewery) => (
 									<option key={brewery.id} value={brewery.id}>
@@ -64,11 +80,14 @@ const Brewhub = () => {
 							</select>
 						</div>
 						<div className={styles.button_container}>
-							<UpdateBrewery brewery={currentBrewery}/>
-							<DeleteBrewery brewery_id={currentBrewery.id}/>
+							<CreateBrewery />
+							<div>
+								<UpdateBrewery brewery={selectedBrewery}/>
+								<DeleteBrewery brewery_id={currentBreweryId}/>
+							</div>
 						</div>
-					</div>
-					<div>
+					</div> }
+					{breweryBeers &&  <div>
 						<div className={styles.input_container}>
 							<label htmlFor="currentBeerId">Select Beer</label>
 							<select
@@ -85,42 +104,81 @@ const Brewhub = () => {
 							</select>
 						</div>
 						<div className={styles.button_container}>
-							<div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div>
-							<div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div>
+							<div role='button' onClick={showNewBeerForm} className={styles.button}>Create New Beer</div>
+							<div>
+								<div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div>
+								<div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div>
+							</div>
+						</div>
+					</div> }
+				</div >
+				<div className={styles.selected_container} >
+					<div className={styles.infoBrewery}>
+						<div className={styles?.first_info} >
+							<div className={styles?.card_img}>
+								<img src={selectedBrewery?.profile_image} alt="brewery" />
+							</div>
+							<div className={styles.middle}>
+								<h2>{selectedBrewery?.name}</h2>
+								<div>{selectedBrewery?.street}</div>
+								<div>{selectedBrewery?.city}, {selectedBrewery?.state}</div>
+								<div>{selectedBrewery?.country}</div>
+								<div>Brewery Type - {breweryType(selectedBrewery?.brewery_type)}</div>
+							</div>
+						</div>
+						<div>
+							<div className={styles.third_info}>
+								<h3>
+									{selectedBrewery?.header}
+								</h3>
+								{!showMoreBrewery && selectedBrewery?.description?.length > 100 ?
+									<div className={styles.no_showBrewery}>
+										{selectedBrewery?.description?.slice(0,100)}...
+										<div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show more</div>
+									</div>
+									:
+									<div className={styles.showBrewery}>
+										{selectedBrewery?.description}
+										<div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show Less</div>
+									</div> }
+							</div>
 						</div>
 					</div>
-				</div >
-				<div className={styles.info}>
-                        <div className={styles.first_info} >
-                            <div className={styles.card_img}>
-                                <img src={currentBrewery.profile_image} alt="brewery" />
-                            </div>
-                            <div className={styles.middle}>
-                                <h2>{currentBrewery.name}</h2>
-                                <div>{currentBrewery.street}</div>
-                                <div>{currentBrewery.city}, {currentBrewery.state}</div>
-                                <div>{currentBrewery.country}</div>
-                                <div>Brewery Type - {breweryType(currentBrewery.brewery_type)}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className={styles.third_info}>
-                                <h3>
-                                    {currentBrewery.header}
-                                </h3>
-                                {!showMore && currentBrewery.description.length > 100 ?
-                                    <div className={styles.no_show}>
-                                        {currentBrewery.description.slice(0,100)}...
-                                        <div onClick={() => setShowMore(!showMore)}>Show more</div>
-                                     </div>
-                                    :
-                                    <div className={styles.show}>
-                                        {currentBrewery.description}
-                                        <div onClick={() => setShowMore(!showMore)}>Show Less</div>
-                                    </div> }
-                            </div>
-                        </div>
-                    </div>
+					<div className={styles.infoBeer}>
+						<div className={styles.first_info} >
+							<div className={styles.card_img}>
+								<img src={selectedBeer?.beer_image} alt="beer" />
+							</div>
+							<div className={styles.middle}>
+								<h2>{selectedBeer?.name}</h2>
+								<h4>{selectedBeer?.brewery_name}</h4>
+								<div>{selectedBeer?.style}</div>
+							</div>
+						</div>
+							<div className={styles.second_info}>
+									<div  className={styles.row}>
+										{selectedBeer?.abv}% ABV
+									</div>
+									<div className={styles.row}>
+										{selectedBeer?.ibu} IBU
+									</div>
+							</div>
+						<div>
+							<div className={styles.third_info}>
+								{!showMoreBeer && selectedBeer?.description.length > 100 ?
+									<div className={styles.no_showBeer}>
+										{selectedBeer?.description.slice(0,100)}...
+										<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show more</div>
+									</div>
+									:
+									<div className={styles.showBeer}>
+										{selectedBeer?.description}
+										<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show Less</div>
+									</div> }
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</PageContainer>
 	);

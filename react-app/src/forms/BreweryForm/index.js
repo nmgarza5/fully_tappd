@@ -70,7 +70,7 @@ export const BreweryForm = ({brewery}) => {
 				setErrors(newBrewery.errors);
 			} else {
 				dispatch(hideModal());
-				history.push(`/breweries/${newBrewery.id}`);
+				history.push(`/brewhub`);
 			}
 		};
 	}
@@ -86,6 +86,7 @@ export const BreweryForm = ({brewery}) => {
 
 	return (
 		<div className={styles.container}>
+			{!brewery && <h1 className={styles.header}>Create Your New Brewery</h1>}
 			<div className={styles.form_entries}>
 				<ul>
 					{errors &&
