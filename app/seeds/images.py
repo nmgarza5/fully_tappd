@@ -67,7 +67,9 @@ images = [
 
 def seed_images():
     for image in images:
-        new_image = Image(image=image['image'])
+        new_image = Image(
+            url=image['url']
+            )
         db.session.add(new_image)
 
 
