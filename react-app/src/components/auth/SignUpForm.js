@@ -57,14 +57,6 @@ const SignUpForm = () => {
         }
     };
     if (user) {
-        // console.log("User: ", user)
-        // if (user.business_user === true) {
-        //     console.log("User TRUE: ", user)
-        //     return <Redirect exact to='/new-brewery' />;
-        // }
-        // if (user.business_user === false) {
-        //     console.log("User FALSE: ", user)
-        //     return <Redirect to="/activity" />;
         return (
             <Route exact path="/activity">
                 {user.business_user ? <Redirect to="/new-brewery" /> : <ActivityPage />}
