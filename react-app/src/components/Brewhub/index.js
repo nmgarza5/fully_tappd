@@ -11,9 +11,9 @@ import { BeerForm } from "../../forms/BeerForm";
 
 const Brewhub = () => {
 	const sessionUser = useSelector((state) => state.session.user);
-	const userBreweries = Object.values(sessionUser.breweries)
+	const userBreweries = Object?.values(sessionUser.breweries)
 	const [currentBrewery, setCurrentBrewery] = useState(userBreweries[0])
-	const breweryBeers = Object.values(currentBrewery.beer)
+	const breweryBeers = Object?.values(currentBrewery?.beer)
 	const [currentBeer, setCurrentBeer] = useState(breweryBeers[0])
 	const [showMore, setShowMore] = useState(false)
 
