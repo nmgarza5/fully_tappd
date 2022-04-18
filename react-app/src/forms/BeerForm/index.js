@@ -6,15 +6,18 @@ import styles from "./BeerForm.module.css"
 import { hideModal } from "../../store/modal"
 
 export const BeerForm = ({beer}) => {
+
+	const parsed_beer = JSON.parse(beer)
+
 	const dispatch = useDispatch();
 	const history = useHistory();
-    const [name, setName] = useState(beer?.name || "");
-	const [style, setStyle] = useState(beer?.style || "Pale Ale")
-	const [description, setDescription] = useState(beer?.description || "");
-	const [price, setPrice] = useState(beer?.price || "0");
-	const [abv, setAbv] = useState(beer?.abv || "0");
-	const [ibu, setIbu] = useState(beer?.ibu || "0");
-	const [brewery_id, setBreweryId] = useState(beer?.brewery_id || "1");
+    const [name, setName] = useState(parsed_beer?.name || "");
+	const [style, setStyle] = useState(parsed_beer?.style || "Pale Ale")
+	const [description, setDescription] = useState(parsed_beer?.description || "");
+	const [price, setPrice] = useState(parsed_beer?.price || "0");
+	const [abv, setAbv] = useState(parsed_beer?.abv || "0");
+	const [ibu, setIbu] = useState(parsed_beer?.ibu || "0");
+	const [brewery_id, setBreweryId] = useState(parsed_beer?.brewery_id || "1");
 	const [errors, setErrors] = useState([]);
 
 	const userBreweries = useSelector((state) => state?.session?.user.breweries);

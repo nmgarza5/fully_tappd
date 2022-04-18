@@ -1,9 +1,12 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { PageContainer } from "../PageContainer";
 import styles from "./Brewhub.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { showModal, setCurrentModal } from '../../store/modal';
 import { UpdateBrewery } from "../UpdateBrewery";
 import { DeleteBrewery } from "../DeleteBrewery";
+import {DeleteBeer} from "../Beer/DeleteBeer"
+import { BeerForm } from "../../forms/BeerForm";
 
 
 const Brewhub = () => {
@@ -12,9 +15,25 @@ const Brewhub = () => {
 	const [currentBrewery, setCurrentBrewery] = useState(userBreweries[0])
 	const breweryBeers = Object.values(currentBrewery.beer)
 	const [currentBeer, setCurrentBeer] = useState(breweryBeers[0])
-
-
 	const [showMore, setShowMore] = useState(false)
+
+	console.log('CURENT BEER', currentBeer)
+
+	// useEffect(() => {
+
+	// },[currentBeer, currentBrewery])
+
+	const dispatch = useDispatch()
+
+    const showDeleteBeerForm = () => {
+        dispatch(setCurrentModal(() => (<DeleteBeer beer_id={currentBeer.id} />)));
+        dispatch(showModal());
+      }
+    const showEditBeerForm = () => {
+        dispatch(setCurrentModal(() => (<BeerForm beer={currentBeer} />)));
+        dispatch(showModal());
+      }
+
 
 	const breweryType = (type) => {
         if (type === "micro") return "Micro"
@@ -38,7 +57,6 @@ const Brewhub = () => {
 							>
 								{userBreweries.map((brewery) => (
 									<option key={brewery.id} value={brewery.id}>
-										{console.log(brewery.name)}
 										{brewery.name}
 										</option>
 									))}
@@ -59,16 +77,15 @@ const Brewhub = () => {
 								onChange={(e) => setCurrentBeer(e.target.value)}
 							>
 								{breweryBeers.map((beer) => (
-									<option key={beer.id} value={beer.id}>
-										{console.log(beer.name)}
+									<option key={beer.id} value={JSON.stringify(currentBeer)}>
 										{beer.name}
 										</option>
 									))}
 							</select>
 						</div>
 						<div className={styles.button_container}>
-							<UpdateBrewery brewery={currentBrewery}/>
-							<DeleteBrewery brewery_id={currentBrewery.id}/>
+							<div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div>
+							<div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div>
 						</div>
 					</div>
 				</div >
