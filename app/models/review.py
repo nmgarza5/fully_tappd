@@ -1,9 +1,9 @@
 from .db import db
+from .image import review_images
 
 
 class Review(db.Model):
     __tablename__ = 'reviews'
-
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -19,7 +19,8 @@ class Review(db.Model):
     brewery = db.relationship("Brewery", backref="reviews")
     user = db.relationship("Brewery", backref="reviews")
     beer = db.relationship("Brewery", backref="reviews")
-    # images = db.relationship
+    images = db.relationship('Review', secondary=review_images, back_populates="reviews")
+
 
     '''Define rating property here. Will need to use reviews'''
 
