@@ -3,7 +3,7 @@
     margin: 0;
     height: 600px;
     position: relative;
-    top: 57px;
+    /* top: 57px; */
 }
 
 .banner {
@@ -69,6 +69,18 @@
     height: 150px;
 }
 
+
+.right {
+  display: flex;
+    align-items: flex-end;
+    position: relative;
+    height: 76px;
+    left: 70%;
+    padding: 20px;
+    width: 317px;
+    margin: 0px;
+}
+
 .button {
     height: 45px;
     width: 150px;
@@ -90,10 +102,36 @@
     color: black;
   }
 
+  .button_top {
+    height: 45px;
+    width: fit-content;
+    padding: 15px;
+    color: white;
+    display: flex;
+    align-items: center;
+    /* position: absolute; */
+    justify-content: center;
+    border: white solid;
+    background-color: #000000;
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 13px;
+    transition: all 0.5s ease 0s;
+    margin-left: 10px;
+    z-index: 999;
+  }
+
+  .button_top:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    border: #000000 solid;
+    color: black;
+  }
+
   .feature_container {
     height:350px;
     /* border-top: #828282 solid thin; */
-    top: 57px;
+    /* top: 57px; */
     width: 100%;
     text-align: center;
     display: flex;
