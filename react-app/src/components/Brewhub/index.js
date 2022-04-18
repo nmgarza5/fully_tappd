@@ -14,10 +14,11 @@ const Brewhub = () => {
 	const userBreweries = Object?.values(sessionUser.breweries)
 	const [currentBrewery, setCurrentBrewery] = useState(userBreweries[0])
 	const breweryBeers = Object?.values(currentBrewery?.beer)
-	const [currentBeer, setCurrentBeer] = useState(breweryBeers[0])
+	const [currentBeerId, setCurrentBeerId] = useState(breweryBeers[0].id)
 	const [showMore, setShowMore] = useState(false)
 
-	console.log('CURENT BEER', currentBeer)
+	const selectedBeer = breweryBeers.find(beer => beer.id === +currentBeerId)
+	console.log('Selected BEER', selectedBeer)
 
 	// useEffect(() => {
 
@@ -26,11 +27,11 @@ const Brewhub = () => {
 	const dispatch = useDispatch()
 
     const showDeleteBeerForm = () => {
-        dispatch(setCurrentModal(() => (<DeleteBeer beer_id={currentBeer.id} />)));
+        dispatch(setCurrentModal(() => (<DeleteBeer beer_id={currentBeerId} />)));
         dispatch(showModal());
       }
     const showEditBeerForm = () => {
-        dispatch(setCurrentModal(() => (<BeerForm beer={currentBeer} />)));
+        dispatch(setCurrentModal(() => (<BeerForm beer={selectedBeer} />)));
         dispatch(showModal());
       }
 
@@ -69,15 +70,15 @@ const Brewhub = () => {
 					</div>
 					<div>
 						<div className={styles.input_container}>
-							<label htmlFor="currentBrewery">Select Beer</label>
+							<label htmlFor="currentBeerId">Select Beer</label>
 							<select
-								name="currentBeer"
-								value={currentBeer}
-								selected={currentBeer}
-								onChange={(e) => setCurrentBeer(e.target.value)}
+								name="currentBeerId"
+								value={currentBeerId}
+								selected={currentBeerId}
+								onChange={(e) => setCurrentBeerId(e.target.value)}
 							>
 								{breweryBeers.map((beer) => (
-									<option key={beer.id} value={JSON.stringify(currentBeer)}>
+									<option key={beer.id} value={beer.id}>
 										{beer.name}
 										</option>
 									))}
