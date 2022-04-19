@@ -10,22 +10,41 @@ import { BeerForm } from "../../forms/BeerForm";
 import { CreateBrewery } from "../CreateBrewery";
 import { receiveOneBeer } from "../../store/beer";
 import { receiveOneBrewery } from "../../store/breweries";
+import { BreweryForm } from "../../forms/BreweryForm";
 
 
 const Brewhub = () => {
 	const dispatch = useDispatch()
-	const sessionUser = useSelector((state) => state.session.user);
-	const userBreweries = Object?.values(sessionUser?.breweries)
-	const [currentBreweryId, setCurrentBreweryId] = useState(userBreweries[0]?.id)
-	const selectedBrewery = userBreweries.find(brewery => brewery.id === +currentBreweryId)
-	const breweryBeers = selectedBrewery.beer ? Object?.values(selectedBrewery?.beer) : [""];
 
-	const [currentBeerId, setCurrentBeerId] = useState(breweryBeers[0]?.id || "")
+	const sessionUser = useSelector((state) => state.session.user);
+	const breweries = useSelector((state) => state.breweries)
+	const beers = useSelector((state) => state.beer)
+
+	const breweriesArray = Object.values(breweries)
+	const beersArray = Object.values(beers)
+
+	const userBreweries = breweriesArray.filter(brewery => brewery.owner_id === sessionUser.id)
+	const [currentBreweryId, setCurrentBreweryId] = useState(userBreweries[0]?.id)
+
+	console.log("currentBreweryId", currentBreweryId)
+
+	const breweryBeers = beersArray.filter(beer => beer.brewery_id === +currentBreweryId)
+	const selectedBrewery = userBreweries.find(brewery => brewery.id === +currentBreweryId)
+
+	console.log("brewryBeers", breweryBeers)
+
+	const [currentBeerId, setCurrentBeerId] = useState(breweryBeers[0]?.id || null)
+
+	console.log("currentBeerId", currentBeerId)
+
 	const selectedBeer = breweryBeers.find(beer => beer.id === +currentBeerId)
+
+	console.log("selectedBeer", selectedBeer)
+
 	const [showMoreBrewery, setShowMoreBrewery] = useState(false)
 	const [showMoreBeer, setShowMoreBeer] = useState(false)
 	useEffect(() => {
-	},[selectedBeer, selectedBrewery])
+	},[currentBeerId])
 
 	// useEffect(() => {
     //     (async () => {
@@ -34,6 +53,11 @@ const Brewhub = () => {
     //         // setLoaded(true);
     //     })();
     // }, [dispatch]);
+
+	const setBrewery = (e) => {
+		setCurrentBreweryId(e.target.value)
+		setCurrentBeerId(breweryBeers[0].id || null)
+	}
 
 
 
@@ -70,7 +94,7 @@ const Brewhub = () => {
 								name="currentBreweryId"
 								value={currentBreweryId}
 								selected={currentBreweryId}
-								onChange={(e) => setCurrentBreweryId(e.target.value)}
+								onChange={setBrewery}
 							>
 								{userBreweries.map((brewery) => (
 									<option key={brewery.id} value={brewery.id}>

@@ -25,7 +25,7 @@ export const BeerForm = ({beer, breweryId}) => {
 	};
 
 	const handleClick_New = () => {
-		history.push("/beer");
+		// history.push("/beer");
 		dispatch(hideModal());
 	};
 
@@ -65,7 +65,7 @@ export const BeerForm = ({beer, breweryId}) => {
 				setErrors(newBeer.errors);
 			} else {
 				dispatch(hideModal());
-				history.push(`/beer/${newBeer.id}`);
+				// history.push(`/beer/${newBeer.id}`);
 			}
 	};
 	}

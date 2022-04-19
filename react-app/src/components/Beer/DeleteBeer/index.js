@@ -15,11 +15,10 @@ export const DeleteBeer = ({ beer_id }) => {
 		await dispatch(hideModal());
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		await dispatch(hideModal());
-		await history.push(`/beer`);
-		await dispatch(deleteBeer(beer_id));
+		dispatch(deleteBeer(beer_id));
+		dispatch(hideModal());
 		setErrors([]);
 	};
 
