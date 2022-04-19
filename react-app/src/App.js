@@ -10,7 +10,7 @@ import { PageWrapper } from "../src/components/PageWrapper";
 import Modal from "./components/Modal/Modal";
 import { Splashpage } from "./components/Splashpage";
 import { SingleBrewery } from "./components/SingleBrewery";
-// import { CreateBrewery } from "./components/CreateBrewery";
+import { CreateBrewery } from "./components/CreateBrewery";
 // import { CreateBeer } from "./components/Beer/CreateBeer";
 import BreweriesList from "./components/BreweriesList";
 import BeerList from "./components/Beer/BeerList";
@@ -22,11 +22,12 @@ import ProfilePage from "./components/ProfilePage";
 import Brewhub from "./components/Brewhub";
 import SignUpPage from "./components/SignUpPage";
 import SplashConditional from "./components/Splashpage/SplashConditional";
+import BrewhubConditional from "./components/Brewhub/BrewhubConditional";
+import ActivityConditional from "./components/ActivityPage/ActivityConditional";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.session.user);
     useEffect(() => {
         (async () => {
             await dispatch(authenticate());
@@ -44,7 +45,7 @@ function App() {
         <BrowserRouter>
             <PageWrapper>
 
-                {sessionUser && <NavBar /> }
+                <NavBar />
                 <Modal />
                 <Switch>
                     <Route exact path="/sign-up">
@@ -56,15 +57,15 @@ function App() {
                     <Route exact path="/beer/:id">
 						<SingleBeer />
 					</Route>
-                    <Route exact path="/activity" >
+                    <ActivityConditional exact path="/activity" >
                         <ActivityPage />
-                    </Route>
+                    </ActivityConditional>
                     <Route exact path="/my-profile" >
                         <ProfilePage />
                     </Route>
-                    <Route exact path="/brewhub" >
+                    <BrewhubConditional exact path="/brewhub" >
                         <Brewhub />
-                    </Route>
+                    </BrewhubConditional>
                     <SplashConditional exact path="/" >
                         <Splashpage />
                     </SplashConditional>
@@ -74,9 +75,9 @@ function App() {
                     <Route exact path="/beer" >
                         <BeerList />
                     </Route>
-                    {/* <ProtectedRoute exact path="/new-brewery">
+                    <ProtectedRoute exact path="/new-brewery">
 						<CreateBrewery />
-					</ProtectedRoute> */}
+					</ProtectedRoute>
                     {/* <ProtectedRoute exact path="/new-beer">
 						<CreateBeer />
 					</ProtectedRoute> */}

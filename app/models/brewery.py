@@ -25,6 +25,7 @@ class Brewery(db.Model):
     updated_at = db.Column(
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
+    beers = db.relationship("Beer", back_populates="brewery", cascade="all, delete-orphan")
     owner = db.relationship("User", backref="breweries")
 
     def to_dict(self):
@@ -45,5 +46,5 @@ class Brewery(db.Model):
             'country': self.country,
             'phone': self.phone,
             'website_url': self.website_url,
-            'beer': {beer.id: beer.to_dict() for beer in self.beer}
+            'beers': {beer.id: beer.to_dict() for beer in self.beers}
         }

@@ -10,6 +10,6 @@ export const PageContainer = styled.div`
 	padding-top: 57px;
 	align-items: center;
 	// background-color: white;
-	// padding-bottom: 65px;
+	padding-bottom: 65px;
 	// filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.16));
 `;

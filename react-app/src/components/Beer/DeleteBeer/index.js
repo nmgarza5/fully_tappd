@@ -4,6 +4,7 @@ import { hideModal } from "../../../store/modal";
 import { deleteBeer } from "../../../store/beer";
 import { useHistory } from "react-router-dom";
 import styles from "./DeleteBeer.module.css";
+import { authenticate } from "../../../store/session";
 
 export const DeleteBeer = ({ beer_id }) => {
 	const [errors, setErrors] = useState([]);
@@ -15,9 +16,10 @@ export const DeleteBeer = ({ beer_id }) => {
 		await dispatch(hideModal());
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(deleteBeer(beer_id));
+		await dispatch(deleteBeer(beer_id));
+		await dispatch(authenticate())
 		dispatch(hideModal());
 		setErrors([]);
 	};

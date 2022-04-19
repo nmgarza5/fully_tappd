@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import { createBeer, updateBeer} from "../../store/beer"
 import styles from "./BeerForm.module.css"
 import { hideModal } from "../../store/modal"
+import { authenticate } from "../../store/session"
 
 export const BeerForm = ({beer, breweryId}) => {
 
@@ -57,6 +58,8 @@ export const BeerForm = ({beer, breweryId}) => {
 			if (updatedBeer.errors) {
 				setErrors(updatedBeer.errors);
 			} else {
+				await dispatch(authenticate())
+				history.push(`/brewhub`);
 				dispatch(hideModal());
 			}
 		} else {
@@ -64,8 +67,9 @@ export const BeerForm = ({beer, breweryId}) => {
 			if (newBeer.errors) {
 				setErrors(newBeer.errors);
 			} else {
+				await dispatch(authenticate())
+				history.push(`/brewhub`);
 				dispatch(hideModal());
-				// history.push(`/beer/${newBeer.id}`);
 			}
 	};
 	}
