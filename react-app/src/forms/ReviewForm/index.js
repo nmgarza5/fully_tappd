@@ -11,15 +11,16 @@ import { receiveOneBeer } from "../../store/beer";
 export const ReviewForm = ({review, brewery_id, beer_id}) => {
     const dispatch = useDispatch();
     const history = useHistory();
+
     let editImages;
     review?.images ? editImages = Object.values(review?.images) : editImages = []
 
-    console.log("EDIT IMAGES", editImages)
+    console.log("EDITimages", editImages)
 
     const [rating, setRating] = useState(review?.rating || 1)
     const [content, setContent] = useState(review?.content || "")
     const [newImage, setNewImage] = useState()
-    const [images, setImages] = useState(editImages || [])
+    const [images, setImages] = useState(editImages)
     const [errors, setErrors] = useState([]);
 
 
@@ -29,12 +30,15 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
         setNewImage("")
     }
 
-    const removeImage = (image) => {
+    const removeImage = async (ind) => {
         if (images.length === 1) setImages([])
         else {
-            const imageIndex = images.indexOf(image)
-            let newImages = images.splice(imageIndex, 1)
-            setImages(newImages)
+            console.log("BEfore", images)
+            // const imageIndex = images.indexOf(image)
+            let newImages = images.splice(ind, 1)
+            editImages = images
+            await setImages(images)
+            console.log("After images", images)
         }
     }
 
@@ -99,7 +103,8 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                         ></textarea>
                     </div>
                     <div className={styles.lower_field}>
-                        <label>Images</label>
+                        <label>Images
+                        </label>
                         <input
                         className={styles.lower_input}
                             type="text"
@@ -108,14 +113,14 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                             value={newImage}
                             onChange={(e) => setNewImage(e.target.value)}
                             ></input>
-                        <i className="fa-solid fa-square-plus fa-2x"  onClick={addImage}></i>
-                        <div className={styles.image_container}>
+                            <i className="fa-solid fa-square-plus"  onClick={addImage}></i>
+                        <div className={styles.images_container}>
                         {images.length > 0 &&
-                            images.map((image) => (
-                                <>
-                                    <img key={image} src={image} alt="" className={styles.image_preview}/>
-                                    <i onClick={() => removeImage(image)} className="fa-solid fa-square-minus"></i>
-                                </>
+                            images.map((image, ind) => (
+                                <div className={styles.single_image}>
+                                    <img key={ind} src={image} alt="" className={styles.image_preview}/>
+                                    <i onClick={() => removeImage(ind)} className="fa-solid fa-square-minus"></i>
+                                </div>
                                     ))
                                 }
                                 </div>

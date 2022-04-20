@@ -60,7 +60,6 @@ def reviewUpdate(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     review = Review.query.get(id)
     images = request.json['images']
-    print("\n\nIMAGES---", images, "\n\n")
     if form.validate_on_submit():
         review.user_id = current_user.id,
         review.brewery_id = form.data['brewery_id']
