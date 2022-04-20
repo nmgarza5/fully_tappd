@@ -5,7 +5,7 @@ import styles from './Splashpage.module.css'
 import { useDispatch } from 'react-redux'
 import { showModal, setCurrentModal } from "../../store/modal";
 import SignUpForm from "../auth/SignUpForm";
-import LoginForm from "../auth/LoginForm";
+// import LoginForm from "../auth/LoginForm";
 import SearchSection from '../SearchSection'
 
 
@@ -20,10 +20,10 @@ export const Splashpage = () => {
     dispatch(setCurrentModal(SignUpForm));
     dispatch(showModal());
   };
-  const showLoginForm = () => {
-    dispatch(setCurrentModal(LoginForm));
-    dispatch(showModal());
-};
+//   const showLoginForm = () => {
+//     dispatch(setCurrentModal(LoginForm));
+//     dispatch(showModal());
+// };
 
 
 

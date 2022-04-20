@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { hideModal } from "../../../store/modal";
 import { deleteBeer } from "../../../store/beer";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import styles from "./DeleteBeer.module.css";
 import { authenticate } from "../../../store/session";
 
 export const DeleteBeer = ({ beer_id }) => {
 	const [errors, setErrors] = useState([]);
 	const dispatch = useDispatch();
-	const history = useHistory();
+	// const history = useHistory();
 
 	const closeModal = async (e) => {
 		e.preventDefault();

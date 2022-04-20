@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { PageContainer } from "../PageContainer";
 import styles from "./Brewhub.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,49 +7,20 @@ import { UpdateBrewery } from "../UpdateBrewery";
 import { DeleteBrewery } from "../DeleteBrewery";
 import {DeleteBeer} from "../Beer/DeleteBeer"
 import { BeerForm } from "../../forms/BeerForm";
-import { CreateBrewery } from "../CreateBrewery";
-import { receiveOneBeer } from "../../store/beer";
-import { receiveOneBrewery } from "../../store/breweries";
-import { BreweryForm } from "../../forms/BreweryForm";
-import { receiveUserBrewery } from "../../store/session";
+// import { CreateBrewery } from "../CreateBrewery";
+// import { receiveOneBeer } from "../../store/beer";
+// import { receiveOneBrewery } from "../../store/breweries";
+// import { BreweryForm } from "../../forms/BreweryForm";
+// import { receiveUserBrewery } from "../../store/session";
 
 
 const Brewhub = () => {
 	const dispatch = useDispatch()
 
-
-
-	const sessionUser = useSelector((state) => state.session.user);
 	const userBrewery = useSelector((state) => Object.values(state.session.user.breweries)[0])
-
-	const breweries = useSelector((state) => state.breweries)
-	const beers = useSelector((state) => state.beer)
-
 	const userBeers = Object.values(userBrewery.beers)
-
-	// console.log("userBeers", userBeers)
-
-	// const breweriesArray = Object.values(breweries)
-	// const beersArray = Object.values(beers)
-
-	// const userBreweries = breweriesArray.filter(brewery => brewery.owner_id === sessionUser.id)
-
-	// const [currentBreweryId, setCurrentBreweryId] = useState(userBreweries[0]?.id)
-
-	// console.log("currentBreweryId", currentBreweryId)
-
-	// const userBeers = beersArray.filter(beer => beer.brewery_id === +currentBreweryId)
-	// const userBrewery = userBreweries.find(brewery => brewery.id === +currentBreweryId)
-
-	// console.log("brewryBeers", userBeers)
-
 	const [currentBeerId, setCurrentBeerId] = useState("Default")
-
-	// console.log("currentBeerId", currentBeerId)
-
 	const selectedBeer = userBeers.find(beer => beer.id === +currentBeerId)
-
-	console.log("selectedBeer", selectedBeer)
 
 	const [showMoreBrewery, setShowMoreBrewery] = useState(false)
 	const [showMoreBeer, setShowMoreBeer] = useState(false)
@@ -58,22 +29,22 @@ const Brewhub = () => {
     const showDeleteBeerForm = () => {
 		dispatch(setCurrentModal(() => (<DeleteBeer beer_id={currentBeerId} />)));
 		dispatch(showModal());
-		// setCurrentBeerId("Default")
-		console.log("BREWBEERS---", userBeers)
-		if (userBeers.length > 2) {
-			console.log("currentBeerIdIF---", currentBeerId)
+		setCurrentBeerId("Default")
+		// console.log("BREWBEERS---", userBeers)
+		// if (userBeers.length > 2) {
+		// 	console.log("currentBeerIdIF---", currentBeerId)
 
-			setCurrentBeerId(userBeers[userBeers.length-1].id)
-		}
-		if (userBeers.length === 2) {
-			console.log("currentBeerId2IF---", currentBeerId)
-			setCurrentBeerId(userBeers[0].id)
-		}
-		else {
-			console.log("currentBeerIdELSE---", currentBeerId)
-			setCurrentBeerId("Default")
-		}
-		console.log("currentBeerIdFINAL---", currentBeerId)
+		// 	setCurrentBeerId(userBeers[userBeers.length-1].id)
+		// }
+		// if (userBeers.length === 2) {
+		// 	console.log("currentBeerId2IF---", currentBeerId)
+		// 	setCurrentBeerId(userBeers[0].id)
+		// }
+		// else {
+		// 	console.log("currentBeerIdELSE---", currentBeerId)
+		// 	setCurrentBeerId("Default")
+		// }
+		// console.log("currentBeerIdFINAL---", currentBeerId)
       }
     const showEditBeerForm = () => {
         dispatch(setCurrentModal(() => (<BeerForm beer={selectedBeer} breweryId={userBrewery.id}/>)));
