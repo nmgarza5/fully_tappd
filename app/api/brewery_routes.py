@@ -19,6 +19,13 @@ def breweries():
   return {brewery.id: brewery.to_dict() for brewery in breweries}
 
 
+
+@brewery_routes.route('/my-brewery', methods=["GET"])
+def my_brewery():
+  my_brewery = Brewery.query.filter(Brewery.owner_id == current_user.id).first()
+  return my_brewery.to_dict()
+
+
 @brewery_routes.route('/<int:id>', methods=["GET"])
 def brewery(id):
   brewery = Brewery.query.get(id)

@@ -39,8 +39,8 @@ const Profile = () => {
 	};
 
 	const onLogout = async (e) => {
-		await dispatch(logout());
 		history.push("/");
+		await dispatch(logout());
 	  };
 
 
