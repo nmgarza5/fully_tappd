@@ -6,7 +6,7 @@ class Review(db.Model):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     brewery_id = db.Column(db.Integer, db.ForeignKey('breweries.id'), nullable=False)
     beer_id = db.Column(db.Integer, db.ForeignKey('beer.id'), nullable=False)
     rating = db.Column(db.Float, nullable=False)
@@ -17,9 +17,9 @@ class Review(db.Model):
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
     brewery = db.relationship("Brewery", backref="reviews")
-    user = db.relationship("Brewery", backref="reviews")
-    beer = db.relationship("Brewery", backref="reviews")
-    images = db.relationship('Review', secondary=review_images, back_populates="reviews")
+    user = db.relationship("User", backref="reviews")
+    beer = db.relationship("Beer", backref="reviews")
+    images = db.relationship('Image', secondary=review_images, back_populates="reviews")
 
 
     '''Define rating property here. Will need to use reviews'''

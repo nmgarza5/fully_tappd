@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSelector} from "react-redux";
 import styles from "./SingleBeer.module.css";
 import { PageContainer } from "../../PageContainer";
+import { ReviewForm } from "../../../forms/ReviewForm";
 
 export const SingleBeer = () => {
     // const dispatch = useDispatch
@@ -74,6 +75,14 @@ export const SingleBeer = () => {
                                         {beer.description}
                                         <div onClick={() => setShowMore(!showMore)}>Show Less</div>
                                     </div> }
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.review_container} >
+                        <ReviewForm beer_id={+id} brewery_id={beer.brewery_id} />
+                        <div className={styles.review_list}>
+                            <div className={styles.review_item}>
+                                Hello
                             </div>
                         </div>
                     </div>

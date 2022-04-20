@@ -22,7 +22,7 @@ beer_list = [
     "ibu": 60
   },
   {
-    "name": 'Trashy Blonde',
+    "name": 'Pale Intoxication',
     "brewery_id": 2,
     "description": 'A titillating, neurotic, peroxide punk of a Pale Ale. Combining attitude, style, substance, and a little bit of low self esteem for good measure; what would your mother say? The seductive lure of the sassy passion fruit hop proves too much to resist. All that is even before we get onto the fact that there are no additives, preservatives, pasteurization or strings attached. All wrapped up with the customary BrewDog bite and imaginative twist.',
     "style": beer_choices[randint(0, 27)],
