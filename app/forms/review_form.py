@@ -10,9 +10,8 @@ from wtforms.validators import DataRequired, ValidationError, Length
 
 class ReviewForm(FlaskForm):
 
-    name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255)])
     brewery_id = IntegerField('Brewery Id', validators=[DataRequired()])
     beer_id = IntegerField('Beer Id', validators=[DataRequired()])
-    reating = IntegerField("Rating", validators=[DataRequired()])
+    rating = IntegerField("Rating", validators=[DataRequired()])
     content = TextAreaField('Content')
     submit = SubmitField('Submit')

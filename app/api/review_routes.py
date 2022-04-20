@@ -31,6 +31,7 @@ def create_review():
   images = request.json['images']
 #   print('\n\n form.data', form.data, '\n\n')
 #   print('\n\n form.data.brewery', form.data['brewery_id'], '\n\n')
+  print("\n\nIMAGES---", images, "\n\n")
 
   if form.validate_on_submit():
     new_review = Review(
