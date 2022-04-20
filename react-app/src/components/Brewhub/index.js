@@ -11,35 +11,43 @@ import { CreateBrewery } from "../CreateBrewery";
 import { receiveOneBeer } from "../../store/beer";
 import { receiveOneBrewery } from "../../store/breweries";
 import { BreweryForm } from "../../forms/BreweryForm";
+import { receiveUserBrewery } from "../../store/session";
 
 
 const Brewhub = () => {
 	const dispatch = useDispatch()
 
-	const sessionUser = useSelector((state) => state.session.user);
-	const breweries = useSelector((state) => state.breweries)
 
+
+	const sessionUser = useSelector((state) => state.session.user);
+	const userBrewery = useSelector((state) => Object.values(state.session.user.breweries)[0])
+
+	const breweries = useSelector((state) => state.breweries)
 	const beers = useSelector((state) => state.beer)
 
-	const breweriesArray = Object.values(breweries)
-	const beersArray = Object.values(beers)
+	const userBeers = Object.values(userBrewery.beers)
 
-	const userBreweries = breweriesArray.filter(brewery => brewery.owner_id === sessionUser.id)
+	// console.log("userBeers", userBeers)
 
-	const [currentBreweryId, setCurrentBreweryId] = useState(userBreweries[0]?.id)
+	// const breweriesArray = Object.values(breweries)
+	// const beersArray = Object.values(beers)
 
-	console.log("currentBreweryId", currentBreweryId)
+	// const userBreweries = breweriesArray.filter(brewery => brewery.owner_id === sessionUser.id)
 
-	const breweryBeers = beersArray.filter(beer => beer.brewery_id === +currentBreweryId)
-	const selectedBrewery = userBreweries.find(brewery => brewery.id === +currentBreweryId)
+	// const [currentBreweryId, setCurrentBreweryId] = useState(userBreweries[0]?.id)
 
-	console.log("brewryBeers", breweryBeers)
+	// console.log("currentBreweryId", currentBreweryId)
 
-	const [currentBeerId, setCurrentBeerId] = useState(breweryBeers[0]?.id || null)
+	// const userBeers = beersArray.filter(beer => beer.brewery_id === +currentBreweryId)
+	// const userBrewery = userBreweries.find(brewery => brewery.id === +currentBreweryId)
 
-	console.log("currentBeerId", currentBeerId)
+	// console.log("brewryBeers", userBeers)
 
-	const selectedBeer = breweryBeers.find(beer => beer.id === +currentBeerId)
+	const [currentBeerId, setCurrentBeerId] = useState("Default")
+
+	// console.log("currentBeerId", currentBeerId)
+
+	const selectedBeer = userBeers.find(beer => beer.id === +currentBeerId)
 
 	console.log("selectedBeer", selectedBeer)
 
@@ -50,28 +58,29 @@ const Brewhub = () => {
     const showDeleteBeerForm = () => {
 		dispatch(setCurrentModal(() => (<DeleteBeer beer_id={currentBeerId} />)));
 		dispatch(showModal());
-		// console.log("BREWBEERS---", breweryBeers)
-		// if (breweryBeers.length > 2) {
-		// 	console.log("currentBeerIdIF---", currentBeerId)
+		// setCurrentBeerId("Default")
+		console.log("BREWBEERS---", userBeers)
+		if (userBeers.length > 2) {
+			console.log("currentBeerIdIF---", currentBeerId)
 
-		// 	setCurrentBeerId(breweryBeers[breweryBeers.length-1].id)
-		// }
-		// if (breweryBeers.length === 2) {
-		// 	console.log("currentBeerId2IF---", currentBeerId)
-		// 	setCurrentBeerId(breweryBeers[0].id)
-		// }
-		// else {
-		// 	console.log("currentBeerIdELSE---", currentBeerId)
-		// 	setCurrentBeerId(null)
-		// }
-		// console.log("currentBeerIdFINAL---", currentBeerId)
+			setCurrentBeerId(userBeers[userBeers.length-1].id)
+		}
+		if (userBeers.length === 2) {
+			console.log("currentBeerId2IF---", currentBeerId)
+			setCurrentBeerId(userBeers[0].id)
+		}
+		else {
+			console.log("currentBeerIdELSE---", currentBeerId)
+			setCurrentBeerId("Default")
+		}
+		console.log("currentBeerIdFINAL---", currentBeerId)
       }
     const showEditBeerForm = () => {
-        dispatch(setCurrentModal(() => (<BeerForm beer={selectedBeer} breweryId={currentBreweryId}/>)));
+        dispatch(setCurrentModal(() => (<BeerForm beer={selectedBeer} breweryId={userBrewery.id}/>)));
         dispatch(showModal());
       }
     const showNewBeerForm = () => {
-        dispatch(setCurrentModal(() => (<BeerForm breweryId={currentBreweryId} />)));
+        dispatch(setCurrentModal(() => (<BeerForm breweryId={userBrewery.id} />)));
         dispatch(showModal());
       }
 
@@ -89,67 +98,67 @@ const Brewhub = () => {
 				<h1>Welcome to the Brewhub!</h1>
 				<div className={styles.infoBrewery}>
 				<div className={styles.brewery_button_container}>
-					<UpdateBrewery brewery={selectedBrewery}/>
-					<DeleteBrewery brewery_id={currentBreweryId}/>
+					<UpdateBrewery brewery={userBrewery}/>
+					<DeleteBrewery brewery_id={userBrewery.id}/>
 				</div>
 					<div className={styles?.first_info} >
 						<div className={styles?.card_img}>
-							<img src={selectedBrewery?.profile_image} alt="brewery" />
+							<img src={userBrewery?.profile_image} alt="brewery" />
 						</div>
 						<div className={styles.middle}>
-							<h2>{selectedBrewery?.name}</h2>
+							<h2>{userBrewery?.name}</h2>
 						</div>
 						<div>
-							<div>{selectedBrewery?.street}</div>
-							<div>{selectedBrewery?.city}, {selectedBrewery?.state}</div>
-							<div>{selectedBrewery?.country}</div>
-							<div>Brewery Type - {breweryType(selectedBrewery?.brewery_type)}</div>
+							<div>{userBrewery?.street}</div>
+							<div>{userBrewery?.city}, {userBrewery?.state}</div>
+							<div>{userBrewery?.country}</div>
+							<div>Brewery Type - {breweryType(userBrewery?.brewery_type)}</div>
 						</div>
 						<div className={styles.end}>
-                                <div>{selectedBrewery?.website_url}</div>
-                                <div>{`(${selectedBrewery?.phone.slice(
+                                <div>{userBrewery?.website_url}</div>
+                                <div>{`(${userBrewery?.phone.slice(
 										0,
 										3
-									)}) ${selectedBrewery?.phone.slice(
+									)}) ${userBrewery?.phone.slice(
 										3,
 										6
-									)}-${selectedBrewery?.phone.slice(6)}`}</div>
+									)}-${userBrewery?.phone.slice(6)}`}</div>
                             </div>
 					</div>
 					<div>
 						<div className={styles.third_info}>
 							<h3>
 								Header:<br></br>
-								{selectedBrewery?.header}
+								{userBrewery?.header}
 							</h3>
 							Description:<br></br>
-							{!showMoreBrewery && selectedBrewery?.description?.length > 100 ?
+							{!showMoreBrewery && userBrewery?.description?.length > 100 ?
 								<div className={styles.no_showBrewery}>
-									{selectedBrewery?.description?.slice(0,100)}...
+									{userBrewery?.description?.slice(0,100)}...
 									<div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show more</div>
 								</div>
 								:
 								<div className={styles.showBrewery}>
-									{selectedBrewery?.description}
+									{userBrewery?.description}
 									<div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show Less</div>
 								</div> }
 						</div>
 					</div>
 				</div>
-				{breweryBeers &&
+				{userBeers &&
 				<div className={styles.beer_container}>
 					<div className={styles.select_container}>
 								<div htmlFor="currentBeerId">Select Beer</div>
 								<select
 									name="currentBeerId"
 									value={currentBeerId}
-									// selected={"Default"}
+									selected={"Default"}
 									onChange={(e) => setCurrentBeerId(e.target.value)}
 								>
 									<option value="Default" disabled>
                             			Select Beer...
                         			</option>
-									{breweryBeers.map((beer) => (
+									{userBeers.map((beer) => (
 										<option key={beer.id} value={beer.id}>
 											{beer.name}
 											</option>
@@ -162,7 +171,7 @@ const Brewhub = () => {
 							</div>
 					</div >
 					<div className={styles.selected_container} >
-						{currentBeerId && <div className={styles.infoBeer}>
+						{selectedBeer && <div className={styles.infoBeer}>
 							<div className={styles.first_info} >
 								<div className={styles.card_img}>
 									<img src={selectedBeer?.beer_image} alt="beer" />

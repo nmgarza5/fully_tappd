@@ -3,7 +3,7 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
 const CREATED_BREWERY = "/session/createdBrewery"
-const RECEIVED_BREWERIES = "/session/receivedBreweries"
+const RECEIVED_BREWERY = "/session/receivedBrewery"
 const UPDATED_BREWERY = "/session/updatedBrewery"
 const DELETED_BREWERY = "/session/deletedBrewery"
 
@@ -14,9 +14,9 @@ const createdBrewery = (payload) => {
     }
 }
 
-const receivedBreweries = (payload) => {
+const receivedBrewery = (payload) => {
     return {
-        type: RECEIVED_BREWERIES,
+        type: RECEIVED_BREWERY,
         payload,
     }
 }
@@ -35,12 +35,12 @@ const deletedBrewery = (payload) => {
     }
 }
 
-export const receiveUserBreweries = () => async (dispatch) => {
-	const res = await fetch("/api/breweries/my-breweries");
+export const receiveUserBrewery = () => async (dispatch) => {
+	const res = await fetch("/api/breweries/my-brewery");
 	if (res.ok) {
-		const breweries = await res.json();
-		dispatch(receivedBreweries(breweries));
-		return breweries;
+		const myBrewery = await res.json();
+		dispatch(receivedBrewery(myBrewery));
+		return myBrewery;
 	}
 };
 
@@ -187,9 +187,8 @@ export default function reducer(state = initialState, action) {
             newState.user.breweries[action.payload?.id] = action.payload;
             return newState;
         }
-        case RECEIVED_BREWERIES: {
-
-            newState.user.breweries = action.payload
+        case RECEIVED_BREWERY: {
+            newState.user.breweries[action.payload.id] = action.payload
             return newState;
         }
         case UPDATED_BREWERY: {

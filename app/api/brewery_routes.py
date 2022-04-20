@@ -20,7 +20,7 @@ def breweries():
 
 
 
-@brewery_routes.route('/my-breweries', methods=["GET"])
+@brewery_routes.route('/my-brewery', methods=["GET"])
 def my_brewery():
   my_brewery = Brewery.query.filter(Brewery.owner_id == current_user.id).first()
   return my_brewery.to_dict()
