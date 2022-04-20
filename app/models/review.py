@@ -33,6 +33,7 @@ class Review(db.Model):
             "brewery_name": self.brewery.name,
             'beer_id': self.beer_id,
             "beer_name": self.beer.name,
+            "brewery_image": self.brewery.profile_image,
             'owner_id': self.brewery.owner_id,
             'content': self.content,
             'images': {image.id: image.image for image in self.images},

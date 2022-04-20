@@ -107,38 +107,46 @@ export const SingleBeer = () => {
                             </div>
                         </div>
                     </div>
+                    {reviewsList.length >0 ?
                     <div className={styles.review_container} >
-
-                        <div className={styles.review_list}>
                             {reviewsList.map(review => (
                                 <div key={review.id} className={styles.review_item}>
-                                    <div>
-                                        {review.user_name} is drinking a {review.beer_name} from {review.brewery_name}
+                                    <img src={sessionUser.profile_image} alt="" className={styles.profile_image}></img>
+                                    <div className={styles.review_info}>
+                                        <div>
+                                            {review.user_name} is drinking a {review.beer_name} from {review.brewery_name}
+                                        </div>
+                                        <div>
+                                            Rating: {review.rating}/5
+                                        </div>
+                                        <div>
+                                            {review.content}
+                                        </div>
+                                        <div>
+                                            {Object.values(review.images).length > 0 &&
+                                                Object.values(review.images).map(image => (
+                                                    <img src={image} alt="" className={styles.image_preview} onClick={imagePreview}/>
+                                                ))
+                                            }
+                                        </div>
                                     </div>
-                                    <div>
-                                        {review.rating}
-                                    </div>
-                                    <div>
-                                        {review.content}
-                                    </div>
-                                    <div>
-                                        {Object.values(review.images).length > 0 &&
-                                            Object.values(review.images).map(image => (
-                                                <img src={image} alt="" className={styles.image_preview} onClick={imagePreview}/>
-                                            ))
+                                    <div className={styles.end_container}>
+                                        <img src={review.brewery_image} alt="" className={styles.brewery_image}></img>
+                                        {review.user_id === sessionUser.id &&
+                                            <div className={styles.review_buttons}>
+                                                <UpdateReview review={review} beer_id={+id} brewery_id={beer.brewery_id} />
+                                                <DeleteReview review_id={review.id} beer_id={+id} />
+                                            </div>
                                         }
                                     </div>
-                                    {review.user_id === sessionUser.id &&
-                                        <div className={styles.review_buttons}>
-                                            <UpdateReview review={review} beer_id={+id} brewery_id={beer.brewery_id} />
-                                            <DeleteReview review_id={review.id} beer_id={+id} />
-                                        </div>
-                                    }
                                 </div>
+
                             ))
                             }
-                        </div>
-                    </div>
+                    </div> :
+                    <div className={styles.review_container}>
+                        <h2>There are no reviews for this Beer... be the first by clicking the green check above!</h2>
+                    </div> }
                 </div>
                 <div className={styles.right}>
                     World

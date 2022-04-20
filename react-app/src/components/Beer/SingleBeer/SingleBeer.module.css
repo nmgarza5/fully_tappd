@@ -172,7 +172,21 @@
 	/* height: auto; */
 	display: flex;
 	flex-direction: column;
-	/* align-items: center; */
+	background: #f7f0f0;
+	border-radius: 5px;
+	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
+	padding: 10px
+}
+
+.profile_image {
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+}
+
+.brewery_image {
+	height: 60px;
+	width: 60px;
 }
 
 
@@ -181,11 +195,38 @@
 	background-color: aqua;
 }
 .review_item {
-	height: 150 px;
-	/* background-color: rgb(65, 160, 104); */
+    display: flex;
+    flex-direction: row;
+	border-bottom: solid grey thin;
+	margin-bottom: 10px;
+	height: fit-content;
+	justify-content: center;
+}
+
+.review_info {
+	margin-left: 10px;
+	width: 550px;
 }
 
 .image_preview {
 	width: 50px;
 	height: 50px;
+  }
+
+  .end_container {
+	width: 80px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+  }
+
+  .review_buttons {
+	  display: flex;
+	  flex-direction: row;
+	  padding: 10px;
+  }
+
+  .review_buttons div {
+
   }
