@@ -19,7 +19,7 @@ class Beer(db.Model):
     updated_at = db.Column(
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    brewery = db.relationship("Brewery", backref="beer")
+    brewery = db.relationship("Brewery", back_populates="beers")
 
 
     '''Define rating property here. Will need to use reviews'''

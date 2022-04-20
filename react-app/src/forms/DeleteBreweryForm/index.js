@@ -4,6 +4,7 @@ import { hideModal } from "../../store/modal";
 import { deleteBrewery } from "../../store/breweries";
 import { useHistory } from "react-router-dom";
 import styles from "./DeleteBreweryForm.module.css";
+import { authenticate } from "../../store/session";
 
 export const DeleteBreweryForm = ({ brewery_id }) => {
 	const [errors, setErrors] = useState([]);
@@ -17,9 +18,10 @@ export const DeleteBreweryForm = ({ brewery_id }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await dispatch(hideModal());
-		await history.push(`/`);
 		await dispatch(deleteBrewery(brewery_id));
+		await dispatch(authenticate())
+		history.push(`/brewhub`);
+		await dispatch(hideModal());
 		setErrors([]);
 	};
 

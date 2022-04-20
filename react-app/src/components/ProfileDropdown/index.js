@@ -39,15 +39,16 @@ const Profile = () => {
 	};
 
 	const onLogout = async (e) => {
-		await dispatch(logout());
 		history.push("/");
+		await dispatch(logout());
 	  };
 
 
 	return (
 		<div className={styles.profileOuterContainer}>
 			<div className={styles.profileIconContainer} onClick={(() => setShowBox(!showBox))}>
-				<img src={sessionUser.profile_image} className={styles.profile_image} alt='' />
+				{sessionUser.profile_image ? <img src={sessionUser.profile_image} className={styles.profile_image} alt=''/>
+				:  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" className={styles.profile_image} alt=''/> }
 			</div>
 			{showBox && (
 				<div

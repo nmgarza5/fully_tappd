@@ -43,8 +43,6 @@ export const receiveBeer = () => async (dispatch) => {
 	const res = await fetch("/api/beer/");
 	if (res.ok) {
 		const beer = await res.json();
-		console.log("BEER --", beer)
-		console.log("BEER OBJECT --", Object.values(beer)[0])
 		dispatch(receivedBeer(beer));
 		return beer;
 	}

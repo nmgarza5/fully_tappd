@@ -49,6 +49,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
+            'business_user': self.business_user,
             'first_name': self.first_name,
             'last_name': self.last_name,
             'header': self.header,

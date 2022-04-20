@@ -28,16 +28,9 @@ export const SingleBeer = () => {
 
     return (
         <PageContainer>
-            {/* {isOwner &&
-            <>
-                <UpdateBrewery brewery={brewery} />
-                <DeleteBrewery brewery_id={brewery.id} />
-            </>
-            } */}
             <div className={styles.page}>
                 <div className={styles.left}>
                     <div className={styles.info}>
-                        {/* <div style={{backgroundImage: `url(${brewery.banner_image})`}}></div> */}
                         <div className={styles.first_info} >
                             <div className={styles.card_img}>
                                 <img src={beer.beer_image} alt="beer" />
@@ -54,7 +47,6 @@ export const SingleBeer = () => {
                                 <div># of Favorites</div>
                             </div>
                         </div>
-                        {/* <div> */}
                             <div className={styles.second_info}>
                                 {/* <div className={styles.row}> */}
                                     <div  className={styles.row}>
@@ -69,9 +61,7 @@ export const SingleBeer = () => {
                                     <div className={styles.row_end}>
                                         <i className="fa-solid fa-star fa-2x"></i>
                                     </div>
-                              {/* </div> */}
                             </div>
-                        {/* </div> */}
                         <div>
                             <div className={styles.third_info}>
                                 {!showMore && beer.description.length > 100 ?

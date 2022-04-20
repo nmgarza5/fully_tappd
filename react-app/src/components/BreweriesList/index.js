@@ -10,7 +10,6 @@ const BreweriesList = () => {
     const history = useHistory()
 	// const dispatch = useDispatch()
     const breweries = useSelector((state) => Object.values(state.breweries))
-	const createBrewery = () => history.push('/new-brewery')
 
 	const goToBrewery = (id) => {
 		history.push(`/breweries/${id}`);
@@ -22,9 +21,6 @@ const BreweriesList = () => {
 			<div className={styles.container}>
 				<div className={styles.all_container}>
 					Breweries Page
-					<div role='button' onClick={createBrewery} className={styles.button}>
-						Create New Brewery
-					</div>
 					{breweries.map((brewery) => (
 						<div
 							onClick={() => goToBrewery(brewery.id)}

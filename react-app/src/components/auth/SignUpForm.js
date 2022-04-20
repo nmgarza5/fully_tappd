@@ -7,11 +7,12 @@ import styles from "./SignUpForm.module.css"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import ActivityPage from "../ActivityPage";
+import { Route} from "react-router-dom";
 
 const SignUpForm = () => {
     const user = useSelector((state) => state.session.user);
 
-    // const history = useHistory();
     const [errors, setErrors] = useState([]);
     const [business_user, setBusinessUser] = useState(false);
     const [username, setUsername] = useState("");
@@ -55,9 +56,13 @@ const SignUpForm = () => {
             }
         }
     };
-
     if (user) {
-        return <Redirect to="/activity" />;
+        return (
+            <Route exact path="/activity">
+                {user.business_user ? <Redirect to="/new-brewery" /> : <ActivityPage />}
+            </Route>
+        )
+
     }
 
     return (

@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import { createBrewery, updateBrewery} from "../../store/breweries"
 import styles from "./BreweryForm.module.css"
 import { hideModal } from "../../store/modal"
+import { authenticate } from "../../store/session"
 
 export const BreweryForm = ({brewery}) => {
 	const dispatch = useDispatch();
@@ -62,6 +63,7 @@ export const BreweryForm = ({brewery}) => {
 			if (updatedBrewery.errors) {
 				setErrors(updatedBrewery.errors);
 			} else {
+				await dispatch(authenticate())
 				dispatch(hideModal());
 			}
 		} else {
@@ -69,8 +71,8 @@ export const BreweryForm = ({brewery}) => {
 			if (newBrewery.errors) {
 				setErrors(newBrewery.errors);
 			} else {
-				dispatch(hideModal());
-				history.push(`/breweries/${newBrewery.id}`);
+				await dispatch(authenticate())
+				history.push(`/brewhub`);
 			}
 		};
 	}
@@ -86,6 +88,7 @@ export const BreweryForm = ({brewery}) => {
 
 	return (
 		<div className={styles.container}>
+			{!brewery && <h1 className={styles.header}>Create Your New Brewery</h1>}
 			<div className={styles.form_entries}>
 				<ul>
 					{errors &&
