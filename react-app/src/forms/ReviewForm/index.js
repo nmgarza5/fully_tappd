@@ -16,7 +16,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
 
     console.log("EDIT IMAGES", editImages)
 
-    const [rating, setRating] = useState(review?.rating || "")
+    const [rating, setRating] = useState(review?.rating || 1)
     const [content, setContent] = useState(review?.content || "")
     const [newImage, setNewImage] = useState()
     const [images, setImages] = useState(editImages || [])

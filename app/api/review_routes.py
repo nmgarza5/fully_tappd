@@ -68,7 +68,10 @@ def reviewUpdate(id):
         review.rating = form.data['rating']
         review.content = form.data['content']
 
-        review.images = []
+        for image in review.images:
+          img = Image.query.get(image.id)
+          db.session.delete(img)
+
         for image in images:
             new_image = Image(image=image)
             review.images.append(new_image)
@@ -84,6 +87,9 @@ def reviewDelete(id):
   print('\n\n req --', request.json, '\n\n')
   data = {}
   review = Review.query.get(id)
+  for image in review.images:
+          img = Image.query.get(image.id)
+          db.session.delete(img)
   data['review'] = review.to_dict()
   db.session.delete(review)
   db.session.commit()
