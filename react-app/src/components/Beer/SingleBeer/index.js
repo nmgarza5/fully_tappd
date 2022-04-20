@@ -1,20 +1,38 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { useSelector} from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch} from "react-redux";
 import styles from "./SingleBeer.module.css";
 import { PageContainer } from "../../PageContainer";
-import { ReviewForm } from "../../../forms/ReviewForm";
+import { CreateReview } from "../../Reviews/CreateReview"
+import { UpdateReview } from "../../Reviews/UpdateReview"
+import { showModal, setCurrentModal } from '../../../store/modal';
+import { authenticate } from "../../../store/session";
+import { receiveOneBeer } from "../../../store/beer";
+import { DeleteReview } from "../../Reviews/DeleteReview";
 
 export const SingleBeer = () => {
-    // const dispatch = useDispatch
+    const [loaded, setLoaded] = useState(false);
+    const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state?.session?.user);
 	const { id } = useParams();
 	const beer = useSelector((state) => state.beer)[`${id}`];
 
     const reviewsList = Object.values(beer.reviews)
+
     const [showMore, setShowMore] = useState(false)
 
+    useEffect(() => {
+        (async () => {
+            await dispatch(authenticate());
+            await dispatch(receiveOneBeer(id))
+            setLoaded(true);
+        })();
+    }, [dispatch]);
+
+    if (!loaded) {
+        return null;
+    }
     // const breweryType = (type) => {
     //     if (type === "micro") return "Micro"
     //     if (type === "brewpub") return "Brewpub"
@@ -28,6 +46,14 @@ export const SingleBeer = () => {
 	// sessionUser && beer?.owner_id === sessionUser.id
     // ? (isOwner = true)
     // : (isOwner = false);
+
+
+
+
+    const imagePreview = () => {
+    //     dispatch(setCurrentModal(() => (<img ={brewery_id} beer_id={beer_id}/>));
+    //     dispatch(showModal());
+    }
 
     return (
         <PageContainer>
@@ -62,6 +88,7 @@ export const SingleBeer = () => {
                                         AVG RATING
                                     </div>
                                     <div className={styles.row_end}>
+                                        <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
                                         <i className="fa-solid fa-star fa-2x"></i>
                                     </div>
                             </div>
@@ -81,10 +108,10 @@ export const SingleBeer = () => {
                         </div>
                     </div>
                     <div className={styles.review_container} >
-                        <ReviewForm beer_id={+id} brewery_id={beer.brewery_id} />
+
                         <div className={styles.review_list}>
                             {reviewsList.map(review => (
-                                <div className={styles.review_item}>
+                                <div key={review.id} className={styles.review_item}>
                                     <div>
                                         {review.user_name} is drinking a {review.beer_name} from {review.brewery_name}
                                     </div>
@@ -94,10 +121,17 @@ export const SingleBeer = () => {
                                     <div>
                                         {review.content}
                                     </div>
+                                    <div>
+                                        {Object.values(review.images).length > 0 &&
+                                            Object.values(review.images).map(image => (
+                                                <img src={image} alt="" className={styles.image_preview} onClick={imagePreview}/>
+                                            ))
+                                        }
+                                    </div>
                                     {review.user_id === sessionUser.id &&
                                         <div className={styles.review_buttons}>
-                                            <div>Edit</div>
-                                            <div>Delete</div>
+                                            <UpdateReview review={review} beer_id={+id} brewery_id={beer.brewery_id} />
+                                            <DeleteReview review_id={review.id} beer_id={+id} />
                                         </div>
                                     }
                                 </div>

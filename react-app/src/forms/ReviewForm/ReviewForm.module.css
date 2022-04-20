@@ -1,7 +1,73 @@
 .review_form {
 	height: 200px;
-	background-color:rgb(163, 47, 47)
+  width: 100%;
+	margin: 0 auto;
+  /* padding: 15px; */
+  border-radius: 5px;
 }
+
+.review_form h3 {
+  width: 100%;
+  margin: 0;
+  color: white;
+  background-color: #000000;
+  border-top-left-radius: 5px;
+  border-top-RIGHT-radius: 5px;
+}
+
+
+.upper_half {
+  margin: 0 10px;
+  margin-top: 0px;
+	width: 100%;
+  display: flex;
+  height: 250px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.image_container {
+  width: 200px;
+  height: 150px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+.image_preview {
+  width: 50px;
+  height: 50px;
+}
+
+
+
+.lower_half {
+	width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.lower_field {
+  width: 200px;
+}
+
+.lower_field i:hover{
+  cursor: pointer
+}
+
+.input_container {
+  width: 300px;
+}
+.input_container textarea{
+  width: 100%;
+  height: 70px;
+}
+
 
 .button {
     height: 45px;

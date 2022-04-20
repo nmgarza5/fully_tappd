@@ -77,6 +77,7 @@ export const receiveOneReview = (reviewId) => async (dispatch) => {
 export const updateReview =
 	({ reviewData, id }) =>
 	async (dispatch) => {
+		console.log("REVIEWDATA---", id, reviewData)
 		const res = await fetch(`/api/reviews/${id}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
@@ -93,10 +94,12 @@ export const updateReview =
 	};
 
 	export const deleteReview= (reviewId) => async (dispatch) => {
-		const res = await fetch(`/api/beer/${reviewId}`, {
+		console.log("REVIEWID", reviewId)
+		const res = await fetch(`/api/reviews/${reviewId}`, {
 			method: "DELETE",
 		});
 		const removedReview = await res.json();
+		console.log("REMVOED", removedReview)
 		dispatch(deletedReview(removedReview));
 		return removedReview;
 	};

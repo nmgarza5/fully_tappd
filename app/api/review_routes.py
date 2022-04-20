@@ -1,3 +1,4 @@
+from ast import For
 from flask import Blueprint, request
 from flask_login import current_user
 from app.models import Brewery, db, User, Beer, Review, Image
@@ -53,31 +54,37 @@ def create_review():
 
 
 
-# @review_routes.route('/<int:id>', methods=['PUT'])
-# def breweryUpdate(id):
-#     form = BeerForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     beer = Beer.query.get(id)
-#     if form.validate_on_submit():
-#         beer.name = form.data['name'],
-#         beer.brewery_id = form.data['brewery_id'],
-#         beer.style = form.data['style'],
-#         beer.description = form.data['description'],
-#         beer.price = form.data['price'],
-#         beer.abv = form.data['abv'],
-#         beer.ibu = form.data['ibu']
-#         db.session.commit()
-#         return beer.to_dict()
-#     else:
-#       return {'errors': error_generator(form.errors)}, 400
+@review_routes.route('/<int:id>', methods=['PUT'])
+def reviewUpdate(id):
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    review = Review.query.get(id)
+    images = request.json['images']
+    print("\n\nIMAGES---", images, "\n\n")
+    if form.validate_on_submit():
+        review.user_id = current_user.id,
+        review.brewery_id = form.data['brewery_id']
+        review.beer_id = form.data['beer_id']
+        review.rating = form.data['rating']
+        review.content = form.data['content']
+
+        review.images = []
+        for image in images:
+            new_image = Image(image=image)
+            review.images.append(new_image)
+
+        db.session.commit()
+        return review.to_dict()
+    else:
+      return {'errors': error_generator(form.errors)}, 400
 
 
-# @review_routes.route('/<int:id>', methods=['DELETE'])
-# def breweryDelete(id):
-#   print('\n\n req --', request.json, '\n\n')
-#   data = {}
-#   beer = Beer.query.get(id)
-#   data['beer'] = beer.to_dict()
-#   db.session.delete(beer)
-#   db.session.commit()
-#   return data
+@review_routes.route('/<int:id>', methods=['DELETE'])
+def reviewDelete(id):
+  print('\n\n req --', request.json, '\n\n')
+  data = {}
+  review = Review.query.get(id)
+  data['review'] = review.to_dict()
+  db.session.delete(review)
+  db.session.commit()
+  return data
