@@ -107,6 +107,7 @@
     display: flex;
     border-right: rgb(197, 197, 197) solid thin;
     justify-content: center;
+	color: black
 }
 
 .row_end{
@@ -213,6 +214,10 @@
 	height: 50px;
   }
 
+  .image_preview:hover {
+	  cursor: pointer
+  }
+
   .end_container {
 	width: 80px;
 	display: flex;
@@ -228,5 +233,5 @@
   }
 
   .review_buttons div {
-
+	padding-right: 5px;
   }

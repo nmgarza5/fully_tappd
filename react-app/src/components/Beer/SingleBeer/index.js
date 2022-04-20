@@ -20,6 +20,21 @@ export const SingleBeer = () => {
 
     const reviewsList = Object.values(beer.reviews)
 
+    const avgRating = () => {
+        let sum = 0;
+        reviewsList.forEach(review => sum += review.rating)
+        let avg = sum / reviewsList.length;
+        return avg
+    }
+
+    const userReviews = () => {
+        let count = 0;
+        reviewsList.forEach(review => {
+            if (review.user_id === sessionUser.id) count+=1;
+        })
+        return count;
+    }
+
     const [showMore, setShowMore] = useState(false)
 
     useEffect(() => {
@@ -33,27 +48,12 @@ export const SingleBeer = () => {
     if (!loaded) {
         return null;
     }
-    // const breweryType = (type) => {
-    //     if (type === "micro") return "Micro"
-    //     if (type === "brewpub") return "Brewpub"
-    //     if (type === "regional") return "Regional"
-    //     if (type === "large") return "Large"
-    // }
 
-    // "brewpub" ? "Brewpub" : "regional" ? "Regional" : "large" ? "Large" : null
-
-    // let isOwner = false;
-	// sessionUser && beer?.owner_id === sessionUser.id
-    // ? (isOwner = true)
-    // : (isOwner = false);
-
-
-
-
-    const imagePreview = () => {
-    //     dispatch(setCurrentModal(() => (<img ={brewery_id} beer_id={beer_id}/>));
-    //     dispatch(showModal());
+    const imagePreview = (image) => {
+        dispatch(setCurrentModal(() => (<img src={image} alt="" style={{ height : 500 }}/>)));
+        dispatch(showModal());
     }
+
 
     return (
         <PageContainer>
@@ -70,9 +70,9 @@ export const SingleBeer = () => {
                                 <div>{beer.style}</div>
                             </div>
                             <div className={styles.end}>
-                                <div>Total Checkins</div>
+                                <div>Total Reviews: {reviewsList.length}</div>
                                 <div>Monthly Average</div>
-                                <div># of your checkins</div>
+                                <div># of your Reviews: {userReviews()}</div>
                                 <div># of Favorites</div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@ export const SingleBeer = () => {
                                         {beer.ibu} IBU
                                     </div>
                                     <div className={styles.row}>
-                                        AVG RATING
+                                        Avg Rating: {avgRating()}/5
                                     </div>
                                     <div className={styles.row_end}>
                                         <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
@@ -125,7 +125,7 @@ export const SingleBeer = () => {
                                         <div>
                                             {Object.values(review.images).length > 0 &&
                                                 Object.values(review.images).map(image => (
-                                                    <img src={image} alt="" className={styles.image_preview} onClick={imagePreview}/>
+                                                    <img src={image} alt="" className={styles.image_preview} onClick={()=>imagePreview(image)}/>
                                                 ))
                                             }
                                         </div>
@@ -138,6 +138,9 @@ export const SingleBeer = () => {
                                                 <DeleteReview review_id={review.id} beer_id={+id} />
                                             </div>
                                         }
+                                        {/* <div>
+                                            posted: {review.created_at}
+                                        </div> */}
                                     </div>
                                 </div>
 
