@@ -37,5 +37,6 @@ class Beer(db.Model):
             'price': self.price,
             'abv': self.abv,
             'ibu': self.ibu,
+            "reviews": {review.id: review.to_dict() for review in self.reviews},
             'created_at': self.created_at
         }

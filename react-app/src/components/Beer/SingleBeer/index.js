@@ -8,9 +8,11 @@ import { ReviewForm } from "../../../forms/ReviewForm";
 
 export const SingleBeer = () => {
     // const dispatch = useDispatch
-	// const sessionUser = useSelector((state) => state?.session?.user);
+	const sessionUser = useSelector((state) => state?.session?.user);
 	const { id } = useParams();
 	const beer = useSelector((state) => state.beer)[`${id}`];
+
+    const reviewsList = Object.values(beer.reviews)
     const [showMore, setShowMore] = useState(false)
 
     // const breweryType = (type) => {
@@ -81,9 +83,26 @@ export const SingleBeer = () => {
                     <div className={styles.review_container} >
                         <ReviewForm beer_id={+id} brewery_id={beer.brewery_id} />
                         <div className={styles.review_list}>
-                            <div className={styles.review_item}>
-                                Hello
-                            </div>
+                            {reviewsList.map(review => (
+                                <div className={styles.review_item}>
+                                    <div>
+                                        {review.user_name} is drinking a {review.beer_name} from {review.brewery_name}
+                                    </div>
+                                    <div>
+                                        {review.rating}
+                                    </div>
+                                    <div>
+                                        {review.content}
+                                    </div>
+                                    {review.user_id === sessionUser.id &&
+                                        <div className={styles.review_buttons}>
+                                            <div>Edit</div>
+                                            <div>Delete</div>
+                                        </div>
+                                    }
+                                </div>
+                            ))
+                            }
                         </div>
                     </div>
                 </div>

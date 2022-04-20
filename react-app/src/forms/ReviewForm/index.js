@@ -18,6 +18,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
     const addImage = () => {
         let newImages = [...images, newImage]
         setImages(newImages)
+        setNewImage("")
     }
 
     const handleSubmit = async (e) => {
@@ -99,6 +100,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                         type="text"
                         name="header"
                         placeholder="Image Url"
+                        value={newImage}
                         onChange={(e) => setNewImage(e.target.value)}
                         ></input>
                     <div className={styles.button} onClick={addImage}>Add Image to Review</div>

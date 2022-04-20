@@ -28,10 +28,14 @@ class Review(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            "user_name": f'{self.user.first_name} {self.user.last_name}',
             'brewery_id': self.brewery_id,
+            "brewery_name": self.brewery.name,
+            'beer_id': self.beer_id,
+            "beer_name": self.beer.name,
             'owner_id': self.brewery.owner_id,
             'content': self.content,
-            # 'images': {url.id: url for url in self.images},
+            'images': {image.id: image.image for image in self.images},
             'rating': self.rating,
             'created_at': self.created_at,
             'updated_at': self.updated_at
