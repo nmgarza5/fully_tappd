@@ -1064,4 +1064,4 @@ brewery_data.forEach((brewery) => {
     });
 });
 
-console.log(breweries);
+// console.log(breweries);

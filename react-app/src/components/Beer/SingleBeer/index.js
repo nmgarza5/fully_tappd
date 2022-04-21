@@ -105,19 +105,25 @@ export const SingleBeer = () => {
                                             Rating: {avgRating()}
                                         </div>
                                     <div className={styles.row_end}>
-                                        Leave a Review:
-                                        <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
+                                       {sessionUser ?
+                                        <>
+                                            Leave a Review:
+                                            <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
+                                        </>
+                                        :
+                                        <>Sign in to Review</> }
                                         {/* <i className="fa-solid fa-star fa-2x"></i> */}
                                     </div>
                             </div>
                         <div>
                             <div className={styles.third_info}>
-                                {!showMore && beer.description.length > 100 ?
+                                {!showMore && beer.description.length > 150 ?
                                     <div className={styles.no_show}>
-                                        {beer.description.slice(0,100)}...
+                                        {beer.description.slice(0,150)}...
                                         <div onClick={() => setShowMore(!showMore)}>Show more</div>
                                      </div>
-                                    :
+                                    : !showMore && beer.description.length < 150 ?
+                                                <div className={styles.show}>{beer.description}</div> :
                                     <div className={styles.show}>
                                         {beer.description}
                                         <div onClick={() => setShowMore(!showMore)}>Show Less</div>

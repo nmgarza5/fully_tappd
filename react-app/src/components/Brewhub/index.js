@@ -109,7 +109,7 @@ const Brewhub = () => {
 								{userBrewery?.header}
 							</h3>
 							Description:<br></br>
-							{!showMoreBrewery && userBrewery?.description?.length > 100 ?
+							{/* {!showMoreBrewery && userBrewery?.description?.length > 100 ?
 								<div className={styles.no_showBrewery}>
 									{userBrewery?.description?.slice(0,100)}...
 									<div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show more</div>
@@ -118,7 +118,18 @@ const Brewhub = () => {
 								<div className={styles.showBrewery}>
 									{userBrewery?.description}
 									<div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show Less</div>
-								</div> }
+								</div> } */}
+								{!showMoreBrewery && userBrewery?.description?.length > 150 ?
+                                    <div className={styles.no_showBrewery}>
+                                        {userBrewery?.description?.slice(0,150)}...
+                                        <div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show more</div>
+                                     </div>
+                                    : !showMoreBrewery && userBrewery?.description?.length < 150 ?
+                                                <div className={styles.showBrewery}>{userBrewery?.description}</div> :
+                                    <div className={styles.showBrewery}>
+                                        {userBrewery?.description}
+                                        <div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show Less</div>
+                                    </div> }
 						</div>
 					</div>
 				</div>
@@ -142,8 +153,8 @@ const Brewhub = () => {
 										))}
 								</select>
 							<div className={styles.button_container}>
-								{userBeers.length > 0 && <div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div> }
-								{userBeers.length > 0 && <div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div> }
+								{selectedBeer && <div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div> }
+								{selectedBeer && <div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div> }
 								<div role='button' onClick={showNewBeerForm} className={styles.button}>Create New Beer</div>
 							</div>
 					</div >

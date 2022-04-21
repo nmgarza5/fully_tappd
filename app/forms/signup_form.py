@@ -38,7 +38,7 @@ def date_format(form, field):
             next = new[0:19]
             # change to date format
             birthdate  = datetime.fromisoformat(next)
-            print("\n\n FROM-ISOFORMAT ------", birthdate, '\n\n')
+            # print("\n\n FROM-ISOFORMAT ------", birthdate, '\n\n')
             return birthdate
         except:
             raise ValidationError('You must enter a valid birthdate')
@@ -46,12 +46,12 @@ def date_format(form, field):
 def calculate_age(form, field):
         birthdate = date_format(form, field)
         current_time = datetime.utcnow()
-        print("\n\n current_time ------", current_time, '\n\n')
+        # print("\n\n current_time ------", current_time, '\n\n')
         delta = (birthdate - current_time).days
-        print("\n\n delta ------", delta, '\n\n')
+        # print("\n\n delta ------", delta, '\n\n')
         # add 5 to offset to correct date, shift from leap years
         age_difference = delta + 21*365 + 5
-        print("\n\n age-def ------", age_difference, '\n\n')
+        # print("\n\n age-def ------", age_difference, '\n\n')
         # this part is weird but if 'age_difference' > 0 the user is younger than 21 years old
         if age_difference >= 0:
             raise ValidationError('You must be over the age of 21 to sign up for FullyTappd')
