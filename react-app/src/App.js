@@ -45,7 +45,6 @@ function App() {
     return (
         <BrowserRouter>
             <PageWrapper>
-
                 <NavBar />
                 <Modal />
                 <Switch>

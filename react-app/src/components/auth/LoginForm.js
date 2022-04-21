@@ -36,10 +36,14 @@ const LoginForm = () => {
     const loginDemo = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(login("keith-stone", "password"));
-		if (data) return setErrors(data);
-		dispatch(hideModal());
-        await history.push('/brewhub')
-        dispatch(hideModal());
+		if (data) {
+            console.log("DATA", data)
+            return setErrors(data)
+        }
+	// 	else {
+    //         dispatch(hideModal());
+    //         history.push('/brewhub')
+    //     }
 	};
 
     const showSignUpForm = () => {
@@ -47,11 +51,13 @@ const LoginForm = () => {
 	};
 
     if (user && user.business_user === true) {
+        dispatch(hideModal());
         return <Redirect to="/brewhub" />;
     }
-    // if (user) {
-    //     return <Redirect to="/breweries" />;
-    // }
+    if (user) {
+        dispatch(hideModal());
+        return <Redirect to="/breweries" />;
+    }
 
     return (
         <div className={styles.parent}>
