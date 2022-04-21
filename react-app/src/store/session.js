@@ -128,14 +128,12 @@ export const login = (username, password) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        // console.log("D DATA", data)
         dispatch(setUser(data));
         return data;
     } else if (response.status < 500) {
         const data = await response.json();
-        // console.log("DATeerrs", data)
         if (data.errors) {
-            return data.errors;
+            return data;
         }
     } else {
         return ["An error occurred. Please try again."];
@@ -155,7 +153,6 @@ export const logout = () => async (dispatch) => {
 };
 
 export const signUp = (userData) => async (dispatch) => {
-    // console.log("userDATA --", userData)
     const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -166,12 +163,16 @@ export const signUp = (userData) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
+        console.log("DATeerrs", data)
         const newUser = await dispatch(setUser(data));
+        console.log("NEW USER", newUser)
         return newUser;
     } else if (response.status < 500) {
         const data = await response.json();
+        console.log("data", data)
         if (data.errors) {
-            return data.errors;
+            console.log("data.ERRORS", data.errors)
+            return data
         }
     } else {
         return ["An error occurred. Please try again."];

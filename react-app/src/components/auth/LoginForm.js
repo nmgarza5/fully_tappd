@@ -19,16 +19,16 @@ const LoginForm = () => {
         e.preventDefault();
         const data = await dispatch(login(username, password));
 
-        if (data) {
-            setErrors(data);
+        if (data.errors) {
+            return setErrors(data.errors);
         }
         if (data.business_user === true) {
             history.push('/brewhub')
-            dispatch(hideModal());
+           return await dispatch(hideModal());
         }
         else {
-            dispatch(hideModal());
             history.push('/breweries')
+            return await dispatch(hideModal());
         }
 
     };
@@ -36,21 +36,21 @@ const LoginForm = () => {
     const loginDemo = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(login("keith-stone", "password"));
-		if (data) {
-            console.log("DATA", data)
-            return setErrors(data)
+		if (data.errors) {
+            console.log("DATA", data.errors)
+            return setErrors(data.errors)
         }
-	// 	else {
-    //         dispatch(hideModal());
-    //         history.push('/brewhub')
-    //     }
+		else {
+            await dispatch(hideModal());
+            history.push('/brewhub')
+        }
 	};
 
     const showSignUpForm = () => {
 		dispatch(setCurrentModal(SignUpForm));
 	};
 
-    if (user && user.business_user === true) {
+    if (user?.business_user === true) {
         dispatch(hideModal());
         return <Redirect to="/brewhub" />;
     }
