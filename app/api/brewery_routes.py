@@ -29,6 +29,7 @@ def my_brewery():
 @brewery_routes.route('/<int:id>', methods=["GET"])
 def brewery(id):
   brewery = Brewery.query.get(id)
+  print("\\n\n", brewery, "\n\n")
   return brewery.to_dict()
 
 @brewery_routes.route('/', methods=['POST'])

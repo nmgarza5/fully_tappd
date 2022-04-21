@@ -20,7 +20,7 @@ class Beer(db.Model):
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
     brewery = db.relationship("Brewery", back_populates="beers")
-
+    reviews = db.relationship("Review", back_populates="beer", cascade="all, delete-orphan")
 
     '''Define rating property here. Will need to use reviews'''
 
