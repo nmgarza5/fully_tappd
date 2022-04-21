@@ -59,6 +59,14 @@
 	font-size: 14px;
 }
 
+.middle h4 {
+	color: rgb(163, 47, 47)
+}
+.middle h4:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 .end {
 	margin-top: 15px;
 	width: 300px;

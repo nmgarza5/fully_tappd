@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch} from "react-redux";
 import styles from "./SingleBeer.module.css";
@@ -15,6 +15,7 @@ import defaultImage from "../../../images/default_image.png"
 
 
 export const SingleBeer = () => {
+    const history = useHistory();
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state?.session?.user);
@@ -27,16 +28,17 @@ export const SingleBeer = () => {
         let sum = 0;
         reviewsList.forEach(review => sum += review.rating)
         let avg = sum / reviewsList.length;
-        return avg
+        if (avg) return `${avg.toFixed(2)}/5`
+        else return "No Ratings"
     }
 
-    const userReviews = () => {
-        let count = 0;
-        reviewsList?.forEach(review => {
-            if (review?.user_id === sessionUser?.id) count+=1;
-        })
-        return count;
-    }
+    // const userReviews = () => {
+    //     let count = 0;
+    //     reviewsList?.forEach(review => {
+    //         if (review?.user_id === sessionUser?.id) count+=1;
+    //     })
+    //     return count;
+    // }
 
     const [showMore, setShowMore] = useState(false)
 
@@ -64,6 +66,11 @@ export const SingleBeer = () => {
         e.target.src = defaultImage
     }
 
+    const goToBrewery = async (id) => {
+        await history.push(`/breweries/${id}`)
+    }
+
+
 
     return (
         <PageContainer>
@@ -76,15 +83,15 @@ export const SingleBeer = () => {
                             </div>
                             <div className={styles.middle}>
                                 <h2>{beer.name}</h2>
-                                <h4>{beer.brewery_name}</h4>
+                                <h4 onClick={() => goToBrewery(beer.brewery_id)}>{beer.brewery_name}</h4>
                                 <div>{beer.style}</div>
                             </div>
-                            <div className={styles.end}>
+                            {/* <div className={styles.end}>
                                 <div>Total Reviews: {reviewsList.length}</div>
                                 <div>Monthly Average</div>
                                 {sessionUser && <div># of your Reviews: {userReviews()}</div> }
                                 <div># of Favorites</div>
-                            </div>
+                            </div> */}
                         </div>
                             <div className={styles.second_info}>
                                 {/* <div className={styles.row}> */}
@@ -94,12 +101,13 @@ export const SingleBeer = () => {
                                     <div className={styles.row}>
                                         {beer.ibu} IBU
                                     </div>
-                                    <div className={styles.row}>
-                                        Avg Rating: {avgRating()}/5
-                                    </div>
+                                        <div className={styles.row}>
+                                            Rating: {avgRating()}
+                                        </div>
                                     <div className={styles.row_end}>
+                                        Leave a Review:
                                         <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
-                                        <i className="fa-solid fa-star fa-2x"></i>
+                                        {/* <i className="fa-solid fa-star fa-2x"></i> */}
                                     </div>
                             </div>
                         <div>
@@ -157,9 +165,9 @@ export const SingleBeer = () => {
                         <h2>There are no reviews for this Beer... be the first by clicking the green check above!</h2>
                     </div> }
                 </div>
-                <div className={styles.right}>
+                {/* <div className={styles.right}>
                     World
-                </div>
+                </div> */}
             </div>
         </PageContainer>
     )
