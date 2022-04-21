@@ -10,6 +10,9 @@ import { showModal, setCurrentModal } from '../../../store/modal';
 import { authenticate } from "../../../store/session";
 import { receiveOneBeer } from "../../../store/beer";
 import { DeleteReview } from "../../Reviews/DeleteReview";
+import defaultProfileImage from "../../../images/default_profile_image.png"
+import defaultImage from "../../../images/default_image.png"
+
 
 export const SingleBeer = () => {
     const [loaded, setLoaded] = useState(false);
@@ -29,8 +32,8 @@ export const SingleBeer = () => {
 
     const userReviews = () => {
         let count = 0;
-        reviewsList.forEach(review => {
-            if (review.user_id === sessionUser.id) count+=1;
+        reviewsList?.forEach(review => {
+            if (review?.user_id === sessionUser?.id) count+=1;
         })
         return count;
     }
@@ -50,8 +53,15 @@ export const SingleBeer = () => {
     }
 
     const imagePreview = (image) => {
-        dispatch(setCurrentModal(() => (<img src={image} alt="" style={{ height : 500 }}/>)));
+        dispatch(setCurrentModal(() => (<img src={image} alt="" style={{ height : 500 }} onError={addDefaultImage}/>)));
         dispatch(showModal());
+    }
+
+    const addDefaultProfileImage = (e) => {
+        e.target.src = defaultProfileImage
+    }
+    const addDefaultImage = (e) => {
+        e.target.src = defaultImage
     }
 
 
@@ -62,7 +72,7 @@ export const SingleBeer = () => {
                     <div className={styles.info}>
                         <div className={styles.first_info} >
                             <div className={styles.card_img}>
-                                <img src={beer.beer_image} alt="beer" />
+                                <img src={beer.beer_image} alt="beer" onError={addDefaultImage}/>
                             </div>
                             <div className={styles.middle}>
                                 <h2>{beer.name}</h2>
@@ -72,7 +82,7 @@ export const SingleBeer = () => {
                             <div className={styles.end}>
                                 <div>Total Reviews: {reviewsList.length}</div>
                                 <div>Monthly Average</div>
-                                <div># of your Reviews: {userReviews()}</div>
+                                {sessionUser && <div># of your Reviews: {userReviews()}</div> }
                                 <div># of Favorites</div>
                             </div>
                         </div>
@@ -111,7 +121,7 @@ export const SingleBeer = () => {
                     <div className={styles.review_container} >
                             {reviewsList.map(review => (
                                 <div key={review.id} className={styles.review_item}>
-                                    <img src={sessionUser.profile_image} alt="" className={styles.profile_image}></img>
+                                    <img src={review.user_image} alt="" className={styles.profile_image} onError={addDefaultProfileImage}></img>
                                     <div className={styles.review_info}>
                                         <div>
                                             {review.user_name} is drinking a {review.beer_name} from {review.brewery_name}
@@ -123,12 +133,12 @@ export const SingleBeer = () => {
                                             {review.content}
                                         </div>
                                         <div>
-                                            <img src={review.image_url} alt="" className={styles.image_preview} onClick={()=>imagePreview(review.image_url)}/>
+                                            <img src={review.image_url} alt="" className={styles.image_preview} onError={addDefaultImage} onClick={()=>imagePreview(review.image_url)}/>
                                         </div>
                                     </div>
                                     <div className={styles.end_container}>
-                                        <img src={review.brewery_image} alt="" className={styles.brewery_image}></img>
-                                        {review.user_id === sessionUser.id &&
+                                        <img src={review.brewery_image} alt="" className={styles.brewery_image} onError={addDefaultImage}></img>
+                                        {sessionUser && review.user_id === sessionUser.id &&
                                             <div className={styles.review_buttons}>
                                                 <UpdateReview review={review} beer_id={+id} brewery_id={beer.brewery_id} />
                                                 <DeleteReview review_id={review.id} beer_id={+id} />

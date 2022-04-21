@@ -17,13 +17,13 @@ import BeerList from "./components/Beer/BeerList";
 import { SingleBeer } from "./components/Beer/SingleBeer";
 import { Footer } from "./components/Footer";
 import ErrorPage from "./components/ErrorPage";
-import ActivityPage from "./components/ActivityPage";
-import ProfilePage from "./components/ProfilePage";
+// import ActivityPage from "./components/ActivityPage";
+// import ProfilePage from "./components/ProfilePage";
 import Brewhub from "./components/Brewhub";
 import SignUpPage from "./components/SignUpPage";
 import SplashConditional from "./components/Splashpage/SplashConditional";
 import BrewhubConditional from "./components/Brewhub/BrewhubConditional";
-import ActivityConditional from "./components/ActivityPage/ActivityConditional";
+// import ActivityConditional from "./components/ActivityPage/ActivityConditional";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -57,12 +57,12 @@ function App() {
                     <Route exact path="/beer/:id">
 						<SingleBeer />
 					</Route>
-                    <ActivityConditional exact path="/activity" >
+                    {/* <ActivityConditional exact path="/activity" >
                         <ActivityPage />
                     </ActivityConditional>
                     <Route exact path="/my-profile" >
                         <ProfilePage />
-                    </Route>
+                    </Route> */}
                     <BrewhubConditional exact path="/brewhub" >
                         <Brewhub />
                     </BrewhubConditional>

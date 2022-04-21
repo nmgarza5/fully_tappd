@@ -6,6 +6,7 @@ import { createReview } from "../../store/reviews";
 import { updateReview } from "../../store/reviews";
 import { hideModal } from "../../store/modal";
 import { receiveOneBeer } from "../../store/beer";
+import defaultImage from "../../images/default_image.png"
 
 
 export const ReviewForm = ({review, brewery_id, beer_id}) => {
@@ -57,6 +58,9 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
 
         }
 
+    const addDefaultImage = async (e) => {
+        e.target.src = defaultImage
+    }
 
     return (
             <form className={styles.review_form}>
@@ -92,7 +96,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                         <div className={styles.images_container}>
                         {image_url &&
                             <div className={styles.single_image}>
-                                <img src={image_url} alt="" className={styles.image_preview}/>
+                                <img src={image_url} alt="" className={styles.image_preview} onError={addDefaultImage}/>
                                 <i onClick={() => setImage("")} className="fa-solid fa-square-minus"></i>
                             </div>
                                 }

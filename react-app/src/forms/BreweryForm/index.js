@@ -21,7 +21,7 @@ export const BreweryForm = ({brewery}) => {
 	const [phone, setPhone] = useState(brewery?.phone || "");
 	const [website_url, setWebsiteUrl] = useState(brewery?.website_url || "");
 	const [profile_image, setProfileImage] = useState(brewery?.profile_image || "");
-	const [banner_image, setBannerImage] = useState(brewery?.banner_image || "");
+	// const [banner_image, setBannerImage] = useState(brewery?.banner_image || "");
 	const [errors, setErrors] = useState([]);
 
 
@@ -39,8 +39,7 @@ export const BreweryForm = ({brewery}) => {
 			country,
 			phone,
 			website_url,
-			profile_image,
-			banner_image
+			profile_image
 		}
 
 		!name
@@ -197,7 +196,7 @@ export const BreweryForm = ({brewery}) => {
 							type="text"
 							name="postal_code"
 							value={postal_code}
-							placeholder="Example: 94124-3221"
+							placeholder="Please enter 5 digit. Example: 94124"
 							required
 							onChange={(e) =>
 								setPostalCode(e.target.value)
@@ -251,7 +250,7 @@ export const BreweryForm = ({brewery}) => {
 							}
 						></input>
 					</div>
-					<div className={styles.input_container}>
+					{/* <div className={styles.input_container}>
 						<label htmlFor="banner_image">Banner Image</label>
 						<input
 							type="banner_image"
@@ -262,7 +261,7 @@ export const BreweryForm = ({brewery}) => {
 								setBannerImage(e.target.value)
 							}
 						></input>
-					</div>
+					</div> */}
 					<div className={styles.button_container}>
 						<div onClick={onSubmit} className={styles.button}>
 							Submit

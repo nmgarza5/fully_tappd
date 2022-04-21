@@ -179,7 +179,7 @@
   }
 
   .business_container {
-    height: 400px;
+    height: 600px;
     border-top: #828282 solid thin;
     top: 57px;
     width: 100%;
@@ -187,13 +187,13 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
   }
 
   .business_feature {
     width: 450px;
     height: 350px;
-    margin: 30px;
+    margin: 70px;
     display: flex;
     flex-direction: column;
     text-align: start;
@@ -219,8 +219,8 @@
   }
 
   .brewhub {
-      width:500px;
-      height:500px;
+      width:600px;
+      height:600px;
       background: #F3AC38;
   }
 
@@ -229,6 +229,7 @@
     border-top: #828282 solid thin;
     top: 57px;
     margin-top: -20px;
+    /* margin-left: 20px; */
     width: 100%;
     text-align: center;
     display: flex;

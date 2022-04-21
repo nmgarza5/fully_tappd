@@ -12,6 +12,7 @@ import { BeerForm } from "../../forms/BeerForm";
 // import { receiveOneBrewery } from "../../store/breweries";
 // import { BreweryForm } from "../../forms/BreweryForm";
 // import { receiveUserBrewery } from "../../store/session";
+import defaultImage from "../../images/default_image.png"
 
 
 const Brewhub = () => {
@@ -63,6 +64,11 @@ const Brewhub = () => {
         if (type === "large") return "Large"
     }
 
+	const addDefaultImage = (e) => {
+        e.target.src = defaultImage
+    }
+
+
 	return (
 		<PageContainer>
 			<div className={styles.container}>
@@ -74,7 +80,7 @@ const Brewhub = () => {
 				</div>
 					<div className={styles?.first_info} >
 						<div className={styles?.card_img}>
-							<img src={userBrewery?.profile_image} alt="brewery" />
+							<img src={userBrewery?.profile_image} alt="brewery" onError={addDefaultImage}/>
 						</div>
 						<div className={styles.middle}>
 							<h2>{userBrewery?.name}</h2>
@@ -136,8 +142,8 @@ const Brewhub = () => {
 										))}
 								</select>
 							<div className={styles.button_container}>
-								<div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div>
-								<div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div>
+								{userBeers.length > 0 && <div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div> }
+								{userBeers.length > 0 && <div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div> }
 								<div role='button' onClick={showNewBeerForm} className={styles.button}>Create New Beer</div>
 							</div>
 					</div >
@@ -145,7 +151,7 @@ const Brewhub = () => {
 						{selectedBeer && <div className={styles.infoBeer}>
 							<div className={styles.first_info} >
 								<div className={styles.card_img}>
-									<img src={selectedBeer?.beer_image} alt="beer" />
+									<img src={selectedBeer?.beer_image} alt="beer" onError={addDefaultImage}/>
 								</div>
 								<div className={styles.middle}>
 									<h2>{selectedBeer?.name}</h2>

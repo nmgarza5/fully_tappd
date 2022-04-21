@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../auth/SignUpForm";
@@ -13,26 +13,26 @@ import ProfileDropdown from "../ProfileDropdown"
 const NavBar = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
-    const [searchQuery, setSearchQuery] = useState("");
-	const history = useHistory();
+    // const [searchQuery, setSearchQuery] = useState("");
+	// const history = useHistory();
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	// const handleSubmit = (e) => {
+	// 	e.preventDefault();
 
-		if (searchQuery.includes("%")) {
-			alert(
-				`Please do not use the "percent" symbol in your search query.`
-			);
-			setSearchQuery("");
-		} else if (searchQuery) {
-			history.push(`/search/${searchQuery}`);
-		} else {
-			alert(`Please enter a search query.`);
-		}
+	// 	if (searchQuery.includes("%")) {
+	// 		alert(
+	// 			`Please do not use the "percent" symbol in your search query.`
+	// 		);
+	// 		setSearchQuery("");
+	// 	} else if (searchQuery) {
+	// 		history.push(`/search/${searchQuery}`);
+	// 	} else {
+	// 		alert(`Please enter a search query.`);
+	// 	}
 
-		// dispatch(hideModal());
-		return;
-	};
+	// 	// dispatch(hideModal());
+	// 	return;
+	// };
 
     const showLoginForm = () => {
         dispatch(setCurrentModal(LoginForm));
@@ -53,10 +53,14 @@ const NavBar = () => {
         return (
             <nav className={styles.container}>
                 <div className={styles.left}>
+                    {sessionUser && sessionUser.business_user === true ? <NavLink to="/brewhub" exact={true} className={styles.home_link}>
+                        <i className="fa-brands fa-untappd"></i>
+                        <h1>FullyTappd</h1>
+                    </NavLink> :
                     <NavLink to="/" exact={true} className={styles.home_link}>
                         <i className="fa-brands fa-untappd"></i>
                         <h1>FullyTappd</h1>
-                    </NavLink>
+                     </NavLink> }
                     <NavLink to="/beer" exact={true} className={styles.nav_link}>
                         Beer
                     </NavLink>
@@ -68,7 +72,7 @@ const NavBar = () => {
                     <div className={styles.profile_icon}>
                         <ProfileDropdown />
                     </div>
-                    <div>
+                    {/* <div>
 					<input
 						className={styles.search_box_field}
 						type="text"
@@ -77,7 +81,7 @@ const NavBar = () => {
 						placeholder="Search for Breweries or Beers"
 					/>
 					<i onClick={handleSubmit} className="fa-solid fa-magnifying-glass"></i>
-				</div>
+				</div> */}
                 </div>
             </nav>
         );
