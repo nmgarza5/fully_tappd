@@ -30,8 +30,8 @@ def create_brewery():
   form = BeerForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
-  print('\n\n form.data', form.data, '\n\n')
-  print('\n\n form.data.brewery', form.data['brewery_id'], '\n\n')
+  # print('\n\n form.data', form.data, '\n\n')
+  # print('\n\n form.data.brewery', form.data['brewery_id'], '\n\n')
 
   if form.validate_on_submit():
     new_beer = Beer(
@@ -72,7 +72,7 @@ def breweryUpdate(id):
 
 @beer_routes.route('/<int:id>', methods=['DELETE'])
 def breweryDelete(id):
-  print('\n\n req --', request.json, '\n\n')
+  # print('\n\n req --', request.json, '\n\n')
   data = {}
   beer = Beer.query.get(id)
   data['beer'] = beer.to_dict()

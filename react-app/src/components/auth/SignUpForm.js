@@ -51,7 +51,6 @@ const SignUpForm = () => {
             if (data) {
                 setErrors(data);
             }
-            console.log("DATA", data)
             if (data.business_user === true) {
                 history.push('/new-brewery')
                 dispatch(hideModal());

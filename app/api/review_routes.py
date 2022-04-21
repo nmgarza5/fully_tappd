@@ -70,7 +70,7 @@ def reviewUpdate(id):
 
 @review_routes.route('/<int:id>', methods=['DELETE'])
 def reviewDelete(id):
-  print('\n\n req --', request.json, '\n\n')
+  # print('\n\n req --', request.json, '\n\n')
   data = {}
   review = Review.query.get(id)
   data['review'] = review.to_dict()

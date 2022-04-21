@@ -33,7 +33,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
         if (review) {
             const id = review?.id;
             const updateData = { reviewData, id };
-            console.log("updateData", updateData)
+            // console.log("updateData", updateData)
             const updatedReview = await dispatch(
                 updateReview(updateData)
             );

@@ -128,10 +128,12 @@ export const login = (username, password) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
+        // console.log("D DATA", data)
         dispatch(setUser(data));
-        return null;
+        return data;
     } else if (response.status < 500) {
         const data = await response.json();
+        // console.log("DATeerrs", data)
         if (data.errors) {
             return data.errors;
         }
@@ -153,7 +155,7 @@ export const logout = () => async (dispatch) => {
 };
 
 export const signUp = (userData) => async (dispatch) => {
-    console.log("userDATA --", userData)
+    // console.log("userDATA --", userData)
     const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {

@@ -21,7 +21,15 @@ const LoginForm = () => {
         if (data) {
             setErrors(data);
         }
-        dispatch(hideModal());
+        else if (data.business_user === true) {
+            history.push('/brewhub')
+            dispatch(hideModal());
+        }
+        else {
+            history.push('/breweries')
+            dispatch(hideModal());
+        }
+
     };
 
     const loginDemo = async (e) => {

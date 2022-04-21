@@ -32,7 +32,6 @@ export const SingleBrewery = () => {
         beersList.forEach(beer => {
             let reviewsList = Object.values(beer.reviews)
             count += reviewsList.length
-            console.log(count)
         })
         return count;
     }

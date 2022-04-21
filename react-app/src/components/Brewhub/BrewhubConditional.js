@@ -6,9 +6,6 @@ const BrewhubConditional = props => {
   const user = useSelector(state => state?.session?.user)
   let userBreweries;
   user ? userBreweries = Object.values(user?.breweries) : userBreweries = null
-
-  console.log("USER", user)
-  console.log("USER Bs", userBreweries)
   return (
     <Route {...props}>
       {(user && userBreweries.length > 0)? props.children  : <Redirect to='/new-brewery' />}

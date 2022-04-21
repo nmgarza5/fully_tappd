@@ -43,6 +43,7 @@ def login():
             User.username == form.data['username']).first()
         login_user(user)
         return user.to_dict()
+    # print("\n\n", form.errors, "\n\n")
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -64,8 +65,6 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     business_user = request.json['business_user']
 
-    print("\n\n DATE ---", form.data['birthdate'], "\n\n")
-
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
@@ -80,7 +79,6 @@ def sign_up():
             profile_image=form.data['profile_image'],
             # banner_image=form.data['banner_image']
         )
-        print("\n\n DATE --", user.birthdate, "\n\n")
         db.session.add(user)
         db.session.commit()
         login_user(user)
