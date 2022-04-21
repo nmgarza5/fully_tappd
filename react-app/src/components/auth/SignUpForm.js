@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import ActivityPage from "../ActivityPage";
 import { Route} from "react-router-dom";
+import BreweriesList from "../BreweriesList";
 
 const SignUpForm = () => {
     const user = useSelector((state) => state.session.user);
@@ -56,8 +57,8 @@ const SignUpForm = () => {
     };
     if (user) {
         return (
-            <Route exact path="/activity">
-                {user.business_user ? <Redirect to="/new-brewery" /> : <ActivityPage />}
+            <Route exact path="/breweries">
+                {user.business_user ? <Redirect to="/new-brewery" /> : <BreweriesList />}
             </Route>
         )
 

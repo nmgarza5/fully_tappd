@@ -32,8 +32,8 @@ export const SingleBeer = () => {
 
     const userReviews = () => {
         let count = 0;
-        reviewsList.forEach(review => {
-            if (review.user_id === sessionUser.id) count+=1;
+        reviewsList?.forEach(review => {
+            if (review?.user_id === sessionUser?.id) count+=1;
         })
         return count;
     }
@@ -82,7 +82,7 @@ export const SingleBeer = () => {
                             <div className={styles.end}>
                                 <div>Total Reviews: {reviewsList.length}</div>
                                 <div>Monthly Average</div>
-                                <div># of your Reviews: {userReviews()}</div>
+                                {sessionUser && <div># of your Reviews: {userReviews()}</div> }
                                 <div># of Favorites</div>
                             </div>
                         </div>
@@ -138,7 +138,7 @@ export const SingleBeer = () => {
                                     </div>
                                     <div className={styles.end_container}>
                                         <img src={review.brewery_image} alt="" className={styles.brewery_image} onError={addDefaultImage}></img>
-                                        {review.user_id === sessionUser.id &&
+                                        {sessionUser && review.user_id === sessionUser.id &&
                                             <div className={styles.review_buttons}>
                                                 <UpdateReview review={review} beer_id={+id} brewery_id={beer.brewery_id} />
                                                 <DeleteReview review_id={review.id} beer_id={+id} />

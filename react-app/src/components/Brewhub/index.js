@@ -142,8 +142,8 @@ const Brewhub = () => {
 										))}
 								</select>
 							<div className={styles.button_container}>
-								<div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div>
-								<div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div>
+								{userBeers.length > 0 && <div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div> }
+								{userBeers.length > 0 && <div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div> }
 								<div role='button' onClick={showNewBeerForm} className={styles.button}>Create New Beer</div>
 							</div>
 					</div >

@@ -40,8 +40,8 @@ const Profile = () => {
 	};
 
 	const onLogout = async (e) => {
-		history.push("/");
 		await dispatch(logout());
+		history.push("/");
 	  };
 
 	const addDefaultProfileImage = (e) => {
@@ -59,8 +59,8 @@ const Profile = () => {
 					className={styles.dropdown}
 				>
 					<h3>Hello {sessionUser.first_name}!</h3>
-					<div role='button' className={styles.button} onClick={goToActivity}> Recent Activity</div>
-					<div role='button' className={styles.button} onClick={goToProfile}>My Profile</div>
+					{/* <div role='button' className={styles.button} onClick={goToActivity}> Recent Activity</div>
+					<div role='button' className={styles.button} onClick={goToProfile}>My Profile</div> */}
 					{ sessionUser.business_user ? <div role='button' className={styles.button} onClick={goToBrewhub}> Brewhub</div> : null }
 					<div role='button' className={styles.button} onClick={goToBreweries}> Breweries</div>
 					<div role='button' className={styles.button} onClick={goToBeer}> Beer</div>

@@ -24,7 +24,6 @@ const BreweriesList = () => {
 		<PageContainer>
 			<div className={styles.container}>
 				<div className={styles.all_container}>
-					Breweries Page
 					{breweries.map((brewery) => (
 						<div
 							onClick={() => goToBrewery(brewery.id)}

@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux'
 import { showModal, setCurrentModal } from "../../store/modal";
 import SignUpForm from "../auth/SignUpForm";
 // import LoginForm from "../auth/LoginForm";
-import SearchSection from '../SearchSection'
+// import SearchSection from '../SearchSection'
+import brewhub from "../../images/brewhub.png"
 
 
 import banner from "../../images/beer-toast.jpg"
@@ -53,7 +54,7 @@ export const Splashpage = () => {
               </div>
           </div>
         </div>
-        <SearchSection />
+        {/* <SearchSection />
           <div className={styles.feature_container} >
             <div className={styles.feature}>
               Ratings
@@ -93,28 +94,25 @@ export const Splashpage = () => {
               <h4>FullyTappd utilizes Amazon Web services to securely store and deliver your images.</h4>
             </div>
           </div>
-        </div>
-        <div className={styles.claim_container}>
+        </div> */}
+        {/* <div className={styles.claim_container}>
           <h2>Work for a brewery? View insights and engage with customers.</h2>
           <div role='button' className={styles.claim_button} onClick={showSignUpForm}>
             Claim your Brewery Today! <i className="fa-solid fa-angle-right"></i>
           </div>
-        </div>
+        </div> */}
         <div className={styles.business_container} >
             <div className={styles.feature}>
-              Brewhub Image
-              <div className={styles.brewhub}>
-              </div>
+              <img  src={brewhub}className={styles.brewhub} />
             </div>
             <div className={styles.business_feature}>
               <h2>FullyTappd for Business</h2>
-              <h4>One Location to view all your brewery insights.</h4>
+              <h4>One Location to access your brewery.</h4>
               <p></p>
               <ul className={styles.list}>
-                <li>Quickly share your beer menus with the world</li>
-                <li>Maximize visibility to drive new customers to your venue</li>
-                <li>Easily create contactless menus</li>
-                <li>Analytics to help you make data-driven decisions</li>
+                <li>Update or Delete your current Brewery</li>
+                <li>Select and preview your beer information</li>
+                <li>Create, Update, and Delete you Beers</li>
               </ul>
             </div>
           </div>

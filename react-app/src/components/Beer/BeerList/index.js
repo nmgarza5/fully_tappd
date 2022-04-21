@@ -27,10 +27,6 @@ const BeerList = () => {
 		<PageContainer>
 			<div className={styles.container}>
 				<div className={styles.all_container}>
-					Beer Page
-					<div role='button' onClick={createBeer} className={styles.button}>
-						Create New Beer
-					</div>
 					{allBeer.map((beer) => (
 						<div
 							onClick={() => goToBeer(beer.id)}

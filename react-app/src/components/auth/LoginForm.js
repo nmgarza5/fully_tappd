@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import modal_bottles from "../../images/modal_bottles.png"
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../store/session";
 import SignUpForm from "./SignUpForm";
 import { setCurrentModal, hideModal } from "../../store/modal";
 import styles from "./Auth.module.css";
 
 const LoginForm = () => {
+    const history = useHistory();
     const [errors, setErrors] = useState([]);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -28,15 +29,19 @@ const LoginForm = () => {
 		const data = await dispatch(login("keith-stone", "password"));
 		if (data) return setErrors(data);
 		dispatch(hideModal());
+        history.push('/brewhub')
 	};
 
     const showSignUpForm = () => {
 		dispatch(setCurrentModal(SignUpForm));
 	};
 
-    if (user) {
-        return <Redirect to="/activity" />;
+    if (user && user.business_user === true) {
+        return <Redirect to="/brewhub" />;
     }
+    // if (user) {
+    //     return <Redirect to="/breweries" />;
+    // }
 
     return (
         <div className={styles.parent}>
