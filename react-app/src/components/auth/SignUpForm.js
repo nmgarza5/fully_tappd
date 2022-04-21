@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { hideModal } from "../../store/modal";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
 import styles from "./SignUpForm.module.css"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 // import ActivityPage from "../ActivityPage";
-import { Route} from "react-router-dom";
-import BreweriesList from "../BreweriesList";
+// import { Route} from "react-router-dom";
+// import BreweriesList from "../BreweriesList";
 
 const SignUpForm = () => {
     const history = useHistory()
-    const user = useSelector((state) => state.session.user);
+    // const user = useSelector((state) => state.session.user);
 
     const [errors, setErrors] = useState([]);
     const [business_user, setBusinessUser] = useState(false);
