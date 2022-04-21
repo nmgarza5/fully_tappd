@@ -41,5 +41,4 @@ class BreweryForm(FlaskForm):
     phone = StringField('Phone Number', validators=[DataRequired(), valid_phone_number])
     website_url = StringField('Website', validators=[Length(min=0, max=2048)])
     profile_image = StringField('Profile Image', validators=[DataRequired(), Length(min=0, max=2048), valid_image])
-    banner_image = StringField('Banner Image', validators=[Length(min=0, max=2048), valid_image])
     submit = SubmitField('Submit')

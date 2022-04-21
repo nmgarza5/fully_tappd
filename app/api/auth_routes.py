@@ -78,7 +78,7 @@ def sign_up():
             header=form.data['header'],
             # bio=form.data['bio'],
             profile_image=form.data['profile_image'],
-            banner_image=form.data['banner_image']
+            # banner_image=form.data['banner_image']
         )
         print("\n\n DATE --", user.birthdate, "\n\n")
         db.session.add(user)

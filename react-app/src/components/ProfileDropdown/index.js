@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./ProfileDropdown.module.css";
 import { logout } from "../../store/session";
 import { useHistory } from "react-router-dom";
+import defaultProfileImage from "../../images/default_profile_image.png"
 
 const Profile = () => {
 	const history = useHistory();
@@ -43,12 +44,15 @@ const Profile = () => {
 		await dispatch(logout());
 	  };
 
+	const addDefaultProfileImage = (e) => {
+		e.target.src = defaultProfileImage;
+	}
+
 
 	return (
 		<div className={styles.profileOuterContainer}>
 			<div className={styles.profileIconContainer} onClick={(() => setShowBox(!showBox))}>
-				{sessionUser.profile_image ? <img src={sessionUser.profile_image} className={styles.profile_image} alt=''/>
-				:  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" className={styles.profile_image} alt=''/> }
+				<img src={sessionUser.profile_image} className={styles.profile_image} onError={addDefaultProfileImage} alt=''/>
 			</div>
 			{showBox && (
 				<div

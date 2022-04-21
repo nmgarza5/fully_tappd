@@ -22,7 +22,6 @@ const SignUpForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
-    const [banner_image, setBannerImage] = useState("");
     const [profile_image, setProfileImage] = useState("");
     const [header, setHeader] = useState("");
     // const [bio, setBio] = useState("");
@@ -42,7 +41,6 @@ const SignUpForm = () => {
             header,
             // bio,
             profile_image,
-			banner_image
         };
 
         if (password === confirm_password) {
@@ -195,17 +193,6 @@ const SignUpForm = () => {
                                 onChange={(e) => setProfileImage(e.target.value)}
                                 placeholder="Please enter the url to your Profile Image (Optional)"
                                 value={profile_image}
-                                ></input>
-                        </div>
-                        <div className={styles.lower_field}>
-                            <label>Banner Image</label>
-                            <input
-                            className={styles.lower_input}
-                                type="text"
-                                name="banner_image"
-                                onChange={(e) => setBannerImage(e.target.value)}
-                                placeholder="Please enter the url of your Banner Image (Optional)"
-                                value={banner_image}
                                 ></input>
                         </div>
                     </div>

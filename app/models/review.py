@@ -30,6 +30,7 @@ class Review(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             "user_name": f'{self.user.first_name} {self.user.last_name}',
+            "user_image": self.user.profile_image,
             'brewery_id': self.brewery_id,
             "brewery_name": self.brewery.name,
             'beer_id': self.beer_id,

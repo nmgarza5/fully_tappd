@@ -3,13 +3,15 @@ import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
 const BrewhubConditional = props => {
-  const user = useSelector(state => state.session.user)
-  const userBreweries = Object.values(user.breweries)
-  console.log(userBreweries.length)
+  const user = useSelector(state => state?.session?.user)
+  let userBreweries;
+  user ? userBreweries = Object.values(user?.breweries) : userBreweries = null
+
+  console.log("USER", user)
+  console.log("USER Bs", userBreweries)
   return (
     <Route {...props}>
-
-      {(userBreweries.length > 0)? props.children  : <Redirect to='/new-brewery' />}
+      {(user && userBreweries.length > 0)? props.children  : <Redirect to='/new-brewery' />}
     </Route>
   )
 };

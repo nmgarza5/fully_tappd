@@ -7,6 +7,8 @@ import styles from "./SingleBrewery.module.css";
 // import { UpdateBrewery } from "../UpdateBrewery";
 import { PageContainer } from "../PageContainer";
 // import { DeleteBrewery } from "../DeleteBrewery";
+// import defaultProfileImage from "../../images/default_profile_image.png"
+import defaultImage from "../../images/default_image.png"
 
 export const SingleBrewery = () => {
     // const dispatch = useDispatch
@@ -30,6 +32,10 @@ export const SingleBrewery = () => {
     // ? (isOwner = true)
     // : (isOwner = false);
 
+    const addDefaultImage = (e) => {
+        e.target.src = defaultImage
+    }
+
     return (
         <PageContainer>
             {/* {isOwner &&
@@ -44,7 +50,7 @@ export const SingleBrewery = () => {
                         {/* <div style={{backgroundImage: `url(${brewery.banner_image})`}}></div> */}
                         <div className={styles.first_info} >
                             <div className={styles.card_img}>
-                                <img src={brewery.profile_image} alt="brewery" />
+                                <img src={brewery.profile_image} alt="brewery" onError={addDefaultImage}/>
                             </div>
                             <div className={styles.middle}>
                                 <h2>{brewery.name}</h2>
