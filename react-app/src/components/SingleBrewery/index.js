@@ -115,12 +115,13 @@ export const SingleBrewery = () => {
                                 <h3>
                                     {brewery.header}
                                 </h3>
-                                {!showMore && brewery.description.length > 100 ?
+                                {!showMore && brewery.description.length > 150 ?
                                     <div className={styles.no_show}>
-                                        {brewery.description.slice(0,100)}...
+                                        {brewery.description.slice(0,150)}...
                                         <div onClick={() => setShowMore(!showMore)}>Show more</div>
                                      </div>
-                                    :
+                                    : !showMore && brewery.description.length < 150 ?
+                                                <div className={styles.show}>{brewery.description}</div> :
                                     <div className={styles.show}>
                                         {brewery.description}
                                         <div onClick={() => setShowMore(!showMore)}>Show Less</div>
