@@ -78,9 +78,6 @@ function App() {
                     <ProtectedRoute exact path="/new-brewery">
 						<CreateBrewery />
 					</ProtectedRoute>
-                    {/* <ProtectedRoute exact path="/new-beer">
-						<CreateBeer />
-					</ProtectedRoute> */}
                     <Route>
 						<ErrorPage />
 					</Route>

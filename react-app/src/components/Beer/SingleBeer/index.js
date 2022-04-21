@@ -1,30 +1,59 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { useSelector} from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch} from "react-redux";
 import styles from "./SingleBeer.module.css";
 import { PageContainer } from "../../PageContainer";
+import { CreateReview } from "../../Reviews/CreateReview"
+import { UpdateReview } from "../../Reviews/UpdateReview"
+import { showModal, setCurrentModal } from '../../../store/modal';
+import { authenticate } from "../../../store/session";
+import { receiveOneBeer } from "../../../store/beer";
+import { DeleteReview } from "../../Reviews/DeleteReview";
 
 export const SingleBeer = () => {
-    // const dispatch = useDispatch
-	// const sessionUser = useSelector((state) => state?.session?.user);
+    const [loaded, setLoaded] = useState(false);
+    const dispatch = useDispatch();
+	const sessionUser = useSelector((state) => state?.session?.user);
 	const { id } = useParams();
 	const beer = useSelector((state) => state.beer)[`${id}`];
+
+    const reviewsList = Object.values(beer.reviews)
+
+    const avgRating = () => {
+        let sum = 0;
+        reviewsList.forEach(review => sum += review.rating)
+        let avg = sum / reviewsList.length;
+        return avg
+    }
+
+    const userReviews = () => {
+        let count = 0;
+        reviewsList.forEach(review => {
+            if (review.user_id === sessionUser.id) count+=1;
+        })
+        return count;
+    }
+
     const [showMore, setShowMore] = useState(false)
 
-    // const breweryType = (type) => {
-    //     if (type === "micro") return "Micro"
-    //     if (type === "brewpub") return "Brewpub"
-    //     if (type === "regional") return "Regional"
-    //     if (type === "large") return "Large"
-    // }
+    useEffect(() => {
+        (async () => {
+            await dispatch(authenticate());
+            await dispatch(receiveOneBeer(id))
+            setLoaded(true);
+        })();
+    }, [dispatch, id]);
 
-    // "brewpub" ? "Brewpub" : "regional" ? "Regional" : "large" ? "Large" : null
+    if (!loaded) {
+        return null;
+    }
 
-    // let isOwner = false;
-	// sessionUser && beer?.owner_id === sessionUser.id
-    // ? (isOwner = true)
-    // : (isOwner = false);
+    const imagePreview = (image) => {
+        dispatch(setCurrentModal(() => (<img src={image} alt="" style={{ height : 500 }}/>)));
+        dispatch(showModal());
+    }
+
 
     return (
         <PageContainer>
@@ -41,9 +70,9 @@ export const SingleBeer = () => {
                                 <div>{beer.style}</div>
                             </div>
                             <div className={styles.end}>
-                                <div>Total Checkins</div>
+                                <div>Total Reviews: {reviewsList.length}</div>
                                 <div>Monthly Average</div>
-                                <div># of your checkins</div>
+                                <div># of your Reviews: {userReviews()}</div>
                                 <div># of Favorites</div>
                             </div>
                         </div>
@@ -56,9 +85,10 @@ export const SingleBeer = () => {
                                         {beer.ibu} IBU
                                     </div>
                                     <div className={styles.row}>
-                                        AVG RATING
+                                        Avg Rating: {avgRating()}/5
                                     </div>
                                     <div className={styles.row_end}>
+                                        <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
                                         <i className="fa-solid fa-star fa-2x"></i>
                                     </div>
                             </div>
@@ -77,6 +107,45 @@ export const SingleBeer = () => {
                             </div>
                         </div>
                     </div>
+                    {reviewsList.length >0 ?
+                    <div className={styles.review_container} >
+                            {reviewsList.map(review => (
+                                <div key={review.id} className={styles.review_item}>
+                                    <img src={sessionUser.profile_image} alt="" className={styles.profile_image}></img>
+                                    <div className={styles.review_info}>
+                                        <div>
+                                            {review.user_name} is drinking a {review.beer_name} from {review.brewery_name}
+                                        </div>
+                                        <div>
+                                            Rating: {review.rating}/5
+                                        </div>
+                                        <div>
+                                            {review.content}
+                                        </div>
+                                        <div>
+                                            <img src={review.image_url} alt="" className={styles.image_preview} onClick={()=>imagePreview(review.image_url)}/>
+                                        </div>
+                                    </div>
+                                    <div className={styles.end_container}>
+                                        <img src={review.brewery_image} alt="" className={styles.brewery_image}></img>
+                                        {review.user_id === sessionUser.id &&
+                                            <div className={styles.review_buttons}>
+                                                <UpdateReview review={review} beer_id={+id} brewery_id={beer.brewery_id} />
+                                                <DeleteReview review_id={review.id} beer_id={+id} />
+                                            </div>
+                                        }
+                                        {/* <div>
+                                            posted: {review.created_at}
+                                        </div> */}
+                                    </div>
+                                </div>
+
+                            ))
+                            }
+                    </div> :
+                    <div className={styles.review_container}>
+                        <h2>There are no reviews for this Beer... be the first by clicking the green check above!</h2>
+                    </div> }
                 </div>
                 <div className={styles.right}>
                     World

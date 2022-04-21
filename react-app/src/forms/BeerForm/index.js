@@ -16,7 +16,7 @@ export const BeerForm = ({beer, breweryId}) => {
 	const [price, setPrice] = useState(beer?.price || "0");
 	const [abv, setAbv] = useState(beer?.abv || "0");
 	const [ibu, setIbu] = useState(beer?.ibu || "0");
-	const [brewery_id, setBreweryId] = useState(breweryId);
+	const brewery_id = breweryId
 	const [errors, setErrors] = useState([]);
 
 	// const userBreweries = useSelector((state) => state?.session?.user.breweries);

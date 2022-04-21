@@ -1,6 +1,6 @@
 .page {
 	width:1200px;
-	height: 100vh;
+	/* height: 100vh; */
 	display: flex;
 	flex-direction: row;
 	/* justify-content: space-between; */;
@@ -11,12 +11,12 @@
 }
 
 	.left {
-		width:750px;
+		width:700px;
 
 	}
 	.right {
 		margin-left: 30px;
-		width: 350px;
+		width: 300px;
 		background: #f7f0f0;
 		filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
 	}
@@ -107,6 +107,7 @@
     display: flex;
     border-right: rgb(197, 197, 197) solid thin;
     justify-content: center;
+	color: black
 }
 
 .row_end{
@@ -114,7 +115,11 @@
 	width: 25%;
     display: flex;
     /* border-right: black solid thin; */
-    justify-content: center;
+    justify-content: space-evenly;
+}
+
+.row_end i {
+	color: gold;
 }
 
 .row-section {
@@ -126,7 +131,6 @@
 
 .third_info {
 	width: 100%;
-	height: 100px;
 	justify-content: center;
 }
 
@@ -162,3 +166,72 @@
 	cursor: pointer;
 	text-decoration: underline;
 }
+
+.review_container {
+	margin-top: 30px;
+	width: 100%;
+	/* height: auto; */
+	display: flex;
+	flex-direction: column;
+	background: #f7f0f0;
+	border-radius: 5px;
+	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
+	padding: 10px
+}
+
+.profile_image {
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+}
+
+.brewery_image {
+	height: 60px;
+	width: 60px;
+}
+
+
+.review_list {
+	/* height: 200px; */
+	background-color: aqua;
+}
+.review_item {
+    display: flex;
+    flex-direction: row;
+	border-bottom: solid grey thin;
+	margin-bottom: 10px;
+	height: fit-content;
+	justify-content: center;
+}
+
+.review_info {
+	margin-left: 10px;
+	width: 550px;
+}
+
+.image_preview {
+	width: 50px;
+	height: 50px;
+  }
+
+  .image_preview:hover {
+	  cursor: pointer
+  }
+
+  .end_container {
+	width: 80px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+  }
+
+  .review_buttons {
+	  display: flex;
+	  flex-direction: row;
+	  padding: 10px;
+  }
+
+  .review_buttons div {
+	padding-right: 5px;
+  }

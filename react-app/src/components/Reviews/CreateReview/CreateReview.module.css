@@ -1,0 +1,30 @@
+/* .button {
+    height: 45px;
+    width: 150px;
+    color: white;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: white solid;
+    background-color: #000000;
+    border-radius: 5px;
+    font-weight: 400;
+    transition: all 0.5s ease 0s;
+  }
+
+  .button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    border: #000000 solid;
+    color: black;
+  } */
+
+  .button i {
+      color: green
+  }
+  .button i:hover {
+      color: green;
+      cursor: pointer;
+  }

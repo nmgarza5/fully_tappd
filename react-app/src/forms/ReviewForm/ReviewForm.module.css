@@ -1,0 +1,101 @@
+.review_form {
+
+  width: 500px;
+	margin: 0 auto;
+  /* padding: 15px; */
+  border-radius: 5px;
+}
+
+.review_form h3 {
+  width: 100%;
+  margin: 0;
+  color: white;
+  background-color: #000000;
+  border-top-left-radius: 5px;
+  border-top-RIGHT-radius: 5px;
+}
+
+
+.upper_half {
+  margin-top: -14px;
+  padding: 5px;
+	width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.images_container {
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  height: 150px;
+  align-items: center;
+  justify-content: center;
+}
+
+.single_image {
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.image_preview {
+  width: 50px;
+  height: 50px;
+}
+
+
+
+.lower_half {
+	width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.lower_field {
+  width: 200px;
+}
+
+.lower_field i:hover{
+  cursor: pointer
+}
+.lower_input {
+  margin-right: 10px;
+}
+
+.input_container {
+  width: 300px;
+  margin-right: 5px;
+}
+.input_container textarea{
+  width: 100%;
+  height: 70px;
+}
+
+
+.button {
+    height: 45px;
+    width: 150px;
+    color: white;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: white solid;
+    background-color: #000000;
+    border-radius: 5px;
+    font-weight: 400;
+    transition: all 0.5s ease 0s;
+  }
+
+  .button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    border: #000000 solid;
+    color: black;
+  }
