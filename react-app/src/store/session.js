@@ -164,8 +164,8 @@ export const signUp = (userData) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(setUser(data));
-        return null;
+        const newUser = await dispatch(setUser(data));
+        return newUser;
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {

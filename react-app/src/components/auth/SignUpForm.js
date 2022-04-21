@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { hideModal } from "../../store/modal";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
 import styles from "./SignUpForm.module.css"
 import DatePicker from "react-datepicker";
@@ -12,6 +12,7 @@ import { Route} from "react-router-dom";
 import BreweriesList from "../BreweriesList";
 
 const SignUpForm = () => {
+    const history = useHistory()
     const user = useSelector((state) => state.session.user);
 
     const [errors, setErrors] = useState([]);
@@ -45,14 +46,22 @@ const SignUpForm = () => {
         };
 
         if (password === confirm_password) {
-            console.group("PASSOWRD MATCH");
+            // console.group("PASSOWRD MATCH");
             const data = await dispatch(signUp(userData));
             if (data) {
                 setErrors(data);
             }
-            else {
+            console.log("DATA", data)
+            if (data.business_user === true) {
+                history.push('/new-brewery')
                 dispatch(hideModal());
             }
+            else {
+                history.push('/breweries')
+                dispatch(hideModal());
+            }
+        } else {
+            setErrors(["Passwords do not match"])
         }
     };
     if (user) {
