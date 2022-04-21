@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { hideModal } from "../../store/modal";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
 import styles from "./SignUpForm.module.css"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 // import ActivityPage from "../ActivityPage";
-import { Route} from "react-router-dom";
-import BreweriesList from "../BreweriesList";
+// import { Route} from "react-router-dom";
+// import BreweriesList from "../BreweriesList";
 
 const SignUpForm = () => {
     const history = useHistory()
-    const user = useSelector((state) => state.session.user);
+    // const user = useSelector((state) => state.session.user);
 
     const [errors, setErrors] = useState([]);
     const [business_user, setBusinessUser] = useState(false);
@@ -48,29 +48,41 @@ const SignUpForm = () => {
         if (password === confirm_password) {
             // console.group("PASSOWRD MATCH");
             const data = await dispatch(signUp(userData));
-            if (data) {
-                setErrors(data);
+            console.log("DATA FRONT", data.payload.business_user)
+            if (data.errors) {
+                return setErrors(data.errors);
             }
-            if (data.business_user === true) {
+            if (data.payload.business_user === true) {
                 history.push('/new-brewery')
-                dispatch(hideModal());
+                return dispatch(hideModal());
+
             }
             else {
                 history.push('/breweries')
-                dispatch(hideModal());
+                return dispatch(hideModal());
             }
         } else {
             setErrors(["Passwords do not match"])
         }
     };
-    if (user) {
-        return (
-            <Route exact path="/breweries">
-                {user.business_user ? <Redirect to="/new-brewery" /> : <BreweriesList />}
-            </Route>
-        )
+    // if (user?.business_user === true) {
+    //     console.log("HIT", user.business_user)
+    //     dispatch(hideModal());
+    //     return (
+    //         <Route exact path="/breweries">
+    //             {user?.business_user === true ? <Redirect to="/new-brewery" /> : <BreweriesList />}
+    //         </Route>
+    //     )
 
-    }
+    // }
+    // if (user?.business_user === true) {
+    //     dispatch(hideModal());
+    //     return <Redirect to="/brewhub" />;
+    // }
+    // if (user) {
+    //     dispatch(hideModal());
+    //     return <Redirect to="/breweries" />;
+    // }
 
     return (
         <div className={styles.parent}>
@@ -90,7 +102,7 @@ const SignUpForm = () => {
             </div>
             <form className={styles.signup_form}>
                 <div>
-                    {errors.map((error, ind) => (
+                    {errors?.map((error, ind) => (
                         <div key={ind} className={styles.errors}>{error.charAt(0).toUpperCase() + error.slice(1).replace("_", " ")}</div>
                     ))}
                 </div>
@@ -178,7 +190,7 @@ const SignUpForm = () => {
                             selected={birthdate}
                             placeholder='Example: 12/12/1994'
                             value={birthdate}
-                            required='true'
+                            required={true}
                             onChange={(date) => setBirthdate(date)} />
                         </div>
                         <div className={styles.lower_field}>
