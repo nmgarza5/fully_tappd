@@ -123,11 +123,7 @@ export const SingleBeer = () => {
                                             {review.content}
                                         </div>
                                         <div>
-                                            {Object.values(review.images).length > 0 &&
-                                                Object.values(review.images).map(image => (
-                                                    <img src={image} alt="" className={styles.image_preview} onClick={()=>imagePreview(image)}/>
-                                                ))
-                                            }
+                                            <img src={review.image_url} alt="" className={styles.image_preview} onClick={()=>imagePreview(review.image_url)}/>
                                         </div>
                                     </div>
                                     <div className={styles.end_container}>

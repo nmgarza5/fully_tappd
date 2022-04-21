@@ -12,35 +12,11 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    let editImages;
-    review?.images ? editImages = Object.values(review?.images) : editImages = []
-
-    console.log("EDITimages", editImages)
-
     const [rating, setRating] = useState(review?.rating || 1)
     const [content, setContent] = useState(review?.content || "")
-    const [newImage, setNewImage] = useState()
-    const [images, setImages] = useState(editImages)
+    const [image_url, setImage] = useState(review?.image_url || "")
     const [errors, setErrors] = useState([]);
 
-
-    const addImage = () => {
-        let newImages = [...images, newImage]
-        setImages(newImages)
-        setNewImage("")
-    }
-
-    const removeImage = async (ind) => {
-        if (images.length === 1) setImages([])
-        else {
-            console.log("BEfore", images)
-            // const imageIndex = images.indexOf(image)
-            let newImages = images.splice(ind, 1)
-            editImages = images
-            await setImages(images)
-            console.log("After images", images)
-        }
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -49,7 +25,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
             brewery_id,
             rating,
             content,
-            images
+            image_url
         }
 
         // conditional checking if there is a restaurant already created. If so, send a put request. Else send a post request.
@@ -110,18 +86,15 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                             type="text"
                             name="header"
                             placeholder="Image Url"
-                            value={newImage}
-                            onChange={(e) => setNewImage(e.target.value)}
+                            value={image_url}
+                            onChange={(e) => setImage(e.target.value)}
                             ></input>
-                            <i className="fa-solid fa-square-plus"  onClick={addImage}></i>
                         <div className={styles.images_container}>
-                        {images.length > 0 &&
-                            images.map((image, ind) => (
-                                <div className={styles.single_image}>
-                                    <img key={ind} src={image} alt="" className={styles.image_preview}/>
-                                    <i onClick={() => removeImage(ind)} className="fa-solid fa-square-minus"></i>
-                                </div>
-                                    ))
+                        {image_url &&
+                            <div className={styles.single_image}>
+                                <img src={image_url} alt="" className={styles.image_preview}/>
+                                <i onClick={() => setImage("")} className="fa-solid fa-square-minus"></i>
+                            </div>
                                 }
                                 </div>
                     </div>

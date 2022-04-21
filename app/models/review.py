@@ -1,5 +1,5 @@
 from .db import db
-from .image import review_images
+# from .image import review_images
 
 
 class Review(db.Model):
@@ -9,6 +9,7 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     brewery_id = db.Column(db.Integer, db.ForeignKey('breweries.id'), nullable=False)
     beer_id = db.Column(db.Integer, db.ForeignKey('beer.id'), nullable=False)
+    image_url = db.Column(db.String(2048), nullable=False)
     rating = db.Column(db.Float, nullable=False)
     content = db.Column(db.Text, nullable=False)
     # FORMAT: 2022-04-02 13:27:25.457314
@@ -19,7 +20,7 @@ class Review(db.Model):
     brewery = db.relationship("Brewery", backref="reviews")
     user = db.relationship("User", backref="reviews")
     beer = db.relationship("Beer", backref="reviews")
-    images = db.relationship('Image', secondary=review_images, back_populates="reviews")
+    # images = db.relationship('Image', secondary=review_images, back_populates="reviews")
 
 
     '''Define rating property here. Will need to use reviews'''
@@ -36,7 +37,8 @@ class Review(db.Model):
             "brewery_image": self.brewery.profile_image,
             'owner_id': self.brewery.owner_id,
             'content': self.content,
-            'images': {image.id: image.image for image in self.images},
+            "image_url": self.image_url,
+            # 'images': {image.id: image.image for image in self.images},
             'rating': self.rating,
             'created_at': self.created_at,
             'updated_at': self.updated_at

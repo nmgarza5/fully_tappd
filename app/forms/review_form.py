@@ -13,5 +13,6 @@ class ReviewForm(FlaskForm):
     brewery_id = IntegerField('Brewery Id', validators=[DataRequired()])
     beer_id = IntegerField('Beer Id', validators=[DataRequired()])
     rating = IntegerField("Rating", validators=[DataRequired()])
+    image_url = StringField('Image Url', validators=[DataRequired(), Length(min=0, max=2048)])
     content = TextAreaField('Content')
     submit = SubmitField('Submit')

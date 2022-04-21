@@ -8,7 +8,7 @@ class Brewery(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     profile_image = db.Column(db.String(2048), nullable=False)
-    banner_image = db.Column(db.String(2048), nullable=True)
+    # banner_image = db.Column(db.String(2048), nullable=True)
     name = db.Column(db.String(255), nullable=False)
     header = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
@@ -35,7 +35,7 @@ class Brewery(db.Model):
             'owner_id': self.owner_id,
             'owner_name': f'{self.owner.first_name} {self.owner.last_name}',
             'profile_image': self.profile_image,
-            'banner_image': self.banner_image,
+            # 'banner_image': self.banner_image,
             'header': self.header,
             'description': self.description,
             'brewery_type': self.brewery_type,
