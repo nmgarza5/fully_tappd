@@ -43,7 +43,7 @@ export const SingleBeer = () => {
             await dispatch(receiveOneBeer(id))
             setLoaded(true);
         })();
-    }, [dispatch]);
+    }, [dispatch, id]);
 
     if (!loaded) {
         return null;

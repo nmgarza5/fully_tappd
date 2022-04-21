@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { hideModal } from "../../../store/modal";
 import { deleteReview } from "../../../store/reviews";
 import { receiveOneBeer } from "../../../store/beer";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import styles from "./DeleteReviewForm.module.css";
 
 export const DeleteReviewForm = ({ review_id, beer_id }) => {
 	const [errors, setErrors] = useState([]);
 	const dispatch = useDispatch();
-	const history = useHistory();
+	// const history = useHistory();
 
 	const closeModal = async (e) => {
 		e.preventDefault();
