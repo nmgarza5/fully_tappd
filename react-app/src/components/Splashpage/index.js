@@ -12,6 +12,7 @@ import brewhub from "../../images/brewhub.png"
 
 import banner from "../../images/beer-toast.jpg"
 import bottles from "../../images/bottles.png"
+import defaultImage from "../../images/default_image.png"
 
 export const Splashpage = () => {
 	// const history = useHistory();
@@ -25,7 +26,9 @@ export const Splashpage = () => {
 //     dispatch(setCurrentModal(LoginForm));
 //     dispatch(showModal());
 // };
-
+const addDefaultImage = (e) => {
+  e.target.src = defaultImage
+}
 
 
   return (
@@ -39,7 +42,7 @@ export const Splashpage = () => {
                     CREATE AN ACCOUNT
                 </div>
           </div> */}
-          <img src={banner} alt="Toast!" className={styles.banner} />
+          <img src={banner} alt="Toast!" className={styles.banner} onError={addDefaultImage}/>
           <div className={styles.overlay}></div>
           <div className={styles.banner_info}>
               <div className={styles.info}>
@@ -103,7 +106,7 @@ export const Splashpage = () => {
         </div> */}
         <div className={styles.business_container} >
             <div className={styles.feature}>
-              <img  src={brewhub}className={styles.brewhub} />
+              <img  src={brewhub}className={styles.brewhub} alt="" onError={addDefaultImage}/>
             </div>
             <div className={styles.business_feature}>
               <h2>FullyTappd for Business</h2>

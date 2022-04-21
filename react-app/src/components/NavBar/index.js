@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../auth/SignUpForm";
@@ -13,26 +13,26 @@ import ProfileDropdown from "../ProfileDropdown"
 const NavBar = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
-    const [searchQuery, setSearchQuery] = useState("");
-	const history = useHistory();
+    // const [searchQuery, setSearchQuery] = useState("");
+	// const history = useHistory();
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	// const handleSubmit = (e) => {
+	// 	e.preventDefault();
 
-		if (searchQuery.includes("%")) {
-			alert(
-				`Please do not use the "percent" symbol in your search query.`
-			);
-			setSearchQuery("");
-		} else if (searchQuery) {
-			history.push(`/search/${searchQuery}`);
-		} else {
-			alert(`Please enter a search query.`);
-		}
+	// 	if (searchQuery.includes("%")) {
+	// 		alert(
+	// 			`Please do not use the "percent" symbol in your search query.`
+	// 		);
+	// 		setSearchQuery("");
+	// 	} else if (searchQuery) {
+	// 		history.push(`/search/${searchQuery}`);
+	// 	} else {
+	// 		alert(`Please enter a search query.`);
+	// 	}
 
-		// dispatch(hideModal());
-		return;
-	};
+	// 	// dispatch(hideModal());
+	// 	return;
+	// };
 
     const showLoginForm = () => {
         dispatch(setCurrentModal(LoginForm));

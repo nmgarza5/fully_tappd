@@ -7,7 +7,7 @@ import styles from "./SignUpForm.module.css"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-import ActivityPage from "../ActivityPage";
+// import ActivityPage from "../ActivityPage";
 import { Route} from "react-router-dom";
 import BreweriesList from "../BreweriesList";
 

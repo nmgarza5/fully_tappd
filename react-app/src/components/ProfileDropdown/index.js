@@ -12,17 +12,17 @@ const Profile = () => {
 	const sessionUser = useSelector((state) => state.session.user);
 
 
-	const goToActivity = () => {
-		history.push("/activity");
-		setShowBox(false);
-		return;
-	};
+	// const goToActivity = () => {
+	// 	history.push("/activity");
+	// 	setShowBox(false);
+	// 	return;
+	// };
 
-	const goToProfile = () => {
-		history.push("/my-profile");
-		setShowBox(false);
-		return;
-	};
+	// const goToProfile = () => {
+	// 	history.push("/my-profile");
+	// 	setShowBox(false);
+	// 	return;
+	// };
 	const goToBrewhub= () => {
 		history.push("/brewhub");
 		setShowBox(false);

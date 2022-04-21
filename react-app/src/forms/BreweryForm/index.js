@@ -21,7 +21,7 @@ export const BreweryForm = ({brewery}) => {
 	const [phone, setPhone] = useState(brewery?.phone || "");
 	const [website_url, setWebsiteUrl] = useState(brewery?.website_url || "");
 	const [profile_image, setProfileImage] = useState(brewery?.profile_image || "");
-	const [banner_image, setBannerImage] = useState(brewery?.banner_image || "");
+	// const [banner_image, setBannerImage] = useState(brewery?.banner_image || "");
 	const [errors, setErrors] = useState([]);
 
 
@@ -39,8 +39,7 @@ export const BreweryForm = ({brewery}) => {
 			country,
 			phone,
 			website_url,
-			profile_image,
-			banner_image
+			profile_image
 		}
 
 		!name

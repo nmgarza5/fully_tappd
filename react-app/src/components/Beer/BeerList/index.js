@@ -10,7 +10,7 @@ const BeerList = () => {
     const history = useHistory()
 	// const dispatch = useDispatch()
     const allBeer = useSelector((state) => Object.values(state.beer))
-	const createBeer = () => history.push('/new-beer')
+	// const createBeer = () => history.push('/new-beer')
 
 	const goToBeer = (id) => {
 		history.push(`/beer/${id}`);
