@@ -105,8 +105,13 @@ export const SingleBeer = () => {
                                             Rating: {avgRating()}
                                         </div>
                                     <div className={styles.row_end}>
-                                        Leave a Review:
-                                        <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
+                                       {sessionUser ?
+                                        <>
+                                            Leave a Review:
+                                            <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
+                                        </>
+                                        :
+                                        <>Sign in to Review</> }
                                         {/* <i className="fa-solid fa-star fa-2x"></i> */}
                                     </div>
                             </div>
