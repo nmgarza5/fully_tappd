@@ -19,7 +19,7 @@ class Review(db.Model):
 
     brewery = db.relationship("Brewery", backref="reviews")
     user = db.relationship("User", backref="reviews")
-    beer = db.relationship("Beer", backref="reviews")
+    beer = db.relationship("Beer", back_populates="reviews")
     # images = db.relationship('Image', secondary=review_images, back_populates="reviews")
 
 

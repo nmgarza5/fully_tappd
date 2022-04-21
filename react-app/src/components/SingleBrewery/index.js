@@ -1,9 +1,11 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useState } from "react";
-import { useSelector} from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
 import styles from "./SingleBrewery.module.css";
-// import { receiveOneBrewery } from "../../store/breweries";
+import { receiveOneBrewery } from "../../store/breweries";
+import { authenticate } from "../../store/session"
+
 // import { UpdateBrewery } from "../UpdateBrewery";
 import { PageContainer } from "../PageContainer";
 // import { DeleteBrewery } from "../DeleteBrewery";
@@ -11,14 +13,15 @@ import { PageContainer } from "../PageContainer";
 import defaultImage from "../../images/default_image.png"
 
 export const SingleBrewery = () => {
-    // const dispatch = useDispatch
-	// const sessionUser = useSelector((state) => state?.session?.user);
+    // const sessionUser = useSelector((state) => state?.session?.user);
+    const [loaded, setLoaded] = useState(false);
 	const { id } = useParams();
     const history = useHistory();
 	const brewery = useSelector((state) => state.breweries)[`${id}`];
     const beersList = Object.values(brewery.beers)
     const [showMore, setShowMore] = useState(false)
 
+    const dispatch = useDispatch();
     // let type = brewery.brewery_type;
     const breweryType = (type) => {
         if (type === "micro") return "Micro"
@@ -34,6 +37,18 @@ export const SingleBrewery = () => {
             count += reviewsList.length
         })
         return count;
+    }
+
+    useEffect(() => {
+        (async () => {
+            await dispatch(authenticate());
+            await dispatch(receiveOneBrewery(id))
+            setLoaded(true);
+        })();
+    }, [dispatch, id]);
+
+    if (!loaded) {
+        return null;
     }
 
     // const calculateRating = () => {
