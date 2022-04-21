@@ -4,7 +4,7 @@ export const PageContainer = styled.div`
 	width: 85vw;
 	min-height: 750px;
 	margin: auto;
-	height: auto;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	padding-top: 57px;

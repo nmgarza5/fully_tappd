@@ -84,15 +84,16 @@ const NavBar = () => {
     } else {
         return (
             <nav className={styles.container}>
-                <div className={styles.logo}>
-                    <NavLink
-                        to="/"
-                        exact={true}
-                        className={styles.home_link}
-                        activeClassName="active"
-                    >
+                 <div className={styles.left}>
+                    <NavLink to="/" exact={true} className={styles.home_link}>
                         <i className="fa-brands fa-untappd"></i>
-                        <span>FullyTappd</span>
+                        <h1>FullyTappd</h1>
+                    </NavLink>
+                    <NavLink to="/beer" exact={true} className={styles.nav_link}>
+                        Beer
+                    </NavLink>
+                    <NavLink to="/breweries" exact={true} className={styles.nav_link}>
+                        Breweries
                     </NavLink>
                 </div>
                 <div className={styles.right}>

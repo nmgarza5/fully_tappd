@@ -1,0 +1,9 @@
+.button {
+  color: rgb(163, 47, 47)
+
+  }
+
+  .button:hover {
+    cursor: pointer;
+	text-decoration: underline;
+}
