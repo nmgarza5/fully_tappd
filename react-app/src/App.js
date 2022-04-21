@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
@@ -21,13 +21,14 @@ import ErrorPage from "./components/ErrorPage";
 // import ProfilePage from "./components/ProfilePage";
 import Brewhub from "./components/Brewhub";
 // import SignUpPage from "./components/SignUpPage";
-import SplashConditional from "./components/Splashpage/SplashConditional";
+// import SplashConditional from "./components/Splashpage/SplashConditional";
 import BrewhubConditional from "./components/Brewhub/BrewhubConditional";
 // import ActivityConditional from "./components/ActivityPage/ActivityConditional";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
+    const sessionUser = useSelector((state) => state.session.user);
     useEffect(() => {
         (async () => {
             await dispatch(authenticate());
@@ -63,9 +64,13 @@ function App() {
                     <BrewhubConditional exact path="/brewhub" >
                         <Brewhub />
                     </BrewhubConditional>
-                    <SplashConditional exact path="/" >
+                    {!sessionUser ?
+                    <Route exact path="/" >
                         <Splashpage />
-                    </SplashConditional>
+                    </Route> :
+                    <Route exact path="/" >
+                        <BreweriesList />
+                    </Route> }
                     <Route exact path="/breweries" >
                         <BreweriesList />
                     </Route>

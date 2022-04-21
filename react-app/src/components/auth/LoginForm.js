@@ -18,16 +18,17 @@ const LoginForm = () => {
     const onLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(username, password));
+
         if (data) {
             setErrors(data);
         }
-        else if (data.business_user === true) {
+        if (data.business_user === true) {
             history.push('/brewhub')
             dispatch(hideModal());
         }
         else {
-            history.push('/breweries')
             dispatch(hideModal());
+            history.push('/breweries')
         }
 
     };
@@ -37,7 +38,8 @@ const LoginForm = () => {
 		const data = await dispatch(login("keith-stone", "password"));
 		if (data) return setErrors(data);
 		dispatch(hideModal());
-        history.push('/brewhub')
+        await history.push('/brewhub')
+        dispatch(hideModal());
 	};
 
     const showSignUpForm = () => {

@@ -9,7 +9,7 @@ const SplashConditional = props => {
       {/* {console.log('PROPS --', props)}
       {console.log('PROPS --', props.children)}
       {console.log('PROPS --', props.)} */}
-      {(!user)? props.children  : <Redirect to='/activity' />}
+      {(!user)? props.children  : <Redirect to='/breweries' />}
     </Route>
   )
 };
