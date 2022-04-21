@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useSelector} from "react-redux";
 import styles from "./SingleBrewery.module.css";
@@ -14,7 +14,9 @@ export const SingleBrewery = () => {
     // const dispatch = useDispatch
 	// const sessionUser = useSelector((state) => state?.session?.user);
 	const { id } = useParams();
+    const history = useHistory();
 	const brewery = useSelector((state) => state.breweries)[`${id}`];
+    const beersList = Object.values(brewery.beers)
     const [showMore, setShowMore] = useState(false)
 
     // let type = brewery.brewery_type;
@@ -25,6 +27,26 @@ export const SingleBrewery = () => {
         if (type === "large") return "Large"
     }
 
+    const calculateRatingsCount = () => {
+        let count = 0;
+        beersList.forEach(beer => {
+            let reviewsList = Object.values(beer.reviews)
+            count += reviewsList.length
+            console.log(count)
+        })
+        return count;
+    }
+
+    // const calculateRating = () => {
+    //     let  = 0;
+    //     beersList.forEach(beer => {
+    //         let reviewsList = Object.values(beer.reviews)
+    //         count += reviewsList.length
+    //         console.log(count)
+    //     })
+    //     return count;
+    // }
+
     // "brewpub" ? "Brewpub" : "regional" ? "Regional" : "large" ? "Large" : null
 
     // let isOwner = false;
@@ -34,6 +56,10 @@ export const SingleBrewery = () => {
 
     const addDefaultImage = (e) => {
         e.target.src = defaultImage
+    }
+
+    const goToBeer = async (id) => {
+        await history.push(`/beer/${id}`)
     }
 
     return (
@@ -59,28 +85,28 @@ export const SingleBrewery = () => {
                                 <div>{brewery.country}</div>
                                 <div>Brewery Type - {breweryType(brewery.brewery_type)}</div>
                             </div>
-                            <div className={styles.end}>
+                            {/* <div className={styles.end}>
                                 <div>Total Checkins</div>
                                 <div>Monthly Average</div>
                                 <div># of your checkins</div>
                                 <div># of Favorites</div>
-                            </div>
+                            </div> */}
                         </div>
                         {/* <div> */}
                             <div className={styles.second_info}>
                                 {/* <div className={styles.row}> */}
-                                    <div  className={styles.row}>
+                                    {/* <div  className={styles.row}>
                                         Avg Rating
-                                    </div>
+                                    </div> */}
                                     <div className={styles.row}>
-                                        # of Ratings
-                                    </div>
-                                    <div className={styles.row}>
-                                        # of Beers Available
+                                        # of Ratings: {calculateRatingsCount()}
                                     </div>
                                     <div className={styles.row_end}>
-                                        <i className="fa-solid fa-star fa-2x"></i>
+                                        # of Beers: {beersList.length}
                                     </div>
+                                    {/* <div className={styles.row_end}>
+                                        <i className="fa-solid fa-star fa-2x"></i>
+                                    </div> */}
                               {/* </div> */}
                             </div>
                         {/* </div> */}
@@ -104,7 +130,10 @@ export const SingleBrewery = () => {
                     </div>
                 </div>
                 <div className={styles.right}>
-                    World
+                    <h3>Beer List</h3>
+                    {beersList && beersList.map(beer => (
+                        <div key={beer.id} className={styles.beer_link} onClick={() => goToBeer(beer.id)}>{beer.name}</div>
+                    ))}
                 </div>
             </div>
         </PageContainer>
