@@ -53,10 +53,14 @@ const NavBar = () => {
         return (
             <nav className={styles.container}>
                 <div className={styles.left}>
+                    {sessionUser && sessionUser.business_user === true ? <NavLink to="/brewhub" exact={true} className={styles.home_link}>
+                        <i className="fa-brands fa-untappd"></i>
+                        <h1>FullyTappd</h1>
+                    </NavLink> :
                     <NavLink to="/" exact={true} className={styles.home_link}>
                         <i className="fa-brands fa-untappd"></i>
                         <h1>FullyTappd</h1>
-                    </NavLink>
+                     </NavLink> }
                     <NavLink to="/beer" exact={true} className={styles.nav_link}>
                         Beer
                     </NavLink>
@@ -68,7 +72,7 @@ const NavBar = () => {
                     <div className={styles.profile_icon}>
                         <ProfileDropdown />
                     </div>
-                    <div>
+                    {/* <div>
 					<input
 						className={styles.search_box_field}
 						type="text"
@@ -77,7 +81,7 @@ const NavBar = () => {
 						placeholder="Search for Breweries or Beers"
 					/>
 					<i onClick={handleSubmit} className="fa-solid fa-magnifying-glass"></i>
-				</div>
+				</div> */}
                 </div>
             </nav>
         );

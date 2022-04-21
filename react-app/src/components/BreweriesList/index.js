@@ -3,7 +3,7 @@ import { useSelector} from "react-redux";
 import { useHistory } from "react-router-dom";
 import { PageContainer } from "../PageContainer";
 import styles from "./BreweriesList.module.css";
-
+import defaultImage from "../../images/default_image.png"
 
 
 const BreweriesList = () => {
@@ -16,11 +16,14 @@ const BreweriesList = () => {
 		return;
 	};
 
+	const addDefaultImage = (e) => {
+        e.target.src = defaultImage
+    }
+
 	return (
 		<PageContainer>
 			<div className={styles.container}>
 				<div className={styles.all_container}>
-					Breweries Page
 					{breweries.map((brewery) => (
 						<div
 							onClick={() => goToBrewery(brewery.id)}
@@ -28,7 +31,7 @@ const BreweriesList = () => {
 							key={brewery.id}
 						>
 							<div className={styles.card_img}>
-								<img src={brewery.profile_image} alt="brewery" />
+								<img src={brewery.profile_image} alt="brewery" onError={addDefaultImage}/>
 							</div>
 							<div className={styles.info}>
 								<h3>

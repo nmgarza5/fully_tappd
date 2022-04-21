@@ -50,8 +50,7 @@ def create_brewery():
       country = form.data['country'],
       phone = form.data['phone'],
       website_url = form.data['website_url'],
-      profile_image = form.data['profile_image'],
-      banner_image = form.data['banner_image'])
+      profile_image = form.data['profile_image'])
     # current_user.user_status()
     db.session.add(new_brewery)
     db.session.commit()

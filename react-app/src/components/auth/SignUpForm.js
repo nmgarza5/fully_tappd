@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import ActivityPage from "../ActivityPage";
 import { Route} from "react-router-dom";
+import BreweriesList from "../BreweriesList";
 
 const SignUpForm = () => {
     const user = useSelector((state) => state.session.user);
@@ -22,7 +23,6 @@ const SignUpForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
-    const [banner_image, setBannerImage] = useState("");
     const [profile_image, setProfileImage] = useState("");
     const [header, setHeader] = useState("");
     // const [bio, setBio] = useState("");
@@ -42,7 +42,6 @@ const SignUpForm = () => {
             header,
             // bio,
             profile_image,
-			banner_image
         };
 
         if (password === confirm_password) {
@@ -58,8 +57,8 @@ const SignUpForm = () => {
     };
     if (user) {
         return (
-            <Route exact path="/activity">
-                {user.business_user ? <Redirect to="/new-brewery" /> : <ActivityPage />}
+            <Route exact path="/breweries">
+                {user.business_user ? <Redirect to="/new-brewery" /> : <BreweriesList />}
             </Route>
         )
 
@@ -195,17 +194,6 @@ const SignUpForm = () => {
                                 onChange={(e) => setProfileImage(e.target.value)}
                                 placeholder="Please enter the url to your Profile Image (Optional)"
                                 value={profile_image}
-                                ></input>
-                        </div>
-                        <div className={styles.lower_field}>
-                            <label>Banner Image</label>
-                            <input
-                            className={styles.lower_input}
-                                type="text"
-                                name="banner_image"
-                                onChange={(e) => setBannerImage(e.target.value)}
-                                placeholder="Please enter the url of your Banner Image (Optional)"
-                                value={banner_image}
                                 ></input>
                         </div>
                     </div>

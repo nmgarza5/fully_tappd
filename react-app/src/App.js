@@ -57,12 +57,12 @@ function App() {
                     <Route exact path="/beer/:id">
 						<SingleBeer />
 					</Route>
-                    <ActivityConditional exact path="/activity" >
+                    {/* <ActivityConditional exact path="/activity" >
                         <ActivityPage />
                     </ActivityConditional>
                     <Route exact path="/my-profile" >
                         <ProfilePage />
-                    </Route>
+                    </Route> */}
                     <BrewhubConditional exact path="/brewhub" >
                         <Brewhub />
                     </BrewhubConditional>
