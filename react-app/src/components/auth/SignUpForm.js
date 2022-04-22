@@ -26,7 +26,7 @@ const SignUpForm = () => {
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
     const [profile_image, setProfileImage] = useState("");
-    const [header, setHeader] = useState("");
+    // const [header, setHeader] = useState("");
     // const [bio, setBio] = useState("");
     const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ const SignUpForm = () => {
             email,
             password,
             confirm_password,
-            header,
+            // header,
             // bio,
             profile_image,
         };
@@ -118,7 +118,7 @@ const SignUpForm = () => {
                 </div>
                 <div className={styles.fields}>
                     <div className={styles.upper_fields}>
-                        <div className={styles.small_text}>All fields below are required unless specified.</div>
+                        <div className={styles.small_text}>All fields below are required.</div>
                         <div className={styles.field_row}>
                             <div className={styles.field}>
                                 <i className="fa-solid fa-user"></i>
@@ -204,6 +204,17 @@ const SignUpForm = () => {
                             onChange={(date) => setBirthdate(date)} />
                         </div>
                         <div className={styles.lower_field}>
+                            <label>Profile Image</label>
+                            <input
+                            className={styles.lower_input}
+                                type="text"
+                                name="profile_image"
+                                onChange={(e) => setProfileImage(e.target.value)}
+                                placeholder="Please enter the url to your Profile Image"
+                                value={profile_image}
+                                ></input>
+                        </div>
+                        {/* <div className={styles.lower_field}>
                             <label>Header</label>
                             <input
                             className={styles.lower_input}
@@ -214,18 +225,7 @@ const SignUpForm = () => {
                                 placeholder="Write a short header for your Profile (Optional)"
                                 required={true}
                                 ></input>
-                        </div>
-                        <div className={styles.lower_field}>
-                            <label>Profile Image</label>
-                            <input
-                            className={styles.lower_input}
-                                type="text"
-                                name="profile_image"
-                                onChange={(e) => setProfileImage(e.target.value)}
-                                placeholder="Please enter the url to your Profile Image (Optional)"
-                                value={profile_image}
-                                ></input>
-                        </div>
+                        </div> */}
                     </div>
                     <div className={styles.button_container}>
                         <div role='button' onClick={handleClick} className={styles.button}>Create Account</div>
