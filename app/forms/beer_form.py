@@ -26,16 +26,16 @@ def valid_value(form, field):
   if value < 1:
     raise ValidationError('Value must be greater than 0')
 
-def name_exists(form, field):
-    # Checking if username is already in use
-    name = field.data
-    beer = Beer.query.filter(Beer.name == name).first()
-    if beer:
-        raise ValidationError('This Beer name already exists.')
+# def name_exists(form, field):
+#     # Checking if username is already in use
+#     name = field.data
+#     beer = Beer.query.filter(Beer.name == name).first()
+#     if beer:
+#         raise ValidationError('This Beer name already exists.')
 
 class BeerForm(FlaskForm):
 
-    name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255), name_exists])
+    name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255)])
     brewery_id = IntegerField('Brewery Id', validators=[DataRequired()])
     style = SelectField('Beer Style', choices=beer_choices, validators=[DataRequired()])
     description = TextAreaField('Description')

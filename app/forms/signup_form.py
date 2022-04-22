@@ -2,7 +2,7 @@ from email.utils import parsedate
 from flask_wtf import FlaskForm
 from sqlalchemy import Boolean, DateTime
 from wtforms import StringField, TextAreaField, SubmitField
-from wtforms.validators import DataRequired, Email, ValidationError, EqualTo, Length
+from wtforms.validators import DataRequired, Email, ValidationError, EqualTo, Length, URL
 from app.models import User
 from datetime import datetime
 
@@ -66,6 +66,6 @@ class SignUpForm(FlaskForm):
     confirm_password = StringField('Confirm Password', validators=[DataRequired()])
     header = StringField('Header', validators=[Length(min=0, max=255)])
     # bio = TextAreaField('Bio')
-    profile_image = StringField('Profile Image', validators=[Length(min=0, max=2048), valid_image])
+    profile_image = StringField('Profile Image', validators=[Length(min=0, max=2048), valid_image, URL()])
     # banner_image = StringField('Banner Image', validators=[Length(min=0, max=2048), valid_image])
     submit = SubmitField('Submit')

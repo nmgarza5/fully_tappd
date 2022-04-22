@@ -8,6 +8,7 @@ import { UpdateBrewery } from "../UpdateBrewery";
 import { DeleteBrewery } from "../DeleteBrewery";
 import {DeleteBeer} from "../Beer/DeleteBeer"
 import { BeerForm } from "../../forms/BeerForm";
+import { receiveBeer } from "../../store/beer";
 
 // import { CreateBrewery } from "../CreateBrewery";
 // import { receiveOneBeer } from "../../store/beer";
@@ -15,6 +16,7 @@ import { BeerForm } from "../../forms/BeerForm";
 // import { BreweryForm } from "../../forms/BreweryForm";
 // import { receiveUserBrewery } from "../../store/session";
 import defaultImage from "../../images/default_image.png"
+import { authenticate } from "../../store/session";
 
 
 const Brewhub = () => {
@@ -29,9 +31,20 @@ const Brewhub = () => {
 	const [showMoreBrewery, setShowMoreBrewery] = useState(false)
 	const [showMoreBeer, setShowMoreBeer] = useState(false)
 
+	const [loaded, setLoaded] = useState(false);
 
-	console.log("CURR BEER ID", currentBeerId)
-	console.log("SELECTED BEER", selectedBeer)
+    useEffect(() => {
+        (async () => {
+			await dispatch(authenticate())
+            // await dispatch(receiveBeer())
+            setLoaded(true);
+        })();
+    }, [dispatch]);
+
+    if (!loaded) {
+        return null;
+    }
+
 	const getPreviousBeerId = () => {
 		const currentIndex = userBeers.indexOf(selectedBeer);
 		if (userBeers[currentIndex-1]) {

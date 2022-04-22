@@ -55,6 +55,7 @@ export const createBeer = (data) => async (dispatch) => {
 		body: JSON.stringify(data),
 	});
 	const newBeer = await res.json();
+	console.log("NEW BEER", newBeer)
 	if (newBeer.errors) {
 		return newBeer;
 	} else {
