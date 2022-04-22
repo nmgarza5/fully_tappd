@@ -19,10 +19,16 @@ export const SingleBeer = () => {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state?.session?.user);
-	const { id } = useParams();
-	const beer = useSelector((state) => state.beer)[`${id}`];
 
-    const reviewsList = Object.values(beer.reviews)
+	const { id } = useParams();
+    console.log("ID", id)
+	const beer = useSelector((state) => state?.beer)[`${id}`];
+
+
+     console.log("BEER", beer)
+
+
+    const reviewsList = Object.values(beer?.reviews)
 
     const avgRating = () => {
         let sum = 0;

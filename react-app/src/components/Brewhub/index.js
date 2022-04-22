@@ -160,12 +160,12 @@ const Brewhub = () => {
 									{userBrewery?.description}
 									<div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show Less</div>
 								</div> } */}
-								{!showMoreBrewery && userBrewery?.description?.length > 150 ?
+								{!showMoreBrewery && userBrewery?.description?.length > 220 ?
                                     <div className={styles.no_showBrewery}>
-                                        {userBrewery?.description?.slice(0,150)}...
+                                        {userBrewery?.description?.slice(0,220)}...
                                         <div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show more</div>
                                      </div>
-                                    : !showMoreBrewery && userBrewery?.description?.length < 150 ?
+                                    : !showMoreBrewery && userBrewery?.description?.length < 220 ?
                                                 <div className={styles.showBrewery}>{userBrewery?.description}</div> :
                                     <div className={styles.showBrewery}>
                                         {userBrewery?.description}
@@ -220,16 +220,34 @@ const Brewhub = () => {
 								</div>
 								<div>
 									<div className={styles.third_info}>
-										{!showMoreBeer && selectedBeer?.description.length > 100 ?
+{/*
+										{!showMoreBeer && selectedBeer?.description.length > 150 ?
 											<div className={styles.no_showBeer}>
-												{selectedBeer?.description.slice(0,100)}...
+												{selectedBeer?.description.slice(0,150)}...
 												<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show more</div>
 											</div>
 											:
 											<div className={styles.showBeer}>
 												{selectedBeer?.description}
 												<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show Less</div>
+											</div> } */}
+
+											{!showMoreBeer && selectedBeer?.description?.length > 150 ?
+
+											<div className={styles.no_showBeer}>
+												{selectedBeer?.description?.slice(0,150)}...
+												<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show more</div>
+											</div>
+
+											: !showMoreBeer && selectedBeer?.description?.length < 150 ?
+
+											<div className={styles.showBeer}>{selectedBeer?.description}</div>
+											:
+											<div className={styles.showBeer}>
+												{selectedBeer?.description}
+												<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show Less</div>
 											</div> }
+
 									</div>
 								</div>
 							</div> }
