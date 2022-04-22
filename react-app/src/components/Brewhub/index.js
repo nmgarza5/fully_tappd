@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { PageContainer } from "../PageContainer";
 import styles from "./Brewhub.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { UpdateBrewery } from "../UpdateBrewery";
 import { DeleteBrewery } from "../DeleteBrewery";
 import {DeleteBeer} from "../Beer/DeleteBeer"
 import { BeerForm } from "../../forms/BeerForm";
+
 // import { CreateBrewery } from "../CreateBrewery";
 // import { receiveOneBeer } from "../../store/beer";
 // import { receiveOneBrewery } from "../../store/breweries";
@@ -22,14 +23,34 @@ const Brewhub = () => {
 
 	const userBrewery = useSelector((state) => Object.values(state.session.user.breweries)[0])
 	const userBeers = Object.values(userBrewery.beers)
-	const [currentBeerId, setCurrentBeerId] = useState(userBeers[0].id)
+	const [currentBeerId, setCurrentBeerId] = useState(userBeers[0]?.id || null)
 	const selectedBeer = userBeers.find(beer => beer.id === +currentBeerId)
 	// const [display, setDisplay] = useState("")
 	const [showMoreBrewery, setShowMoreBrewery] = useState(false)
 	const [showMoreBeer, setShowMoreBeer] = useState(false)
 
 
-	const reviewsList = Object.values(selectedBeer?.reviews)
+	console.log("CURR BEER ID", currentBeerId)
+	console.log("SELECTED BEER", selectedBeer)
+	const getPreviousBeerId = () => {
+		const currentIndex = userBeers.indexOf(selectedBeer);
+		if (userBeers[currentIndex-1]) {
+			const nextBeer = userBeers[currentIndex-1]
+			return nextBeer.id
+		}
+	}
+
+	const getNextBeerId = () => {
+		const currentIndex = userBeers.indexOf(selectedBeer);
+		if (userBeers[currentIndex+1]) {
+			const nextBeer = userBeers[currentIndex+1]
+			return nextBeer.id
+		}
+	}
+
+
+	let reviewsList;
+	currentBeerId ? reviewsList = Object.values(selectedBeer?.reviews) : reviewsList = null
 
     const avgRating = () => {
         let sum = 0;
@@ -47,22 +68,8 @@ const Brewhub = () => {
     const showDeleteBeerForm = () => {
 		dispatch(setCurrentModal(() => (<DeleteBeer beer_id={currentBeerId} />)));
 		dispatch(showModal());
-		setCurrentBeerId("Default")
-		// console.log("BREWBEERS---", userBeers)
-		// if (userBeers.length > 2) {
-		// 	console.log("currentBeerIdIF---", currentBeerId)
+		setCurrentBeerId(getPreviousBeerId())
 
-		// 	setCurrentBeerId(userBeers[userBeers.length-1].id)
-		// }
-		// if (userBeers.length === 2) {
-		// 	console.log("currentBeerId2IF---", currentBeerId)
-		// 	setCurrentBeerId(userBeers[0].id)
-		// }
-		// else {
-		// 	console.log("currentBeerIdELSE---", currentBeerId)
-		// 	setCurrentBeerId("Default")
-		// }
-		// console.log("currentBeerIdFINAL---", currentBeerId)
       }
     const showEditBeerForm = () => {
         dispatch(setCurrentModal(() => (<BeerForm beer={selectedBeer} breweryId={userBrewery.id}/>)));
@@ -71,6 +78,7 @@ const Brewhub = () => {
     const showNewBeerForm = () => {
         dispatch(setCurrentModal(() => (<BeerForm breweryId={userBrewery.id} />)));
         dispatch(showModal());
+		// setCurrentBeerId(getNextBeerId())
       }
 
 
@@ -161,11 +169,12 @@ const Brewhub = () => {
 						<div className={styles.select_container}>
 									<div htmlFor="currentBeerId">Beer List</div>
 
-										{userBeers.map((beer) => (
-											<div className={styles.one_beer} key={beer.id} value={beer.id} onClick={(e)=> setCurrentBeerId(beer.id)}>
-												{beer.name}
-												</div>
-											))}
+									{currentBeerId ? userBeers.map((beer) => (
+										<div className={styles.one_beer} key={beer.id} value={beer.id} onClick={(e)=> setCurrentBeerId(beer.id)}>
+											{beer.name}
+											</div>
+										))
+									: <div>- No Beers Created Yet</div>}
 						</div >
 						<div className={styles.selected_container} >
 							{selectedBeer && <div className={styles.infoBeer}>
