@@ -119,6 +119,7 @@ const beerReducer = (state = {}, action) => {
 		}
 		case RECEIVED__ONE_BEER: {
 			newState[action.payload.id] = action.payload;
+
 			return newState;
 		}
 		case UPDATED_BEER: {

@@ -17,6 +17,7 @@ import { hideModal } from "../../../store/modal"
 export const SingleBeer = () => {
     const history = useHistory();
     const [loaded, setLoaded] = useState(false);
+    const [showMore, setShowMore] = useState(false)
     const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state?.session?.user);
 
@@ -25,10 +26,28 @@ export const SingleBeer = () => {
 	const beer = useSelector((state) => state?.beer)[`${id}`];
 
 
+    useEffect(() => {
+        (async () => {
+            console.log("HELLO FIRST")
+            await dispatch(authenticate());
+            console.log("HELLO", id)
+            await dispatch(receiveOneBeer(id))
+            setLoaded(true);
+        })();
+    }, [dispatch, id]);
+
+    if (!loaded) {
+        return null;
+    }
+
+    let reviewsList;
+
      console.log("BEER", beer)
 
+    if (beer) {
+        reviewsList = Object.values(beer?.reviews)
+    }
 
-    const reviewsList = Object.values(beer?.reviews)
 
     const avgRating = () => {
         let sum = 0;
@@ -46,19 +65,7 @@ export const SingleBeer = () => {
     //     return count;
     // }
 
-    const [showMore, setShowMore] = useState(false)
 
-    useEffect(() => {
-        (async () => {
-            await dispatch(authenticate());
-            await dispatch(receiveOneBeer(id))
-            setLoaded(true);
-        })();
-    }, [dispatch, id]);
-
-    if (!loaded) {
-        return null;
-    }
 
 
 
