@@ -72,16 +72,19 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                  <ul>
 					{errors &&
 						errors.map((error) => (
-							<li key={error} className={styles.error_messages}>
+							<li key={error} className={styles.errors}>
 								{error.replace("_", " ")}
 							</li>
 						))}
 				</ul>
+                <div className={styles.small_text}>All fields below are required.</div>
                 <div className={styles.upper_half}>
                     <div className={styles.input_container}>
+                        <label>Content
+                        </label>
                         <textarea
                             name="content"
-                            placeholder="What did you think? (Required)"
+                            placeholder="What did you think?"
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                         ></textarea>
@@ -93,7 +96,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                         className={styles.lower_input}
                             type="text"
                             name="header"
-                            placeholder="Image Url (Required)"
+                            placeholder="Your image url"
                             value={image_url}
                             onChange={(e) => setImage(e.target.value)}
                             ></input>

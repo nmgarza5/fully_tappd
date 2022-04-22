@@ -50,7 +50,7 @@ def create_brewery():
       postal_code = form.data['postal_code'],
       country = form.data['country'],
       phone = form.data['phone'],
-      website_url = form.data['website_url'],
+      # website_url = form.data['website_url'],
       profile_image = form.data['profile_image'])
     # current_user.user_status()
     db.session.add(new_brewery)
@@ -78,7 +78,7 @@ def breweryUpdate(id):
         brewery.postal_code = form.data['postal_code'],
         brewery.country = form.data['country'],
         brewery.phone = form.data['phone'],
-        brewery.website_url = form.data['website_url']
+        # brewery.website_url = form.data['website_url']
         brewery.profile_image = form.data['profile_image']
         db.session.commit()
         return brewery.to_dict()
