@@ -1,9 +1,11 @@
-import React from "react";
-import { useSelector} from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
 import { useHistory } from "react-router-dom";
 import { PageContainer } from "../../PageContainer";
 import styles from "./BeerList.module.css";
 import defaultImage from "../../../images/default_image.png"
+import { receiveBeer } from "../../../store/beer";
+import { authenticate } from "../../../store/session";
 
 
 const BeerList = () => {
@@ -11,6 +13,20 @@ const BeerList = () => {
 	// const dispatch = useDispatch()
     const allBeer = useSelector((state) => Object.values(state.beer))
 	// const createBeer = () => history.push('/new-beer')
+	const [loaded, setLoaded] = useState(false);
+    const dispatch = useDispatch();
+
+	useEffect(() => {
+        (async () => {
+            await dispatch(authenticate());
+            await dispatch(receiveBeer())
+            setLoaded(true);
+        })();
+    }, [dispatch]);
+
+    if (!loaded) {
+        return null;
+    }
 
 	const goToBeer = (id) => {
 		history.push(`/beer/${id}`);

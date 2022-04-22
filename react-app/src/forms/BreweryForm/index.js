@@ -19,7 +19,7 @@ export const BreweryForm = ({brewery}) => {
 	const [postal_code, setPostalCode] = useState(brewery?.postal_code || "");
 	const [country, setCountry] = useState(brewery?.country || "");
 	const [phone, setPhone] = useState(brewery?.phone || "");
-	const [website_url, setWebsiteUrl] = useState(brewery?.website_url || "");
+	// const [website_url, setWebsiteUrl] = useState(brewery?.website_url || "");
 	const [profile_image, setProfileImage] = useState(brewery?.profile_image || "");
 	// const [banner_image, setBannerImage] = useState(brewery?.banner_image || "");
 	const [errors, setErrors] = useState([]);
@@ -38,19 +38,19 @@ export const BreweryForm = ({brewery}) => {
 			postal_code,
 			country,
 			phone,
-			website_url,
+			// website_url,
 			profile_image
 		}
 
-		!name
-			? setErrors(["Please provide your Brewery name."])
-			: !profile_image
-			? setErrors(["Please provide a url for your image."])
-			: !phone
-			? setErrors(["Please provide your phone number."])
-			: !street
-			? setErrors(["Please provide your street address."])
-			: setErrors([]);
+		// !name
+		// 	? setErrors(["Please provide your Brewery name."])
+		// 	: !profile_image
+		// 	? setErrors(["Please provide a url for your image."])
+		// 	: !phone
+		// 	? setErrors(["Please provide your phone number."])
+		// 	: !street
+		// 	? setErrors(["Please provide your street address."])
+		// 	: setErrors([]);
 
 		// conditional checking if there is a restaurant already created. If so, send a put request. Else send a post request.
 		if (brewery) {
@@ -228,7 +228,7 @@ export const BreweryForm = ({brewery}) => {
 							onChange={(e) => setPhone(e.target.value)}
 						></input>
 					</div>
-					<div className={styles.input_container}>
+					{/* <div className={styles.input_container}>
 						<label htmlFor="website_url">Website</label>
 						<input
 							type="text"
@@ -237,7 +237,7 @@ export const BreweryForm = ({brewery}) => {
 							placeholder="Enter your website's name."
 							onChange={(e) => setWebsiteUrl(e.target.value)}
 						></input>
-					</div>
+					</div> */}
 					<div className={styles.input_container}>
 						<label htmlFor="profile_image">Profile Image</label>
 						<input

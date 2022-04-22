@@ -15,7 +15,7 @@ breweries = [
         "postal_code": "94124-3221",
         "country": "United States",
         "phone": "4159140936",
-        "website_url": "http://www.sevenstillsofsf.com",
+        # "website_url": "http://www.sevenstillsofsf.com",
     },
     {
         "name": "47 Hills Brewing Co",
@@ -31,7 +31,7 @@ breweries = [
         "postal_code": "94080-6410",
         "country": "United States",
         "phone": "6508678476",
-        "website_url": "http://47hillsbrewingcompany.com",
+        # "website_url": "http://47hillsbrewingcompany.com",
     },
     {
         "name": "Anchor Brewing Co",
@@ -47,7 +47,7 @@ breweries = [
         "postal_code": "94107-2334",
         "country": "United States",
         "phone": "4158638350",
-        "website_url": "http://www.anchorbrewing.com",
+        # "website_url": "http://www.anchorbrewing.com",
     },
     {
         "name": "Armstrong Brewing Co",
@@ -63,7 +63,7 @@ breweries = [
         "postal_code": "94080-3614",
         "country": "United States",
         "phone": "6509898447",
-        "website_url": "https://www.facebook.com/ArmstrongBrewing/",
+        # "website_url": "https://www.facebook.com/ArmstrongBrewing/",
     },
     {
         "name": "Barebottle Brewing Company",
@@ -79,7 +79,7 @@ breweries = [
         "postal_code": "94110-5714",
         "country": "United States",
         "phone": "4159268617",
-        "website_url": "http://www.barebottlebeer.com",
+        # "website_url": "http://www.barebottlebeer.com",
     },
     {
         "name": "Barrel Head Brewhouse",
@@ -95,7 +95,7 @@ breweries = [
         "postal_code": "94117-1202",
         "country": "United States",
         "phone": "4154166989",
-        "website_url": "http://www.barrelheadsf.com",
+        # "website_url": "http://www.barrelheadsf.com",
     },
     {
         "name": "Black Hammer Brewing",
@@ -111,7 +111,7 @@ breweries = [
         "postal_code": "94107-1217",
         "country": "United States",
         "phone": "4155002273",
-        "website_url": "http://www.blackhammerbrewing.com",
+        # "website_url": "http://www.blackhammerbrewing.com",
     },
     {
         "name": "Cellarmaker Brewing Company",
@@ -127,7 +127,7 @@ breweries = [
         "postal_code": "94103-3914",
         "country": "United States",
         "phone": "4158633940",
-        "website_url": "http://www.cellarmakerbrewing.com",
+        # "website_url": "http://www.cellarmakerbrewing.com",
     },
     {
         "name": "Fort Point Beer Company",
@@ -143,7 +143,7 @@ breweries = [
         "postal_code": "94129-1600",
         "country": "United States",
         "phone": "4159064021",
-        "website_url": "http://www.fortpointbeer.com",
+        # "website_url": "http://www.fortpointbeer.com",
     },
     {
         "name": "Harmonic Brewing",
@@ -159,7 +159,7 @@ breweries = [
         "postal_code": "94107-3513",
         "country": "United States",
         "phone": "4158726817",
-        "website_url": "http://www.harmonicbrewing.com",
+        # "website_url": "http://www.harmonicbrewing.com",
     },
     {
         "name": "Laughing Monk Brewing",
@@ -175,7 +175,7 @@ breweries = [
         "postal_code": "94124-3221",
         "country": "United States",
         "phone": "4158905970",
-        "website_url": "http://www.laughingmonkbrewing.com",
+        # "website_url": "http://www.laughingmonkbrewing.com",
     },
     {
         "name": "Local Brewing Co",
@@ -191,7 +191,7 @@ breweries = [
         "postal_code": "94107-1605",
         "country": "United States",
         "phone": "4158647468",
-        "website_url": "http://www.localbrewingco.com",
+        # "website_url": "http://www.localbrewingco.com",
     },
     {
         "name": "Magnolia Brewing Company",
@@ -207,7 +207,7 @@ breweries = [
         "postal_code": "94117-2909",
         "country": "United States",
         "phone": "4158647468",
-        "website_url": "https://magnoliabrewing.com/",
+        # "website_url": "https://magnoliabrewing.com/",
     },
     {
         "name": "Ale Industries",
@@ -223,7 +223,7 @@ breweries = [
         "postal_code": "94601-2960",
         "country": "United States",
         "phone": "9254705280",
-        "website_url": "http://www.aleindustries.com",
+        # "website_url": "http://www.aleindustries.com",
     },
     {
         "name": "Diving Dog Brewhouse",
@@ -239,7 +239,7 @@ breweries = [
         "postal_code": "94612-2110",
         "country": "United States",
         "phone": "5103061914",
-        "website_url": "http://www.divingdogbrew.com",
+        # "website_url": "http://www.divingdogbrew.com",
     },
     {
         "name": "Federation Brewing",
@@ -255,7 +255,7 @@ breweries = [
         "postal_code": "94607-3809",
         "country": "United States",
         "phone": "5104964228",
-        "website_url": "http://www.federationbrewing.com",
+        # "website_url": "http://www.federationbrewing.com",
     },
     {
         "name": "Funky Buddha Brewery",
@@ -271,7 +271,7 @@ breweries = [
         "postal_code": "33334-4504",
         "country": "United States",
         "phone": "9544400046",
-        "website_url": "http://www.thefunkybuddha.com",
+        # "website_url": "http://www.thefunkybuddha.com",
     },
     {
         "name": "Ghost Town Brewing",
@@ -287,7 +287,7 @@ breweries = [
         "postal_code": "94607-2300",
         "country": "United States",
         "phone": "5109266728",
-        "website_url": "http://www.ghosttownbrewing.com",
+        # "website_url": "http://www.ghosttownbrewing.com",
     },
     {
         "name": "Independent Brewing Co",
@@ -303,7 +303,7 @@ breweries = [
         "postal_code": "94607-4118",
         "country": "United States",
         "phone": "5109266728",
-        "website_url": "http://independentbrewing.com",
+        # "website_url": "http://independentbrewing.com",
     },
     {
         "name": "Lucky Devil Brewing",
@@ -319,7 +319,7 @@ breweries = [
         "postal_code": "94612",
         "country": "United States",
         "phone": "5109692865",
-        "website_url": "http://www.luckydevilbrewery.com",
+        # "website_url": "http://www.luckydevilbrewery.com",
     },
 ]
 
@@ -340,8 +340,8 @@ def seed_breweries():
             state=brewery["state"],
             postal_code=brewery["postal_code"],
             country=brewery["country"],
-            phone=brewery["phone"],
-            website_url=brewery["website_url"])
+            phone=brewery["phone"])
+            # website_url=brewery["website_url"])
         db.session.add(new_brewery)
     db.session.commit()
 
