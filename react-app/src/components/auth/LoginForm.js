@@ -47,6 +47,10 @@ const LoginForm = () => {
         return <Redirect to="/breweries" />;
     }
 
+    const closeModal = () => {
+        dispatch(hideModal())
+    }
+
     return (
         <div className={styles.parent}>
             <div className={styles.info}>
@@ -94,6 +98,12 @@ const LoginForm = () => {
                         onClick={onLogin}
                     >
                         Login
+                    </div>
+                    <div
+                        className={styles.button}
+                        onClick={closeModal}
+                    >
+                        Cancel
                     </div>
                 </div>
                 <div className={styles.grey_line}></div>

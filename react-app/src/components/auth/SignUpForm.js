@@ -90,6 +90,10 @@ const SignUpForm = () => {
         }
 	};
 
+    const closeModal = () => {
+        dispatch(hideModal())
+    }
+
     return (
         <div className={styles.parent}>
             <div className={styles.info}>
@@ -223,8 +227,10 @@ const SignUpForm = () => {
                                 ></input>
                         </div>
                     </div>
-                    <div role='button' onClick={handleClick} className={styles.button}>Create Account</div>
-                    {/* <div className={styles.grey_line}></div> */}
+                    <div className={styles.button_container}>
+                        <div role='button' onClick={handleClick} className={styles.button}>Create Account</div>
+                        <div className={styles.button} onClick={closeModal} >Cancel</div>
+                    </div>
                     <div className={styles.lower}>
                         Or
                         <div className={styles.demo}>

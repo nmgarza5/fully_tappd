@@ -242,3 +242,8 @@
   margin-top: 10px;
     text-align: center
 }
+
+.button_container {
+  display: flex;
+  flex-direction: row;
+}

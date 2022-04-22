@@ -12,7 +12,7 @@ import { receiveOneBeer } from "../../../store/beer";
 import { DeleteReview } from "../../Reviews/DeleteReview";
 import defaultProfileImage from "../../../images/default_profile_image.png"
 import defaultImage from "../../../images/default_image.png"
-
+import { hideModal } from "../../../store/modal"
 
 export const SingleBeer = () => {
     const history = useHistory();
@@ -54,10 +54,7 @@ export const SingleBeer = () => {
         return null;
     }
 
-    const imagePreview = (image) => {
-        dispatch(setCurrentModal(() => (<img src={image} alt="" style={{ height : 500 }} onError={addDefaultImage}/>)));
-        dispatch(showModal());
-    }
+
 
     const addDefaultProfileImage = (e) => {
         e.target.src = defaultProfileImage
@@ -70,6 +67,23 @@ export const SingleBeer = () => {
         await history.push(`/breweries/${id}`)
     }
 
+    const closeModal = () => {
+        dispatch(hideModal())
+    }
+
+    const ImageModal = ({image}) => {
+        return (
+            <div>
+                <h3 className={styles.image_header}>Image Preview<i className="fa-solid fa-rectangle-xmark" onClick={closeModal}></i></h3>
+                <img src={image} alt="" style={{ height : 500 }} onError={addDefaultImage}/>
+            </div>
+        )
+    }
+
+    const imagePreview = (image) => {
+        dispatch(setCurrentModal(() => (<ImageModal image={image} />)));
+        dispatch(showModal());
+    }
 
 
     return (

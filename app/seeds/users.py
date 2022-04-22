@@ -67,6 +67,9 @@ images = [
     {
         "image": "https://i.imgur.com/fR1xMw0.jpeg",
     },
+    {
+        "image": "https://i.imgur.com/fR1xMw0.jpeg",
+    },
 ]
 
 
@@ -86,19 +89,6 @@ def seed_users():
         # bio='The human embodiment of smoothness. Never without my case of ice cold stones and smooth pick up lines.')
     db.session.add(demo)
 
-    demo2 = User(
-        business_user=False,
-        username='keith-stone2',
-        first_name='Keith',
-        last_name='Stone',
-        birthdate= '1994-04-15T16:29:17.000Z',
-        email='demo1@demo.com',
-        password='password',
-        profile_image = "https://pbs.twimg.com/profile_images/2521709236/image_400x400.jpg",
-        # banner_image = "https://freight.cargo.site/t/original/i/cae1c483c916f1ce2f25ccafec7b64f0f4a5075bdf8c74dae0909534a6a82851/Limit_A.jpg",
-        header='Always Smooth')
-        # bio='The human embodiment of smoothness. Never without my case of ice cold stones and smooth pick up lines.')
-    db.session.add(demo2)
 
     for image in images:
         name = fake.first_name()
@@ -115,6 +105,21 @@ def seed_users():
             header=fake.text())
             # bio=fake.text())
         db.session.add(owner)
+
+    demo2 = User(
+        business_user=False,
+        username='keith-stone2',
+        first_name='Keith',
+        last_name='Stone',
+        birthdate= '1994-04-15T16:29:17.000Z',
+        email='demo1@demo.com',
+        password='password',
+        profile_image = "https://pbs.twimg.com/profile_images/2521709236/image_400x400.jpg",
+        # banner_image = "https://freight.cargo.site/t/original/i/cae1c483c916f1ce2f25ccafec7b64f0f4a5075bdf8c74dae0909534a6a82851/Limit_A.jpg",
+        header='Always Smooth')
+        # bio='The human embodiment of smoothness. Never without my case of ice cold stones and smooth pick up lines.')
+    db.session.add(demo2)
+
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE the users table.
