@@ -62,9 +62,13 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
         e.target.src = defaultImage
     }
 
+    const closeModal = () => {
+        dispatch(hideModal())
+    }
+
     return (
             <form className={styles.review_form}>
-                <h3>Review</h3>
+                <h3 className={styles.review_header}>Review <i className="fa-solid fa-rectangle-xmark" onClick={closeModal}></i></h3>
                  <ul>
 					{errors &&
 						errors.map((error) => (
@@ -77,19 +81,19 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                     <div className={styles.input_container}>
                         <textarea
                             name="content"
-                            placeholder="What did you think?"
+                            placeholder="What did you think? (Required)"
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                         ></textarea>
                     </div>
                     <div className={styles.lower_field}>
-                        <label>Images
+                        <label>Image
                         </label>
                         <input
                         className={styles.lower_input}
                             type="text"
                             name="header"
-                            placeholder="Image Url"
+                            placeholder="Image Url (Required)"
                             value={image_url}
                             onChange={(e) => setImage(e.target.value)}
                             ></input>

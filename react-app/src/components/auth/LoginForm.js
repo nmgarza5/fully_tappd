@@ -33,18 +33,6 @@ const LoginForm = () => {
 
     };
 
-    const loginDemo = async (e) => {
-		e.preventDefault();
-		const data = await dispatch(login("keith-stone", "password"));
-		if (data.errors) {
-            console.log("DATA", data.errors)
-            return setErrors(data.errors)
-        }
-		else {
-            await dispatch(hideModal());
-            history.push('/brewhub')
-        }
-	};
 
     const showSignUpForm = () => {
 		dispatch(setCurrentModal(SignUpForm));
@@ -59,6 +47,10 @@ const LoginForm = () => {
         return <Redirect to="/breweries" />;
     }
 
+    const closeModal = () => {
+        dispatch(hideModal())
+    }
+
     return (
         <div className={styles.parent}>
             <div className={styles.info}>
@@ -69,7 +61,7 @@ const LoginForm = () => {
             <h4>Welcome back! Please login.</h4>
             <form className={styles.form_element}>
                 {errors.length > 0 && (
-                    <div className={styles.error_container}>
+                    <div className={styles.errors}>
                         {errors.map((error, i) => (
                             <div key={i}>{error}</div>
                         ))}
@@ -109,13 +101,13 @@ const LoginForm = () => {
                     </div>
                     <div
                         className={styles.button}
-                        onClick={loginDemo}
+                        onClick={closeModal}
                     >
-                        Demo User
+                        Cancel
                     </div>
                 </div>
                 <div className={styles.grey_line}></div>
-				<div>
+				<div className={styles.lower}>
                     New around here?
                     <div  className={styles.signup} onClick={showSignUpForm}>
                     Sign Up!

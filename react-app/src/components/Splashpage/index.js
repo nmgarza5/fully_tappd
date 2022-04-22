@@ -115,7 +115,7 @@ const addDefaultImage = (e) => {
               <ul className={styles.list}>
                 <li>Update or Delete your current Brewery</li>
                 <li>Select and preview your beer information</li>
-                <li>Create, Update, and Delete you Beers</li>
+                <li>Create, Update, and Delete your Beers</li>
               </ul>
             </div>
           </div>
