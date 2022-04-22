@@ -1,4 +1,4 @@
-import profile
+from app.models import Beer
 from flask_wtf import FlaskForm
 from wtforms import (StringField, TextAreaField, BooleanField, SelectField, SubmitField, DecimalField, IntegerField)
 from wtforms.validators import DataRequired, ValidationError, Length
@@ -26,14 +26,20 @@ def valid_value(form, field):
   if value < 1:
     raise ValidationError('Value must be greater than 0')
 
+def name_exists(form, field):
+    # Checking if username is already in use
+    name = field.data
+    beer = Beer.query.filter(Beer.name == name).first()
+    if beer:
+        raise ValidationError('This Beer name already exists.')
 
 class BeerForm(FlaskForm):
 
-    name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255)])
+    name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255), name_exists])
     brewery_id = IntegerField('Brewery Id', validators=[DataRequired()])
     style = SelectField('Beer Style', choices=beer_choices, validators=[DataRequired()])
     description = TextAreaField('Description')
-    price = DecimalField('Price', places=2, validators=[DataRequired(), valid_value])
+    # price = DecimalField('Price', places=2, validators=[DataRequired(), valid_value])
     abv = DecimalField('ABV', places=2, validators=[DataRequired(), valid_value])
     ibu = IntegerField('IBU', validators=[DataRequired(), valid_value])
     # beer_image = StringField('Beer Image', validators=[DataRequired(), Length(min=0, max=2048), valid_image])

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { hideModal } from "../../store/modal";
 import { useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
+import { login } from "../../store/session";
 import styles from "./SignUpForm.module.css"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
@@ -65,24 +66,29 @@ const SignUpForm = () => {
             setErrors(["Passwords do not match"])
         }
     };
-    // if (user?.business_user === true) {
-    //     console.log("HIT", user.business_user)
-    //     dispatch(hideModal());
-    //     return (
-    //         <Route exact path="/breweries">
-    //             {user?.business_user === true ? <Redirect to="/new-brewery" /> : <BreweriesList />}
-    //         </Route>
-    //     )
 
-    // }
-    // if (user?.business_user === true) {
-    //     dispatch(hideModal());
-    //     return <Redirect to="/brewhub" />;
-    // }
-    // if (user) {
-    //     dispatch(hideModal());
-    //     return <Redirect to="/breweries" />;
-    // }
+    const loginBusinessDemo = async (e) => {
+		e.preventDefault();
+		const data = await dispatch(login("keith-stone", "password"));
+		if (data.errors) {
+            return setErrors(data.errors)
+        }
+		else {
+            await dispatch(hideModal());
+            history.push('/brewhub')
+        }
+	};
+    const loginStandardDemo = async (e) => {
+		e.preventDefault();
+		const data = await dispatch(login("keith-stone2", "password"));
+		if (data.errors) {
+            return setErrors(data.errors)
+        }
+		else {
+            await dispatch(hideModal());
+            history.push('/breweries')
+        }
+	};
 
     return (
         <div className={styles.parent}>
@@ -218,6 +224,26 @@ const SignUpForm = () => {
                         </div>
                     </div>
                     <div role='button' onClick={handleClick} className={styles.button}>Create Account</div>
+                    {/* <div className={styles.grey_line}></div> */}
+                    <div className={styles.lower}>
+                        Or
+                        <div className={styles.demo}>
+                            Demo as a
+                            <div
+                                className={styles.demo_click}
+                                onClick={loginBusinessDemo}
+                            >
+                                Business User
+                            </div>
+                            or
+                            <div
+                                className={styles.demo_click}
+                                onClick={loginStandardDemo}
+                            >
+                                Standard User
+                            </div>
+                        </div>
+				    </div>
                 </div>
             </form>
         </div>

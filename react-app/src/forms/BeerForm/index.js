@@ -80,10 +80,15 @@ export const BeerForm = ({beer, breweryId}) => {
 		"Lager", "Lambic", "Oktoberfestbier", "Pale Ale", "Pilsner", "Porter", "Red Ale", "Saison", "Stout", "Witbier",
 	]
 
+	const closeModal = () => {
+        dispatch(hideModal())
+    }
+
 
 	return (
-		<div className={styles.container}>
 			<div className={styles.form_entries}>
+				{beer ? <h3 className={styles.beer_header}>Edit: {beer.name} <i className="fa-solid fa-rectangle-xmark" onClick={closeModal}></i></h3>
+					: <h3 className={styles.beer_header}>New Beer <i className="fa-solid fa-rectangle-xmark" onClick={closeModal}></i></h3> }
 				<ul>
 					{errors &&
 						errors.map((error) => (
@@ -92,7 +97,7 @@ export const BeerForm = ({beer, breweryId}) => {
 							</li>
 						))}
 				</ul>
-				<form>
+				<form className={styles.beer_form}>
 					<div className={styles.input_container}>
 						<label htmlFor="name">Name</label>
 						<input
@@ -141,10 +146,10 @@ export const BeerForm = ({beer, breweryId}) => {
 							}
 						></textarea>
 					</div>
-					<div className={styles.input_container}>
+					{/* <div className={styles.input_container}>
 						<label htmlFor="price">Price</label>
 						<input style={{width: '150px'}} type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
-					</div>
+					</div> */}
 					<div className={styles.input_container}>
 						<label htmlFor="price">ABV</label>
 						<input style={{width: '150px'}} type="number" value={abv} onChange={(e) => setAbv(e.target.value)}/>
@@ -176,7 +181,6 @@ export const BeerForm = ({beer, breweryId}) => {
 					</div>
 				</form>
 			</div>
-		</div>
 	)
 }
 

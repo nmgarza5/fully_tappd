@@ -39,7 +39,7 @@ def create_brewery():
       brewery_id = form.data['brewery_id'],
       style = form.data['style'],
       description = form.data['description'],
-      price = form.data['price'],
+      # price = form.data['price'],
       abv = form.data['abv'],
       ibu = form.data['ibu']
       )
@@ -61,7 +61,7 @@ def breweryUpdate(id):
         beer.brewery_id = form.data['brewery_id'],
         beer.style = form.data['style'],
         beer.description = form.data['description'],
-        beer.price = form.data['price'],
+        # beer.price = form.data['price'],
         beer.abv = form.data['abv'],
         beer.ibu = form.data['ibu']
         db.session.commit()

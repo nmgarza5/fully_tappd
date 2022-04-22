@@ -11,7 +11,7 @@ class Beer(db.Model):
     name = db.Column(db.String(255), nullable=False)
     style = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    price = db.Column(db.Float, nullable=False)
+    # price = db.Column(db.Float, nullable=False)
     abv = db.Column(db.Float, nullable=False)
     ibu = db.Column(db.Integer, nullable=False)
     # FORMAT: 2022-04-02 13:27:25.457314
@@ -34,7 +34,7 @@ class Beer(db.Model):
             'beer_image': self.brewery.profile_image,
             'description': self.description,
             'style': self.style,
-            'price': self.price,
+            # 'price': self.price,
             'abv': self.abv,
             'ibu': self.ibu,
             "reviews": {review.id: review.to_dict() for review in self.reviews},

@@ -1,4 +1,4 @@
-import profile
+from app.models import Brewery
 from flask_wtf import FlaskForm
 from wtforms import (StringField, TextAreaField, BooleanField, SelectField, SubmitField)
 from wtforms.validators import DataRequired, ValidationError, Length
@@ -34,9 +34,16 @@ def valid_image(form, field):
   if url and not (url.endswith('.jpg') or url.endswith('.jpeg') or url.endswith('.png') or url.endswith('.gif')):
     raise ValidationError('Image format must be .jpg, .jpeg, .png, or .gif')
 
+def name_exists(form, field):
+    # Checking if username is already in use
+    name = field.data
+    brewery = Brewery.query.filter(Brewery.name == name).first()
+    if brewery:
+        raise ValidationError('This Brewery name already exists.')
+
 class BreweryForm(FlaskForm):
 
-    name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255)])
+    name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255), name_exists] )
     header = StringField('Header', validators=[DataRequired(), Length(min=0, max=255)])
     description = TextAreaField('Description')
     brewery_type = SelectField('Brewery Type', choices=["micro", "brewpub","large", "regional"], validators=[DataRequired()])

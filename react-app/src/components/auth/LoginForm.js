@@ -33,18 +33,6 @@ const LoginForm = () => {
 
     };
 
-    const loginDemo = async (e) => {
-		e.preventDefault();
-		const data = await dispatch(login("keith-stone", "password"));
-		if (data.errors) {
-            console.log("DATA", data.errors)
-            return setErrors(data.errors)
-        }
-		else {
-            await dispatch(hideModal());
-            history.push('/brewhub')
-        }
-	};
 
     const showSignUpForm = () => {
 		dispatch(setCurrentModal(SignUpForm));
@@ -107,15 +95,9 @@ const LoginForm = () => {
                     >
                         Login
                     </div>
-                    <div
-                        className={styles.button}
-                        onClick={loginDemo}
-                    >
-                        Demo User
-                    </div>
                 </div>
                 <div className={styles.grey_line}></div>
-				<div>
+				<div className={styles.lower}>
                     New around here?
                     <div  className={styles.signup} onClick={showSignUpForm}>
                     Sign Up!
