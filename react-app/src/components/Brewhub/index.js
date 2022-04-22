@@ -44,8 +44,12 @@ const Brewhub = () => {
         return null;
     }
 
-	const getPreviousBeerId = () => {
+	const getNextBeerId = () => {
 		const currentIndex = userBeers.indexOf(selectedBeer);
+		if (userBeers[currentIndex+1]) {
+			const nextBeer = userBeers[currentIndex+1]
+			return nextBeer.id
+		}
 		if (userBeers[currentIndex-1]) {
 			const nextBeer = userBeers[currentIndex-1]
 			return nextBeer.id
@@ -80,7 +84,7 @@ const Brewhub = () => {
     const showDeleteBeerForm = () => {
 		dispatch(setCurrentModal(() => (<DeleteBeer beer_id={currentBeerId} />)));
 		dispatch(showModal());
-		setCurrentBeerId(getPreviousBeerId())
+		setCurrentBeerId(getNextBeerId())
 
       }
     const showEditBeerForm = () => {
