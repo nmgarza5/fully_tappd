@@ -52,7 +52,7 @@ class User(db.Model, UserMixin):
             'business_user': self.business_user,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'header': self.header,
+            # 'header': self.header,
             # 'bio': self.bio,
             'profile_image': self.profile_image,
             # 'banner_image': self.banner_image,
