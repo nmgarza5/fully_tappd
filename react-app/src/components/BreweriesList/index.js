@@ -1,15 +1,32 @@
-import React from "react";
-import { useSelector} from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
 import { useHistory } from "react-router-dom";
 import { PageContainer } from "../PageContainer";
 import styles from "./BreweriesList.module.css";
 import defaultImage from "../../images/default_image.png"
+import { receiveBreweries } from "../../store/breweries";
+import { authenticate } from "../../store/session";
 
 
 const BreweriesList = () => {
     const history = useHistory()
-	// const dispatch = useDispatch()
+	const [loaded, setLoaded] = useState(false);
+    const dispatch = useDispatch();
     const breweries = useSelector((state) => Object.values(state.breweries))
+
+
+	useEffect(() => {
+        (async () => {
+            await dispatch(authenticate());
+            await dispatch(receiveBreweries())
+            setLoaded(true);
+        })();
+    }, [dispatch]);
+
+    if (!loaded) {
+        return null;
+    }
+
 
 	const goToBrewery = (id) => {
 		history.push(`/breweries/${id}`);

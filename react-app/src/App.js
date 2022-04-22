@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
-import { receiveBreweries } from "./store/breweries";
-import { receiveBeer } from "./store/beer";
 import { PageWrapper } from "../src/components/PageWrapper";
 import Modal from "./components/Modal/Modal";
 import { Splashpage } from "./components/Splashpage";
@@ -32,8 +30,6 @@ function App() {
     useEffect(() => {
         (async () => {
             await dispatch(authenticate());
-            await dispatch(receiveBreweries())
-            await dispatch(receiveBeer())
             setLoaded(true);
         })();
     }, [dispatch]);
