@@ -19,7 +19,7 @@ class Brewery(db.Model):
     postal_code = db.Column(db.String(10), nullable=False)
     country = db.Column(db.String(255), nullable=False)
     phone = db.Column(db.String(10), nullable=False)
-    website_url = db.Column(db.String(255), nullable=False)
+    # website_url = db.Column(db.String(255), nullable=False)
     # FORMAT: 2022-04-02 13:27:25.457314
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(
@@ -45,6 +45,6 @@ class Brewery(db.Model):
             'postal_code': self.postal_code,
             'country': self.country,
             'phone': self.phone,
-            'website_url': self.website_url,
+            # 'website_url': self.website_url,
             'beers': {beer.id: beer.to_dict() for beer in self.beers}
         }

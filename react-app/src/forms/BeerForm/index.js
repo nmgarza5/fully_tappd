@@ -92,11 +92,12 @@ export const BeerForm = ({beer, breweryId}) => {
 				<ul>
 					{errors &&
 						errors.map((error) => (
-							<li key={error} className={styles.error_messages}>
+							<li key={error} className={styles.errors}>
 								{error.replace("_", " ")}
 							</li>
 						))}
 				</ul>
+				<div className={styles.small_text}>All fields below are required.</div>
 				<form className={styles.beer_form}>
 					<div className={styles.input_container}>
 						<label htmlFor="name">Name</label>
@@ -127,6 +128,7 @@ export const BeerForm = ({beer, breweryId}) => {
 							name="style"
 							value={style}
 							selected={style}
+							required
 							onChange={(e) => setStyle(e.target.value)}
 						>
 						{beerChoices.map((style, i) => (
@@ -141,6 +143,7 @@ export const BeerForm = ({beer, breweryId}) => {
 							name="description"
 							value={description}
 							placeholder="Tell us what makes your beer special."
+							required
 							onChange={(e) =>
 								setDescription(e.target.value)
 							}
