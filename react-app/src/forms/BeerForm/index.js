@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch} from "react-redux"
-import { useHistory, Redirect } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { createBeer, updateBeer} from "../../store/beer"
 import styles from "./BeerForm.module.css"
 import { hideModal } from "../../store/modal"
@@ -13,7 +13,7 @@ export const BeerForm = ({beer, breweryId}) => {
     const [name, setName] = useState(beer?.name || "");
 	const [style, setStyle] = useState(beer?.style || "Pale Ale")
 	const [description, setDescription] = useState(beer?.description || "");
-	const [price, setPrice] = useState(beer?.price || "0");
+	// const [price, setPrice] = useState(beer?.price || "0");
 	const [abv, setAbv] = useState(beer?.abv || "0");
 	const [ibu, setIbu] = useState(beer?.ibu || "0");
 	const brewery_id = breweryId
@@ -36,17 +36,17 @@ export const BeerForm = ({beer, breweryId}) => {
 			name,
 			description,
 			style,
-			price,
+			// price,
 			abv,
 			ibu,
 			brewery_id
 		}
 
-		!name
-			? setErrors([...errors, "Please provide your beer name."])
-			: !price
-			? setErrors([...errors, "Please provide your price."])
-			: setErrors([]);
+		// !name
+		// 	? setErrors([...errors, "Please provide your beer name."])
+		// 	: !price
+		// 	? setErrors([...errors, "Please provide your price."])
+		// 	: setErrors([]);
 
 		// conditional checking if there is a restaurant already created. If so, send a put request. Else send a post request.
 		if (beer) {

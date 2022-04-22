@@ -8,7 +8,6 @@ import { UpdateBrewery } from "../UpdateBrewery";
 import { DeleteBrewery } from "../DeleteBrewery";
 import {DeleteBeer} from "../Beer/DeleteBeer"
 import { BeerForm } from "../../forms/BeerForm";
-import { receiveBeer } from "../../store/beer";
 
 // import { CreateBrewery } from "../CreateBrewery";
 // import { receiveOneBeer } from "../../store/beer";
@@ -53,13 +52,13 @@ const Brewhub = () => {
 		}
 	}
 
-	const getNextBeerId = () => {
-		const currentIndex = userBeers.indexOf(selectedBeer);
-		if (userBeers[currentIndex+1]) {
-			const nextBeer = userBeers[currentIndex+1]
-			return nextBeer.id
-		}
-	}
+	// const getNextBeerId = () => {
+	// 	const currentIndex = userBeers.indexOf(selectedBeer);
+	// 	if (userBeers[currentIndex+1]) {
+	// 		const nextBeer = userBeers[currentIndex+1]
+	// 		return nextBeer.id
+	// 	}
+	// }
 
 
 	let reviewsList;

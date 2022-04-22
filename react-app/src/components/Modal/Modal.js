@@ -1,10 +1,9 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import ReactDOM from 'react-dom';
 import './Modal.css'
 
 export const Modal = () => {
-    const dispatch = useDispatch()
 
     const mount = useSelector(state => state.modals.modalMount)
     const display = useSelector(state => state.modals.display)
