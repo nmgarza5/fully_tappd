@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { PageContainer } from "../PageContainer";
 import styles from "./Brewhub.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { showModal, setCurrentModal } from '../../store/modal';
 import { UpdateBrewery } from "../UpdateBrewery";
 import { DeleteBrewery } from "../DeleteBrewery";
@@ -17,6 +18,7 @@ import defaultImage from "../../images/default_image.png"
 
 const Brewhub = () => {
 	const dispatch = useDispatch()
+	const history = useHistory();
 
 	const userBrewery = useSelector((state) => Object.values(state.session.user.breweries)[0])
 	const userBeers = Object.values(userBrewery.beers)
@@ -25,6 +27,21 @@ const Brewhub = () => {
 	// const [display, setDisplay] = useState("")
 	const [showMoreBrewery, setShowMoreBrewery] = useState(false)
 	const [showMoreBeer, setShowMoreBeer] = useState(false)
+
+
+	const reviewsList = Object.values(selectedBeer?.reviews)
+
+    const avgRating = () => {
+        let sum = 0;
+        reviewsList.forEach(review => sum += review.rating)
+        let avg = sum / reviewsList.length;
+        if (avg) return `${avg.toFixed(2)}/5`
+        else return "No Ratings"
+    }
+
+	const goToBeer = async (id) => {
+        await history.push(`/beer/${id}`)
+    }
 
 
     const showDeleteBeerForm = () => {
@@ -159,9 +176,8 @@ const Brewhub = () => {
 									<div className={styles.middle}>
 										<h2>{selectedBeer?.name}</h2>
 										<h4>{selectedBeer?.brewery_name}</h4>
-										<div>{selectedBeer?.style}</div>
+										<div>Beer Style: {selectedBeer?.style}</div>
 									</div>
-								</div>
 									<div className={styles.second_info}>
 											<div  className={styles.row}>
 												{selectedBeer?.abv}% ABV
@@ -169,7 +185,14 @@ const Brewhub = () => {
 											<div className={styles.row}>
 												{selectedBeer?.ibu} IBU
 											</div>
+											<div className={styles.row}>
+                                            	Rating: {avgRating()}
+                                        	</div>
+											<div className={styles.beer_link} onClick={() => goToBeer(selectedBeer.id)}>
+                                            	Go To Beer <i className="fa-solid fa-angle-right"></i>
+                                        	</div>
 									</div>
+								</div>
 								<div>
 									<div className={styles.third_info}>
 										{!showMoreBeer && selectedBeer?.description.length > 100 ?

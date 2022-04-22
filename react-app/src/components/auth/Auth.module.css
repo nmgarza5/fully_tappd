@@ -14,16 +14,10 @@
     align-items: center;
 }
 
-.error_container {
-    background-color: #c1c1c1;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 5px;
-    margin: 15px 0;
-    width: 100%;
-}
+.errors {
+    color: red;
+    font-size: 13px;
+  }
 
 .fields {
     display: flex;

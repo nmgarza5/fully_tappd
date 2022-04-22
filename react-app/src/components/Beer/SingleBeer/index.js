@@ -101,9 +101,9 @@ export const SingleBeer = () => {
                                     <div className={styles.row}>
                                         {beer.ibu} IBU
                                     </div>
-                                        <div className={styles.row}>
-                                            Rating: {avgRating()}
-                                        </div>
+                                    <div className={styles.row}>
+                                        Rating: {avgRating()}
+                                    </div>
                                     <div className={styles.row_end}>
                                        {sessionUser ?
                                         <>

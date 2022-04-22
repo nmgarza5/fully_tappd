@@ -48,7 +48,7 @@ const SignUpForm = () => {
         if (password === confirm_password) {
             // console.group("PASSOWRD MATCH");
             const data = await dispatch(signUp(userData));
-            console.log("DATA FRONT", data.payload.business_user)
+            // console.log("DATA FRONT", data.payload.business_user)
             if (data.errors) {
                 return setErrors(data.errors);
             }

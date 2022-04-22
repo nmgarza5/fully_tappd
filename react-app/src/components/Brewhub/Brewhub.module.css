@@ -66,7 +66,7 @@
 }
 
 .first_info {
-	height: 200px;
+    height: 200px;
 	padding: 10px;
     margin-top: -10px;
 	/* background: lightcoral; */
@@ -83,7 +83,7 @@
 }
 
 .card_img img {
-	width: 150px;
+    width: 150px;
 	height: 150px;
 	border-radius: 10px;
 	object-fit:contain;
@@ -93,11 +93,48 @@
 
 .middle {
 	margin-left: 15px;
-	width: 250px;
+	width: 300px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 }
+
+.middle h2 {
+    margin-bottom: -10px;
+}
+.middle h4 {
+    margin-bottom: 5px;
+    margin-left: 3px;
+}
+
+.beer_link {
+    color: rgb(163, 47, 47);
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+  }
+
+  .beer_link:hover {
+    cursor: pointer;
+	text-decoration: underline;
+  }
+
+  .second_info {
+      display: flex;
+      flex-direction: column;
+  }
+
+.beer_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    /* margin-right: 0px; */
+    width: 200px;
+}
+
+
+
 
 .middle div {
 	font-size: 14px;
@@ -182,6 +219,7 @@
   .selected_container {
       display: flex;
       flex-direction: row;
+      margin-top: -10px;
 
   }
 
