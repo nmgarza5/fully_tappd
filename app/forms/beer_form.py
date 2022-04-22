@@ -38,7 +38,7 @@ class BeerForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=0, max=255)])
     brewery_id = IntegerField('Brewery Id', validators=[DataRequired()])
     style = SelectField('Beer Style', choices=beer_choices, validators=[DataRequired()])
-    description = TextAreaField('Description')
+    description = TextAreaField('Description', validators=[DataRequired()])
     # price = DecimalField('Price', places=2, validators=[DataRequired(), valid_value])
     abv = DecimalField('ABV', places=2, validators=[DataRequired(), valid_value])
     ibu = IntegerField('IBU', validators=[DataRequired(), valid_value])
