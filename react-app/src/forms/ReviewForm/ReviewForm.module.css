@@ -1,3 +1,8 @@
+/* .outer_container {
+  width: 600px;
+  height: 800px;
+} */
+
 .review_form {
 
   width: 500px;
@@ -6,13 +11,29 @@
   border-radius: 5px;
 }
 
-.review_form h3 {
+.review_header {
   width: 100%;
+  padding-left: 10px;
   margin: 0;
   color: white;
   background-color: #000000;
   border-top-left-radius: 5px;
   border-top-RIGHT-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.review_header i{
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  color: rgb(163, 47, 47);
+
+}
+.review_header i:hover{
+  cursor: pointer;
+  color: white
 }
 
 

@@ -92,12 +92,13 @@ export const BreweryForm = ({brewery}) => {
 				<ul>
 					{errors &&
 						errors.map((error) => (
-							<li key={error} className={styles.error_messages}>
+							<li key={error} className={styles.errors}>
 								{error.replace("_", " ")}
 							</li>
 						))}
 				</ul>
 				<form>
+				<div className={styles.small_text}>All fields below are required.</div>
 					<div className={styles.input_container}>
 						<label htmlFor="name">Name</label>
 						<input

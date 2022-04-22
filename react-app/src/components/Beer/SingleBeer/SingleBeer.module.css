@@ -223,7 +223,8 @@
   }
 
   .image_preview:hover {
-	  cursor: pointer
+	  cursor: pointer;
+	  transform: scale(1.2);
   }
 
   .end_container {
@@ -242,4 +243,29 @@
 
   .review_buttons div {
 	padding-right: 5px;
+  }
+
+  .image_header {
+    width: 100%;
+    padding-left: 10px;
+    margin: 0;
+    color: white;
+    background-color: #000000;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .image_header i{
+      margin-right: 20px;
+    display: flex;
+    align-items: center;
+    color: rgb(163, 47, 47);
+
+  }
+  .image_header i:hover{
+    cursor: pointer;
+    color: white
   }

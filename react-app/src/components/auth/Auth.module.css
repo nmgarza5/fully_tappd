@@ -14,16 +14,10 @@
     align-items: center;
 }
 
-.error_container {
-    background-color: #c1c1c1;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 5px;
-    margin: 15px 0;
-    width: 100%;
-}
+.errors {
+    color: red;
+    font-size: 13px;
+  }
 
 .fields {
     display: flex;
@@ -161,4 +155,26 @@
     border-bottom: rgb(190, 190, 190) solid thin;
     width: 240px;
     margin-bottom: 10px;
+}
+
+.demo {
+    display:flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-between
+}
+
+.demo_click {
+    margin-left: 5px;
+    color: #14213D;
+    text-align: center;
+}
+.demo_click:hover {
+    cursor: pointer;
+    color: #0051ff;
+    font-weight: bolder;
+}
+
+.lower {
+    text-align: center
 }
