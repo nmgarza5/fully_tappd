@@ -22,15 +22,15 @@ export const SingleBeer = () => {
 	const sessionUser = useSelector((state) => state?.session?.user);
 
 	const { id } = useParams();
-    console.log("ID", id)
+    // console.log("ID", id)
 	const beer = useSelector((state) => state?.beer)[`${id}`];
 
 
     useEffect(() => {
         (async () => {
-            console.log("HELLO FIRST")
+            // console.log("HELLO FIRST")
             await dispatch(authenticate());
-            console.log("HELLO", id)
+            // console.log("HELLO", id)
             await dispatch(receiveOneBeer(id))
             setLoaded(true);
         })();
@@ -42,7 +42,7 @@ export const SingleBeer = () => {
 
     let reviewsList;
 
-     console.log("BEER", beer)
+    //  console.log("BEER", beer)
 
     if (beer) {
         reviewsList = Object.values(beer?.reviews)

@@ -55,7 +55,7 @@ export const createBeer = (data) => async (dispatch) => {
 		body: JSON.stringify(data),
 	});
 	const newBeer = await res.json();
-	console.log("NEW BEER", newBeer)
+	// console.log("NEW BEER", newBeer)
 	if (newBeer.errors) {
 		return newBeer;
 	} else {
@@ -65,10 +65,10 @@ export const createBeer = (data) => async (dispatch) => {
 };
 
 export const receiveOneBeer = (beerId) => async (dispatch) => {
-	console.log("beerid", beerId)
+	// console.log("beerid", beerId)
 	const res = await fetch(`/api/beer/${beerId}`);
 		const beer = await res.json();
-		console.log("beer store", beer)
+		// console.log("beer store", beer)
 		if (beer.errors) {
 			return beer
 		} else {

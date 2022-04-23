@@ -21,4 +21,4 @@ beers = [
 
 randomImage = faker.image.abstract(200, 200, true)
 
-console.log(randomImage)
+// console.log(randomImage)
