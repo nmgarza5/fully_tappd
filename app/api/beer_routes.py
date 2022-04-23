@@ -23,6 +23,7 @@ def beer():
 @beer_routes.route('/<int:id>', methods=["GET"])
 def singleBeer(id):
   beer = Beer.query.get(id)
+  # print('\n\n SINGLE BEER --', beer, '\n\n')
   return beer.to_dict()
 
 @beer_routes.route('/', methods=['POST'])
@@ -56,7 +57,7 @@ def breweryUpdate(id):
     form = BeerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     beer = Beer.query.get(id)
-    print("\n\n FORMDATA\n", form.data)
+    # print("\n\n FORMDATA\n", form.data)
     if form.validate_on_submit():
         beer.name = form.data['name'],
         beer.brewery_id = form.data['brewery_id'],

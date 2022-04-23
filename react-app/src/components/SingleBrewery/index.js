@@ -18,7 +18,7 @@ export const SingleBrewery = () => {
 	const { id } = useParams();
     const history = useHistory();
 	const brewery = useSelector((state) => state.breweries)[`${id}`];
-    const beersList = Object.values(brewery.beers)
+    const beersList = Object.values(brewery?.beers)
     const [showMore, setShowMore] = useState(false)
 
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export const SingleBrewery = () => {
     const calculateRatingsCount = () => {
         let count = 0;
         beersList.forEach(beer => {
-            let reviewsList = Object.values(beer.reviews)
+            let reviewsList = Object.values(beer?.reviews)
             count += reviewsList.length
         })
         return count;
