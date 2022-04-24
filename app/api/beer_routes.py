@@ -17,6 +17,13 @@ def error_generator(validation_errors):
 def beer():
   all_beer = Beer.query.all()
   # print('\n\n ALL BEER --', all_beer, '\n\n')
+  beerList = []
+  for beer in all_beer:
+    beerList.append({
+      "id": beer.id,
+      "brewery_id": beer.brewery_id
+      })
+  print("\nBEERLIST\n", beerList, "\n")
   return {beer.id: beer.to_dict() for beer in all_beer}
 
 

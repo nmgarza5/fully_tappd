@@ -14,7 +14,7 @@ beer_choices = [
 beer_list = [
   {
     "name": 'Buzz',
-    "brewery_id": 20,
+    "brewery_id": 8,
     "description": 'A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.',
     "style": beer_choices[randint(0, 27)],
     # "price": 7,
@@ -113,7 +113,7 @@ beer_list = [
   },
   {
     "name": 'Arcade Nation',
-    "brewery_id": 7,
+    "brewery_id": 8,
     "description": 'Running the knife-edge between an India Pale Ale and a Stout, this particular style is one we truly love. Black IPAs are a great showcase for the skill of our brew team, balancing so many complex and twisting flavours in the same moment. The citrus, mango and pine from the hops – three of our all-time favourites – play off against the roasty dryness from the malt bill at each and every turn.',
     "style": beer_choices[randint(0, 27)],
     "price": 7,
