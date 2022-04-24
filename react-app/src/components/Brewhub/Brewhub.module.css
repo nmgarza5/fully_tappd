@@ -143,15 +143,20 @@
 .third_info {
 	/* width: 100%; */
 	justify-content: center;
+    margin-bottom: 20px;
 }
 
 .third_info h3{
 	/* text-align: center; */
-	margin-bottom: 0;;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: -10px;
 }
 
 .showBeer, .showBrewery {
-	padding: 10px;
+	margin-left: 30px;
+    margin-right: 30px;
+    margin-top: -10px;
 }
 .showBeer div:hover, .showBrewery div:hover{
 	cursor: pointer;
@@ -159,7 +164,9 @@
 }
 
 .no_showBeer, .no_showBrewery {
-	padding: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: -10px;
 }
 
 .showBeer div, .showBrewery div {

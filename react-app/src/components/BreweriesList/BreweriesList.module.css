@@ -1,62 +1,66 @@
 .container {
-	width: 100%;
+	width: 800px;
 	margin: 0;
 	padding: 0;
 }
 
-.all_container {
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+.infoBrewery{
+    margin: 20px;
+	border-radius: 5px;
 	width: 100%;
-	gap: 50px 10px;
-	padding: 20px;
+	height: fit-content;
+	background: #f7f0f0;
+	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
+	contain: layout;
 }
 
-.each_container {
-	border: 1px solid #e1e1e1;
-	width: 100%;
-	height: 250px;
+.first_info {
+    height: 200px;
+	padding: 10px;
+    margin-top: -10px;
+	/* background: lightcoral; */
 	display: flex;
-	align-items: flex-start;
-	flex-direction: column;
-	border-radius: 6px;
-	transition: all linear 0.3s;
-	cursor: pointer;
-	overflow: hidden;
+	flex-direction: row;
+}
+
+.first_info div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* margin: 5px; */
+    margin-left: 5px;
 }
 
 .card_img img {
-	width: 100px;
-	height: 100px;
-    /* border-radius: 10px; */
+    width: 150px;
+	height: 150px;
+	border-radius: 10px;
 	object-fit:contain;
-	border-radius: 0;
+	/* border-radius: 10%; */
+	margin-top: 15px;
 }
 
-
-.each_container h3 {
-	margin: 0;
-}
-.info {
-	padding: 8px;
-}
-
-.button {
-	height: 45px;
-	width: 200px;
-	color: white;
+.middle {
+	margin-left: 15px;
+	width: 300px;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #da3743;
-	border-radius: 5px;
-	font-weight: 600;
-	margin-left: 20px;
-	transition: all 0.5s ease 0s;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
 
+.middle h2 {
+    margin-bottom: -10px;
+	/* margin-left: 10px; */
+}
+
+
+.brewery_link {
+	margin-top: 10px;
+	margin-left: 10px;
+    color: rgb(163, 47, 47)
   }
 
-  .button:hover {
-	cursor: pointer;
-	background-color: #bc202b;
+  .brewery_link:hover {
+    cursor: pointer;
+	text-decoration: underline;
   }

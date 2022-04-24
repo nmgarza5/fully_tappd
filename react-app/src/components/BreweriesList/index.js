@@ -27,6 +27,13 @@ const BreweriesList = () => {
     //     return null;
     // }
 
+	const breweryType = (type) => {
+        if (type === "micro") return "Micro"
+        if (type === "brewpub") return "Brewpub"
+        if (type === "regional") return "Regional"
+        if (type === "large") return "Large"
+    }
+
 
 	const goToBrewery = (id) => {
 		history.push(`/breweries/${id}`);
@@ -42,22 +49,31 @@ const BreweriesList = () => {
 			<div className={styles.container}>
 				<div className={styles.all_container}>
 					{breweries.map((brewery) => (
-						<div
-							onClick={() => goToBrewery(brewery.id)}
-							className={styles.each_container}
-							key={brewery.id}
-						>
-							<div className={styles.card_img}>
-								<img src={brewery.profile_image} alt="brewery" onError={addDefaultImage}/>
-							</div>
-							<div className={styles.info}>
-								<h3>
-									{/* {brewery?.name?.length > 20
-										? brewery?.name?.slice(0, 20) + "..."
-										: brewery?.name} */}
-										{brewery.name}
-								</h3>
-								<p>{brewery.header}</p>
+						<div key={brewery.id} className={styles.infoBrewery}>
+							<div className={styles?.first_info} >
+								<div className={styles?.card_img}>
+									<img src={brewery?.profile_image} alt="brewery" onError={addDefaultImage}/>
+								</div>
+								<div className={styles.middle}>
+									<h2>{brewery?.name}</h2>
+									<div className={styles.brewery_link} onClick={() => goToBrewery(brewery.id)}>
+										Go To Brewery <i className="fa-solid fa-angle-right"></i>
+									</div>
+								</div>
+								<div>
+									<div>{brewery?.street}</div>
+									<div>{brewery?.city}, {brewery?.state}</div>
+									<div>{brewery?.country}</div>
+									<div>Brewery Type - {breweryType(brewery?.brewery_type)}</div>
+									<div>{`(${brewery?.phone.slice(
+											0,
+											3
+										)}) ${brewery?.phone.slice(
+											3,
+											6
+										)}-${brewery?.phone.slice(6)}`}
+									</div>
+								</div>
 							</div>
 						</div>
 					))}
