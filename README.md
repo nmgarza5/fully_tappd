@@ -6,3 +6,26 @@ There are two kinds of users: business and standard. A standard user is able to 
 
 This project has been a testament to my pursuit of building upon my previus knowledge. Prior to my enrollment in App Academy, I spent time working in the beer and wine industries. This project proved to be an extension of those passions and I throughly enhoyed building out this application. I look forward to spending more time and further developing out additional feature such as user profiles, friends, favorites, and badges. I also plan on integrating AWS for image uploads and google maps api to find beer and breweries local to each user.
 
+## Features
+- Create an account, sign in, or log in as a standard or business demo user
+- Create, view, edit, and delete
+   - Breweries
+   - Beers
+   - Reviews
+
+Upcoming features: 
+- Favorites
+- User Profiles
+- Friends
+- Badges
+- AWS
+- Google Maps
+
+## Technologies Used
+- Javascript
+- React
+- Redux 
+- Python
+- PostgreSQL
+- Flask SQLAlchemy
+
