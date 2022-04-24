@@ -24,6 +24,20 @@ class Beer(db.Model):
 
     '''Define rating property here. Will need to use reviews'''
 
+
+    # @property
+    # def rating(self):
+    #     return self.rating
+
+    # @rating.setter
+    # def rating(self, reviews):
+    #     sum = 0
+    #     print("\n\n reviewS", reviews, "\n\n")
+    #     for review in reviews:
+    #         sum += review.rating
+    #     return sum / len(reviews)
+
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -37,6 +51,7 @@ class Beer(db.Model):
             # 'price': self.price,
             'abv': self.abv,
             'ibu': self.ibu,
+            # "rating": self.rating,
             "reviews": {review.id: review.to_dict() for review in self.reviews},
             'created_at': self.created_at
         }
