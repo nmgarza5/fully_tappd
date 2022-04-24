@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import { useDispatch } from "react-redux";
 import { hideModal } from "../../../store/modal";
 import { deleteBeer } from "../../../store/beer";
@@ -7,7 +7,7 @@ import styles from "./DeleteBeer.module.css";
 import { authenticate } from "../../../store/session";
 
 export const DeleteBeer = ({ beer_id }) => {
-	const [errors, setErrors] = useState([]);
+	// const [errors, setErrors] = useState([]);
 	const dispatch = useDispatch();
 	// const history = useHistory();
 
@@ -21,16 +21,15 @@ export const DeleteBeer = ({ beer_id }) => {
 		await dispatch(deleteBeer(beer_id));
 		await dispatch(authenticate())
 		dispatch(hideModal());
-		setErrors([]);
 	};
 
 	return (
 		<div className={styles.main_container}>
-			<div>
+			{/* <div>
 				{errors.map((error, ind) => (
 					<div key={ind}>{error}</div>
 				))}
-			</div>
+			</div> */}
 			<div className={styles.text_container}>
 				<h2>Are you sure you want to Delete your Brewery?</h2>
 				<h3>

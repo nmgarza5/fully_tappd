@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import modal_bottles from "../../images/modal_bottles.png"
-import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { login } from "../../store/session";
 import SignUpForm from "./SignUpForm";
 import { setCurrentModal, hideModal } from "../../store/modal";
@@ -12,7 +12,7 @@ const LoginForm = () => {
     const [errors, setErrors] = useState([]);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const user = useSelector((state) => state.session.user);
+    // const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
 
     const onLogin = async (e) => {
@@ -24,11 +24,11 @@ const LoginForm = () => {
         }
         if (data.business_user === true) {
             history.push('/brewhub')
-           return await dispatch(hideModal());
+           await dispatch(hideModal());
         }
         else {
             history.push('/breweries')
-            return await dispatch(hideModal());
+            await dispatch(hideModal());
         }
 
     };
@@ -38,14 +38,14 @@ const LoginForm = () => {
 		dispatch(setCurrentModal(SignUpForm));
 	};
 
-    if (user?.business_user === true) {
-        dispatch(hideModal());
-        return <Redirect to="/brewhub" />;
-    }
-    if (user) {
-        dispatch(hideModal());
-        return <Redirect to="/breweries" />;
-    }
+    // if (user?.business_user === true) {
+    //     dispatch(hideModal());
+    //     return <Redirect to="/brewhub" />;
+    // }
+    // if (user) {
+    //     dispatch(hideModal());
+    //     return <Redirect to="/breweries" />;
+    // }
 
     const closeModal = () => {
         dispatch(hideModal())

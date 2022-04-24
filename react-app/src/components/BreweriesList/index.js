@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { useHistory } from "react-router-dom";
 import { PageContainer } from "../PageContainer";
@@ -10,7 +10,7 @@ import { authenticate } from "../../store/session";
 
 const BreweriesList = () => {
     const history = useHistory()
-	const [loaded, setLoaded] = useState(false);
+	// const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const breweries = useSelector((state) => Object.values(state.breweries))
 
@@ -19,13 +19,13 @@ const BreweriesList = () => {
         (async () => {
             await dispatch(authenticate());
             await dispatch(receiveBreweries())
-            setLoaded(true);
+            // setLoaded(true);
         })();
     }, [dispatch]);
 
-    if (!loaded) {
-        return null;
-    }
+    // if (!loaded) {
+    //     return null;
+    // }
 
 
 	const goToBrewery = (id) => {

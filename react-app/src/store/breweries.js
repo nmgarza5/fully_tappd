@@ -66,7 +66,6 @@ export const createBrewery = (data) => async (dispatch) => {
 export const receiveOneBrewery = (breweryId) => async (dispatch) => {
 	const res = await fetch(`/api/breweries/${breweryId}`);
 		const brewery = await res.json();
-		console.log("store", brewery)
 		if (brewery.errors) {
 			return brewery
 		} else {
