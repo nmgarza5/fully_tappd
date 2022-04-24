@@ -39,9 +39,7 @@ export const SingleBrewery = () => {
     if (brewery) {
         beersList = Object.values(brewery?.beers)
     }
-    else {
-        return <Redirect to="/error" />
-    }
+
 
 
     // let type = brewery.brewery_type;
