@@ -15,7 +15,7 @@ export const BreweryForm = ({brewery}) => {
 	const [brewery_type, setBreweryType] = useState(brewery?.brewery_type || "micro")
 	const [street, setStreet] = useState(brewery?.street || "");
 	const [city, setCity] = useState(brewery?.city || "");
-	const [state, setState] = useState(brewery?.name || "");
+	const [state, setState] = useState(brewery?.state || "");
 	const [postal_code, setPostalCode] = useState(brewery?.postal_code || "");
 	const [country, setCountry] = useState(brewery?.country || "");
 	const [phone, setPhone] = useState(brewery?.phone || "");
