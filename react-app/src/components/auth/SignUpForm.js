@@ -78,6 +78,7 @@ const SignUpForm = () => {
             history.push('/brewhub')
         }
 	};
+
     const loginStandardDemo = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(login("keith-stone2", "password"));

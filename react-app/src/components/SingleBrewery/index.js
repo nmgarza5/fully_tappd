@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import styles from "./SingleBrewery.module.css";
@@ -14,14 +14,34 @@ import defaultImage from "../../images/default_image.png"
 
 export const SingleBrewery = () => {
     // const sessionUser = useSelector((state) => state?.session?.user);
+
+    const dispatch = useDispatch();
     const [loaded, setLoaded] = useState(false);
+    const [showMore, setShowMore] = useState(false)
 	const { id } = useParams();
     const history = useHistory();
 	const brewery = useSelector((state) => state.breweries)[`${id}`];
-    const beersList = Object.values(brewery?.beers)
-    const [showMore, setShowMore] = useState(false)
 
-    const dispatch = useDispatch();
+    useEffect(() => {
+        (async () => {
+            await dispatch(authenticate());
+            await dispatch(receiveOneBrewery(id))
+            setLoaded(true);
+        })();
+    }, [dispatch, id]);
+
+    if (!loaded) {
+        return null;
+    }
+
+    let beersList;
+
+    if (brewery) {
+        beersList = Object.values(brewery?.beers)
+    }
+
+
+
     // let type = brewery.brewery_type;
     const breweryType = (type) => {
         if (type === "micro") return "Micro"
@@ -39,17 +59,6 @@ export const SingleBrewery = () => {
         return count;
     }
 
-    useEffect(() => {
-        (async () => {
-            await dispatch(authenticate());
-            await dispatch(receiveOneBrewery(id))
-            setLoaded(true);
-        })();
-    }, [dispatch, id]);
-
-    if (!loaded) {
-        return null;
-    }
 
     // const calculateRating = () => {
     //     let  = 0;

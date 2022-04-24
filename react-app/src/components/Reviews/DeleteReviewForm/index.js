@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { hideModal } from "../../../store/modal";
 import { deleteReview } from "../../../store/reviews";
@@ -7,7 +7,6 @@ import { receiveOneBeer } from "../../../store/beer";
 import styles from "./DeleteReviewForm.module.css";
 
 export const DeleteReviewForm = ({ review_id, beer_id }) => {
-	const [errors, setErrors] = useState([]);
 	const dispatch = useDispatch();
 	// const history = useHistory();
 
@@ -22,16 +21,10 @@ export const DeleteReviewForm = ({ review_id, beer_id }) => {
 		await dispatch(receiveOneBeer(beer_id))
 		dispatch(hideModal());
 		// history.push(`/beer/${beer_id}`)
-		setErrors([]);
 	};
 
 	return (
 		<div className={styles.main_container}>
-			<div>
-				{errors.map((error, ind) => (
-					<div key={ind}>{error}</div>
-				))}
-			</div>
 			<div className={styles.text_container}>
 				<h2>Are you sure you want to Delete your Review?</h2>
 				<h3>

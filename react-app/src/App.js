@@ -76,7 +76,7 @@ function App() {
 						<CreateBrewery />
 					</ProtectedRoute>
                     <Route>
-						<ErrorPage />
+						<ErrorPage path="*" />
 					</Route>
                 </Switch>
                 <Footer />
