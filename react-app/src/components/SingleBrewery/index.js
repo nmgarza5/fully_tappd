@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useParams, Redirect } from "react-router-dom";
+import { useHistory, useParams} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import styles from "./SingleBrewery.module.css";
