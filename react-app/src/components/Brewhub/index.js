@@ -131,46 +131,32 @@ const Brewhub = () => {
 							<div>{userBrewery?.city}, {userBrewery?.state}</div>
 							<div>{userBrewery?.country}</div>
 							<div>Brewery Type - {breweryType(userBrewery?.brewery_type)}</div>
+							<div>{`(${userBrewery?.phone.slice(
+									0,
+									3
+								)}) ${userBrewery?.phone.slice(
+									3,
+									6
+								)}-${userBrewery?.phone.slice(6)}`}
+							</div>
 						</div>
-						<div className={styles.end}>
-                                <div>{userBrewery?.website_url}</div>
-                                <div>{`(${userBrewery?.phone.slice(
-										0,
-										3
-									)}) ${userBrewery?.phone.slice(
-										3,
-										6
-									)}-${userBrewery?.phone.slice(6)}`}</div>
-                            </div>
 					</div>
 					<div>
 						<div className={styles.third_info}>
 							<h3>
-								Header:<br></br>
 								{userBrewery?.header}
 							</h3>
-							Description:<br></br>
-							{/* {!showMoreBrewery && userBrewery?.description?.length > 100 ?
+							{!showMoreBrewery && userBrewery?.description?.length > 220 ?
 								<div className={styles.no_showBrewery}>
-									{userBrewery?.description?.slice(0,100)}...
+									{userBrewery?.description?.slice(0,220)}...
 									<div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show more</div>
-								</div>
-								:
+									</div>
+								: !showMoreBrewery && userBrewery?.description?.length < 220 ?
+											<div className={styles.showBrewery}>{userBrewery?.description}</div> :
 								<div className={styles.showBrewery}>
 									{userBrewery?.description}
 									<div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show Less</div>
-								</div> } */}
-								{!showMoreBrewery && userBrewery?.description?.length > 220 ?
-                                    <div className={styles.no_showBrewery}>
-                                        {userBrewery?.description?.slice(0,220)}...
-                                        <div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show more</div>
-                                     </div>
-                                    : !showMoreBrewery && userBrewery?.description?.length < 220 ?
-                                                <div className={styles.showBrewery}>{userBrewery?.description}</div> :
-                                    <div className={styles.showBrewery}>
-                                        {userBrewery?.description}
-                                        <div onClick={() => setShowMoreBrewery(!showMoreBrewery)}>Show Less</div>
-                                    </div> }
+								</div> }
 						</div>
 					</div>
 				</div>
@@ -220,26 +206,14 @@ const Brewhub = () => {
 								</div>
 								<div>
 									<div className={styles.third_info}>
-{/*
-										{!showMoreBeer && selectedBeer?.description.length > 150 ?
-											<div className={styles.no_showBeer}>
-												{selectedBeer?.description.slice(0,150)}...
-												<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show more</div>
-											</div>
-											:
-											<div className={styles.showBeer}>
-												{selectedBeer?.description}
-												<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show Less</div>
-											</div> } */}
-
-											{!showMoreBeer && selectedBeer?.description?.length > 150 ?
+											{!showMoreBeer && selectedBeer?.description?.length > 140 ?
 
 											<div className={styles.no_showBeer}>
-												{selectedBeer?.description?.slice(0,150)}...
+												{selectedBeer?.description?.slice(0,140)}...
 												<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show more</div>
 											</div>
 
-											: !showMoreBeer && selectedBeer?.description?.length < 150 ?
+											: !showMoreBeer && selectedBeer?.description?.length < 140 ?
 
 											<div className={styles.showBeer}>{selectedBeer?.description}</div>
 											:
@@ -247,7 +221,6 @@ const Brewhub = () => {
 												{selectedBeer?.description}
 												<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show Less</div>
 											</div> }
-
 									</div>
 								</div>
 							</div> }

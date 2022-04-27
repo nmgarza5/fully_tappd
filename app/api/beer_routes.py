@@ -16,7 +16,6 @@ def error_generator(validation_errors):
 @beer_routes.route('/', methods=["GET"])
 def beer():
   all_beer = Beer.query.all()
-  # print('\n\n ALL BEER --', all_beer, '\n\n')
   return {beer.id: beer.to_dict() for beer in all_beer}
 
 
