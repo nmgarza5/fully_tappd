@@ -25,40 +25,55 @@ const SignUpForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
-    const [profile_image, setProfileImage] = useState("");
+    const [image, setProfileImage] = useState("");
+    const [imageLoading, setImageLoading] = useState(false);
     // const [header, setHeader] = useState("");
     // const [bio, setBio] = useState("");
     const dispatch = useDispatch();
 
     const handleClick = async (e) => {
         e.preventDefault();
-        const userData = {
-            username,
-            first_name,
-            last_name,
-            business_user,
-            birthdate,
-            email,
-            password,
-            confirm_password,
-            // header,
-            // bio,
-            profile_image,
-        };
+        const formData = new FormData();
+        formData.append('username', username)
+        formData.append('first_name', first_name)
+        formData.append('last_name', last_name)
+        formData.append('business_user', business_user)
+        formData.append('birthdate', birthdate)
+        formData.append('email', email)
+        formData.append('password', password)
+        formData.append('confirm_password', confirm_password)
+        formData.append('image', image)
+        setImageLoading(true);
+        // const userData = {
+        //     username,
+        //     first_name,
+        //     last_name,
+        //     business_user,
+        //     birthdate,
+        //     email,
+        //     password,
+        //     confirm_password,
+        //     // header,
+        //     // bio,
+        //     profile_image,
+        // };
 
         if (password === confirm_password) {
             // console.group("PASSOWRD MATCH");
-            const data = await dispatch(signUp(userData));
+            const data = await dispatch(signUp(formData));
             // console.log("DATA FRONT", data.payload.business_user)
             if (data.errors) {
+                setImageLoading(false);
                 return setErrors(data.errors);
             }
             if (data.payload.business_user === true) {
+                setImageLoading(false);
                 history.push('/new-brewery')
                 return dispatch(hideModal());
 
             }
             else {
+                setImageLoading(false);
                 history.push('/breweries')
                 return dispatch(hideModal());
             }
@@ -93,6 +108,11 @@ const SignUpForm = () => {
 
     const closeModal = () => {
         dispatch(hideModal())
+    }
+
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
     }
 
     return (
@@ -206,14 +226,20 @@ const SignUpForm = () => {
                         </div>
                         <div className={styles.lower_field}>
                             <label>Profile Image</label>
-                            <input
+                            {/* <input
                             className={styles.lower_input}
                                 type="text"
                                 name="profile_image"
                                 onChange={(e) => setProfileImage(e.target.value)}
                                 placeholder="Please enter the url to your Profile Image"
                                 value={profile_image}
-                                ></input>
+                                ></input> */}
+                                <input
+                                type="file"
+                                accept="image/*"
+                                onChange={updateImage}
+                                />
+                                {(imageLoading)&& <p>Loading...</p>}
                         </div>
                         {/* <div className={styles.lower_field}>
                             <label>Header</label>

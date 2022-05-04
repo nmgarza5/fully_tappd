@@ -152,13 +152,13 @@ export const logout = () => async (dispatch) => {
     }
 };
 
-export const signUp = (userData) => async (dispatch) => {
+export const signUp = (formData) => async (dispatch) => {
     const response = await fetch("/api/auth/signup", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
+        // headers: {
+        //     "Content-Type": "application/json",
+        // },
+        body: formData,
     });
 
     if (response.ok) {
