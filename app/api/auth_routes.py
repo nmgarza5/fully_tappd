@@ -67,7 +67,6 @@ def sign_up():
         return {"errors": "image required"}, 400
 
     image = request.files["image"]
-
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400
 
@@ -85,12 +84,12 @@ def sign_up():
 
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    business_user = request.json['business_user']
+
 
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
-            business_user=business_user,
+            business_user=form.data['business_user'],
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
             birthdate=form.data['birthdate'],
@@ -98,7 +97,7 @@ def sign_up():
             password=form.data['password'],
             # header=form.data['header'],
             # bio=form.data['bio'],
-            profile_image=form.data['profile_image'],
+            profile_image=url,
             # banner_image=form.data['banner_image']
         )
         db.session.add(user)

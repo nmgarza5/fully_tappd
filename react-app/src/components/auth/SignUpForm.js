@@ -25,7 +25,7 @@ const SignUpForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
-    const [image, setProfileImage] = useState("");
+    const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
     // const [header, setHeader] = useState("");
     // const [bio, setBio] = useState("");
@@ -34,6 +34,7 @@ const SignUpForm = () => {
     const handleClick = async (e) => {
         e.preventDefault();
         const formData = new FormData();
+        formData.append('name', 'NAME')
         formData.append('username', username)
         formData.append('first_name', first_name)
         formData.append('last_name', last_name)
@@ -44,6 +45,9 @@ const SignUpForm = () => {
         formData.append('confirm_password', confirm_password)
         formData.append('image', image)
         setImageLoading(true);
+
+        console.log("formDATA SIGNUP", formData.get('username'))
+        console.log("formDATA SIGNUP", formData.get('name'))
         // const userData = {
         //     username,
         //     first_name,
@@ -235,6 +239,7 @@ const SignUpForm = () => {
                                 value={profile_image}
                                 ></input> */}
                                 <input
+                                className={styles.lower_input}
                                 type="file"
                                 accept="image/*"
                                 onChange={updateImage}
