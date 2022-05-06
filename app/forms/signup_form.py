@@ -1,7 +1,7 @@
 from email.utils import parsedate
 from flask_wtf import FlaskForm
 from sqlalchemy import Boolean, DateTime
-from wtforms import StringField, TextAreaField, SubmitField
+from wtforms import StringField, TextAreaField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, ValidationError, EqualTo, Length, URL
 from app.models import User
 from datetime import datetime
@@ -30,15 +30,10 @@ def valid_image(form, field):
 
 
 def date_format(form, field):
-        # receive date as string
         try:
             birthdate_str = field.data
-            # replace characters to create date format
-            new = birthdate_str.replace("T", " ")
-            next = new[0:19]
-            # change to date format
-            birthdate  = datetime.fromisoformat(next)
-            # print("\n\n FROM-ISOFORMAT ------", birthdate, '\n\n')
+            next = birthdate_str[4:15]
+            birthdate  = datetime.strptime(next, '%b %d %Y')
             return birthdate
         except:
             raise ValidationError('You must enter a valid birthdate')
@@ -46,7 +41,7 @@ def date_format(form, field):
 def calculate_age(form, field):
         birthdate = date_format(form, field)
         current_time = datetime.utcnow()
-        # print("\n\n current_time ------", current_time, '\n\n')
+        print("\n\n current_time ------", current_time, '\n\n')
         delta = (birthdate - current_time).days
         # print("\n\n delta ------", delta, '\n\n')
         # add 5 to offset to correct date, shift from leap years
@@ -57,6 +52,7 @@ def calculate_age(form, field):
             raise ValidationError('You must be over the age of 21 to sign up for FullyTappd')
 
 class SignUpForm(FlaskForm):
+    business_user = BooleanField('Business User')
     username = StringField('Username', validators=[DataRequired(), username_exists])
     first_name = StringField('First Name', validators=[DataRequired(), Length(min=0, max=50)])
     last_name = StringField('Last Name', validators=[DataRequired(), Length(min=0, max=50)])
@@ -66,6 +62,6 @@ class SignUpForm(FlaskForm):
     confirm_password = StringField('Confirm Password', validators=[DataRequired()])
     # header = StringField('Header', validators=[Length(min=0, max=255)])
     # bio = TextAreaField('Bio')
-    profile_image = StringField('Profile Image', validators=[Length(min=0, max=2048), valid_image, DataRequired(), URL()])
+    # profile_image = StringField('Profile Image', validators=[Length(min=0, max=2048), valid_image, DataRequired(), URL()])
     # banner_image = StringField('Banner Image', validators=[Length(min=0, max=2048), valid_image])
     submit = SubmitField('Submit')

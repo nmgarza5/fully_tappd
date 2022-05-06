@@ -12,6 +12,7 @@ const Profile = () => {
 	const sessionUser = useSelector((state) => state.session.user);
 
 
+
 	// const goToActivity = () => {
 	// 	history.push("/activity");
 	// 	setShowBox(false);
