@@ -46,8 +46,8 @@ const SignUpForm = () => {
         formData.append('image', image)
         setImageLoading(true);
 
-        console.log("formDATA SIGNUP", formData.get('username'))
-        console.log("formDATA SIGNUP", formData.get('name'))
+        // console.log("formDATA SIGNUP", formData.get('username'))
+        // console.log("formDATA SIGNUP", formData.get('name'))
         // const userData = {
         //     username,
         //     first_name,
@@ -68,7 +68,7 @@ const SignUpForm = () => {
             // console.log("DATA FRONT", data.payload.business_user)
             if (data.errors) {
                 setImageLoading(false);
-                return setErrors(data.errors);
+                setErrors(data.errors);
             }
             if (data.payload.business_user === true) {
                 setImageLoading(false);
