@@ -88,7 +88,7 @@ export const SingleBeer = () => {
         return (
             <div>
                 <h3 className={styles.image_header}>Image Preview<i className="fa-solid fa-rectangle-xmark" onClick={closeModal}></i></h3>
-                <img src={image} alt="" style={{ height : 500 }} onError={addDefaultImage}/>
+                <img src={image} alt=""className={styles.image} onError={addDefaultImage}/>
             </div>
         )
     }

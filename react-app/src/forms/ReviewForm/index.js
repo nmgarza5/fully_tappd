@@ -16,7 +16,8 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
     const [rating, setRating] = useState(review?.rating || 1)
     const [content, setContent] = useState(review?.content || "")
     // const [image_url, setImage] = useState(review?.image_url || "")
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState(review?.image_url || null);
+    console.log("review", review)
     console.log("IMAGE", image)
     const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
@@ -40,11 +41,11 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
         console.log("formData", formData)
         setImageLoading(true);
 
-        // conditional checking if there is a restaurant already created. If so, send a put request. Else send a post request.
+        // conditional checking if there is a review already created. If so, send a put request. Else send a post request.
         if (review) {
             const id = review?.id;
             const updateData = { formData, id };
-            // console.log("updateData", updateData)
+            console.log("updateData", updateData)
             const updatedReview = await dispatch(
                 updateReview(updateData)
             );
@@ -111,7 +112,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                             onChange={(e) => setContent(e.target.value)}
                         ></textarea>
                     </div>
-                    <div className={styles.lower_field}>
+                    {!image &&  <div className={styles.lower_field}>
                         <label>Image
                         </label>
                         {/* <input
@@ -128,6 +129,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                                 accept="image/*"
                                 onChange={updateImage}
                                 />
+
                                 {(imageLoading)&& <p>Loading...</p>}
                         {/* <div className={styles.images_container}>
                         {image &&
@@ -137,7 +139,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                             </div>
                                 }
                                 </div> */}
-                    </div>
+                    </div> }
                 </div>
                 <div className={styles.lower_half}>
                     <div className={styles.rating_container}>

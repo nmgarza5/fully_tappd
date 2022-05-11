@@ -77,13 +77,13 @@ export const receiveOneReview = (reviewId) => async (dispatch) => {
 };
 
 export const updateReview =
-	({ reviewData, id }) =>
+	({ formData, id }) =>
 	async (dispatch) => {
-		// console.log("REVIEWDATA---", id, reviewData)
+		console.log("REVIEWDATA---", id, formData)
 		const res = await fetch(`/api/reviews/${id}`, {
 			method: "PUT",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(reviewData),
+			// headers: { "Content-Type": "application/json" },
+			body: formData,
 		});
 
 		const review = await res.json();

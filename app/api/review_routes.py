@@ -50,7 +50,7 @@ def create_review():
 
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  print("\n FORM", form.data)
+  # print("\n FORM", form.data)
   if form.validate_on_submit():
     new_review = Review(
       user_id = current_user.id,
@@ -75,13 +75,14 @@ def reviewUpdate(id):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     review = Review.query.get(id)
+    print("\n FORM", form.data)
+    print("\n review", review.to_dict())
     if form.validate_on_submit():
         review.user_id = current_user.id,
         review.brewery_id = form.data['brewery_id']
         review.beer_id = form.data['beer_id']
         review.rating = form.data['rating']
         review.content = form.data['content']
-        review.image_url = form.data['image_url']
 
         db.session.commit()
         return review.to_dict()
