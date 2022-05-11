@@ -37,6 +37,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
         formData.append('rating', rating)
         formData.append('content', content)
         formData.append('image', image)
+        console.log("formData", formData)
         setImageLoading(true);
 
         // conditional checking if there is a restaurant already created. If so, send a put request. Else send a post request.
@@ -58,7 +59,9 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
             }
         } else {
             const newReview = await dispatch(createReview(formData));
+            console.log("newReview", newReview)
             if (newReview.errors) {
+                console.log("newReview.errors", newReview.errors)
                 setImageLoading(false);
                 setErrors(newReview.errors);
             } else {
@@ -72,9 +75,9 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
 
         }
 
-    const addDefaultImage = async (e) => {
-        e.target.src = defaultImage
-    }
+    // const addDefaultImage = async (e) => {
+    //     e.target.src = defaultImage
+    // }
 
     const closeModal = () => {
         dispatch(hideModal())
@@ -126,14 +129,14 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                                 onChange={updateImage}
                                 />
                                 {(imageLoading)&& <p>Loading...</p>}
-                        <div className={styles.images_container}>
+                        {/* <div className={styles.images_container}>
                         {image &&
                             <div className={styles.single_image}>
                                 <img src={image} alt="" className={styles.image_preview} onError={addDefaultImage}/>
                                 <i onClick={() => setImage(null)} className="fa-solid fa-square-minus"></i>
                             </div>
                                 }
-                                </div>
+                                </div> */}
                     </div>
                 </div>
                 <div className={styles.lower_half}>

@@ -3,6 +3,8 @@ from flask import Blueprint, request
 from flask_login import current_user
 from app.models import Brewery, db, User, Beer, Review
 from app.forms import ReviewForm
+from app.s3_helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 review_routes = Blueprint('reviews', __name__)
 
@@ -48,7 +50,7 @@ def create_review():
 
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-
+  print("\n FORM", form.data)
   if form.validate_on_submit():
     new_review = Review(
       user_id = current_user.id,
