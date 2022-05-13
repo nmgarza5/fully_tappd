@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../auth/SignUpForm";
 import styles from "./NavBar.module.css";
+import SearchSection from "../SearchSection";
 
 import { showModal, setCurrentModal } from "../../store/modal";
 import ProfileDropdown from "../ProfileDropdown"
@@ -13,26 +14,26 @@ import ProfileDropdown from "../ProfileDropdown"
 const NavBar = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
-    // const [searchQuery, setSearchQuery] = useState("");
-	// const history = useHistory();
+    const [searchQuery, setSearchQuery] = useState("");
+	const history = useHistory();
 
-	// const handleSubmit = (e) => {
-	// 	e.preventDefault();
+	const handleSubmit = (e) => {
+		e.preventDefault();
 
-	// 	if (searchQuery.includes("%")) {
-	// 		alert(
-	// 			`Please do not use the "percent" symbol in your search query.`
-	// 		);
-	// 		setSearchQuery("");
-	// 	} else if (searchQuery) {
-	// 		history.push(`/search/${searchQuery}`);
-	// 	} else {
-	// 		alert(`Please enter a search query.`);
-	// 	}
+		if (searchQuery.includes("%")) {
+			alert(
+				`Please do not use the "percent" symbol in your search query.`
+			);
+			setSearchQuery("");
+		} else if (searchQuery) {
+			history.push(`/search/${searchQuery}`);
+		} else {
+			alert(`Please enter a search query.`);
+		}
 
-	// 	// dispatch(hideModal());
-	// 	return;
-	// };
+		// dispatch(hideModal());
+		return;
+	};
 
     const showLoginForm = () => {
         dispatch(setCurrentModal(LoginForm));
@@ -44,10 +45,10 @@ const NavBar = () => {
         dispatch(showModal());
     };
 
-    // const showSearchForm = () => {
-    //     dispatch(setCurrentModal(SearchSection));
-    //     dispatch(showModal());
-    // };
+    const showSearchForm = () => {
+        dispatch(setCurrentModal(SearchSection));
+        dispatch(showModal());
+    };
 
     if (sessionUser) {
         return (
@@ -72,7 +73,7 @@ const NavBar = () => {
                     <div className={styles.profile_icon}>
                         <ProfileDropdown />
                     </div>
-                    {/* <div>
+                    <div>
 					<input
 						className={styles.search_box_field}
 						type="text"
@@ -81,7 +82,7 @@ const NavBar = () => {
 						placeholder="Search for Breweries or Beers"
 					/>
 					<i onClick={handleSubmit} className="fa-solid fa-magnifying-glass"></i>
-				</div> */}
+				</div>
                 </div>
             </nav>
         );
