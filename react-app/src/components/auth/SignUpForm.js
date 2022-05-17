@@ -63,14 +63,13 @@ const SignUpForm = () => {
         // };
 
         if (password === confirm_password) {
-            // console.group("PASSOWRD MATCH");
             const data = await dispatch(signUp(formData));
-            // console.log("DATA FRONT", data.payload.business_user)
             if (data.errors) {
                 setImageLoading(false);
-                setErrors(data.errors);
+                setErrors(data.errors[0]);
+                return
             }
-            if (data.payload.business_user === true) {
+            if (data?.payload?.business_user === true) {
                 setImageLoading(false);
                 history.push('/new-brewery')
                 return dispatch(hideModal());
@@ -137,9 +136,7 @@ const SignUpForm = () => {
             </div>
             <form className={styles.signup_form}>
                 <div>
-                    {errors?.map((error, ind) => (
-                        <div key={ind} className={styles.errors}>{error.charAt(0).toUpperCase() + error.slice(1).replace("_", " ")}</div>
-                    ))}
+                    {errors.length > 1 && <div className={styles.errors}>{errors?.charAt(0)?.toUpperCase() + errors?.slice(1)?.replace("_", " ")}</div> }
                 </div>
                 <div className={styles.fields}>
                     <div className={styles.upper_fields}>
