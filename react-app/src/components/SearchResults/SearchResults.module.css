@@ -9,17 +9,12 @@
 	border-radius: 5px;
 
 }
+/* main panel */
+.left {
+	width:700px;
+}
 
-	.left {
-		width:700px;
 
-	}
-	.right {
-		margin-left: 30px;
-		width: 300px;
-		background: #f7f0f0;
-		filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
-	}
 
 .header_results {
 	padding-top: 50px;
@@ -72,3 +67,38 @@
 .search_intro_message {
 	margin-bottom: 30px;
 }
+
+	/* right side panel */
+	.right {
+		margin-left: 40px;
+		width: 250px;
+
+	}
+
+	.right_container {
+		background: #ffffff;
+		filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
+		border-radius: 5px;
+		padding: 5px;
+	}
+	.right_container p {
+		font-weight: bolder;
+		border-bottom: grey thin solid;
+		margin: 5px;
+		padding-left: 5px;
+	}
+
+	.right_image {
+		width: 16%;
+		;
+	}
+
+	.beer_link {
+		color: rgb(163, 47, 47)
+
+		}
+
+	.beer_link:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	  }

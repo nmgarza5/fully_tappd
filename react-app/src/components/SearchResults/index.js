@@ -16,6 +16,10 @@ const SearchResults = () => {
 	const breweries = useSelector((state) =>
 		Object.values(state.breweries)
 	);
+	console.log('beers', beers)
+	const beer_sort_ratings = beers.sort((a,b) => (b.rating - a.rating));
+	const topTenBeers = beer_sort_ratings.slice(0, 11);
+	console.log("TopTen --- ", topTenBeers)
 
 	const beers_set = new Set();
 	beers.forEach((beer) => {
@@ -37,7 +41,7 @@ const SearchResults = () => {
 	});
 
 	const sendToBeer = (beer_id) => {
-		history.push(`/beers/${beer_id}`);
+		history.push(`/beer/${beer_id}`);
 	};
 
 	const matchedBeers = Array.from(beers_set);
@@ -53,7 +57,7 @@ const SearchResults = () => {
 		<PageContainer>
 			<div className={styles.page}>
                 <div className={styles.left}>
-					{matchedBeers.length || matchedBreweries.length ? (
+					{matchedBeers.length || matchedBreweries.length ?
 						<>
 							<div className={styles.parent_container_each}>
 								<div
@@ -77,12 +81,24 @@ const SearchResults = () => {
 								{/* Place the brewery listings here */}
 							</div>
 						</>
-					) : (
+					 : (
 						<div className={styles.no_search_results}>
 							<div>No Search Results Were Found.</div>
 						</div>
 					)}
 				</div>
+				<div className={styles.right}>
+					<div className={styles.right_container}>
+						<p>Top Beers</p>
+						{topTenBeers.map(beer => (
+							<div key={beer.id} className={styles.beer_link} onClick={() => sendToBeer(beer.id)}>
+								<img className={styles.right_image} src={beer.beer_image} alt='beer image' />
+								{beer.name}
+							</div>
+						))}
+					</div>
+
+                </div>
 			</div>
 		</PageContainer>
 	);

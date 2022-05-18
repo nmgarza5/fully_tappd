@@ -57,13 +57,13 @@ export const SingleBeer = () => {
         else return "No Ratings"
     }
 
-    // const userReviews = () => {
-    //     let count = 0;
-    //     reviewsList?.forEach(review => {
-    //         if (review?.user_id === sessionUser?.id) count+=1;
-    //     })
-    //     return count;
-    // }
+    const userReviews = () => {
+        let count = 0;
+        reviewsList?.forEach(review => {
+            if (review?.user_id === sessionUser?.id) count+=1;
+        })
+        return count;
+    }
 
 
 
@@ -113,12 +113,12 @@ export const SingleBeer = () => {
                                 <h4 onClick={() => goToBrewery(beer.brewery_id)}>{beer.brewery_name}</h4>
                                 <div>{beer.style}</div>
                             </div>
-                            {/* <div className={styles.end}>
+                            <div className={styles.end}>
                                 <div>Total Reviews: {reviewsList.length}</div>
                                 <div>Monthly Average</div>
-                                {sessionUser && <div># of your Reviews: {userReviews()}</div> }
+                                {sessionUser && <div>Your Reviews: {userReviews()}</div> }
                                 <div># of Favorites</div>
-                            </div> */}
+                            </div>
                         </div>
                             <div className={styles.second_info}>
                                 {/* <div className={styles.row}> */}
@@ -129,7 +129,7 @@ export const SingleBeer = () => {
                                         {beer.ibu} IBU
                                     </div>
                                     <div className={styles.row}>
-                                        Rating: {avgRating()}
+                                        Rating: {beer.rating}
                                     </div>
                                     <div className={styles.row_end}>
                                        {sessionUser ?
