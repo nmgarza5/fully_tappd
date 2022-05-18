@@ -1,7 +1,25 @@
-.all_beers {
-	width: 100%;
-	/* overflow-y: auto; */
+.page {
+	width:1200px;
+	/* height: 100vh; */
+	display: flex;
+	flex-direction: row;
+	/* justify-content: space-between; */;
+	justify-content: center;
+	margin-top: 10px;
+	border-radius: 5px;
+
 }
+
+	.left {
+		width:700px;
+
+	}
+	.right {
+		margin-left: 30px;
+		width: 300px;
+		background: #f7f0f0;
+		filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
+	}
 
 .header_results {
 	padding-top: 50px;

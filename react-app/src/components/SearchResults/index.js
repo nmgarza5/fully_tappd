@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { PageContainer } from "../PageContainer";
@@ -8,6 +8,7 @@ import styles from "./SearchResults.module.css";
 const SearchResults = () => {
 	const { searchWord } = useParams();
 	const history = useHistory();
+	const [selected, setSelected] = useState("Beer")
 
 	const beers = useSelector((state) =>
 		Object.values(state.beer)
@@ -50,40 +51,39 @@ const SearchResults = () => {
 
 	return (
 		<PageContainer>
-				{matchedBeers.length || matchedBreweries.length ? (
-					<>
-						<div className={styles.parent_container_each}>
-							<div
-								className={styles.search_intro_message}
-							>{`You searched for "${searchWord}":`}</div>
-							<div>
-								<strong>
-									{`Your search result has returned ${matchedBreweries.length} breweries
-									and ${matchedBeers.length} beers: `}
-								</strong>
+			<div className={styles.page}>
+                <div className={styles.left}>
+					{matchedBeers.length || matchedBreweries.length ? (
+						<>
+							<div className={styles.parent_container_each}>
+								<div
+									className={styles.search_intro_message}
+								>{`You searched for "${searchWord}":`}</div>
+								<div>
+									<strong>
+										{`Your search result has returned ${matchedBreweries.length} breweries
+										and ${matchedBeers.length} beers: `}
+									</strong>
+								</div>
 							</div>
-						</div>
 
-						<div  className={styles.results}>
-							<div  className={styles.beer_results}>
-								{matchedBeers.map(
-									(beer) => (
-										<BeerCardSmall key={beer.id} beer={beer} />
-								))}
+							<div  className={styles.results}>
+								<div  className={styles.beer_results}>
+									{matchedBeers.map(
+										(beer) => (
+											<BeerCardSmall key={beer.id} beer={beer} />
+									))}
+								</div>
+								{/* Place the brewery listings here */}
 							</div>
-							<div  className={styles.brewery_results}>
-								{matchedBeers.map(
-									(beer) => (
-										<BeerCardSmall key={beer.id} beer={beer} />
-								))}
-							</div>
+						</>
+					) : (
+						<div className={styles.no_search_results}>
+							<div>No Search Results Were Found.</div>
 						</div>
-					</>
-				) : (
-					<div className={styles.no_search_results}>
-						<div>No Search Results Were Found.</div>
-					</div>
-				)}
+					)}
+				</div>
+			</div>
 		</PageContainer>
 	);
 };
