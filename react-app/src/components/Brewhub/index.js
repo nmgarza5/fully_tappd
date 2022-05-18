@@ -4,8 +4,8 @@ import styles from "./Brewhub.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { showModal, setCurrentModal } from '../../store/modal';
-import { UpdateBrewery } from "../UpdateBrewery";
-import { DeleteBrewery } from "../DeleteBrewery";
+import { UpdateBrewery } from "../Breweries/UpdateBrewery";
+import { DeleteBrewery } from "../Breweries/DeleteBrewery";
 import {DeleteBeer} from "../Beer/DeleteBeer"
 import { BeerForm } from "../../forms/BeerForm";
 

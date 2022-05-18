@@ -6,6 +6,7 @@ import defaultImage from "../../../images/default_image.png"
 
 
 const BeerCardSmall = ({beer}) => {
+    console.log('BEER', beer)
     const history = useHistory()
 
 
@@ -41,15 +42,9 @@ const BeerCardSmall = ({beer}) => {
                 <div className={styles.middle}>
                     <h2>{beer?.name}</h2>
                     <h4 onClick={() => goToBrewery(beer.brewery_id)}>{beer?.brewery_name}</h4>
-                    <div>Beer Style: {beer?.style}</div>
                 </div>
                 <div className={styles.second_info}>
-                    <div  className={styles.row}>
-                        {beer?.abv}% ABV
-                    </div>
-                    <div className={styles.row}>
-                        {beer?.ibu} IBU
-                    </div>
+                    <div>Beer Style: {beer?.style}</div>
                     <div className={styles.row}>
                         Rating: {avgRating(beer?.reviews)}
                     </div>

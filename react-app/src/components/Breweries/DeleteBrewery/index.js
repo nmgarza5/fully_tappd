@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { DeleteBreweryForm } from '../../forms/DeleteBreweryForm';
-import { showModal, setCurrentModal } from '../../store/modal';
+import { DeleteBreweryForm } from '../../../forms/DeleteBreweryForm';
+import { showModal, setCurrentModal } from '../../../store/modal';
 import styles from './DeleteBrewery.module.css'
 
 

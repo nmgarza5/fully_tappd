@@ -7,7 +7,7 @@ import { authenticate } from "./store/session";
 import { PageWrapper } from "../src/components/PageWrapper";
 import Modal from "./components/Modal/Modal";
 import { Splashpage } from "./components/Splashpage";
-import { SingleBrewery } from "./components/SingleBrewery";
+import { SingleBrewery } from "./components/Breweries/SingleBrewery";
 import { CreateBrewery } from "./components/Breweries/CreateBrewery";
 import SearchResults from "./components/SearchResults";
 // import { CreateBeer } from "./components/Beer/CreateBeer";

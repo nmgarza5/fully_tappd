@@ -3,18 +3,18 @@ import { useHistory, useParams} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import styles from "./SingleBrewery.module.css";
-import { receiveOneBrewery } from "../../store/breweries";
-import { authenticate } from "../../store/session"
-import { UpdateReview } from "../Reviews/UpdateReview"
-import { DeleteReview } from "../Reviews/DeleteReview";
+import { receiveOneBrewery } from "../../../store/breweries";
+import { authenticate } from "../../../store/session"
+import { UpdateReview } from "../../Reviews/UpdateReview"
+import { DeleteReview } from "../../Reviews/DeleteReview";
 // import { UpdateBrewery } from "../UpdateBrewery";
-import { PageContainer } from "../PageContainer";
+import { PageContainer } from "../../PageContainer";
 // import { DeleteBrewery } from "../DeleteBrewery";
-import defaultProfileImage from "../../images/default_profile_image.png"
-import defaultImage from "../../images/default_image.png"
-import { showModal, setCurrentModal } from '../../store/modal';
-import { hideModal } from "../../store/modal"
-import { ReviewForm } from "../../forms/ReviewForm";
+import defaultProfileImage from "../../../images/default_profile_image.png"
+import defaultImage from "../../../images/default_image.png"
+import { showModal, setCurrentModal } from '../../../store/modal';
+import { hideModal } from "../../../store/modal"
+import { ReviewForm } from "../../../forms/ReviewForm";
 
 export const SingleBrewery = () => {
     // const sessionUser = useSelector((state) => state?.session?.user);
