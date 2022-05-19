@@ -99,7 +99,7 @@
   .stars_outer {
     position: relative;
     display: inline-block;
-    padding: 5px;
+    /* padding: 5px; */
   }
 
   .stars_inner {

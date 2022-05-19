@@ -23,7 +23,7 @@ const BeerCardSmall = ({beer}) => {
         e.target.src = defaultImage
     }
 
-    const circlePercentage = `${Math.round((beer.rating/5)*100 / 10) * 10}%`
+    const circlePercentage = `${(beer.rating/5)*100 }%`
 
     return (
         <div className={styles.infoBeer}>
