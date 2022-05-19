@@ -13,6 +13,7 @@ import { DeleteReview } from "../../Reviews/DeleteReview";
 import defaultProfileImage from "../../../images/default_profile_image.png"
 import defaultImage from "../../../images/default_image.png"
 import { hideModal } from "../../../store/modal"
+import RatingsBar from "../../RatingsBar";
 
 export const SingleBeer = () => {
     const history = useHistory();
@@ -129,7 +130,7 @@ export const SingleBeer = () => {
                                         {beer.ibu} IBU
                                     </div>
                                     <div className={styles.row}>
-                                        Rating: {beer.rating}
+                                       <RatingsBar rating={beer.rating} />
                                     </div>
                                     <div className={styles.row_end}>
                                        {sessionUser ?
@@ -168,7 +169,7 @@ export const SingleBeer = () => {
                                             {review.user_name} is drinking a {review.beer_name} from {review.brewery_name}
                                         </div>
                                         <div>
-                                            Rating: {review.rating}/5
+                                            <RatingsBar rating={review.rating} />
                                         </div>
                                         <div>
                                             {review.content}

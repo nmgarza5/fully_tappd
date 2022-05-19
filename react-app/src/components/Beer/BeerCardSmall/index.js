@@ -2,11 +2,11 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./BeerCardSmall.module.css";
 import defaultImage from "../../../images/default_image.png"
+import RatingsBar from "../../RatingsBar";
 
 
 
 const BeerCardSmall = ({beer}) => {
-    console.log('BEER', beer)
     const history = useHistory()
 
 
@@ -22,8 +22,6 @@ const BeerCardSmall = ({beer}) => {
 	const addDefaultImage = (e) => {
         e.target.src = defaultImage
     }
-
-    const circlePercentage = `${(beer.rating/5)*100 }%`
 
     return (
         <div className={styles.infoBeer}>
@@ -47,12 +45,8 @@ const BeerCardSmall = ({beer}) => {
                     </div>
                 </div>
                 <div className={styles.second_bottom}>
-                    <div className={styles.stars_outer}>
-                        <div className={styles.stars_inner} style={{width: `${circlePercentage}`}}></div>
-                    </div>
-                    <span className={styles.number_rating}></span>
-                        ({beer.rating})
-                    </div>
+                    <RatingsBar rating={beer.rating}/>
+                </div>
             </div>
         </div>
     )
