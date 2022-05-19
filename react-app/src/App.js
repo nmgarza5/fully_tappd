@@ -9,7 +9,7 @@ import Modal from "./components/Modal/Modal";
 import { Splashpage } from "./components/Splashpage";
 import { SingleBrewery } from "./components/Breweries/SingleBrewery";
 import { CreateBrewery } from "./components/Breweries/CreateBrewery";
-import SearchResults from "./components/SearchResults";
+import SearchResults from "./components/Search/SearchResults";
 // import { CreateBeer } from "./components/Beer/CreateBeer";
 import BreweriesList from "./components/Breweries/BreweriesList";
 import BeerList from "./components/Beer/BeerList";
@@ -65,10 +65,12 @@ function App() {
                     <BrewhubConditional exact path="/brewhub" >
                         <Brewhub />
                     </BrewhubConditional>
-                    {!sessionUser ?
+                    {!sessionUser
+                    ?
                     <Route exact path="/" >
                         <Splashpage />
-                    </Route> :
+                    </Route>
+                    :
                     <Route exact path="/" >
                         <BreweriesList />
                     </Route> }

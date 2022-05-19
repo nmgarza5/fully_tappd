@@ -74,7 +74,6 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-	border-bottom: rgb(197, 197, 197) solid thin;
 }
 
 .beer_selected {
@@ -92,7 +91,10 @@
     text-align: center;
 	padding: 5px;
     width: 100%;
-	border-right: rgb(197, 197, 197) solid thin;}
+	border-right: rgb(197, 197, 197) solid thin;
+	border-bottom: rgb(197, 197, 197) solid thin;
+}
+
 
 .beer_not_selected:hover {
 	cursor: pointer;
@@ -113,6 +115,7 @@
 	text-align: center;
 	padding: 5px;
 	width: 100%;
+	border-bottom: rgb(197, 197, 197) solid thin;
 }
 
 .brewery_not_selected:hover {
@@ -120,7 +123,7 @@
 }
 
 .num_results {
-	font-weight: lighter;
+	margin-left: 10px;
 }
 
 .no_results {

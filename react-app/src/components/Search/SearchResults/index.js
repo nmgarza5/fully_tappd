@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { PageContainer } from "../PageContainer";
-import BeerCardSmall from "../Beer/BeerCardSmall"
+import { PageContainer } from "../../PageContainer";
+import SearchCard from "../SearchCard"
 import styles from "./SearchResults.module.css";
-import defaultImage from "../../images/default_image.png"
-import { receiveBreweries } from "../../store/breweries";
-import { receiveBeer } from "../../store/beer";
+import defaultImage from "../../../images/default_image.png"
+import { receiveBreweries } from "../../../store/breweries";
+import { receiveBeer } from "../../../store/beer";
 
 const SearchResults = () => {
 	const { searchWord } = useParams();
@@ -95,6 +95,12 @@ const SearchResults = () => {
 		return;
 	};
 
+	const handleKeyPress = (e) => {
+		if (e.key === "Enter") {
+			handleSubmit(e);
+		}
+	};
+
 
 	return (
 		<PageContainer>
@@ -108,6 +114,7 @@ const SearchResults = () => {
 								type="text"
 								value={searchQuery}
 								onChange={(e) => setSearchQuery(e.target.value)}
+								onKeyPress={handleKeyPress}
 								placeholder="Search for Breweries or Beers"
 							/>
 						</div>
@@ -147,7 +154,7 @@ const SearchResults = () => {
 									<strong>{matchedBeers.length} beer</strong> results for <strong>"{searchWord}"</strong>
 								</p>
 								{matchedBeers.map(beer => (
-									<BeerCardSmall key={beer.id} beer={beer} />
+									<SearchCard key={beer.id} type={"beer"} content={beer} />
 								))}
 							</>
 							:
@@ -165,7 +172,7 @@ const SearchResults = () => {
 									<strong>{matchedBreweries.length} brewery</strong> results for <strong>"{searchWord}"</strong>
 								</p>
 								{matchedBreweries.map(brewery => (
-									<BeerCardSmall key={brewery.id} beer={brewery} />
+									<SearchCard key={brewery.id} type={"brewery"} content={brewery} />
 								))}
 							</>
 							:
