@@ -23,6 +23,8 @@ const BeerCardSmall = ({beer}) => {
         e.target.src = defaultImage
     }
 
+    const circlePercentage = `${Math.round((beer.rating/5)*100 / 10) * 10}%`
+
     return (
         <div className={styles.infoBeer}>
             <div className={styles.first_info} >
@@ -30,11 +32,27 @@ const BeerCardSmall = ({beer}) => {
                     <img src={beer?.beer_image} alt="beer" onError={addDefaultImage}/>
                 </div>
                 <div className={styles.middle}>
-                    <h2 onClick={() => goToBeer(beer.id)}>{beer?.name}</h2>
-                    <h4 onClick={() => goToBrewery(beer.brewery_id)}>{beer?.brewery_name}</h4>
+                    <h3 onClick={() => goToBeer(beer.id)}>{beer?.name}</h3>
+                    <h5 onClick={() => goToBrewery(beer.brewery_id)}>{beer?.brewery_name}</h5>
+                    <p>{beer.style}</p>
                 </div>
             </div>
             <div className={styles.second_info}>
+                <div className={styles.second_top}>
+                    <div>
+                        {beer.abv}% ABV
+                    </div>
+                    <div>
+                        {beer.ibu} IBU
+                    </div>
+                </div>
+                <div className={styles.second_bottom}>
+                    <div className={styles.stars_outer}>
+                        <div className={styles.stars_inner} style={{width: `${circlePercentage}`}}></div>
+                    </div>
+                    <span className={styles.number_rating}></span>
+                        ({beer.rating})
+                    </div>
             </div>
         </div>
     )

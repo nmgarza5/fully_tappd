@@ -1,37 +1,32 @@
 
 .card_img img {
-    width: 50px;
-	height: 50px;
+    width: 70px;
+	height: 70px;
 	border-radius: 10px;
 	object-fit:contain;
 	/* border-radius: 10%; */
-	margin-top: 15px;
 }
 
 .infoBeer{
 	width: 100%;
+    height: 100px;
     display: flex;
     flex-direction: row;
-	border-bottom: rgb(197, 197, 197) solid thin;
+	border-top: rgb(197, 197, 197) solid thin;
 }
 
 
 .first_info {
-    height: 200px;
-	padding: 10px;
-    margin-top: -30px;
-    margin-bottom: -20px;
-	/* background: lightcoral; */
 	display: flex;
 	flex-direction: row;
+    width: 70%;
 }
 
 .first_info div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* margin: 5px; */
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .middle {
@@ -42,40 +37,90 @@
 	justify-content: space-evenly;
 }
 
-.middle h2 {
-    margin-bottom: -10px;
+.middle h3 {
+    margin: 0;
+	color: #8a4500;
+    font-weight: bold;
 }
-.middle h4 {
-    margin-bottom: 5px;
-    margin-left: 3px;
-	color: rgb(163, 47, 47);
+.middle h5 {
+    margin: 0;
+	color: #8a4500;
 }
 
-.middle h4:hover {
+.middle h3:hover {
     cursor: pointer;
-	text-decoration: underline;
+    color: #c60;
+  }
+.middle h5:hover {
+    cursor: pointer;
+    color: #c60;
   }
 
-.middle div {
-	font-size: 13px;
-}
-
-.beer_link {
-    color: rgb(163, 47, 47);
-    display: flex;
-    flex-direction: column;
-    width: 100px;
-  }
-   .beer_link i {
-	   width: fit-content;
-   }
-
-  .beer_link:hover {
-    cursor: pointer;
-	text-decoration: underline;
+.middle p {
+    margin: 0;
+    color: rgb(131, 131, 131);
+    font-size: 12px;;
   }
 
   .second_info {
-      display: flex;
-      flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .second_top {
+    width: 100%;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 5px;
+    border-left: rgb(197, 197, 197) solid thin;
+  }
+
+  .second_top div {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .second_top div:nth-child(2) {
+    border-left: rgb(197, 197, 197) solid thin;
+  }
+
+  .second_bottom {
+    border-top: rgb(197, 197, 197) solid thin;
+    border-left: rgb(197, 197, 197) solid thin;
+    text-align: center;
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .stars_outer {
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+  }
+
+  .stars_inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+  }
+
+  .stars_outer::before {
+    content: "\f111 \f111 \f111 \f111 \f111";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #ccc;
+  }
+
+  .stars_inner::before {
+    content: "\f111 \f111 \f111 \f111 \f111";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #f8ce0b;
   }

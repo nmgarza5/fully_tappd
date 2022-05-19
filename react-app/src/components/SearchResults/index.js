@@ -1,17 +1,20 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { PageContainer } from "../PageContainer";
 import BeerCardSmall from "../Beer/BeerCardSmall"
 import styles from "./SearchResults.module.css";
 import defaultImage from "../../images/default_image.png"
+import { receiveBreweries } from "../../store/breweries";
+import { receiveBeer } from "../../store/beer";
 
 const SearchResults = () => {
 	const { searchWord } = useParams();
+	const dispatch = useDispatch();
 	const history = useHistory();
 	const [selected, setSelected] = useState("beer")
 	const [searchQuery, setSearchQuery] = useState("");
-
+	const [loaded, setLoaded] = useState(false);
 
 	const beers = useSelector((state) =>
 		Object.values(state.beer)
@@ -19,6 +22,20 @@ const SearchResults = () => {
 	const breweries = useSelector((state) =>
 		Object.values(state.breweries)
 	);
+
+    useEffect(() => {
+        (async () => {
+            await dispatch(receiveBreweries());
+            await dispatch(receiveBeer());
+            setLoaded(true);
+        })();
+    }, [dispatch]);
+
+    if (!loaded) {
+        return null;
+    }
+
+
 
 	const beer_sort_ratings = beers.sort((a,b) => (b.rating - a.rating));
 	const topTenBeers = beer_sort_ratings.slice(0, 11);
@@ -121,20 +138,41 @@ const SearchResults = () => {
 							</span>
 							}
 						</div>
-						{selected === "beer" && matchedBeers.length > 0
-						?
+						{selected === "beer" &&
 						<>
-							<p className={styles.num_results}>
-								<strong>{matchedBeers.length} beer</strong> results for <strong>{searchWord}</strong>
-							</p>
-							{matchedBeers.map(beer => (
-								<BeerCardSmall key={beer.id} beer={beer} />
-							))}
+							{matchedBeers.length > 0
+							?
+							<>
+								<p className={styles.num_results}>
+									<strong>{matchedBeers.length} beer</strong> results for <strong>"{searchWord}"</strong>
+								</p>
+								{matchedBeers.map(beer => (
+									<BeerCardSmall key={beer.id} beer={beer} />
+								))}
+							</>
+							:
+							<div className={styles.no_results}>
+								Sorry there are no matching beers, please search again...
+							</div>}
 						</>
-						:
-						<div>
-							Sorry there are no beers
-						</div>
+						}
+						{selected === "brewery" &&
+						<>
+							{matchedBreweries.length > 0
+							?
+							<>
+								<p className={styles.num_results}>
+									<strong>{matchedBreweries.length} brewery</strong> results for <strong>"{searchWord}"</strong>
+								</p>
+								{matchedBreweries.map(brewery => (
+									<BeerCardSmall key={brewery.id} beer={brewery} />
+								))}
+							</>
+							:
+							<div className={styles.no_results}>
+								Sorry there are no matching breweries, please search again...
+							</div>}
+						</>
 						}
 					</div>
 
