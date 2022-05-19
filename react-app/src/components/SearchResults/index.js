@@ -4,11 +4,14 @@ import { useParams, useHistory } from "react-router-dom";
 import { PageContainer } from "../PageContainer";
 import BeerCardSmall from "../Beer/BeerCardSmall"
 import styles from "./SearchResults.module.css";
+import defaultImage from "../../images/default_image.png"
 
 const SearchResults = () => {
 	const { searchWord } = useParams();
 	const history = useHistory();
-	const [selected, setSelected] = useState("Beer")
+	const [selected, setSelected] = useState("beer")
+	const [searchQuery, setSearchQuery] = useState("");
+
 
 	const beers = useSelector((state) =>
 		Object.values(state.beer)
@@ -16,10 +19,13 @@ const SearchResults = () => {
 	const breweries = useSelector((state) =>
 		Object.values(state.breweries)
 	);
-	console.log('beers', beers)
+
 	const beer_sort_ratings = beers.sort((a,b) => (b.rating - a.rating));
 	const topTenBeers = beer_sort_ratings.slice(0, 11);
-	console.log("TopTen --- ", topTenBeers)
+
+	const breweries_sort_ratings = breweries.sort((a,b) => (b.rating - a.rating));
+	const topTenBreweries = breweries_sort_ratings.slice(0, 11);
+
 
 	const beers_set = new Set();
 	beers.forEach((beer) => {
@@ -40,64 +46,126 @@ const SearchResults = () => {
 		}
 	});
 
+	const matchedBeers = Array.from(beers_set);
+	const matchedBreweries = Array.from(breweries_set);
+
+
 	const sendToBeer = (beer_id) => {
 		history.push(`/beer/${beer_id}`);
 	};
-
-	const matchedBeers = Array.from(beers_set);
 
 	const sendToBrewery = (brewery_id) => {
 		history.push(`/breweries/${brewery_id}`);
 	};
 
-	const matchedBreweries = Array.from(breweries_set);
+	const addDefaultImage = (e) => {
+		e.target.src = defaultImage
+	}
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if (searchQuery.includes("%")) {
+			alert(
+				`Please do not use the "percent" symbol in your search query.`
+			);
+			setSearchQuery("");
+		} else if (searchQuery) {
+			history.push(`/search/${searchQuery}`);
+		} else {
+			alert(`Please enter a search query.`);
+		}
+		return;
+	};
 
 
 	return (
 		<PageContainer>
 			<div className={styles.page}>
                 <div className={styles.left}>
-					{matchedBeers.length || matchedBreweries.length ?
-						<>
-							<div className={styles.parent_container_each}>
-								<div
-									className={styles.search_intro_message}
-								>{`You searched for "${searchWord}":`}</div>
-								<div>
-									<strong>
-										{`Your search result has returned ${matchedBreweries.length} breweries
-										and ${matchedBeers.length} beers: `}
-									</strong>
-								</div>
-							</div>
-
-							<div  className={styles.results}>
-								<div  className={styles.beer_results}>
-									{matchedBeers.map(
-										(beer) => (
-											<BeerCardSmall key={beer.id} beer={beer} />
-									))}
-								</div>
-								{/* Place the brewery listings here */}
-							</div>
-						</>
-					 : (
-						<div className={styles.no_search_results}>
-							<div>No Search Results Were Found.</div>
+					<div className={styles.search_bar}>
+						<div>
+							<i className="fa-solid fa-magnifying-glass fa-2x"></i>
+							<input
+								className={styles.search_box_field}
+								type="text"
+								value={searchQuery}
+								onChange={(e) => setSearchQuery(e.target.value)}
+								placeholder="Search for Breweries or Beers"
+							/>
 						</div>
-					)}
+						<div onClick={handleSubmit} className={styles.button}>
+							Search
+						</div>
+					</div>
+					<div className={styles.main_container}>
+						<div className={styles.select_container}>
+							{selected === "beer"
+							?
+							<span className={styles.beer_selected}>
+								Beer
+							</span>
+							:
+							<span className={styles.beer_not_selected} onClick={()=>setSelected("beer")}>
+								Beer
+							</span>
+							}
+							{selected === "brewery"
+							?
+							<span className={styles.brewery_selected}>
+								Brewery
+							</span>
+							:
+							<span className={styles.brewery_not_selected}  onClick={()=>setSelected("brewery")}>
+								Brewery
+							</span>
+							}
+						</div>
+						{selected === "beer" && matchedBeers.length > 0
+						?
+						<>
+							<p className={styles.num_results}>
+								<strong>{matchedBeers.length} beer</strong> results for <strong>{searchWord}</strong>
+							</p>
+							{matchedBeers.map(beer => (
+								<BeerCardSmall key={beer.id} beer={beer} />
+							))}
+						</>
+						:
+						<div>
+							Sorry there are no beers
+						</div>
+						}
+					</div>
+
+
+
 				</div>
 				<div className={styles.right}>
 					<div className={styles.right_container}>
-						<p>Top Beers</p>
+						<h3>Top Beers</h3>
 						{topTenBeers.map(beer => (
 							<div key={beer.id} className={styles.beer_link} onClick={() => sendToBeer(beer.id)}>
-								<img className={styles.right_image} src={beer.beer_image} alt='beer image' />
-								{beer.name}
+								<img className={styles.right_image} src={beer.beer_image} alt='beer image' onError={addDefaultImage}/>
+								<div className={styles.text_container}>
+									<h4>{beer.name}</h4>
+									<p>{beer.brewery_name}</p>
+								</div>
 							</div>
 						))}
 					</div>
-
+					<div className={styles.right_container}>
+						<h3>Top Breweries</h3>
+						{topTenBreweries.map(brewery => (
+							<div key={brewery.id} className={styles.beer_link} onClick={() => sendToBeer(brewery.id)}>
+								<img className={styles.right_image} src={brewery.profile_image} alt='brewery image' onError={addDefaultImage}/>
+								<div className={styles.text_container}>
+									<h4>{brewery.name}</h4>
+									<p>Rating: {brewery.rating}</p>
+								</div>
+							</div>
+						))}
+					</div>
                 </div>
 			</div>
 		</PageContainer>

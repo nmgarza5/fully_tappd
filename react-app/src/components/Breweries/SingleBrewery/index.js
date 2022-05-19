@@ -126,16 +126,9 @@ export const SingleBrewery = () => {
 
     return (
         <PageContainer>
-            {/* {isOwner &&
-            <>
-                <UpdateBrewery brewery={brewery} />
-                <DeleteBrewery brewery_id={brewery.id} />
-            </>
-            } */}
             <div className={styles.page}>
                 <div className={styles.left}>
                     <div className={styles.info}>
-                        {/* <div style={{backgroundImage: `url(${brewery.banner_image})`}}></div> */}
                         <div className={styles.first_info} >
                             <div className={styles.card_img}>
                                 <img src={brewery.profile_image} alt="brewery" onError={addDefaultImage}/>
@@ -147,21 +140,17 @@ export const SingleBrewery = () => {
                                 <div>{brewery.country}</div>
                                 <div>Brewery Type - {breweryType(brewery.brewery_type)}</div>
                             </div>
-                            {/* <div className={styles.end}>
+                            <div className={styles.end}>
                                 <div>Total Checkins</div>
                                 <div>Monthly Average</div>
                                 <div># of your checkins</div>
                                 <div># of Favorites</div>
-                            </div> */}
+                            </div>
                         </div>
                         {/* <div> */}
                             <div className={styles.second_info}>
-                                {/* <div className={styles.row}> */}
-                                    {/* <div  className={styles.row}>
-                                        Avg Rating
-                                    </div> */}
                                     <div className={styles.row}>
-                                        # of Ratings: {calculateRatingsCount()}
+                                        Rating: {brewery.rating}
                                     </div>
                                     <div className={styles.row_end}>
                                         # of Beers: {beersList.length}

@@ -1,7 +1,7 @@
 
 .card_img img {
-    width: 100px;
-	height: 100px;
+    width: 50px;
+	height: 50px;
 	border-radius: 10px;
 	object-fit:contain;
 	/* border-radius: 10%; */
@@ -9,13 +9,10 @@
 }
 
 .infoBeer{
-    margin: 10px;
-	border-radius: 5px;
-	width: 700px;
-	height: fit-content;
-	background: #f7f0f0;
-	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
-	contain: layout;
+	width: 100%;
+    display: flex;
+    flex-direction: row;
+	border-bottom: rgb(197, 197, 197) solid thin;
 }
 
 

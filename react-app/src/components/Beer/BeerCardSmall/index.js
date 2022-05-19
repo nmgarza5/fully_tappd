@@ -23,16 +23,6 @@ const BeerCardSmall = ({beer}) => {
         e.target.src = defaultImage
     }
 
-	const avgRating = (reviews) => {
-        let sum = 0;
-		let reviewsList = Object.values(reviews)
-        reviewsList.forEach(review => sum += review.rating)
-        let avg = sum / reviewsList.length;
-        if (avg) return `${avg.toFixed(2)}/5`
-        else return "No Ratings"
-    }
-
-
     return (
         <div className={styles.infoBeer}>
             <div className={styles.first_info} >
@@ -40,18 +30,11 @@ const BeerCardSmall = ({beer}) => {
                     <img src={beer?.beer_image} alt="beer" onError={addDefaultImage}/>
                 </div>
                 <div className={styles.middle}>
-                    <h2>{beer?.name}</h2>
+                    <h2 onClick={() => goToBeer(beer.id)}>{beer?.name}</h2>
                     <h4 onClick={() => goToBrewery(beer.brewery_id)}>{beer?.brewery_name}</h4>
                 </div>
-                <div className={styles.second_info}>
-                    <div>Beer Style: {beer?.style}</div>
-                    <div className={styles.row}>
-                        Rating: {avgRating(beer?.reviews)}
-                    </div>
-                    <div className={styles.beer_link} onClick={() => goToBeer(beer.id)}>
-                        Go To Beer <i className="fa-solid fa-angle-right"></i>
-                    </div>
-                </div>
+            </div>
+            <div className={styles.second_info}>
             </div>
         </div>
     )

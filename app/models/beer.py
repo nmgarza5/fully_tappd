@@ -22,17 +22,14 @@ class Beer(db.Model):
     brewery = db.relationship("Brewery", back_populates="beers")
     reviews = db.relationship("Review", back_populates="beer", cascade="all, delete-orphan")
 
-    '''Define rating property here. Will need to use reviews'''
-
-
     def rating(self):
         sum = 0
-        print("\n\n reviewS", self.reviews, "\n\n")
         for review in self.reviews:
             sum += review.rating
-        print("\n\n RATING", sum / len(self.reviews), "\n\n")
-        return sum / len(self.reviews)
-
+        try:
+            return round(sum / len(self.reviews), 2)
+        except:
+            return 0
 
     def to_dict(self):
         return {
