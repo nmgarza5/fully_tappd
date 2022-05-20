@@ -42,11 +42,21 @@ export const SingleBeer = () => {
     }
 
     let reviewsList;
+    let uniqueReviews;
 
     //  console.log("BEER", beer)
 
     if (beer) {
+
+        //find reviews list
         reviewsList = Object.values(beer?.reviews)
+
+        //find number of unique users that posted reviews
+        let reviewerSet = new Set();
+        reviewsList.forEach(review=> {
+            reviewerSet.add(review.user_id)
+        })
+        uniqueReviews = reviewerSet.size
     }
 
 
@@ -112,17 +122,35 @@ export const SingleBeer = () => {
                             <div className={styles.middle}>
                                 <h2>{beer.name}</h2>
                                 <h4 onClick={() => goToBrewery(beer.brewery_id)}>{beer.brewery_name}</h4>
-                                <div>{beer.style}</div>
+                                <p>{beer.style}</p>
                             </div>
                             <div className={styles.end}>
-                                <div>Total Reviews: {reviewsList.length}</div>
-                                <div>Monthly Average</div>
-                                {sessionUser && <div>Your Reviews: {userReviews()}</div> }
-                                <div># of Favorites</div>
+                                <div>
+                                    <p>TOTAL (?)</p>
+                                    {reviewsList.length}
+                                </div>
+                                <div>
+                                    <p>UNIQUE (?)</p>
+                                    {uniqueReviews}
+                                </div>
+                                {sessionUser
+                                ?
+                                <div>
+                                    <p>YOU (?)</p>
+                                    {userReviews()}
+                                </div>
+                                :
+                                <div>
+                                    <p>YOU (?)</p>
+                                    0
+                                </div>}
+                                <div>
+                                    <p>FAVORITES (?)</p>
+                                    # favs
+                                </div>
                             </div>
                         </div>
                             <div className={styles.second_info}>
-                                {/* <div className={styles.row}> */}
                                     <div  className={styles.row}>
                                         {beer.abv}% ABV
                                     </div>
@@ -130,9 +158,12 @@ export const SingleBeer = () => {
                                         {beer.ibu} IBU
                                     </div>
                                     <div className={styles.row}>
-                                       <RatingsBar rating={beer.rating} />
+                                       <p><RatingsBar rating={beer.rating} /></p>
                                     </div>
                                     <div className={styles.row_end}>
+                                        {}
+                                    </div>
+                                    {/* <div className={styles.row_end}>
                                        {sessionUser ?
                                         <>
                                             Leave a Review:
@@ -140,8 +171,8 @@ export const SingleBeer = () => {
                                         </>
                                         :
                                         <>Sign in to Review</> }
-                                        {/* <i className="fa-solid fa-star fa-2x"></i> */}
-                                    </div>
+                                        <i className="fa-solid fa-star fa-2x"></i>
+                                    </div> */}
                             </div>
                         <div>
                             <div className={styles.third_info}>
@@ -199,9 +230,11 @@ export const SingleBeer = () => {
                         <h2>There are no reviews for this Beer... be the first by clicking the green check above!</h2>
                     </div> }
                 </div>
-                {/* <div className={styles.right}>
-                    World
-                </div> */}
+                <div className={styles.right}>
+                <div className={styles.right_container}>
+						<h3>Loyal Drinkers</h3>
+					</div>
+                </div>
             </div>
         </PageContainer>
     )

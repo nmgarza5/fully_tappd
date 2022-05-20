@@ -30,7 +30,7 @@
   .nav_link {
     margin-left: 10%;
     text-decoration: none;
-    color: black;
+    color: #8a4500;
     font-weight: 600;
     font-size: 14px;
     display: flex;
@@ -38,7 +38,7 @@
   }
 
   .nav_link:hover {
-    color: blue;
+    color: #c60;
   }
 
 .right {

@@ -7,6 +7,7 @@ import styles from "./SearchResults.module.css";
 import defaultImage from "../../../images/default_image.png"
 import { receiveBreweries } from "../../../store/breweries";
 import { receiveBeer } from "../../../store/beer";
+import RatingsBar from "../../RatingsBar";
 
 const SearchResults = () => {
 	const { searchWord } = useParams();
@@ -183,8 +184,6 @@ const SearchResults = () => {
 						}
 					</div>
 
-
-
 				</div>
 				<div className={styles.right}>
 					<div className={styles.right_container}>
@@ -206,7 +205,7 @@ const SearchResults = () => {
 								<img className={styles.right_image} src={brewery.profile_image} alt='brewery image' onError={addDefaultImage}/>
 								<div className={styles.text_container}>
 									<h4>{brewery.name}</h4>
-									<p>Rating: {brewery.rating}</p>
+									<p><RatingsBar rating={brewery.rating}/></p>
 								</div>
 							</div>
 						))}

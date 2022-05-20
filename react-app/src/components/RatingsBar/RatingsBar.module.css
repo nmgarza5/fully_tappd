@@ -1,7 +1,17 @@
+.ratings_bar {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+
+.value {
+  margin: 0;
+  margin-left: 5px;
+}
+
 .outer {
     position: relative;
     display: inline-block;
-    /* padding: 5px; */
   }
 
   .inner {
@@ -14,14 +24,14 @@
   }
 
   .outer::before {
-    content: "\f111 \f111 \f111 \f111 \f111";
+    content: "\f111    \f111    \f111     \f111     \f111";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     color: #ccc;
   }
 
   .inner::before {
-    content: "\f111 \f111 \f111 \f111 \f111";
+    content: "\f111   \f111    \f111    \f111     \f111";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     color: #f8ce0b;

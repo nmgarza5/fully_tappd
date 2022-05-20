@@ -7,16 +7,13 @@ import RatingsBar from "../../RatingsBar";
 
 
 const SearchCard = ({type, content}) => {
-
-    console.log("TYPE", type)
-    console.log("content", content)
     const history = useHistory()
-
 
 	const goToBeer = (id) => {
 		history.push(`/beer/${id}`);
 		return;
 	};
+
 	const goToBrewery = (id) => {
 		history.push(`/breweries/${id}`);
 		return;
@@ -25,8 +22,6 @@ const SearchCard = ({type, content}) => {
 	const addDefaultImage = (e) => {
         e.target.src = defaultImage
     }
-
-
 
     let beersCount;
     let reviewsCount;
