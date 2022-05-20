@@ -151,20 +151,7 @@
 	justify-content: center;
 }
 
-.third_info h3{
-	text-align: center;
-	margin-bottom: 0;;
-}
-
-.show {
-	padding: 10px;
-}
-.show div:hover {
-	cursor: pointer;
-	text-decoration: underline;
-}
-
-.no_show {
+.show{
 	padding: 10px;
 }
 
@@ -173,16 +160,13 @@
 	float: right;
 	color: rgb(163, 47, 47)
 }
-.no_show div {
-	margin-top: 5px;
-	float: right;
-	color: rgb(163, 47, 47)
-}
 
-.no_show div:hover {
+.show div:hover {
 	cursor: pointer;
 	text-decoration: underline;
 }
+
+
 
 .review_container {
 	margin-top: 30px;
@@ -190,8 +174,7 @@
 	/* height: auto; */
 	display: flex;
 	flex-direction: column;
-	background: #f7f0f0;
-	border-radius: 5px;
+	background: #ffffff;
 	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
 	padding: 10px
 }
@@ -224,6 +207,22 @@
 .review_info {
 	margin-left: 10px;
 	width: 550px;
+}
+
+.review_info div {
+	margin-bottom: 5px;
+}
+
+.strong {
+	color: #8a4500;
+}
+
+.review_info div strong:nth-child(1) {
+	margin-right: 5px;
+}
+
+.review_info div strong:nth-child(n+2) {
+	margin: 0 5px;
 }
 
 .image_preview {

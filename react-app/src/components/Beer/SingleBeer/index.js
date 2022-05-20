@@ -161,23 +161,20 @@ export const SingleBeer = () => {
                                        <p><RatingsBar rating={beer.rating} /></p>
                                     </div>
                                     <div className={styles.row_end}>
-                                        {}
-                                    </div>
-                                    {/* <div className={styles.row_end}>
                                        {sessionUser ?
                                         <>
-                                            Leave a Review:
                                             <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
+                                            <i className="fa-solid fa-star fa-2x"></i>
                                         </>
                                         :
-                                        <>Sign in to Review</> }
-                                        <i className="fa-solid fa-star fa-2x"></i>
-                                    </div> */}
+                                        <>Sign in to Interact</> }
+                                    </div>
+
                             </div>
                         <div>
                             <div className={styles.third_info}>
                                 {!showMore && beer.description.length > 150 ?
-                                    <div className={styles.no_show}>
+                                    <div className={styles.show}>
                                         {beer.description.slice(0,150)}...
                                         <div onClick={() => setShowMore(!showMore)}>Show more</div>
                                      </div>
@@ -197,13 +194,17 @@ export const SingleBeer = () => {
                                     <img src={review.user_image} alt="" className={styles.profile_image} onError={addDefaultProfileImage}></img>
                                     <div className={styles.review_info}>
                                         <div>
-                                            {review.user_name} is drinking a {review.beer_name} from {review.brewery_name}
-                                        </div>
-                                        <div>
-                                            <RatingsBar rating={review.rating} />
+                                            <strong className={styles.strong}>{review.user_name}</strong>
+                                            is drinking a
+                                            <strong className={styles.strong}>{review.beer_name}</strong>
+                                            from
+                                            <strong className={styles.strong}>{review.brewery_name}</strong>
                                         </div>
                                         <div>
                                             {review.content}
+                                        </div>
+                                        <div>
+                                            <RatingsBar rating={review.rating} />
                                         </div>
                                         <div>
                                             <img src={review.image_url} alt="" className={styles.image_preview} onError={addDefaultImage} onClick={()=>imagePreview(review.image_url)}/>
