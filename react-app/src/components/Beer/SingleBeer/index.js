@@ -43,13 +43,14 @@ export const SingleBeer = () => {
     let reviewsList;
     let uniqueReviews;
     let recentReviewers;
-    let similarBeers;
+    let similarBeerList;
 
 
     if (beer) {
 
         //find reviews list
         reviewsList = Object.values(beer?.reviews)
+        similarBeerList = Object.values(beer?.similar_beers)
 
         //find number of unique users that posted reviews
         let reviewerSet = new Set();
@@ -102,6 +103,10 @@ export const SingleBeer = () => {
         dispatch(setCurrentModal(() => (<ImageModal image={image} />)));
         dispatch(showModal());
     }
+
+    const sendToBeer = (beer_id) => {
+		history.push(`/beer/${beer_id}`);
+	};
 
 
     return (
@@ -226,12 +231,24 @@ export const SingleBeer = () => {
                     </div> }
                 </div>
                 <div className={styles.right}>
-                <div className={styles.right_container}>
-						<h3>Loyal Drinkers</h3>
+                    <div className={styles.right_container}>
+                        <h3>Loyal Drinkers</h3>
                         {recentReviewers.map((user, idx) => (
-							<img key={idx} className={styles.loyal_reviewers} src={user} alt='user image' onError={addDefaultImage}/>
-						))}
-					</div>
+                            <img key={idx} className={styles.loyal_reviewers} src={user} alt='user image' onError={addDefaultImage}/>
+                        ))}
+                    </div>
+                    <div className={styles.right_container}>
+                        <h3>Similar Beers</h3>
+                        {similarBeerList.map(beer => (
+                            <div key={beer.id} className={styles.beer_link} onClick={() => sendToBeer(beer.id)}>
+                                <img className={styles.right_image} src={beer.beer_image} alt='beer image' onError={addDefaultImage}/>
+                                <div className={styles.text_container}>
+                                    <h4>{beer.name}</h4>
+                                    <p>{beer.brewery_name}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </PageContainer>

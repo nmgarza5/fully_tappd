@@ -23,29 +23,12 @@ def beer():
 @beer_routes.route('/<int:id>', methods=["GET"])
 def singleBeer(id):
   beer = Beer.query.get(id)
-  all_beer = Beer.query.all()
-
-  similar_beers = [];
-  for b in all_beer:
-    if beer.style == b.style:
-      beer_dict = b.to_dict()
-      similar_beers.append(beer_dict)
-    if beer.brewery_id == b.brewery_id:
-      beer_dict = b.to_dict()
-      similar_beers.append(beer_dict)
-  # unique_beers = set(similar_beers)
-  # print("\n", unique_beers, "\n")
-  beer.similar_beers = similar_beers
-  # print('\n\n SINGLE BEER --', beer, '\n\n')
   return beer.to_dict()
 
 @beer_routes.route('/', methods=['POST'])
 def create_brewery():
   form = BeerForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-
-  # print('\n\n form.data', form.data, '\n\n')
-  # print('\n\n form.data.brewery', form.data['brewery_id'], '\n\n')
 
   if form.validate_on_submit():
     new_beer = Beer(

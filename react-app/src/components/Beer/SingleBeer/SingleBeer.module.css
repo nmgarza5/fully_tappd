@@ -288,7 +288,7 @@
 }
 
 /* Right Panel */
-  .right {
+.right {
 	margin-left: 40px;
 	width: 250px;
 }
@@ -299,13 +299,49 @@
 	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
 	padding: 5px;
 }
-
 .right_container h3 {
 	font-weight: bolder;
 	border-bottom: grey thin solid;
 	margin: 5px;
 	padding-left: 5px;
 }
+
+.right_image {
+	width: 35px;
+	height: 35px;
+	object-fit: cover;
+}
+
+.text_container {
+	display:flex;
+	flex-direction: column;
+	margin-left: 5px;
+}
+
+.text_container h4 {
+	color: #8a4500;
+	font-size: 13px;
+	margin: 0;
+}
+.text_container p {
+	font-size: 10px;
+	margin: 0;
+}
+
+.text_container h4:hover {
+	color: #c60;
+}
+
+.beer_link {
+
+	padding: 5px;
+	display:flex;
+	flex-direction: row;
+	}
+
+.beer_link:hover {
+	cursor: pointer;
+	}
 
 .loyal_reviewers {
 	width: 60px;
