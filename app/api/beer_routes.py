@@ -1,3 +1,4 @@
+from enum import unique
 from flask import Blueprint, request
 from flask_login import current_user
 from app.models import Brewery, db, User, Beer
@@ -22,6 +23,19 @@ def beer():
 @beer_routes.route('/<int:id>', methods=["GET"])
 def singleBeer(id):
   beer = Beer.query.get(id)
+  all_beer = Beer.query.all()
+
+  similar_beers = [];
+  for b in all_beer:
+    if beer.style == b.style:
+      beer_dict = b.to_dict()
+      similar_beers.append(beer_dict)
+    if beer.brewery_id == b.brewery_id:
+      beer_dict = b.to_dict()
+      similar_beers.append(beer_dict)
+  # unique_beers = set(similar_beers)
+  # print("\n", unique_beers, "\n")
+  beer.similar_beers = similar_beers
   # print('\n\n SINGLE BEER --', beer, '\n\n')
   return beer.to_dict()
 

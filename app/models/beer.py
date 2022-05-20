@@ -31,6 +31,17 @@ class Beer(db.Model):
         except:
             return 0
 
+    def similar_beers(self):
+        all_beer = Beer.query.all()
+        similar_beers = [];
+        for b in all_beer:
+            if self.style == b.style:
+                beer_dict = b.to_dict()
+                similar_beers.append(beer_dict)
+            if self.brewery_id == b.brewery_id:
+                beer_dict = b.to_dict()
+                similar_beers.append(beer_dict)
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -45,6 +56,7 @@ class Beer(db.Model):
             'abv': self.abv,
             'ibu': self.ibu,
             "rating": self.rating(),
+            "similar_beers": self.similar_beers(),
             "reviews": {review.id: review.to_dict() for review in self.reviews},
             'created_at': self.created_at
         }

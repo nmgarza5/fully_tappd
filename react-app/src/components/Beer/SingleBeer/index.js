@@ -14,6 +14,7 @@ import defaultProfileImage from "../../../images/default_profile_image.png"
 import defaultImage from "../../../images/default_image.png"
 import { hideModal } from "../../../store/modal"
 import RatingsBar from "../../RatingsBar";
+import { ReviewForm } from "../../../forms/ReviewForm";
 
 export const SingleBeer = () => {
     const history = useHistory();
@@ -29,9 +30,7 @@ export const SingleBeer = () => {
 
     useEffect(() => {
         (async () => {
-            // console.log("HELLO FIRST")
             await dispatch(authenticate());
-            // console.log("HELLO", id)
             await dispatch(receiveOneBeer(id))
             setLoaded(true);
         })();
@@ -43,8 +42,9 @@ export const SingleBeer = () => {
 
     let reviewsList;
     let uniqueReviews;
+    let recentReviewers;
+    let similarBeers;
 
-    //  console.log("BEER", beer)
 
     if (beer) {
 
@@ -53,19 +53,13 @@ export const SingleBeer = () => {
 
         //find number of unique users that posted reviews
         let reviewerSet = new Set();
+        let userImageSet = new Set();
         reviewsList.forEach(review=> {
             reviewerSet.add(review.user_id)
+            userImageSet.add(review.user_image)
         })
         uniqueReviews = reviewerSet.size
-    }
-
-
-    const avgRating = () => {
-        let sum = 0;
-        reviewsList.forEach(review => sum += review.rating)
-        let avg = sum / reviewsList.length;
-        if (avg) return `${avg.toFixed(2)}/5`
-        else return "No Ratings"
+        recentReviewers = Array.from(userImageSet).slice(0, 13);
     }
 
     const userReviews = () => {
@@ -126,26 +120,26 @@ export const SingleBeer = () => {
                             </div>
                             <div className={styles.end}>
                                 <div>
-                                    <p>TOTAL (?)</p>
+                                    <p>TOTAL</p>
                                     {reviewsList.length}
                                 </div>
                                 <div>
-                                    <p>UNIQUE (?)</p>
+                                    <p>UNIQUE</p>
                                     {uniqueReviews}
                                 </div>
                                 {sessionUser
                                 ?
                                 <div>
-                                    <p>YOU (?)</p>
+                                    <p>YOU</p>
                                     {userReviews()}
                                 </div>
                                 :
                                 <div>
-                                    <p>YOU (?)</p>
+                                    <p>YOU</p>
                                     0
                                 </div>}
                                 <div>
-                                    <p>FAVORITES (?)</p>
+                                    <p>FAVORITES</p>
                                     # favs
                                 </div>
                             </div>
@@ -209,6 +203,9 @@ export const SingleBeer = () => {
                                         <div>
                                             <img src={review.image_url} alt="" className={styles.image_preview} onError={addDefaultImage} onClick={()=>imagePreview(review.image_url)}/>
                                         </div>
+                                        <p className={styles.updated_at}>
+                                            reviewed on: {review.updated_at.slice(0,16)}
+                                        </p>
                                     </div>
                                     <div className={styles.end_container}>
                                         <img src={review.brewery_image} alt="" className={styles.brewery_image} onError={addDefaultImage}></img>
@@ -218,9 +215,6 @@ export const SingleBeer = () => {
                                                 <DeleteReview review_id={review.id} beer_id={+id} />
                                             </div>
                                         }
-                                        {/* <div>
-                                            posted: {review.created_at}
-                                        </div> */}
                                     </div>
                                 </div>
 
@@ -234,6 +228,9 @@ export const SingleBeer = () => {
                 <div className={styles.right}>
                 <div className={styles.right_container}>
 						<h3>Loyal Drinkers</h3>
+                        {recentReviewers.map((user, idx) => (
+							<img key={idx} className={styles.loyal_reviewers} src={user} alt='user image' onError={addDefaultImage}/>
+						))}
 					</div>
                 </div>
             </div>
