@@ -35,9 +35,11 @@ class Beer(db.Model):
         all_beer = Beer.query.all()
         similar_beers = [];
         for b in all_beer:
-            if self.style == b.style:
+            if self.id == b.id:
+                pass
+            elif self.style == b.style:
                 similar_beers.append(b)
-            if self.brewery_id == b.brewery_id:
+            elif self.brewery_id == b.brewery_id:
                 similar_beers.append(b)
         return similar_beers
 
