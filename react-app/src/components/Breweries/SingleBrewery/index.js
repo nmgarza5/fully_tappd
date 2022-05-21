@@ -5,19 +5,13 @@ import { useDispatch, useSelector} from "react-redux";
 import styles from "./SingleBrewery.module.css";
 import { receiveOneBrewery } from "../../../store/breweries";
 import { authenticate } from "../../../store/session"
-import { UpdateReview } from "../../Reviews/UpdateReview"
-import { DeleteReview } from "../../Reviews/DeleteReview";
-// import { UpdateBrewery } from "../UpdateBrewery";
 import { PageContainer } from "../../PageContainer";
-// import { DeleteBrewery } from "../DeleteBrewery";
-import defaultProfileImage from "../../../images/default_profile_image.png"
 import defaultImage from "../../../images/default_image.png"
-import { showModal, setCurrentModal } from '../../../store/modal';
-import { hideModal } from "../../../store/modal"
-import { ReviewForm } from "../../../forms/ReviewForm";
+import RatingsBar from "../../RatingsBar";
+import ReviewCard from "../../Reviews/ReviewCard";
 
 export const SingleBrewery = () => {
-    // const sessionUser = useSelector((state) => state?.session?.user);
+
 
     const dispatch = useDispatch();
     const [loaded, setLoaded] = useState(false);
@@ -57,7 +51,6 @@ export const SingleBrewery = () => {
         return dateB - dateA
     });
 
-    console.log("reviewsList", reviewsList)
 
     // let type = brewery.brewery_type;
     const breweryType = (type) => {
@@ -67,36 +60,6 @@ export const SingleBrewery = () => {
         if (type === "large") return "Large"
     }
 
-    const calculateRatingsCount = () => {
-        let count = 0;
-        beersList.forEach(beer => {
-            let reviewsList = Object.values(beer?.reviews)
-            count += reviewsList.length
-        })
-        return count;
-    }
-
-
-    // const calculateRating = () => {
-    //     let  = 0;
-    //     beersList.forEach(beer => {
-    //         let reviewsList = Object.values(beer.reviews)
-    //         count += reviewsList.length
-    //         console.log(count)
-    //     })
-    //     return count;
-    // }
-
-    // "brewpub" ? "Brewpub" : "regional" ? "Regional" : "large" ? "Large" : null
-
-    // let isOwner = false;
-	// sessionUser && brewery?.owner_id === sessionUser.id
-    // ? (isOwner = true)
-    // : (isOwner = false);
-
-    const addDefaultProfileImage = (e) => {
-        e.target.src = defaultProfileImage
-    }
     const addDefaultImage = (e) => {
         e.target.src = defaultImage
     }
@@ -104,24 +67,6 @@ export const SingleBrewery = () => {
 
     const goToBeer = async (id) => {
         await history.push(`/beer/${id}`)
-    }
-
-    const ImageModal = ({image}) => {
-        return (
-            <div>
-                <h3 className={styles.image_header}>Image Preview<i className="fa-solid fa-rectangle-xmark" onClick={closeModal}></i></h3>
-                <img src={image} alt=""className={styles.image} onError={addDefaultImage}/>
-            </div>
-        )
-    }
-
-    const imagePreview = (image) => {
-        dispatch(setCurrentModal(() => (<ImageModal image={image} />)));
-        dispatch(showModal());
-    }
-
-    const closeModal = () => {
-        dispatch(hideModal())
     }
 
     return (
@@ -135,32 +80,55 @@ export const SingleBrewery = () => {
                             </div>
                             <div className={styles.middle}>
                                 <h2>{brewery.name}</h2>
-                                <div>{brewery.street}</div>
-                                <div>{brewery.city}, {brewery.state}</div>
-                                <div>{brewery.country}</div>
-                                <div>Brewery Type - {breweryType(brewery.brewery_type)}</div>
+                                <h4>{brewery.city}, {brewery.state} {brewery.country}</h4>
+                                <p>{breweryType(brewery.brewery_type)} Brewery</p>
                             </div>
                             <div className={styles.end}>
-                                <div>Total Checkins</div>
-                                <div>Monthly Average</div>
-                                <div># of your checkins</div>
-                                <div># of Favorites</div>
+                                <div>
+                                    <p>TOTAL</p>
+                                    {reviewsList.length}
+                                </div>
+                                <div>
+                                    <p>UNIQUE</p>
+                                    {/* {uniqueReviews} */}
+                                </div>
+                                {sessionUser
+                                ?
+                                <div>
+                                    <p>YOU</p>
+                                    {/* {userReviews()} */}
+                                </div>
+                                :
+                                <div>
+                                    <p>YOU</p>
+                                    0
+                                </div>}
+                                <div>
+                                    <p>LIKES</p>
+                                    # likes
+                                </div>
                             </div>
                         </div>
-                        {/* <div> */}
-                            <div className={styles.second_info}>
+                        <div className={styles.second_info}>
+                                    <div  className={styles.row}>
+                                        <p><RatingsBar rating={brewery.rating} /></p>
+                                    </div>
                                     <div className={styles.row}>
-                                        Rating: {brewery.rating}
+                                        {reviewsList.length} Ratings
+                                    </div>
+                                    <div className={styles.row}>
+                                         {beersList.length} Beers
                                     </div>
                                     <div className={styles.row_end}>
-                                        # of Beers: {beersList.length}
+                                       {sessionUser ?
+                                        <>
+                                            <i className="fa-solid fa-star fa-2x"></i>
+                                        </>
+                                        :
+                                        <>Sign in to Interact</> }
                                     </div>
-                                    {/* <div className={styles.row_end}>
-                                        <i className="fa-solid fa-star fa-2x"></i>
-                                    </div> */}
-                              {/* </div> */}
+
                             </div>
-                        {/* </div> */}
                         <div>
                             <div className={styles.third_info}>
                                 <h3>
@@ -183,36 +151,7 @@ export const SingleBrewery = () => {
                     {reviewsList.length >0 ?
                     <div className={styles.review_container} >
                             {reviewsList.map(review => (
-                                <div key={review.id} className={styles.review_item}>
-                                    <img src={review.user_image} alt="" className={styles.profile_image} onError={addDefaultProfileImage}></img>
-                                    <div className={styles.review_info}>
-                                        <div>
-                                            {review.user_name} is drinking a {review.beer_name} from {review.brewery_name}
-                                        </div>
-                                        <div>
-                                            Rating: {review.rating}/5
-                                        </div>
-                                        <div>
-                                            {review.content}
-                                        </div>
-                                        <div>
-                                            <img src={review.image_url} alt="" className={styles.image_preview} onError={addDefaultImage} onClick={()=>imagePreview(review.image_url)}/>
-                                        </div>
-                                    </div>
-                                    <div className={styles.end_container}>
-                                        <img src={review.brewery_image} alt="" className={styles.brewery_image} onError={addDefaultImage}></img>
-                                        {sessionUser && review.user_id === sessionUser.id &&
-                                            <div className={styles.review_buttons}>
-                                                <UpdateReview review={review} beer_id={review.beer_id} brewery_id={+id} />
-                                                <DeleteReview review_id={review.id} beer_id={+id} />
-                                            </div>
-                                        }
-                                        {/* <div>
-                                            posted: {review.created_at}
-                                        </div> */}
-                                    </div>
-                                </div>
-
+                                <ReviewCard review={review} />
                             ))
                             }
                     </div> :
@@ -221,10 +160,23 @@ export const SingleBrewery = () => {
                     </div> }
                 </div>
                 <div className={styles.right}>
-                    <h3>Beer List</h3>
-                    {beersList && beersList.map(beer => (
-                        <div key={beer.id} className={styles.beer_link} onClick={() => goToBeer(beer.id)}>{beer.name}</div>
-                    ))}
+                    <div className={styles.right_container}>
+                        <h2>"Brewery Like #"</h2>
+                        <h3>PEOPLE LIKE THIS BREWERY</h3>
+                    </div>
+                    <div className={styles.right_container}>
+                        <h3>Beer List</h3>
+                        {beersList && beersList.map(beer => (
+                            <div key={beer.id} className={styles.beer_link} onClick={() => goToBeer(beer.id)}>
+                                    <img className={styles.right_image} src={beer.beer_image} alt='beer image' onError={addDefaultImage}/>
+                                    <div className={styles.text_container}>
+                                        <h4>{beer.name}</h4>
+                                        <p>{beer.style}</p>
+                                        <p><RatingsBar rating={beer.rating} /></p>
+                                    </div>
+                                </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </PageContainer>

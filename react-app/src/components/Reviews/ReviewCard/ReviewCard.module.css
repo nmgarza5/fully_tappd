@@ -90,10 +90,8 @@
         width: 100%;
         padding-left: 10px;
         margin: 0;
-        color: white;
-        background-color: #000000;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        color: black;
+        background-color: #F3AC38;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -103,12 +101,12 @@
         margin-right: 20px;
         display: flex;
         align-items: center;
-        color: rgb(163, 47, 47);
+        color: black;
 
       }
       .image_header i:hover{
         cursor: pointer;
-        color: white
+        color: rgb(163, 47, 47);
       }
 
       .image {

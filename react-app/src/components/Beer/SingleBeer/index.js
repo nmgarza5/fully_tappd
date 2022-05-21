@@ -43,12 +43,18 @@ export const SingleBeer = () => {
     let uniqueReviews;
     let recentReviewers;
     let similarBeerList;
+    let review_updated_sort;
 
 
     if (beer) {
 
         //find reviews list
         reviewsList = Object.values(beer?.reviews)
+
+        //sort reviews by updated_at
+        review_updated_sort = reviewsList.sort((a,b) => (new Date(b.updated_at) - new Date(a.updated_at)));
+
+
         similarBeerList = Object.values(beer?.similar_beers)
 
         //find number of unique users that posted reviews
@@ -117,32 +123,32 @@ export const SingleBeer = () => {
                                     0
                                 </div>}
                                 <div>
-                                    <p>FAVORITES</p>
-                                    # favs
+                                    <p>LIKES</p>
+                                    # likes
                                 </div>
                             </div>
                         </div>
-                            <div className={styles.second_info}>
-                                    <div  className={styles.row}>
-                                        {beer.abv}% ABV
-                                    </div>
-                                    <div className={styles.row}>
-                                        {beer.ibu} IBU
-                                    </div>
-                                    <div className={styles.row}>
-                                       <p><RatingsBar rating={beer.rating} /></p>
-                                    </div>
-                                    <div className={styles.row_end}>
-                                       {sessionUser ?
-                                        <>
-                                            <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
-                                            <i className="fa-solid fa-star fa-2x"></i>
-                                        </>
-                                        :
-                                        <>Sign in to Interact</> }
-                                    </div>
+                        <div className={styles.second_info}>
+                                <div  className={styles.row}>
+                                    {beer.abv}% ABV
+                                </div>
+                                <div className={styles.row}>
+                                    {beer.ibu} IBU
+                                </div>
+                                <div className={styles.row}>
+                                    <p><RatingsBar rating={beer.rating} /></p>
+                                </div>
+                                <div className={styles.row_end}>
+                                    {sessionUser ?
+                                    <>
+                                        <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
+                                        <i className="fa-solid fa-star fa-2x"></i>
+                                    </>
+                                    :
+                                    <>Sign in to Interact</> }
+                                </div>
 
-                            </div>
+                        </div>
                         <div>
                             <div className={styles.third_info}>
                                 {!showMore && beer.description.length > 150 ?
@@ -161,7 +167,7 @@ export const SingleBeer = () => {
                     </div>
                     {reviewsList.length >0 ?
                     <div className={styles.review_container} >
-                            {reviewsList.map(review => (
+                            {review_updated_sort.map(review => (
                                 <ReviewCard review={review} />
                             ))
                             }

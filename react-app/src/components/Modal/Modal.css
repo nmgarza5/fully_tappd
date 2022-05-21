@@ -16,8 +16,8 @@
     /* height: fit-content;
     width: fit-content; */
     /* overflow-y: scroll; */
-    overflow-x: hidden;
-    border-radius: 5px;
+    /* overflow-x: hidden; */
+    /* border-radius: 5px; */
     background-color: white;
     display: flex;
     justify-content: center;
