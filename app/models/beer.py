@@ -22,21 +22,35 @@ class Beer(db.Model):
     brewery = db.relationship("Brewery", back_populates="beers")
     reviews = db.relationship("Review", back_populates="beer", cascade="all, delete-orphan")
 
-    '''Define rating property here. Will need to use reviews'''
+    def rating(self):
+        sum = 0
+        for review in self.reviews:
+            sum += review.rating
+        try:
+            return round(sum / len(self.reviews), 2)
+        except:
+            return 0
 
+    def similar_beers(self):
+        all_beer = Beer.query.all()
+        similar_beers = [];
+        for b in all_beer:
+            if self.id == b.id:
+                pass
+            elif self.style == b.style:
+                similar_beers.append(b)
+            elif self.brewery_id == b.brewery_id:
+                similar_beers.append(b)
+        return similar_beers
 
-    # @property
-    # def rating(self):
-    #     return self.rating
-
-    # @rating.setter
-    # def rating(self, reviews):
-    #     sum = 0
-    #     print("\n\n reviewS", reviews, "\n\n")
-    #     for review in reviews:
-    #         sum += review.rating
-    #     return sum / len(reviews)
-
+    def similar_to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'brewery_id': self.brewery_id,
+            'brewery_name': self.brewery.name,
+            'beer_image': self.brewery.profile_image,
+        }
 
     def to_dict(self):
         return {
@@ -51,7 +65,8 @@ class Beer(db.Model):
             # 'price': self.price,
             'abv': self.abv,
             'ibu': self.ibu,
-            # "rating": self.rating,
+            "rating": self.rating(),
+            "similar_beers": { b.id: b.similar_to_dict() for b in self.similar_beers() },
             "reviews": {review.id: review.to_dict() for review in self.reviews},
             'created_at': self.created_at
         }

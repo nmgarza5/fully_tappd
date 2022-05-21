@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { useHistory } from "react-router-dom";
-import { PageContainer } from "../PageContainer";
+import { PageContainer } from "../../PageContainer";
 import styles from "./BreweriesList.module.css";
-import defaultImage from "../../images/default_image.png"
-import { receiveBreweries } from "../../store/breweries";
-import { authenticate } from "../../store/session";
+import defaultImage from "../../../images/default_image.png"
+import { receiveBreweries } from "../../../store/breweries";
+import { authenticate } from "../../../store/session";
 
 
 const BreweriesList = () => {

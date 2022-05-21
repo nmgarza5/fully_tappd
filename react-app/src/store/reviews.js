@@ -48,14 +48,16 @@ export const receiveReviews = () => async (dispatch) => {
 	}
 };
 
-export const createReview = (data) => async (dispatch) => {
+export const createReview = (formData) => async (dispatch) => {
+	console.log("formData", formData)
 	const res = await fetch("/api/reviews/", {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(data),
+		// headers: { "Content-Type": "application/json" },
+		body: formData,
 	});
 	const newReview = await res.json();
 	if (newReview.errors) {
+		console.log("newReview.errors store", newReview.errors)
 		return newReview;
 	} else {
 		dispatch(createdReview(newReview));
@@ -75,13 +77,13 @@ export const receiveOneReview = (reviewId) => async (dispatch) => {
 };
 
 export const updateReview =
-	({ reviewData, id }) =>
+	({ formData, id }) =>
 	async (dispatch) => {
-		// console.log("REVIEWDATA---", id, reviewData)
+		console.log("REVIEWDATA---", id, formData)
 		const res = await fetch(`/api/reviews/${id}`, {
 			method: "PUT",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(reviewData),
+			// headers: { "Content-Type": "application/json" },
+			body: formData,
 		});
 
 		const review = await res.json();

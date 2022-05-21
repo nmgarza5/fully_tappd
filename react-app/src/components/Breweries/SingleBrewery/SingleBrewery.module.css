@@ -1,88 +1,94 @@
 .page {
 	width:1200px;
-	height: 100vh;
+	/* height: 100vh; */
 	display: flex;
 	flex-direction: row;
 	/* justify-content: space-between; */;
 	justify-content: center;
-	margin-top: 10px;
+	margin-top: 20px;
 	border-radius: 5px;
 
 }
 
-	.left {
-		width:750px;
-
-	}
-	.right {
-		margin-left: 30px;
-		width: 200px;
-		height: fit-content;
-		padding: 20px;
-		background: #f7f0f0;
-		filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
-	}
-
-	.right h3 {
-		margin-top: -10px;
-	}
+	/* MAIN PANEL */
+.left {
+	width:600px;
+}
 
 .info {
-	border-radius: 5px;
+	/* border-radius: 5px; */
 	width: 100%;
 	height: auto;
-	background: #f7f0f0;
+	background: #ffffff;
 	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
 	contain: layout;
 }
 
+/*first info container */
 .first_info {
-	height: 200px;
+	height: fit-content;
 	padding: 10px;
-	/* background: lightcoral; */
 	display: flex;
 	flex-direction: row;
 }
 
 .card_img img {
-	width: 150px;
-	height: 150px;
+	width: 90px;
+	height: 90px;
 	border-radius: 10px;
 	object-fit:contain;
-	/* border-radius: 10%; */
-	margin-top: 15px;
+	margin-top: 10px;
 }
 
 .middle {
-	margin-left: 15px;
-	width: 250px;
+	margin-top: 10px;
+	margin-left: 5px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
 }
 
-.middle div {
-	font-size: 14px;
+.middle p {
+	font-size: 13px;
+	color: rgb(131, 131, 131);
+	margin: 0;
+}
+.middle h2 {
+	margin: 0;
+	margin-top: 5px;
+}
+.middle h4 {
+	color: #8a4500;
+	margin: 0;
+}
+.middle h4:hover {
+	cursor: pointer;
+	color: #c60;
+
 }
 
 .end {
-	margin-top: 15px;
-	width: 300px;
-	height: 150px;
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 200px;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: repeat(2, 1fr);
 	grid-column-gap: 0px;
 	grid-row-gap: 0px;
 	/* border: 1px solid; */
-	margin-left: 20px;
+	height: fit-content;
 }
 
 .end div {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	text-align: center;
 	justify-content: center;
+	color: rgb(109, 108, 108);
+}
+.end div p {
+	margin: 0;
+	font-size: 10px;
 }
 
 .end div:nth-child(1) {
@@ -169,12 +175,89 @@
 	text-decoration: underline;
 }
 
-.beer_link {
-	color: rgb(163, 47, 47)
 
+.review_container {
+	margin-top: 30px;
+	width: 100%;
+	/* height: auto; */
+	display: flex;
+	flex-direction: column;
+	background: #ffffff;
+	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
+	padding: 10px
+}
+
+.profile_image {
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+}
+
+.brewery_image {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+}
+
+  /* Right Panel */
+.right {
+	margin-left: 40px;
+	width: 250px;
+}
+
+.right_container {
+	margin-bottom: 20px;
+	background: #ffffff;
+	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
+	padding: 5px;
+}
+
+.right_container h3 {
+	font-weight: bolder;
+	border-bottom: grey thin solid;
+	margin: 5px;
+	padding-left: 5px;
+}
+
+
+.right_image {
+	width: 35px;
+	height: 35px;
+	object-fit: cover;
+}
+
+.text_container {
+	display:flex;
+	flex-direction: column;
+	margin-left: 5px;
+}
+
+.text_container h4 {
+	color: #8a4500;
+	font-size: 13px;
+	margin: 0;
+}
+.text_container p {
+	font-size: 10px;
+	color: rgb(109, 108, 108);
+	margin: 0;
+}
+
+.text_container p:nth-child(3) {
+	margin-left: -10px;
+}
+
+.text_container h4:hover {
+	color: #c60;
+}
+
+.beer_link {
+
+	padding: 5px;
+	display:flex;
+	flex-direction: row;
 	}
 
 .beer_link:hover {
 	cursor: pointer;
-	text-decoration: underline;
-  }
+	}

@@ -14,6 +14,7 @@ def validation_errors_to_error_messages(validation_errors):
     Simple function that turns the WTForms validation errors into a simple list
     """
     errorMessages = []
+    print("\n", validation_errors, '\n')
     for field in validation_errors:
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
@@ -63,12 +64,15 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
+    form = SignUpForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if "image" not in request.files:
-        return {"errors": "image required"}, 400
+        return {"errors": validation_errors_to_error_messages({"profile image": ["image required"]})}, 400
 
     image = request.files["image"]
+    print("\n image \n", image, '\n')
     if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
+        return {"errors": validation_errors_to_error_messages({"image": ["file type not permitted"]})}, 400
 
     image.filename = get_unique_filename(image.filename)
 
@@ -81,9 +85,7 @@ def sign_up():
         return upload, 400
 
     url = upload["url"]
-
-    form = SignUpForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    print("\n URL \n", url, '\n')
 
 
     if form.validate_on_submit():

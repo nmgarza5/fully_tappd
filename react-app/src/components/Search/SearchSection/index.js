@@ -2,7 +2,7 @@ import styles from "./SearchSection.module.css";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { hideModal } from "../../store/modal";
+import { hideModal } from "../../../store/modal";
 
 const SearchSection = () => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -27,6 +27,12 @@ const SearchSection = () => {
 		return;
 	};
 
+	const handleKeyPress = (e) => {
+		if (e.key === "Enter") {
+			handleSubmit(e);
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_parent}>
@@ -37,6 +43,7 @@ const SearchSection = () => {
 						type="text"
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
+						onKeyPress={handleKeyPress}
 						placeholder="Search for Breweries or Beers"
 					/>
 				</div>

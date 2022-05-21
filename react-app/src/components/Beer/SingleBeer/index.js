@@ -13,6 +13,8 @@ import { DeleteReview } from "../../Reviews/DeleteReview";
 import defaultProfileImage from "../../../images/default_profile_image.png"
 import defaultImage from "../../../images/default_image.png"
 import { hideModal } from "../../../store/modal"
+import RatingsBar from "../../RatingsBar";
+import ReviewCard from "../../Reviews/ReviewCard";
 
 export const SingleBeer = () => {
     const history = useHistory();
@@ -22,15 +24,12 @@ export const SingleBeer = () => {
 	const sessionUser = useSelector((state) => state?.session?.user);
 
 	const { id } = useParams();
-    // console.log("ID", id)
 	const beer = useSelector((state) => state?.beer)[`${id}`];
 
 
     useEffect(() => {
         (async () => {
-            // console.log("HELLO FIRST")
             await dispatch(authenticate());
-            // console.log("HELLO", id)
             await dispatch(receiveOneBeer(id))
             setLoaded(true);
         })();
@@ -41,37 +40,42 @@ export const SingleBeer = () => {
     }
 
     let reviewsList;
+    let uniqueReviews;
+    let recentReviewers;
+    let similarBeerList;
+    let review_updated_sort;
 
-    //  console.log("BEER", beer)
 
     if (beer) {
+
+        //find reviews list
         reviewsList = Object.values(beer?.reviews)
+
+        //sort reviews by updated_at
+        review_updated_sort = reviewsList.sort((a,b) => (new Date(b.updated_at) - new Date(a.updated_at)));
+
+
+        similarBeerList = Object.values(beer?.similar_beers)
+
+        //find number of unique users that posted reviews
+        let reviewerSet = new Set();
+        let userImageSet = new Set();
+        reviewsList.forEach(review=> {
+            reviewerSet.add(review.user_id)
+            userImageSet.add(review.user_image)
+        })
+        uniqueReviews = reviewerSet.size
+        recentReviewers = Array.from(userImageSet).slice(0, 13);
     }
 
-
-    const avgRating = () => {
-        let sum = 0;
-        reviewsList.forEach(review => sum += review.rating)
-        let avg = sum / reviewsList.length;
-        if (avg) return `${avg.toFixed(2)}/5`
-        else return "No Ratings"
+    const userReviews = () => {
+        let count = 0;
+        reviewsList?.forEach(review => {
+            if (review?.user_id === sessionUser?.id) count+=1;
+        })
+        return count;
     }
 
-    // const userReviews = () => {
-    //     let count = 0;
-    //     reviewsList?.forEach(review => {
-    //         if (review?.user_id === sessionUser?.id) count+=1;
-    //     })
-    //     return count;
-    // }
-
-
-
-
-
-    const addDefaultProfileImage = (e) => {
-        e.target.src = defaultProfileImage
-    }
     const addDefaultImage = (e) => {
         e.target.src = defaultImage
     }
@@ -80,24 +84,9 @@ export const SingleBeer = () => {
         await history.push(`/breweries/${id}`)
     }
 
-    const closeModal = () => {
-        dispatch(hideModal())
-    }
-
-    const ImageModal = ({image}) => {
-        return (
-            <div>
-                <h3 className={styles.image_header}>Image Preview<i className="fa-solid fa-rectangle-xmark" onClick={closeModal}></i></h3>
-                <img src={image} alt="" style={{ height : 500 }} onError={addDefaultImage}/>
-            </div>
-        )
-    }
-
-    const imagePreview = (image) => {
-        dispatch(setCurrentModal(() => (<ImageModal image={image} />)));
-        dispatch(showModal());
-    }
-
+    const sendToBeer = (beer_id) => {
+        history.push(`/beer/${beer_id}`);
+    };
 
     return (
         <PageContainer>
@@ -111,41 +100,59 @@ export const SingleBeer = () => {
                             <div className={styles.middle}>
                                 <h2>{beer.name}</h2>
                                 <h4 onClick={() => goToBrewery(beer.brewery_id)}>{beer.brewery_name}</h4>
-                                <div>{beer.style}</div>
+                                <p>{beer.style}</p>
                             </div>
-                            {/* <div className={styles.end}>
-                                <div>Total Reviews: {reviewsList.length}</div>
-                                <div>Monthly Average</div>
-                                {sessionUser && <div># of your Reviews: {userReviews()}</div> }
-                                <div># of Favorites</div>
-                            </div> */}
+                            <div className={styles.end}>
+                                <div>
+                                    <p>TOTAL</p>
+                                    {reviewsList.length}
+                                </div>
+                                <div>
+                                    <p>UNIQUE</p>
+                                    {uniqueReviews}
+                                </div>
+                                {sessionUser
+                                ?
+                                <div>
+                                    <p>YOU</p>
+                                    {userReviews()}
+                                </div>
+                                :
+                                <div>
+                                    <p>YOU</p>
+                                    0
+                                </div>}
+                                <div>
+                                    <p>LIKES</p>
+                                    # likes
+                                </div>
+                            </div>
                         </div>
-                            <div className={styles.second_info}>
-                                {/* <div className={styles.row}> */}
-                                    <div  className={styles.row}>
-                                        {beer.abv}% ABV
-                                    </div>
-                                    <div className={styles.row}>
-                                        {beer.ibu} IBU
-                                    </div>
-                                    <div className={styles.row}>
-                                        Rating: {avgRating()}
-                                    </div>
-                                    <div className={styles.row_end}>
-                                       {sessionUser ?
-                                        <>
-                                            Leave a Review:
-                                            <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
-                                        </>
-                                        :
-                                        <>Sign in to Review</> }
-                                        {/* <i className="fa-solid fa-star fa-2x"></i> */}
-                                    </div>
-                            </div>
+                        <div className={styles.second_info}>
+                                <div  className={styles.row}>
+                                    {beer.abv}% ABV
+                                </div>
+                                <div className={styles.row}>
+                                    {beer.ibu} IBU
+                                </div>
+                                <div className={styles.row}>
+                                    <p><RatingsBar rating={beer.rating} /></p>
+                                </div>
+                                <div className={styles.row_end}>
+                                    {sessionUser ?
+                                    <>
+                                        <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
+                                        <i className="fa-solid fa-star fa-2x"></i>
+                                    </>
+                                    :
+                                    <>Sign in to Interact</> }
+                                </div>
+
+                        </div>
                         <div>
                             <div className={styles.third_info}>
                                 {!showMore && beer.description.length > 150 ?
-                                    <div className={styles.no_show}>
+                                    <div className={styles.show}>
                                         {beer.description.slice(0,150)}...
                                         <div onClick={() => setShowMore(!showMore)}>Show more</div>
                                      </div>
@@ -160,37 +167,8 @@ export const SingleBeer = () => {
                     </div>
                     {reviewsList.length >0 ?
                     <div className={styles.review_container} >
-                            {reviewsList.map(review => (
-                                <div key={review.id} className={styles.review_item}>
-                                    <img src={review.user_image} alt="" className={styles.profile_image} onError={addDefaultProfileImage}></img>
-                                    <div className={styles.review_info}>
-                                        <div>
-                                            {review.user_name} is drinking a {review.beer_name} from {review.brewery_name}
-                                        </div>
-                                        <div>
-                                            Rating: {review.rating}/5
-                                        </div>
-                                        <div>
-                                            {review.content}
-                                        </div>
-                                        <div>
-                                            <img src={review.image_url} alt="" className={styles.image_preview} onError={addDefaultImage} onClick={()=>imagePreview(review.image_url)}/>
-                                        </div>
-                                    </div>
-                                    <div className={styles.end_container}>
-                                        <img src={review.brewery_image} alt="" className={styles.brewery_image} onError={addDefaultImage}></img>
-                                        {sessionUser && review.user_id === sessionUser.id &&
-                                            <div className={styles.review_buttons}>
-                                                <UpdateReview review={review} beer_id={+id} brewery_id={beer.brewery_id} />
-                                                <DeleteReview review_id={review.id} beer_id={+id} />
-                                            </div>
-                                        }
-                                        {/* <div>
-                                            posted: {review.created_at}
-                                        </div> */}
-                                    </div>
-                                </div>
-
+                            {review_updated_sort.map(review => (
+                                <ReviewCard review={review} />
                             ))
                             }
                     </div> :
@@ -198,9 +176,33 @@ export const SingleBeer = () => {
                         <h2>There are no reviews for this Beer... be the first by clicking the green check above!</h2>
                     </div> }
                 </div>
-                {/* <div className={styles.right}>
-                    World
-                </div> */}
+                <div className={styles.right}>
+                    <div className={styles.right_container}>
+                        <h3>Loyal Drinkers</h3>
+                        {recentReviewers.map((user, idx) => (
+                            <img key={idx} className={styles.loyal_reviewers} src={user} alt='user image' onError={addDefaultImage}/>
+                        ))}
+                    </div>
+                    <div className={styles.right_container}>
+                        <h3>Similar Beers</h3>
+                        {similarBeerList.length > 0
+                        ?
+                        <>
+                            {similarBeerList.map(beer => (
+                                <div key={beer.id} className={styles.beer_link} onClick={() => sendToBeer(beer.id)}>
+                                    <img className={styles.right_image} src={beer.beer_image} alt='beer image' onError={addDefaultImage}/>
+                                    <div className={styles.text_container}>
+                                        <h4>{beer.name}</h4>
+                                        <p>{beer.brewery_name}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </>
+                        :
+                        <h4>There are no similar beers...</h4>
+                        }
+                    </div>
+                </div>
             </div>
         </PageContainer>
     )
