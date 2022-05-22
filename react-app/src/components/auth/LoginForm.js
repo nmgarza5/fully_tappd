@@ -20,7 +20,7 @@ const LoginForm = () => {
         const data = await dispatch(login(username, password));
 
         if (data.errors) {
-            return setErrors(data.errors);
+            return setErrors(data.errors[0]);
         }
         if (data.business_user === true) {
             history.push('/brewhub')
@@ -60,13 +60,9 @@ const LoginForm = () => {
             </div>
             <h4>Welcome back! Please login.</h4>
             <form className={styles.form_element}>
-                {errors.length > 0 && (
-                    <div className={styles.errors}>
-                        {errors.map((error, i) => (
-                            <div key={i}>{error}</div>
-                        ))}
-                    </div>
-                )}
+                <div>
+                    {errors.length > 1 && <div className={styles.errors}>{errors?.charAt(0)?.toUpperCase() + errors?.slice(1)?.replace("_", " ")}</div> }
+                </div>
                 <div className={styles.fields}>
                     <div className={styles.field}>
                         <i className="fa-solid fa-user"></i>

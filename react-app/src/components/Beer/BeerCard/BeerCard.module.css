@@ -1,0 +1,84 @@
+
+.card_img img {
+    width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	object-fit:contain;
+	/* border-radius: 10%; */
+	margin-top: 15px;
+}
+
+.infoBeer{
+    margin: 10px;
+	border-radius: 5px;
+	width: 700px;
+	height: fit-content;
+	background: #f7f0f0;
+	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
+	contain: layout;
+}
+
+
+.first_info {
+    height: 200px;
+	padding: 10px;
+    margin-top: -30px;
+    margin-bottom: -20px;
+	/* background: lightcoral; */
+	display: flex;
+	flex-direction: row;
+}
+
+.first_info div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* margin: 5px; */
+    margin-left: 5px;
+}
+
+.middle {
+	margin-left: 15px;
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.middle h2 {
+    margin-bottom: -10px;
+}
+.middle h4 {
+    margin-bottom: 5px;
+    margin-left: 3px;
+	color: rgb(163, 47, 47);
+}
+
+.middle h4:hover {
+    cursor: pointer;
+	text-decoration: underline;
+  }
+
+.middle div {
+	font-size: 13px;
+}
+
+.beer_link {
+    color: rgb(163, 47, 47);
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+  }
+   .beer_link i {
+	   width: fit-content;
+   }
+
+  .beer_link:hover {
+    cursor: pointer;
+	text-decoration: underline;
+  }
+
+  .second_info {
+      display: flex;
+      flex-direction: column;
+  }

@@ -1,3 +1,4 @@
+from enum import unique
 from flask import Blueprint, request
 from flask_login import current_user
 from app.models import Brewery, db, User, Beer
@@ -22,16 +23,12 @@ def beer():
 @beer_routes.route('/<int:id>', methods=["GET"])
 def singleBeer(id):
   beer = Beer.query.get(id)
-  # print('\n\n SINGLE BEER --', beer, '\n\n')
   return beer.to_dict()
 
 @beer_routes.route('/', methods=['POST'])
 def create_brewery():
   form = BeerForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-
-  # print('\n\n form.data', form.data, '\n\n')
-  # print('\n\n form.data.brewery', form.data['brewery_id'], '\n\n')
 
   if form.validate_on_submit():
     new_beer = Beer(

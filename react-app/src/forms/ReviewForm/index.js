@@ -15,42 +15,60 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
 
     const [rating, setRating] = useState(review?.rating || 1)
     const [content, setContent] = useState(review?.content || "")
-    const [image_url, setImage] = useState(review?.image_url || "")
+    // const [image_url, setImage] = useState(review?.image_url || "")
+    const [image, setImage] = useState(review?.image_url || null);
+    console.log("review", review)
+    console.log("IMAGE", image)
+    const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const reviewData = {
-            beer_id,
-            brewery_id,
-            rating,
-            content,
-            image_url
-        }
+        const formData = new FormData();
+        // const reviewData = {
+        //     beer_id,
+        //     brewery_id,
+        //     rating,
+        //     content,
+        //     image_url
+        // }
+        formData.append('beer_id', beer_id)
+        formData.append('brewery_id', brewery_id)
+        formData.append('rating', rating)
+        formData.append('content', content)
+        formData.append('image', image)
+        console.log("formData", formData)
+        setImageLoading(true);
 
-        // conditional checking if there is a restaurant already created. If so, send a put request. Else send a post request.
+        // conditional checking if there is a review already created. If so, send a put request. Else send a post request.
         if (review) {
             const id = review?.id;
-            const updateData = { reviewData, id };
-            // console.log("updateData", updateData)
+            const updateData = { formData, id };
+            console.log("updateData", updateData)
             const updatedReview = await dispatch(
                 updateReview(updateData)
             );
             if (updatedReview.errors) {
+                setImageLoading(false);
                 setErrors(updatedReview.errors);
             } else {
                 await dispatch(receiveOneBeer(beer_id))
+                setImageLoading(false);
                 history.push(`/beer/${beer_id}`);
                 dispatch(hideModal());
             }
         } else {
-            const newReview = await dispatch(createReview(reviewData));
+            const newReview = await dispatch(createReview(formData));
+            console.log("newReview", newReview)
             if (newReview.errors) {
+                console.log("newReview.errors", newReview.errors)
+                setImageLoading(false);
                 setErrors(newReview.errors);
             } else {
                 // await dispatch(authenticate())
                 await dispatch(receiveOneBeer(beer_id))
+                setImageLoading(false);
                 dispatch(hideModal());
                 history.push(`/beer/${beer_id}`);
             }
@@ -58,12 +76,17 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
 
         }
 
-    const addDefaultImage = async (e) => {
-        e.target.src = defaultImage
-    }
+    // const addDefaultImage = async (e) => {
+    //     e.target.src = defaultImage
+    // }
 
     const closeModal = () => {
         dispatch(hideModal())
+    }
+
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
     }
 
     return (
@@ -89,26 +112,34 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                             onChange={(e) => setContent(e.target.value)}
                         ></textarea>
                     </div>
-                    <div className={styles.lower_field}>
+                    {!image &&  <div className={styles.lower_field}>
                         <label>Image
                         </label>
-                        <input
+                        {/* <input
                         className={styles.lower_input}
                             type="text"
                             name="header"
                             placeholder="Your image url"
                             value={image_url}
                             onChange={(e) => setImage(e.target.value)}
-                            ></input>
-                        <div className={styles.images_container}>
-                        {image_url &&
+                            ></input> */}
+                            <input
+                                className={styles.lower_input}
+                                type="file"
+                                accept="image/*"
+                                onChange={updateImage}
+                                />
+
+                                {(imageLoading)&& <p>Loading...</p>}
+                        {/* <div className={styles.images_container}>
+                        {image &&
                             <div className={styles.single_image}>
-                                <img src={image_url} alt="" className={styles.image_preview} onError={addDefaultImage}/>
-                                <i onClick={() => setImage("")} className="fa-solid fa-square-minus"></i>
+                                <img src={image} alt="" className={styles.image_preview} onError={addDefaultImage}/>
+                                <i onClick={() => setImage(null)} className="fa-solid fa-square-minus"></i>
                             </div>
                                 }
-                                </div>
-                    </div>
+                                </div> */}
+                    </div> }
                 </div>
                 <div className={styles.lower_half}>
                     <div className={styles.rating_container}>

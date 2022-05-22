@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { showModal, setCurrentModal } from "../../store/modal";
 import SignUpForm from "../auth/SignUpForm";
 // import LoginForm from "../auth/LoginForm";
-// import SearchSection from '../SearchSection'
+import SearchSection from '../Search/SearchSection'
 import brewhub from "../../images/brewhub.png"
 
 
@@ -57,7 +57,7 @@ const addDefaultImage = (e) => {
               </div>
           </div>
         </div>
-        {/* <SearchSection />
+        <SearchSection />
           <div className={styles.feature_container} >
             <div className={styles.feature}>
               Ratings
@@ -67,23 +67,23 @@ const addDefaultImage = (e) => {
               <h3>CHECK IN AND RATE BEER </h3>
               <h4>Keep track of what you’ve tried and what you thought of it by checking in a beer and rating it.</h4>
             </div>
-            <div className={styles.feature}>
+            {/* <div className={styles.feature}>
               Badges
               <div className={styles.inner_feature}>
               </div>
               <h3>DRINK NEW BEERS, UNLOCK BADGES</h3>
               <h4>Expand your palate by trying new & different beer styles and unlock achievements along the way.</h4>
-            </div>
+            </div> */}
           </div>
         <div className={styles.other_feature_container} >
           <h2>Other Great Features</h2>
             <div className={styles.feature_container} >
-            <div className={styles.feature}>
+            {/* <div className={styles.feature}>
               <div className={styles.inner_feature}>
               </div>
               <h3>FRIENDS</h3>
               <h4>Make friends and stay in touch with what you and your crew are drinking!</h4>
-            </div>
+            </div> */}
             <div className={styles.feature}>
               <div className={styles.inner_feature}>
               </div>
@@ -97,13 +97,13 @@ const addDefaultImage = (e) => {
               <h4>FullyTappd utilizes Amazon Web services to securely store and deliver your images.</h4>
             </div>
           </div>
-        </div> */}
-        {/* <div className={styles.claim_container}>
+        </div>
+        <div className={styles.claim_container}>
           <h2>Work for a brewery? View insights and engage with customers.</h2>
           <div role='button' className={styles.claim_button} onClick={showSignUpForm}>
             Claim your Brewery Today! <i className="fa-solid fa-angle-right"></i>
           </div>
-        </div> */}
+        </div>
         <div className={styles.business_container} >
             <div className={styles.feature}>
               <img  src={brewhub}className={styles.brewhub} alt="" onError={addDefaultImage}/>

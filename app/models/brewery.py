@@ -8,7 +8,6 @@ class Brewery(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     profile_image = db.Column(db.String(2048), nullable=False)
-    # banner_image = db.Column(db.String(2048), nullable=True)
     name = db.Column(db.String(255), nullable=False)
     header = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
@@ -27,6 +26,17 @@ class Brewery(db.Model):
 
     beers = db.relationship("Beer", back_populates="brewery", cascade="all, delete-orphan")
     owner = db.relationship("User", backref="breweries")
+    likes = db.relationship('Like', back_populates='breweries', cascade='all, delete-orphan')
+
+    def rating(self):
+        sum = 0
+        for beer in self.beers:
+            sum += beer.rating()
+        try:
+            return round(sum / len(self.beers), 2)
+        except:
+            return 0
+
 
     def to_dict(self):
         return {
@@ -46,5 +56,7 @@ class Brewery(db.Model):
             'country': self.country,
             'phone': self.phone,
             # 'website_url': self.website_url,
+            'rating': self.rating(),
+            'likes': {like.id: like.to_dict() for like in self.likes},
             'beers': {beer.id: beer.to_dict() for beer in self.beers}
         }

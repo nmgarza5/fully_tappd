@@ -10,8 +10,7 @@
 
 }
 
-
-/* MAIN PANEL */
+	/* MAIN PANEL */
 .left {
 	width:600px;
 }
@@ -103,7 +102,7 @@
 	border-right: rgb(197, 197, 197) solid thin;
 }
 
-/*second info container */
+
 .second_info{
 	border-bottom: rgb(197, 197, 197) solid thin;
 	border-top: rgb(197, 197, 197) solid thin;
@@ -151,6 +150,11 @@
 	justify-content: center;
 }
 
+.third_info h3{
+	text-align: center;
+	margin-bottom: 0;;
+}
+
 .show{
 	padding: 10px;
 }
@@ -165,7 +169,6 @@
 	cursor: pointer;
 	text-decoration: underline;
 }
-
 
 
 .review_container {
@@ -191,7 +194,7 @@
 	object-fit: cover;
 }
 
-/* Right Panel */
+  /* Right Panel */
 .right {
 	margin-left: 40px;
 	width: 250px;
@@ -203,6 +206,7 @@
 	filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.3));
 	padding: 5px;
 }
+
 .right_container h3 {
 	font-weight: bolder;
 	border-bottom: grey thin solid;
@@ -210,9 +214,6 @@
 	padding-left: 5px;
 }
 
-.right_container h4 {
-	margin-left: 5px;
-}
 
 .right_image {
 	width: 35px;
@@ -233,7 +234,12 @@
 }
 .text_container p {
 	font-size: 10px;
+	color: rgb(109, 108, 108);
 	margin: 0;
+}
+
+.text_container p:nth-child(3) {
+	margin-left: -10px;
 }
 
 .text_container h4:hover {
@@ -250,9 +256,3 @@
 .beer_link:hover {
 	cursor: pointer;
 	}
-
-.loyal_reviewers {
-	width: 60px;
-	height: 60px;
-	padding: 5px;
-}
