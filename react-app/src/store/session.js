@@ -121,31 +121,31 @@ export const signUp = (formData) => async (dispatch) => {
 };
 
 export const addBeerLike = (id) => async (dispatch) => {
-    console.log("ID", id)
-	const res = await fetch("/api/likes/beer_likes/", {
+	const res = await fetch("/api/likes/beer_likes", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(id),
 	});
-    console.log("res", res)
 	const newLike = await res.json();
 	dispatch(addedBeerLike(newLike));
 	return newLike;
 };
 
-export const removeBeerLike = (data) => async (dispatch) => {
+export const removeBeerLike = (id) => async (dispatch) => {
+    console.log("ID", id)
 	const res = await fetch("/api/likes/beer_likes", {
 		method: "DELETE",
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(data),
+		body: JSON.stringify(id),
 	});
+    console.log("res", res)
 	const like = await res.json();
 	dispatch(removedBeerLike(like));
 	return like;
 };
 
 export const addBreweryLike = (id) => async (dispatch) => {
-	const res = await fetch("/api/likes/brewery_likes/", {
+	const res = await fetch("/api/likes/brewery_likes", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(id),
@@ -174,18 +174,18 @@ export default function reducer(state = initialState, action) {
         case REMOVE_USER:
             return { user: null };
         case ADD_BEER_LIKE:
-            newState.user.beer_likes[action.payload.id] =
+            newState.user.beer_likes[action.payload.beer_id] =
                 action.payload;
             return newState;
         case REMOVE_BEER_LIKE:
-            delete newState.user.beer_likes[action.payload.id];
+            delete newState.user.beer_likes[action.payload.beer_id];
             return newState;
         case ADD_BREWERY_LIKE:
-            newState.user.brewery_likes[action.payload.id] =
+            newState.user.brewery_likes[action.payload.brewery_id] =
                 action.payload;
             return newState;
         case REMOVE_BREWERY_LIKE:
-            delete newState.user.brewery_likes[action.payload.id];
+            delete newState.user.brewery_likes[action.payload.brewery_id];
             return newState;
         default:
             return state;

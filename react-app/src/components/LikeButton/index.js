@@ -4,6 +4,8 @@ import styles from "./LikeButton.module.css";
 import { addBeerLike, removeBeerLike, removeBreweryLike, addBreweryLike } from "../../store/session";
 
 const LikeButton = ({id, type}) => {
+
+    console.log("beer", id, type)
     const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state?.session?.user);
 
@@ -11,15 +13,13 @@ const LikeButton = ({id, type}) => {
     let likeId;
     if (type === "beer" ) {
         likeId = sessionUser?.beer_likes[`${id}`]?.id;
-        sessionUser?.beer_likes?.hasOwnProperty(`${id}`)
-            ? (isLike = true)
-            : (isLike = false);
+        isLike = sessionUser?.beer_likes?.hasOwnProperty(`${id}`)
+        console.log("isLike", isLike)
+        console.log("property", sessionUser?.beer_likes?.hasOwnProperty(`${id}`))
     }
     if (type === "brewery" ) {
         likeId = sessionUser?.brewery_likes[`${id}`]?.id;
-        sessionUser?.brewery_likes?.hasOwnProperty(`${id}`)
-            ? (isLike = true)
-            : (isLike = false);
+        isLike = sessionUser?.brewery_likes?.hasOwnProperty(`${id}`)
     }
 	const [likeToggle, setLikeToggle] = useState(isLike);
 
@@ -51,13 +51,13 @@ const LikeButton = ({id, type}) => {
         >
             {likeToggle ? (
                 <div
-                    className={styles.like_star}
+                    className={styles.like}
                 >
-                    <i className="fa-solid fa-beer-mug fa-2x"></i>
+                    <i className="fa-solid fa-beer-mug-empty fa-2x"></i>
                 </div>
             ) : (
                 <div
-                    className={styles.like_star}
+                    className={styles.no_like}
                 >
                     <i className="fa-solid fa-beer-mug-empty fa-2x"></i>
                 </div>
