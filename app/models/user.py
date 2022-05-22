@@ -24,6 +24,10 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
+    reviews = db.relationship('Review', back_populates="user", cascade="all, delete-orphan")
+    beer_likes = db.relationship('BeerLike', back_populates="user", cascade="all, delete-orphan")
+    brewery_likes = db.relationship('BreweryLike', back_populates="user", cascade="all, delete-orphan")
+
 
     @property
     def password(self):
@@ -56,5 +60,8 @@ class User(db.Model, UserMixin):
             # 'bio': self.bio,
             'profile_image': self.profile_image,
             # 'banner_image': self.banner_image,
+            'reviews': {review.id:review.to_dict() for review in self.reviews},
+            'beer_likes': {like.id: like.to_dict() for like in self.beer_likes},
+            'brewery_likes': {like.id: like.to_dict() for like in self.brewery_likes},
             'breweries': {brewery.id: brewery.to_dict() for brewery in self.breweries}
         }

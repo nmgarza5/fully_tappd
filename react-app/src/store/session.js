@@ -1,6 +1,10 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const ADD_BEER_LIKE = "session/ADD_BEER_LIKE";
+const REMOVE_BEER_LIKE = "session/REMOVE_BEER_LIKE";
+const ADD_BREWERY_LIKE = "session/ADD_BREWERY_LIKE";
+const REMOVE_BREWERY_LIKE = "session/REMOVE_BREWERY_LIKE";
 
 const setUser = (user) => ({
     type: SET_USER,
@@ -9,6 +13,26 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
     type: REMOVE_USER,
+});
+
+const addedBeerLike = (newLike) => ({
+	type: ADD_BEER_LIKE,
+	payload: newLike,
+});
+
+const removedBeerLike = (removedLike) => ({
+	type: REMOVE_BEER_LIKE,
+	payload: removedLike,
+});
+
+const addedBreweryLike = (newLike) => ({
+	type: ADD_BREWERY_LIKE,
+	payload: newLike,
+});
+
+const removedBreweryLike = (removedLike) => ({
+	type: REMOVE_BREWERY_LIKE,
+	payload: removedLike,
 });
 
 const initialState = { user: null };
@@ -96,6 +120,52 @@ export const signUp = (formData) => async (dispatch) => {
     }
 };
 
+export const addBeerLike = (id) => async (dispatch) => {
+    console.log("ID", id)
+	const res = await fetch("/api/likes/beer_likes/", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(id),
+	});
+    console.log("res", res)
+	const newLike = await res.json();
+	dispatch(addedBeerLike(newLike));
+	return newLike;
+};
+
+export const removeBeerLike = (data) => async (dispatch) => {
+	const res = await fetch("/api/likes/beer_likes", {
+		method: "DELETE",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(data),
+	});
+	const like = await res.json();
+	dispatch(removedBeerLike(like));
+	return like;
+};
+
+export const addBreweryLike = (id) => async (dispatch) => {
+	const res = await fetch("/api/likes/brewery_likes/", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(id),
+	});
+	const newLike = await res.json();
+	dispatch(addedBreweryLike(newLike));
+	return newLike;
+};
+
+export const removeBreweryLike = (data) => async (dispatch) => {
+	const res = await fetch("/api/likes/brewery_likes", {
+		method: "DELETE",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(data),
+	});
+	const like = await res.json();
+	dispatch(removedBreweryLike(like));
+	return like;
+};
+
 export default function reducer(state = initialState, action) {
     let newState = { ...state }
     switch (action.type) {
@@ -103,6 +173,20 @@ export default function reducer(state = initialState, action) {
             return { user: action.payload };
         case REMOVE_USER:
             return { user: null };
+        case ADD_BEER_LIKE:
+            newState.user.beer_likes[action.payload.id] =
+                action.payload;
+            return newState;
+        case REMOVE_BEER_LIKE:
+            delete newState.user.beer_likes[action.payload.id];
+            return newState;
+        case ADD_BREWERY_LIKE:
+            newState.user.brewery_likes[action.payload.id] =
+                action.payload;
+            return newState;
+        case REMOVE_BREWERY_LIKE:
+            delete newState.user.brewery_likes[action.payload.id];
+            return newState;
         default:
             return state;
     }

@@ -15,6 +15,7 @@ import defaultImage from "../../../images/default_image.png"
 import { hideModal } from "../../../store/modal"
 import RatingsBar from "../../RatingsBar";
 import ReviewCard from "../../Reviews/ReviewCard";
+import LikeButton from "../../LikeButton";
 
 export const SingleBeer = () => {
     const history = useHistory();
@@ -88,6 +89,7 @@ export const SingleBeer = () => {
         history.push(`/beer/${beer_id}`);
     };
 
+
     return (
         <PageContainer>
             <div className={styles.page}>
@@ -142,7 +144,7 @@ export const SingleBeer = () => {
                                     {sessionUser ?
                                     <>
                                         <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
-                                        <i className="fa-solid fa-star fa-2x"></i>
+                                        <LikeButton id={+id} type={"beer"} />
                                     </>
                                     :
                                     <>Sign in to Interact</> }
@@ -168,7 +170,7 @@ export const SingleBeer = () => {
                     {reviewsList.length >0 ?
                     <div className={styles.review_container} >
                             {review_updated_sort.map(review => (
-                                <ReviewCard review={review} />
+                                <ReviewCard review={review} key={review.id}/>
                             ))
                             }
                     </div> :
@@ -180,7 +182,7 @@ export const SingleBeer = () => {
                     <div className={styles.right_container}>
                         <h3>Loyal Drinkers</h3>
                         {recentReviewers.map((user, idx) => (
-                            <img key={idx} className={styles.loyal_reviewers} src={user} alt='user image' onError={addDefaultImage}/>
+                            <img key={user} className={styles.loyal_reviewers} src={user} alt='user image' onError={addDefaultImage}/>
                         ))}
                     </div>
                     <div className={styles.right_container}>

@@ -26,7 +26,7 @@ class Brewery(db.Model):
 
     beers = db.relationship("Beer", back_populates="brewery", cascade="all, delete-orphan")
     owner = db.relationship("User", backref="breweries")
-    likes = db.relationship('Like', back_populates='breweries', cascade='all, delete-orphan')
+    likes = db.relationship('BreweryLike', back_populates='brewery', cascade='all, delete-orphan')
 
     def rating(self):
         sum = 0

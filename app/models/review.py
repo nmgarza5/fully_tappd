@@ -18,7 +18,7 @@ class Review(db.Model):
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
     brewery = db.relationship("Brewery", backref="reviews")
-    user = db.relationship("User", backref="reviews")
+    user = db.relationship("User", back_populates="reviews")
     beer = db.relationship("Beer", back_populates="reviews")
     # images = db.relationship('Image', secondary=review_images, back_populates="reviews")
 
