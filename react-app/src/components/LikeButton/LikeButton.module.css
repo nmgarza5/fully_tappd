@@ -4,14 +4,18 @@
 
 }
 
-.like {
-	color: gold;
+.like i{
+	color: #F3AC38;
 }
-.no_like {
+.no_like i{
 	color: rgb(109, 108, 108);
 }
 
-.like:hover {
+.like i:hover {
+	cursor: pointer;
+    transform: scale(1.2);
+}
+.no_like i:hover {
 	cursor: pointer;
     transform: scale(1.2);
 }

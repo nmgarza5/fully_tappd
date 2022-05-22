@@ -25,6 +25,6 @@
       color: green
   }
   .button i:hover {
-      color: green;
       cursor: pointer;
+      transform: scale(1.2);
   }

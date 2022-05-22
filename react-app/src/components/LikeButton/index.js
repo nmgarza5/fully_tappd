@@ -1,7 +1,9 @@
 import { useSelector, useDispatch} from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./LikeButton.module.css";
 import { addBeerLike, removeBeerLike, removeBreweryLike, addBreweryLike } from "../../store/session";
+import { receiveOneBeer } from "../../store/beer";
+import { receiveOneBrewery } from "../../store/breweries";
 
 const LikeButton = ({id, type}) => {
 
@@ -14,6 +16,7 @@ const LikeButton = ({id, type}) => {
     if (type === "beer" ) {
         likeId = sessionUser?.beer_likes[`${id}`]?.id;
         isLike = sessionUser?.beer_likes?.hasOwnProperty(`${id}`)
+        console.log("likeId", likeId)
         console.log("isLike", isLike)
         console.log("property", sessionUser?.beer_likes?.hasOwnProperty(`${id}`))
     }
@@ -23,20 +26,30 @@ const LikeButton = ({id, type}) => {
     }
 	const [likeToggle, setLikeToggle] = useState(isLike);
 
+    // useEffect(() => {
+	// 	return () => {
+	// 		setLikeToggle(null);
+	// 	};
+	// }, [dispatch, id]);
+
     const handleLike = async () => {
 		setLikeToggle(!likeToggle);
         if (type === "beer") {
             if (!likeToggle) {
-                dispatch(addBeerLike(id));
+                await dispatch(addBeerLike(id));
+                await dispatch(receiveOneBeer(id))
             } else {
-                dispatch(removeBeerLike(likeId));
+                await dispatch(removeBeerLike(likeId));
+                await dispatch(receiveOneBeer(id))
             }
         }
         if (type === "brewery") {
             if (!likeToggle) {
                 dispatch(addBreweryLike(id));
+                await dispatch(receiveOneBrewery(id))
             } else {
-                dispatch(removeBreweryLike(likeId));
+                await dispatch(removeBreweryLike(likeId));
+                await dispatch(receiveOneBrewery(id))
             }
         }
 		// dispatch(
@@ -44,6 +57,7 @@ const LikeButton = ({id, type}) => {
 		// );
 		// dispatch(showModal());
 	};
+    console.log("likeTog", likeToggle)
     return (
         <div
             className={styles.like_container}
@@ -51,7 +65,7 @@ const LikeButton = ({id, type}) => {
         >
             {likeToggle ? (
                 <div
-                    className={styles.like}
+                className={styles.like}
                 >
                     <i className="fa-solid fa-beer-mug-empty fa-2x"></i>
                 </div>

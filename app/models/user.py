@@ -61,7 +61,7 @@ class User(db.Model, UserMixin):
             'profile_image': self.profile_image,
             # 'banner_image': self.banner_image,
             'reviews': {review.id:review.to_dict() for review in self.reviews},
-            'beer_likes': {like.id: like.to_dict() for like in self.beer_likes},
-            'brewery_likes': {like.id: like.to_dict() for like in self.brewery_likes},
+            'beer_likes': {like.beer_id: like.to_dict() for like in self.beer_likes},
+            'brewery_likes': {like.brewery_id: like.to_dict() for like in self.brewery_likes},
             'breweries': {brewery.id: brewery.to_dict() for brewery in self.breweries}
         }
