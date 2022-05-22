@@ -21,6 +21,7 @@ class Beer(db.Model):
 
     brewery = db.relationship("Brewery", back_populates="beers")
     reviews = db.relationship("Review", back_populates="beer", cascade="all, delete-orphan")
+    likes = db.relationship('Like', back_populates='beers', cascade='all, delete-orphan')
 
     def rating(self):
         sum = 0
@@ -66,6 +67,7 @@ class Beer(db.Model):
             'abv': self.abv,
             'ibu': self.ibu,
             "rating": self.rating(),
+            'likes': {like.id: like.to_dict() for like in self.likes},
             "similar_beers": { b.id: b.similar_to_dict() for b in self.similar_beers() },
             "reviews": {review.id: review.to_dict() for review in self.reviews},
             'created_at': self.created_at
