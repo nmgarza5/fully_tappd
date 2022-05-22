@@ -26,6 +26,7 @@ class Brewery(db.Model):
 
     beers = db.relationship("Beer", back_populates="brewery", cascade="all, delete-orphan")
     owner = db.relationship("User", backref="breweries")
+    likes = db.relationship('Like', back_populates='breweries', cascade='all, delete-orphan')
 
     def rating(self):
         sum = 0
@@ -35,6 +36,7 @@ class Brewery(db.Model):
             return round(sum / len(self.beers), 2)
         except:
             return 0
+
 
     def to_dict(self):
         return {
@@ -55,5 +57,6 @@ class Brewery(db.Model):
             'phone': self.phone,
             # 'website_url': self.website_url,
             'rating': self.rating(),
+            'likes': {like.id: like.to_dict() for like in self.likes},
             'beers': {beer.id: beer.to_dict() for beer in self.beers}
         }

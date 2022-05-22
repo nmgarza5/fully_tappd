@@ -74,15 +74,15 @@ const NavBar = () => {
                         <ProfileDropdown />
                     </div>
                     <div>
-					<input
-						className={styles.search_box_field}
-						type="text"
-						value={searchQuery}
-						onChange={(e) => setSearchQuery(e.target.value)}
-						placeholder="Search for Breweries or Beers"
-					/>
-					<i onClick={handleSubmit} className="fa-solid fa-magnifying-glass"></i>
-				</div>
+                        <input
+                            className={styles.search_box_field}
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder="Search for Breweries or Beers"
+                        />
+                        <i onClick={handleSubmit} className="fa-solid fa-magnifying-glass"></i>
+				    </div>
                 </div>
             </nav>
         );
