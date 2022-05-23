@@ -132,13 +132,11 @@ export const addBeerLike = (id) => async (dispatch) => {
 };
 
 export const removeBeerLike = (id) => async (dispatch) => {
-    console.log("ID", id)
 	const res = await fetch("/api/likes/beer_likes", {
 		method: "DELETE",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(id),
 	});
-    console.log("res", res)
 	const like = await res.json();
 	dispatch(removedBeerLike(like));
 	return like;

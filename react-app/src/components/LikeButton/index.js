@@ -1,63 +1,53 @@
-import { useSelector, useDispatch} from "react-redux";
+import { useDispatch} from "react-redux";
 import { useState, useEffect } from "react";
 import styles from "./LikeButton.module.css";
 import { addBeerLike, removeBeerLike, removeBreweryLike, addBreweryLike } from "../../store/session";
 import { receiveOneBeer } from "../../store/beer";
 import { receiveOneBrewery } from "../../store/breweries";
 
-const LikeButton = ({id, type}) => {
-
-    console.log("beer", id, type)
+const LikeButton = ({id, type, isLike, likeId}) => {
     const dispatch = useDispatch();
-	const sessionUser = useSelector((state) => state?.session?.user);
 
-    let isLike;
-    let likeId;
-    if (type === "beer" ) {
-        likeId = sessionUser?.beer_likes[`${id}`]?.id;
-        isLike = sessionUser?.beer_likes?.hasOwnProperty(`${id}`)
-        console.log("likeId", likeId)
-        console.log("isLike", isLike)
-        console.log("property", sessionUser?.beer_likes?.hasOwnProperty(`${id}`))
-    }
-    if (type === "brewery" ) {
-        likeId = sessionUser?.brewery_likes[`${id}`]?.id;
-        isLike = sessionUser?.brewery_likes?.hasOwnProperty(`${id}`)
-    }
-	const [likeToggle, setLikeToggle] = useState(isLike);
+	const [likeToggle, setLikeToggle] = useState(null);
 
-    // useEffect(() => {
-	// 	return () => {
-	// 		setLikeToggle(null);
-	// 	};
-	// }, [dispatch, id]);
+    useEffect(()=> {
+        setLikeToggle(isLike)
+    }, [isLike])
+
+    const [showBox, setShowBox] = useState(false);
+    const [message, setMessage] = useState(false);
+
+    const showBoxTimer = () => {
+        setShowBox(true)
+        setTimeout(() => {setShowBox(false)}, 1500)
+    }
 
     const handleLike = async () => {
 		setLikeToggle(!likeToggle);
         if (type === "beer") {
             if (!likeToggle) {
+                showBoxTimer()
                 await dispatch(addBeerLike(id));
                 await dispatch(receiveOneBeer(id))
             } else {
+                showBoxTimer()
                 await dispatch(removeBeerLike(likeId));
                 await dispatch(receiveOneBeer(id))
             }
         }
         if (type === "brewery") {
             if (!likeToggle) {
-                dispatch(addBreweryLike(id));
+                showBoxTimer()
+                await dispatch(addBreweryLike(id));
                 await dispatch(receiveOneBrewery(id))
             } else {
+                showBoxTimer()
                 await dispatch(removeBreweryLike(likeId));
                 await dispatch(receiveOneBrewery(id))
             }
         }
-		// dispatch(
-		// 	setCurrentModal(() => <FavoriteMessage favToggle={favToggle} />)
-		// );
-		// dispatch(showModal());
 	};
-    console.log("likeTog", likeToggle)
+
     return (
         <div
             className={styles.like_container}
@@ -66,14 +56,38 @@ const LikeButton = ({id, type}) => {
             {likeToggle ? (
                 <div
                 className={styles.like}
+                onMouseEnter={() => setMessage(true)}
+                onMouseLeave={() => setMessage(false)}
                 >
                     <i className="fa-solid fa-beer-mug-empty fa-2x"></i>
+                    {message && (
+                        <p className={styles.showBox}>
+                            Remove Like
+                        </p>
+                    )}
+                    {showBox && (
+                        <p className={styles.showBox}>
+                            Liked!
+                        </p>
+                    )}
                 </div>
             ) : (
                 <div
                     className={styles.no_like}
+                    onMouseEnter={() => setMessage(true)}
+                    onMouseLeave={() => setMessage(false)}
                 >
                     <i className="fa-solid fa-beer-mug-empty fa-2x"></i>
+                    {message && (
+                        <p className={styles.showBox}>
+                            Like this Beer!
+                        </p>
+                    )}
+                    {showBox && (
+                        <p className={styles.showBox}>
+                        Removed Liked!
+                    </p>
+                    )}
                 </div>
             )}
         </div>

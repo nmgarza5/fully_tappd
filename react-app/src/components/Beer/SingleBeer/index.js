@@ -26,7 +26,8 @@ export const SingleBeer = () => {
 
 	const { id } = useParams();
 	const beer = useSelector((state) => state?.beer)[`${id}`];
-
+    const likeId = sessionUser?.beer_likes[`${id}`]?.id;
+    const isLike = sessionUser?.beer_likes?.hasOwnProperty(`${id}`)
 
     useEffect(() => {
         (async () => {
@@ -45,12 +46,14 @@ export const SingleBeer = () => {
     let recentReviewers;
     let similarBeerList;
     let review_updated_sort;
+    let numLikes;
 
 
     if (beer) {
 
         //find reviews list
         reviewsList = Object.values(beer?.reviews)
+        numLikes = Object.values(beer?.likes).length
 
         //sort reviews by updated_at
         review_updated_sort = reviewsList.sort((a,b) => (new Date(b.updated_at) - new Date(a.updated_at)));
@@ -126,7 +129,7 @@ export const SingleBeer = () => {
                                 </div>}
                                 <div>
                                     <p>LIKES</p>
-                                    # likes
+                                    {numLikes}
                                 </div>
                             </div>
                         </div>
@@ -144,7 +147,7 @@ export const SingleBeer = () => {
                                     {sessionUser ?
                                     <>
                                         <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
-                                        <LikeButton id={+id} type={"beer"} />
+                                        <LikeButton id={+id} type={"beer"} isLike={isLike} likeId={likeId} />
                                     </>
                                     :
                                     <>Sign in to Interact</> }

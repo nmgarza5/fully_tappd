@@ -9,6 +9,7 @@ import { PageContainer } from "../../PageContainer";
 import defaultImage from "../../../images/default_image.png"
 import RatingsBar from "../../RatingsBar";
 import ReviewCard from "../../Reviews/ReviewCard";
+import LikeButton from "../../LikeButton";
 
 export const SingleBrewery = () => {
 
@@ -20,6 +21,9 @@ export const SingleBrewery = () => {
     const history = useHistory();
     const sessionUser = useSelector((state) => state?.session?.user);
 	const brewery = useSelector((state) => state.breweries)[`${id}`];
+
+    const likeId = sessionUser?.brewery_likes[`${id}`]?.id;
+    const isLike = sessionUser?.brewery_likes?.hasOwnProperty(`${id}`)
 
     useEffect(() => {
         (async () => {
@@ -34,11 +38,13 @@ export const SingleBrewery = () => {
     }
 
     let beersList;
+    let numLikes;
 
     if (brewery) {
         beersList = Object.values(brewery?.beers)
+        numLikes = Object.values(brewery?.likes).length
     }
-
+    console.log("numLikes", numLikes)
 
     let reviewsList = [];
     beersList.map(beer => {
@@ -92,20 +98,14 @@ export const SingleBrewery = () => {
                                     <p>UNIQUE</p>
                                     {/* {uniqueReviews} */}
                                 </div>
-                                {sessionUser
-                                ?
                                 <div>
                                     <p>YOU</p>
-                                    {/* {userReviews()} */}
+                                    {/* {sessionUser ? userReviews(): 0} */} 0
                                 </div>
-                                :
-                                <div>
-                                    <p>YOU</p>
-                                    0
-                                </div>}
+
                                 <div>
                                     <p>LIKES</p>
-                                    # likes
+                                    {numLikes ? numLikes : 0}
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@ export const SingleBrewery = () => {
                                     <div className={styles.row_end}>
                                        {sessionUser ?
                                         <>
-                                            <i className="fa-solid fa-star fa-2x"></i>
+                                            <LikeButton id={+id} type={"brewery"} isLike={isLike} likeId={likeId} />
                                         </>
                                         :
                                         <>Sign in to Interact</> }
