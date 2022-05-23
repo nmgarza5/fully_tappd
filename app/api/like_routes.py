@@ -42,4 +42,4 @@ def removeBreweryLike():
   like = BreweryLike.query.get(int(id))
   current_user.brewery_likes.remove(like)
   db.session.commit()
-  return like.to_dict()
+  return like.remove_like()

@@ -30,9 +30,9 @@ const addedBreweryLike = (newLike) => ({
 	payload: newLike,
 });
 
-const removedBreweryLike = (removedLike) => ({
+const removedBreweryLike = (breweryId) => ({
 	type: REMOVE_BREWERY_LIKE,
-	payload: removedLike,
+	payload: breweryId,
 });
 
 const initialState = { user: null };
@@ -159,9 +159,9 @@ export const removeBreweryLike = (data) => async (dispatch) => {
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(data),
 	});
-	const like = await res.json();
-	dispatch(removedBreweryLike(like));
-	return like;
+	const breweryId = await res.json();
+	dispatch(removedBreweryLike(breweryId));
+	return breweryId;
 };
 
 export default function reducer(state = initialState, action) {
@@ -183,7 +183,7 @@ export default function reducer(state = initialState, action) {
                 action.payload;
             return newState;
         case REMOVE_BREWERY_LIKE:
-            delete newState.user.brewery_likes[action.payload.brewery_id];
+            delete newState.user.brewery_likes[action.payload];
             return newState;
         default:
             return state;
