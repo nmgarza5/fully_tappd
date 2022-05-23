@@ -4,4 +4,5 @@ from .user import User
 from .brewery import Brewery
 from .beer import Beer
 from .review import Review
-from .like import Like
+from .brewery_like import BreweryLike
+from .beer_like import BeerLike

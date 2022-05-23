@@ -60,11 +60,7 @@
 	color: #8a4500;
 	margin: 0;
 }
-.middle h4:hover {
-	cursor: pointer;
-	color: #c60;
 
-}
 
 .end {
 	margin: 0 auto;
@@ -132,10 +128,6 @@
     display: flex;
     /* border-right: black solid thin; */
     justify-content: space-evenly;
-}
-
-.row_end i {
-	color: gold;
 }
 
 .row-section {
@@ -207,11 +199,30 @@
 	padding: 5px;
 }
 
+.right_container h2 {
+	margin: 5px 0;
+	text-align: center;
+}
+
+
+.like_header {
+	font-weight: bolder;
+	border-bottom: grey thin solid;
+	margin: 5px;
+	padding-left: 5px;
+}
+
 .right_container h3 {
 	font-weight: bolder;
 	border-bottom: grey thin solid;
 	margin: 5px;
 	padding-left: 5px;
+}
+
+.loyal_reviewers {
+	width: 60px;
+	height: 60px;
+	padding: 5px;
 }
 
 

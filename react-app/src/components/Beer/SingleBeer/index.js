@@ -15,6 +15,7 @@ import defaultImage from "../../../images/default_image.png"
 import { hideModal } from "../../../store/modal"
 import RatingsBar from "../../RatingsBar";
 import ReviewCard from "../../Reviews/ReviewCard";
+import LikeButton from "../../LikeButton";
 
 export const SingleBeer = () => {
     const history = useHistory();
@@ -25,7 +26,8 @@ export const SingleBeer = () => {
 
 	const { id } = useParams();
 	const beer = useSelector((state) => state?.beer)[`${id}`];
-
+    const likeId = sessionUser?.beer_likes[`${id}`]?.id;
+    const isLike = sessionUser?.beer_likes?.hasOwnProperty(`${id}`)
 
     useEffect(() => {
         (async () => {
@@ -44,12 +46,14 @@ export const SingleBeer = () => {
     let recentReviewers;
     let similarBeerList;
     let review_updated_sort;
+    let numLikes;
 
 
     if (beer) {
 
         //find reviews list
         reviewsList = Object.values(beer?.reviews)
+        numLikes = Object.values(beer?.likes).length
 
         //sort reviews by updated_at
         review_updated_sort = reviewsList.sort((a,b) => (new Date(b.updated_at) - new Date(a.updated_at)));
@@ -65,7 +69,7 @@ export const SingleBeer = () => {
             userImageSet.add(review.user_image)
         })
         uniqueReviews = reviewerSet.size
-        recentReviewers = Array.from(userImageSet).slice(0, 13);
+        recentReviewers = Array.from(userImageSet).slice(0, 12);
     }
 
     const userReviews = () => {
@@ -87,6 +91,7 @@ export const SingleBeer = () => {
     const sendToBeer = (beer_id) => {
         history.push(`/beer/${beer_id}`);
     };
+
 
     return (
         <PageContainer>
@@ -124,7 +129,7 @@ export const SingleBeer = () => {
                                 </div>}
                                 <div>
                                     <p>LIKES</p>
-                                    # likes
+                                    {numLikes}
                                 </div>
                             </div>
                         </div>
@@ -142,7 +147,7 @@ export const SingleBeer = () => {
                                     {sessionUser ?
                                     <>
                                         <CreateReview beer_id={+id} brewery_id={beer.brewery_id} />
-                                        <i className="fa-solid fa-star fa-2x"></i>
+                                        <LikeButton id={+id} type={"beer"} isLike={isLike} likeId={likeId} />
                                     </>
                                     :
                                     <>Sign in to Interact</> }
@@ -168,7 +173,7 @@ export const SingleBeer = () => {
                     {reviewsList.length >0 ?
                     <div className={styles.review_container} >
                             {review_updated_sort.map(review => (
-                                <ReviewCard review={review} />
+                                <ReviewCard review={review} key={review.id}/>
                             ))
                             }
                     </div> :
@@ -180,7 +185,7 @@ export const SingleBeer = () => {
                     <div className={styles.right_container}>
                         <h3>Loyal Drinkers</h3>
                         {recentReviewers.map((user, idx) => (
-                            <img key={idx} className={styles.loyal_reviewers} src={user} alt='user image' onError={addDefaultImage}/>
+                            <img key={user} className={styles.loyal_reviewers} src={user} alt='user image' onError={addDefaultImage}/>
                         ))}
                     </div>
                     <div className={styles.right_container}>

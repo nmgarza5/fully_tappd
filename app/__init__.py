@@ -11,6 +11,7 @@ from .api.auth_routes import auth_routes
 from .api.brewery_routes import brewery_routes
 from .api.beer_routes import beer_routes
 from .api.review_routes import review_routes
+from .api.like_routes import like_routes
 
 from .seeds import seed_commands
 
@@ -37,6 +38,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(brewery_routes, url_prefix='/api/breweries')
 app.register_blueprint(beer_routes, url_prefix='/api/beer')
 app.register_blueprint(review_routes, url_prefix='/api/reviews')
+app.register_blueprint(like_routes, url_prefix='/api/likes')
 db.init_app(app)
 Migrate(app, db)
 
