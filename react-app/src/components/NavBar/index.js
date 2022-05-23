@@ -50,6 +50,12 @@ const NavBar = () => {
         dispatch(showModal());
     };
 
+    const handleKeyPress = (e) => {
+		if (e.key === "Enter") {
+			handleSubmit(e);
+		}
+	};
+
     if (sessionUser) {
         return (
             <nav className={styles.container}>
@@ -79,6 +85,7 @@ const NavBar = () => {
                             type="text"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
+                            onKeyPress={handleKeyPress}
                             placeholder="Search for Breweries or Beers"
                         />
                         <i onClick={handleSubmit} className="fa-solid fa-magnifying-glass"></i>

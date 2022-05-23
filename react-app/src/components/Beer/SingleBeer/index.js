@@ -69,7 +69,7 @@ export const SingleBeer = () => {
             userImageSet.add(review.user_image)
         })
         uniqueReviews = reviewerSet.size
-        recentReviewers = Array.from(userImageSet).slice(0, 13);
+        recentReviewers = Array.from(userImageSet).slice(0, 12);
     }
 
     const userReviews = () => {

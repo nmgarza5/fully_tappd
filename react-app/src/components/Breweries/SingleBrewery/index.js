@@ -38,11 +38,15 @@ export const SingleBrewery = () => {
     }
 
     let beersList;
+    let likes;
     let numLikes;
+    let uniqueReviews;
+    let recentReviewers;
 
     if (brewery) {
         beersList = Object.values(brewery?.beers)
-        numLikes = Object.values(brewery?.likes).length
+        likes = Object.values(brewery?.likes)
+        numLikes = likes.length;
     }
     console.log("numLikes", numLikes)
 
@@ -57,6 +61,16 @@ export const SingleBrewery = () => {
         return dateB - dateA
     });
 
+    //find number of unique users that posted reviews
+    let reviewerSet = new Set();
+    let userImageSet = new Set();
+    reviewsList.forEach(review=> {
+        reviewerSet.add(review.user_id)
+        userImageSet.add(review.user_image)
+    })
+    uniqueReviews = reviewerSet.size
+    recentReviewers = Array.from(userImageSet).slice(0, 12);
+
 
     // let type = brewery.brewery_type;
     const breweryType = (type) => {
@@ -64,6 +78,15 @@ export const SingleBrewery = () => {
         if (type === "brewpub") return "Brewpub"
         if (type === "regional") return "Regional"
         if (type === "large") return "Large"
+    }
+
+
+    const userReviews = () => {
+        let count = 0;
+        reviewsList?.forEach(review => {
+            if (review?.user_id === sessionUser?.id) count+=1;
+        })
+        return count;
     }
 
     const addDefaultImage = (e) => {
@@ -96,11 +119,11 @@ export const SingleBrewery = () => {
                                 </div>
                                 <div>
                                     <p>UNIQUE</p>
-                                    {/* {uniqueReviews} */}
+                                    {uniqueReviews}
                                 </div>
                                 <div>
                                     <p>YOU</p>
-                                    {/* {sessionUser ? userReviews(): 0} */} 0
+                                    {sessionUser ? userReviews(): 0}
                                 </div>
 
                                 <div>
@@ -161,8 +184,11 @@ export const SingleBrewery = () => {
                 </div>
                 <div className={styles.right}>
                     <div className={styles.right_container}>
-                        <h2>"Brewery Like #"</h2>
-                        <h3>PEOPLE LIKE THIS BREWERY</h3>
+                        <h2>{numLikes ? numLikes : 0}</h2>
+                        <h4 className={styles.like_header}>PEOPLE LIKE THIS BREWERY</h4>
+                        {likes.map((like) => (
+                            <img key={like.id} className={styles.loyal_reviewers} src={like.user_image} alt='user image' onError={addDefaultImage}/>
+                        ))}
                     </div>
                     <div className={styles.right_container}>
                         <h3>Beer List</h3>

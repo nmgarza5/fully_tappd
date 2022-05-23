@@ -130,10 +130,6 @@
     justify-content: space-evenly;
 }
 
-.row_end i {
-	color: gold;
-}
-
 .row-section {
 	justify-content: center;
 	text-align: center;
@@ -203,11 +199,30 @@
 	padding: 5px;
 }
 
+.right_container h2 {
+	margin: 5px 0;
+	text-align: center;
+}
+
+
+.like_header {
+	font-weight: bolder;
+	border-bottom: grey thin solid;
+	margin: 5px;
+	padding-left: 5px;
+}
+
 .right_container h3 {
 	font-weight: bolder;
 	border-bottom: grey thin solid;
 	margin: 5px;
 	padding-left: 5px;
+}
+
+.loyal_reviewers {
+	width: 60px;
+	height: 60px;
+	padding: 5px;
 }
 
 

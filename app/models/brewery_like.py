@@ -15,5 +15,6 @@ class BreweryLike(db.Model):
         return {
             'id': self.id,
             'brewery_id': self.brewery_id,
-            'user_id': self.user_id
+            'user_id': self.user_id,
+            'user_image': self.user.profile_image
         }
