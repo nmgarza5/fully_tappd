@@ -48,7 +48,7 @@ export const SingleBrewery = () => {
         likes = Object.values(brewery?.likes)
         numLikes = likes.length;
     }
-    console.log("numLikes", numLikes)
+
 
     let reviewsList = [];
     beersList.map(beer => {

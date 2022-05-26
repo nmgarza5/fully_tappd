@@ -4,8 +4,7 @@ import { PageContainer } from "../../PageContainer";
 import styles from "./BeerList.module.css";
 import { receiveBeer } from "../../../store/beer";
 import { authenticate } from "../../../store/session";
-import BeerCard from "../BeerCard";
-
+import SearchCard from "../../Search/SearchCard";
 
 const BeerList = () => {
     const allBeer = useSelector((state) => Object.values(state.beer))
@@ -33,7 +32,7 @@ const BeerList = () => {
 			<div className={styles.container}>
 					{allBeer.map((beer) => (
 					<div key={beer.id} className={styles.selected_container} >
-						<BeerCard beer={beer} />
+						<SearchCard key={beer.id} type={"beer"} content={beer} />
 					</div>
 					))}
 

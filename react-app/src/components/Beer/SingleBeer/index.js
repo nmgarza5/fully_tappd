@@ -16,6 +16,7 @@ import { hideModal } from "../../../store/modal"
 import RatingsBar from "../../RatingsBar";
 import ReviewCard from "../../Reviews/ReviewCard";
 import LikeButton from "../../LikeButton";
+import ImageModal from "../../Modal/ImageModal";
 
 export const SingleBeer = () => {
     const history = useHistory();
@@ -92,6 +93,15 @@ export const SingleBeer = () => {
         history.push(`/beer/${beer_id}`);
     };
 
+    const closeModal = () => {
+        dispatch(hideModal())
+    }
+
+    const imagePreview = (image) => {
+        dispatch(setCurrentModal(() => (<ImageModal image={image} />)));
+        dispatch(showModal());
+    }
+
 
     return (
         <PageContainer>
@@ -100,7 +110,7 @@ export const SingleBeer = () => {
                     <div className={styles.info}>
                         <div className={styles.first_info} >
                             <div className={styles.card_img}>
-                                <img src={beer.beer_image} alt="beer" onError={addDefaultImage}/>
+                                <img src={beer.beer_image} alt="beer" onError={addDefaultImage} onClick={()=>imagePreview(beer.beer_image)}/>
                             </div>
                             <div className={styles.middle}>
                                 <h2>{beer.name}</h2>

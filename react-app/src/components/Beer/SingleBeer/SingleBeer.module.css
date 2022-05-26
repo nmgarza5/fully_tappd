@@ -40,6 +40,9 @@
 	object-fit:contain;
 	margin-top: 10px;
 }
+.card_img img {
+	cursor: pointer;
+}
 
 .middle {
 	margin-top: 10px;

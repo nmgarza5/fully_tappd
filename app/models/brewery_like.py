@@ -18,3 +18,8 @@ class BreweryLike(db.Model):
             'user_id': self.user_id,
             'user_image': self.user.profile_image
         }
+
+    def remove_like(self):
+        return {
+            'brewery_id': self.brewery_id,
+        }

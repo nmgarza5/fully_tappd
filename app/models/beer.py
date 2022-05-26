@@ -7,7 +7,7 @@ class Beer(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     brewery_id = db.Column(db.Integer, db.ForeignKey('breweries.id'), nullable=False)
-    # beer_image = db.Column(db.String(2048), nullable=False)
+    beer_image = db.Column(db.String(2048), nullable=False)
     name = db.Column(db.String(255), nullable=False)
     style = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
@@ -50,7 +50,7 @@ class Beer(db.Model):
             'name': self.name,
             'brewery_id': self.brewery_id,
             'brewery_name': self.brewery.name,
-            'beer_image': self.brewery.profile_image,
+            'beer_image': self.beer_image,
         }
 
     def to_dict(self):
@@ -60,7 +60,7 @@ class Beer(db.Model):
             'brewery_id': self.brewery_id,
             'owner_id': self.brewery.owner_id,
             'brewery_name': self.brewery.name,
-            'beer_image': self.brewery.profile_image,
+            'beer_image': self.beer_image,
             'description': self.description,
             'style': self.style,
             # 'price': self.price,

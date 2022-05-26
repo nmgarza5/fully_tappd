@@ -17,7 +17,7 @@ import { SingleBeer } from "./components/Beer/SingleBeer";
 import { Footer } from "./components/Footer";
 import ErrorPage from "./components/ErrorPage";
 // import ActivityPage from "./components/ActivityPage";
-// import ProfilePage from "./components/ProfilePage";
+import ProfilePage from "./components/ProfilePage";
 import Brewhub from "./components/Brewhub";
 // import SignUpPage from "./components/SignUpPage";
 // import SplashConditional from "./components/Splashpage/SplashConditional";
@@ -58,10 +58,10 @@ function App() {
 					</Route>
                     {/* <ActivityConditional exact path="/activity" >
                         <ActivityPage />
-                    </ActivityConditional>
-                    <Route exact path="/my-profile" >
+                    </ActivityConditional> */}
+                    <Route exact path="/profiles/:id" >
                         <ProfilePage />
-                    </Route> */}
+                    </Route>
                     <BrewhubConditional exact path="/brewhub" >
                         <Brewhub />
                     </BrewhubConditional>

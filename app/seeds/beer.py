@@ -5,7 +5,7 @@ fake = Faker()
 
 beer_choices = [
     "Altbier", "Amber Ale", "Barley Wine", "Berliner Weisse", "Blonde Ale", "Bock", "Brown Ale", "Cream Ale", "Dopplebock",
-    "Doppelbock", "English Bitter", "English Mild", "Gose", "Gueze", "Hefeweizen", "Helles Bock", "India Pale Ale", "Kolsch",
+    "Doppelbock", "English Bitter", "English Mild", "Fruit Beer", "Gose", "Gueze", "Hefeweizen", "Helles Bock", "IPA", "Kolsch",
     "Lager", "Lambic", "Oktoberfestbier", "Pale Ale", "Pilsner", "Porter", "Red Ale", "Saison", "Stout", "Witbier",
 ]
 
@@ -13,227 +13,247 @@ beer_choices = [
 
 beer_list = [
   {
-    "name": 'Buzz',
+    "name": "Mt Nelson",
     "brewery_id": 8,
-    "description": 'A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.',
-    "style": beer_choices[randint(0, 27)],
-    # "price": 7,
-    "abv": 4.5,
+    "description": "Hopped with 100% Nelson Sauvin hops. As you contemplate the path to the top of Mt. Nelson think about the 2.5 lbs. per barrel of New Zealand Nelson Sauvin hops in this precarious pale ale. Ruminate on the diesely, tropical fruit and melon aromas. May we suggest a word of advice: it's not the summit of Mt. Nelson you need to worry about, rather, the way down to the bottom.",
+    "style": "IPA",
+    "beer_image": "https://cellarmakerbrewing.com/wp-content/uploads/2020/04/MountNelson1.jpg",
+    "price": 7,
+    "abv": 6.5,
     "ibu": 60
   },
   {
     "name": 'Pale Intoxication',
     "brewery_id": 2,
-    "description": 'A titillating, neurotic, peroxide punk of a Pale Ale. Combining attitude, style, substance, and a little bit of low self esteem for good measure; what would your mother say? The seductive lure of the sassy passion fruit hop proves too much to resist. All that is even before we get onto the fact that there are no additives, preservatives, pasteurization or strings attached. All wrapped up with the customary BrewDog bite and imaginative twist.',
-    "style": beer_choices[randint(0, 27)],
-    # "price": 7,
+    "description": 'A titillating, neurotic, peroxide punk of an IPA. Combining attitude, style, substance, and a little bit of low self esteem for good measure; what would your mother say? The seductive lure of the sassy passion fruit hop proves too much to resist. All that is even before we get onto the fact that there are no additives, preservatives, pasteurization or strings attached.',
+    "style": "IPA",
+    "beer_image": "https://untappd.akamaized.net/photo/2022_04_14/820ac664c13723f0d70afe2f9db4e82d_c_1147828408_640x640.jpg",
+    "price": 7,
     "abv": 4.1,
     "ibu": 41.5
   },
   {
-    "name": 'Berliner Weisse With Yuzu - B-Sides',
+    "name": 'Seven Stills IPA',
     "brewery_id": 1,
-    "description": 'Japanese citrus fruit intensifies the sour nature of this German classic.',
-    "style": beer_choices[randint(0, 27)],
+    "description": 'A light, crisp and bitter IPA brewed with English and American hops.',
+    "style": "IPA",
+    "beer_image": "https://drinkbaybeer.com/assets/18/18-823d986323f7b7f8d09b26e8f8f51.jpg",
     "price": 7,
-    "abv": 4.2,
-    "ibu": 8
+    "abv": 6.0,
+    "ibu": 60
   },
   {
-    "name": 'Pilsen Lager',
+    "name": "Mo' Citra",
     "brewery_id": 8,
-    "description": 'Our Unleash the Yeast series was an epic experiment into the differences in aroma and flavour provided by switching up your yeast. We brewed up a wort with a light caramel note and some toasty biscuit flavour, and hopped it with Amarillo and Centennial for a citrusy bitterness. Everything else is down to the yeast. Pilsner yeast ferments with no fruity esters or spicy phenols, although it can add a hint of butterscotch.',
-    "style": beer_choices[randint(0, 27)],
+    "description": "If you don't know, “Mo” stands for Mosaic. The Mo' beers are always a two-hop beer featuring Mosaic, one of our favorite and maybe the most versatile of IPA hops, with one other world class hop. The 2nd is Citra, a hop to which we dedicate much of our time searching for the fruitiest, most aromatic version from year to year. Passionfruit, tangerine & forest pine!",
+    "style": "IPA",
+    "beer_image": "https://untappd.akamaized.net/site/beer_logos_hd/beer-626873_ac9c4_hd.jpeg",
     "price": 7,
     "abv": 6.3,
     "ibu": 55
   },
   {
-    "name": 'Avery Brown Dredge',
+    "name": 'Yelling At Cars',
     "brewery_id": 2,
-    "description": 'An Imperial Pilsner in collaboration with beer writers. Tradition. Homage. Revolution. We wanted to showcase the awesome backbone of the Czech brewing tradition, the noble Saaz hop, and also tip our hats to the modern beers that rock our world, and the people who make them.',
-    "style": beer_choices[randint(0, 27)],
-    "price": 7,
-    "abv": 7.2,
-    "ibu": 59
-  },
-  {
-    "name": 'Electric India',
-    "brewery_id": 2,
-    "description": 'Re-brewed as a spring seasonal, this beer – which appeared originally as an Equity Punk shareholder creation – retains its trademark spicy, fruity edge. A perfect blend of Belgian Saison and US IPA, crushed peppercorns and heather honey are also added to produce a genuinely unique beer.',
-    "style": beer_choices[randint(0, 27)],
+    "description": 'Tradition. Homage. Revolution. We wanted to showcase the awesome backbone of the Czech brewing tradition, the noble Saaz hop, and also tip our hats to the modern beers that rock our world, and the people who make them. This Pilsner exemplifies that.',
+    "style": "Pilsner",
+    "beer_image": "https://untappd.akamaized.net/photo/2022_04_15/41dfc2f2df1b902e6bb5f32e6dabc827_c_1148573487_640x640.jpg",
     "price": 7,
     "abv": 5.2,
-    "ibu": 38
-  },
-  {
-    "name": 'AB:12',
-    "brewery_id": 3,
-    "description": 'An Imperial Black Belgian Ale aged in old Invergordon Scotch whisky barrels with mountains of raspberries, tayberries and blackberries in each cask. Decadent but light and dry, this beer would make a fantastic base for ageing on pretty much any dark fruit - we used raspberries, tayberries and blackberries beause they were local.',
-    "style": beer_choices[randint(0, 27)],
-    # "price": 7,
-    "abv": 11.2,
     "ibu": 35
   },
   {
-    "name": 'Fake Lager',
-    "brewery_id": 4,
-    "description": 'Fake is the new black. Fake is where it is at. Fake Art, fake brands, fake breasts, and fake lager. We want to play our part in the ugly fallout from the Lager Dream. Say hello to Fake Lager – a zesty, floral 21st century faux masterpiece with added BrewDog bitterness.',
-    "style": beer_choices[randint(0, 27)],
+    "name": 'Farmhouse Ale',
+    "brewery_id": 2,
+    "description": 'Fruity, spicy, medium bodied Belgian style ale with Kveik yeast and hopped with Horizon hops',
+    "style": "Saison",
+    "beer_image": "https://untappd.akamaized.net/photos/2022_04_22/6ad50ade6e9020e1fe8b649376e7a0b1_640x640.jpg",
+    "price": 7,
+    "abv": 6.4,
+    "ibu": 28
+  },
+  {
+    "name": 'Steam Beer',
+    "brewery_id": 3,
+    "description": "Anchor Steam® Beer derives its unusual name from the 19th century when 'steam' was a nickname for beer brewed on the West Coast of America under primitive conditions and without ice. While the origin of the name remains shrouded in mystery, it likely relates to the original practice of fermenting the beer on San Francisco's rooftops in a cool climate. In lieu of ice, the foggy night air naturally cooled the fermenting beer, creating steam off the warm open pans. Once a nickname for any Californian or West Coast beer brewed under these conditions, today the name 'steam' is a trademark of Anchor Brewing and applies only to the singular process and taste of our flagship brand - San Francisco's original Anchor Steam® Beer. The classic of American brewing tradition since 1896.",
+    "style": "Amber Ale",
+    "beer_image": "https://s3.amazonaws.com/anchor_cms_production/beers/1/original/Steam_CanBottlePint_v2.png",
+    # "price": 7,
+    "abv": 4.9,
+    "ibu": 35
+  },
+  {
+    "name": 'Club Haus, Golf Lager',
+    "brewery_id": 5,
+    "description": 'Crush birdies & brews. Tee off into notes of sweet toast & a slightly flowery aroma. Now thats what I call par for the course.',
+    "style": "Lager",
+    "beer_image": "https://images.squarespace-cdn.com/content/v1/581a2d252994ca082120e432/1652459380215-O35Q5ABHSN57C5BXABJN/UpdatedClubHausHero.jpg",
     # "price": 7,
     "abv": 4.7,
     "ibu": 40
   },
   {
-    "name": 'AB:07',
+    "name": 'Unicorn Dust',
     "brewery_id": 5,
-    "description": 'Whisky cask-aged imperial scotch ale. Beer perfect for when the rain is coming sideways. Liquorice, plum and raisin temper the warming alcohol, producing a beer capable of holding back the Scottish chill.',
-    "style": beer_choices[randint(0, 27)],
+    "description": "It's said that Unicorns had special powers to make water drinkable and we absolutely agree, Unicorn Dust is unconscionably smooth. Brewed with rainbow Mosaic hops giving notes of peach, blueberry, tangerine, and papaya.",
+    "style": "IPA",
+    "beer_image": "https://untappd.akamaized.net/site/beer_logos_hd/beer-1894766_8fda8_hd.jpeg",
     # "price": 7,
-    "abv": 12.5,
-    "ibu": 30
+    "abv": 7.5,
+    "ibu": 60
   },
   {
     "name": 'Bramling X',
     "brewery_id": 6,
     "description": 'Good old Bramling Cross is elegant, refined, assured, (boring) and understated. Understated that is unless you hop the living daylights out of a beer with it. This is Bramling Cross re-invented and re-imagined, and shows just what can be done with English hops if you use enough of them. Poor Bramling Cross normally gets lost in a woeful stream of conformist brown ales made by sleepy cask ale brewers. But not anymore. This beer shows that British hops do have some soul, and is a fruity riot of blackberries, pears, and plums. Reminds me of the bramble, apple and ginger jam my grandmother used to make.',
-    "style": beer_choices[randint(0, 27)],
+    "style": "Pale ALe",
+    "beer_image": "http://beer.suregork.com/wp-content/uploads/2011/07/brewdog_bramling_x-400x600.jpg",
     # "price": 7,
     "abv": 7.5,
-    "ibu": 75
+    "ibu": 50
   },
   {
-    "name": 'Misspent Youth',
+    "name": 'The Glow',
     "brewery_id": 8,
-    "description": 'The brainchild of our small batch brewer, George Woods. A dangerously drinkable milk sugar- infused Scotch Ale.',
-    "style": beer_choices[randint(0, 27)],
+    "description": "Motueka and Citra hops provide a Satsuma zest nose with pleasantly bitter tropical tang and candied apricot on a familiar coastal New Zealand hop flavor undertone. We had to sprinkle The Glow with a little Simcoe and Mosaic for some of that west coast darkness that we love. It's got that Cellarmaker glow!",
+    "style": "Pale Ale",
+    "beer_image": "https://untappd.akamaized.net/site/beer_logos_hd/beer-924656_a6220_hd.jpeg",
     # "price": 7,
     "abv": 7.3,
+    "ibu": 55
+  },
+  {
+    "name": 'Works and Days',
+    "brewery_id": 8,
+    "description": 'A four component Barleywine blend that weaves two parts double oak aged Barleywine (Weller Reserve and Thomas Handy Rye) with a barrel of our first Bourbon aged Munichwine (Heaven Hill) as well as a Bourbon aged Barleywine (Old Fitzgerald) of incredible depth that aged for two years. Salivating aromas of Tawny Port, cherry cordial, Tahitian vanilla, bourbon soaked dates and chinotto. Paralyzing flavors of maple sugar marzipan, creme brulee, fig, cinnamon raisin pumpernickel French toast and bourbon warmth.',
+    "style": "Barley Wine",
+    "beer_image": "https://untappd.akamaized.net/site/beer_logos_hd/beer-4710495_4e9ae_hd.jpeg",
+    "price": 7,
+    "abv": 5.3,
     "ibu": 30
   },
   {
-    "name": 'Arcade Nation',
+    "name": 'Dank of the West',
     "brewery_id": 8,
-    "description": 'Running the knife-edge between an India Pale Ale and a Stout, this particular style is one we truly love. Black IPAs are a great showcase for the skill of our brew team, balancing so many complex and twisting flavours in the same moment. The citrus, mango and pine from the hops – three of our all-time favourites – play off against the roasty dryness from the malt bill at each and every turn.',
-    "style": beer_choices[randint(0, 27)],
-    "price": 7,
-    "abv": 5.3,
-    "ibu": 60
-  },
-  {
-    "name": 'Movember',
-    "brewery_id": 8,
-    "description": 'A deliciously robust, black malted beer with a decadent dark, dry cocoa flavour that provides an enticing backdrop to the Cascade hops.',
-    "style": beer_choices[randint(0, 27)],
+    "description": 'You know we love anything DANK, so when we tried this oily, tangy, ganja-smelling IPA, we had to label it with our first dank pun in years! Strata and Idaho 7 lead the way with bright tropical fruit and sour diesel spice with a touch of Centennial and Simcoe for undertones of citrusy terpenes. Clear and crisp for that West Coast kick that we all love some much!',
+    "style": "IPA",
+    "beer_image": "https://untappd.akamaized.net/site/beer_logos_hd/beer-3673411_b746f_hd.jpeg",
     # "price": 7,
     "abv": 4.5,
-    "ibu": 50
+    "ibu": 70
   },
   {
     "name": 'Alpha Dog',
     "brewery_id": 15,
-    "description": 'A fusion of caramel malt flavours and punchy New Zealand hops. A session beer you can get your teeth into.',
-    "style": beer_choices[randint(0, 27)],
+    "description": 'A fusion of caramel malt flavours and punchy New Zealand hops. An imperial beer you can get your teeth into.',
+    "style": "IPA",
+    "beer_image": "https://lh3.googleusercontent.com/UikyE01_YD_0z2H5IXWV_bWaOF9X_Rp94pnMHPL5qGCfrjcuTWf0NxHpSBlxiI59Whws0yNxDe0OgpiDigyMyAr6GiVQrys=s750",
     # "price": 7,
-    "abv": 4.5,
-    "ibu": 42
+    "abv": 8.5,
+    "ibu": 72
   },
   {
-    "name": 'Mixtape 8',
+    "name": 'ANIMAL',
     "brewery_id": 9,
-    "description": 'This recipe is for the Belgian Tripel base. A blend of two huge oak aged beers – half a hopped up Belgian Tripel, and half a Triple India Pale Ale. Both aged in single grain whisky barrels for two years and blended, each beer brings its own character to the mix. The Belgian Tripel comes loaded with complex spicy, fruity esters, and punchy citrus hop character.',
-    "style": beer_choices[randint(0, 27)],
+    "description": 'Animal is an intensely aromatic IPA whose vibrant tropical hop character is grounded by a dry, well-structured malt backbone. The primary flavors of pineapple, citrus and mango—the result of blending Australian Vic Secret, Citra and Simcoe hops—work harmoniously to create an IPA in the Fort Point tradition: an exceptionally bold, well-balanced beer.',
+    "style": "IPA",
+    "beer_image": "https://fortpointbeer.com/assets/images/beers/Animal/_cans/Thumb_Animal.jpg",
     # "price": 7,
-    "abv": 14.5,
-    "ibu": 50
+    "abv": 7.5,
+    "ibu": 68
   },
   {
-    "name": 'Libertine Porter',
+    "name": 'Harmonic Kolsch',
     "brewery_id": 10,
-    "description": 'An avalanche of cross-continental hop varieties give this porter a complex spicy, resinous and citrusy aroma, with a huge malt bill providing a complex roasty counterpoint. Digging deeper into the flavour draws out cinder toffee, bitter chocolate and hints of woodsmoke.',
-    "style": beer_choices[randint(0, 27)],
+    "description": 'Soft grain - subtle and clean.',
+    "style": "Kolsch",
+    "beer_image": "https://untappd.akamaized.net/photos/2022_03_20/0d56ad7c4511a98df5282b1934da6e75_640x640.jpg",
     # "price": 7,
-    "abv": 6.1,
+    "abv": 5.1,
     "ibu": 45
   },
   {
-    "name": 'AB:06',
+    "name": 'Third Circle',
     "brewery_id": 11,
-    "description": 'Our sixth Abstrakt, this imperial black IPA combined dark malts with a monumental triple dry-hop, using an all-star team of some of our favourite American hops. Roasty and resinous.',
-    "style": beer_choices[randint(0, 27)],
+    "description": 'Bright gold with a rich and full white head. Aromas of cumin and coriander with a slight toasted bread character. Balanced spice notes accompany the dried fruit flavors of pear and grapefruit. Clean and dry finish with a slightly acidic tone. Well balanced Tripel for the any season.',
+    "style": "Belgian",
+    "beer_image": "https://www.laughingmonkshop.com/uploads/1/3/3/2/133278315/s168931851213007208_p217_i2_w1200.jpeg",
     "price": 7,
-    "abv": 11.2,
-    "ibu": 150
+    "abv": 9.2,
+    "ibu": 40
   },
   {
-    "name": 'Russian Doll – India Pale Ale',
+    "name": 'Air Hugs',
     "brewery_id": 12,
     "description": 'The levels of hops vary throughout the range. We love hops, so all four beers are big, bitter badasses, but by tweaking the amount of each hop used later in the boil and during dry- hopping, we can balance the malty backbone with some unexpected flavours. Simcoe is used in the whirlpool for all four beers, and yet still lends different characters to each',
-    "style": beer_choices[randint(0, 27)],
+    "style": "IPA",
+    "beer_image": "https://untappd.akamaized.net/site/beer_logos/beer-3742558_96601_sm.jpeg",
     # "price": 7,
     "abv": 6,
     "ibu": 70
   },
   {
-    "name": 'Hello My Name Is Mette-Marit',
+    "name": 'Dubs',
     "brewery_id": 13,
-    "description": "We sent this beer to Norway where it was known as 'Hello, my name is Censored’. You can make up your own mind as to why. This brew was a red berry explosion, with a reisnous bitter edge layered with dry berry tartness.",
-    "style": beer_choices[randint(0, 27)],
+    "description": "Magnolia in proud partnership with the Golden State Warriors. A unique combination of German and American hops gives just a swish of aroma to this easy drinking Lager. ",
+    "style": "Lager",
+    "beer_image": "https://untappd.akamaized.net/site/beer_logos_hd/beer-3400647_85dad_hd.jpeg",
     # "price": 7,
     "abv": 8.2,
     "ibu": 70
   },
   {
-    "name": 'Rabiator',
+    "name": 'East Bay IPA',
     "brewery_id": 14,
-    "description": 'Imperial Wheat beer / Weizenbock brewed by a homesick German in leather trousers. Think banana bread, bubble gum and David Hasselhoff.',
-    "style": beer_choices[randint(0, 27)],
+    "description": 'Bio-energy brewed with hella West Coast hops that result in notes of bright tropical citrus flavor, mellow pine needle aroma and balanced by a bold grain bill for a vibrant malt body that drinks deceptively smooth.',
+    "style": "IPA",
+    "beer_image": "https://images.squarespace-cdn.com/content/v1/5e508a7cc3edc625cceee952/1619150465459-REDLIJ4I71TBWS6X8NED/01-EBIPA.png",
     # "price": 7,
-    "abv": 10.27,
-    "ibu": 26
+    "abv": 7.7,
+    "ibu": 76
   },
   {
-    "name": 'Vice Bier',
-    "brewery_id": 20,
-    "description": 'Our take on the classic German Kristallweizen. A clear German wheat beer, layers of bubblegum and vanilla perfectly balanced with the American and New Zealand hops.',
-    "style": beer_choices[randint(0, 27)],
-    # "price": 7,
+    "name": 'La Nina Fresa',
+    "brewery_id": 14,
+    "description": 'Ale crafted our house-made Mexican Tepache consisting of cinnamon, brown sugar, ginger, and whole chopped pineapples. Spontaneous fermentation creates a tart ale balanced by funky pineapple and bready cake flavors.',
+    "style": "Fruit Beer",
+    "beer_image": "https://cdn.shopify.com/s/files/1/1361/4547/files/Website_Beer_Icon_-_La_Nina_Fresa.png",    # "price": 7,
     "abv": 4.3,
     "ibu": 25
   },
   {
-    "name": 'Devine Rebel (w/ Mikkeller)',
+    "name": 'After Hours (Chocolate)',
     "brewery_id": 16,
-    "description": "Two of Europe's most experimental, boundary-pushing brewers, BrewDog and Mikkeller, combined forces to produce a rebellious beer that combined their respective talents and brewing skills. The 12.5% Barley Wine fermented well, and the champagne yeast drew it ever closer to 12.5%. The beer was brewed with a single hop variety and was going to be partially aged in oak casks.",
-    "style": beer_choices[randint(0, 27)],
-    # "price": 7,
-    "abv": 12.5,
-    "ibu": 100
+    "description": "Fair trade Ghanaian cocoa nibs give a smooth, rich, lightly floral chocolatey flavor rounded out by just a bit of vanilla. We dare you to try this one over ice cream.",
+    "style": "Stout",
+    "beer_image": "https://images.squarespace-cdn.com/content/v1/5c16d35a7e3c3a927a76ec36/1639173219603-LA0RPUXM1KI1YR65DJQ5/afterhours-4pack.jpg?format=500w",    # "price": 7,
+    "abv": 7.8,
+    "ibu": 25
   },
   {
-    "name": 'Storm',
-    "brewery_id": 17,
-    "description": 'Dark and powerful Islay magic infuses this tropical sensation of an IPA. Using the original Punk IPA as a base, we boosted the ABV to 8% giving it some extra backbone to stand up to the peated smoke imported directly from Islay.',
-    "style": beer_choices[randint(0, 27)],
-    # "price": 7,
+    "name": 'Succubus',
+    "brewery_id": 14,
+    "description": 'Dark, heavy, and deceptively smooth with a dry finish bursting in notes of roasted barley and black coffee.',
+    "style": "Stout",
+    "beer_image": "https://images.squarespace-cdn.com/content/v1/5e508a7cc3edc625cceee952/1632282126754-85V3Q3OPO69BBLDZ94WP/succubus-2cans.png",    # "price": 7,
     "abv": 8,
-    "ibu": 60
+    "ibu": 20
   },
   {
-    "name": 'The End Of History',
+    "name": 'Bubble Chamber',
     "brewery_id": 8,
-    "description": 'The End of History: The name derives from the famous work of philosopher Francis Fukuyama, this is to beer what democracy is to history. Complexity defined. Floral, grapefruit, caramel and cloves are intensified by boozy heat.',
-    "style": beer_choices[randint(0, 27)],
-    # "price": 7,
+    "description": 'This is the light beer craft drinkers want to crush. Pleasantly soft citrus & floral orange blossom aromas arise from German Hallertau Mittelfrüh & the dry hop of whole leaf German Hersbrucker hops sourced by Hop Head Farms. The flavor is fresh, clean & vibrant with hints of oolong tea, lilac pollen, honey dipped rye bread and dried lemon peel. Zesty carb & a smooth as silk finish from 4 weeks of cold conditioning.',
+    "style": "Pilsner",
+    "beer_image": "https://untappd.akamaized.net/site/beer_logos_hd/beer-4270683_72406_hd.jpeg",    # "price": 7,
     "abv": 55,
     "ibu": 75
   },
   {
-    "name": 'Bad Pixie',
+    "name": 'Emerald Eyes',
     "brewery_id": 8,
-    "description": '2008 Prototype beer, a 4.7% wheat ale with crushed juniper berries and citrus peel.',
-    "style": beer_choices[randint(0, 27)],
-    # "price": 7,
+    "description": 'The world needs more pale ale. You should drink more pale ale. And that’s why we are stoked to rebrew this very new pale, sessionable and aromatic brew. Hopped with a unique and modern combination of Riwaka, Strata and Talus, Emerald Eyes is incredibly soft with aromas of peachy stonefruit, white grape and guava and underlying notes of coastal pine and lime.',
+    "style": "Pale Ale",
+    "beer_image": "https://untappd.akamaized.net/site/beer_logos_hd/beer-4536900_9d353_hd.jpeg",    # "price": 7,
     "abv": 4.7,
     "ibu": 45
   }
@@ -253,7 +273,7 @@ def seed_beer():
             # price=beer["price"],
             abv=beer["abv"],
             ibu=beer["ibu"],
-            # beer_image=randomImage
+            beer_image=beer["beer_image"],
         )
         db.session.add(new_beer)
     db.session.commit()
