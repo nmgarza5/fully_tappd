@@ -5,33 +5,16 @@ from wtforms.validators import DataRequired, ValidationError, Length
 
 
 beer_choices = [
-    "Altbier", "Amber Ale", "Barley Wine", "Berliner Weisse", "Blonde Ale", "Bock", "Brown Ale", "Cream Ale", "Dopplebock",
-    "English Bitter", "English Mild", "Gose", "Gueze", "Hefeweizen", "Helles Bock", "India Pale Ale", "Kolsch",
+    "Altbier", "Amber Ale", "Barley Wine", "Belgian", "Berliner Weisse", "Blonde Ale", "Bock", "Brown Ale", "Cream Ale", "Dopplebock",
+    "English Bitter", "English Mild", "Fruit Beer", "Gose", "Gueze", "Hefeweizen", "Helles Bock", "IPA", "Kolsch",
     "Lager", "Lambic", "Oktoberfestbier", "Pale Ale", "Pilsner", "Porter", "Red Ale", "Saison", "Stout", "Witbier",
 ]
-
-'''Dont forget to put in a validators for:
-
-- FLOAT DATA TYPES
-
-'''
-
-def valid_image(form, field):
-  url = field.data
-  if url and not (url.endswith('.jpg') or url.endswith('.jpeg') or url.endswith('.png') or url.endswith('.gif')):
-    raise ValidationError('Image format must be .jpg, .jpeg, .png, or .gif')
 
 def valid_value(form, field):
   value = field.data
   if value < 1:
     raise ValidationError('Value must be greater than 0')
 
-# def name_exists(form, field):
-#     # Checking if username is already in use
-#     name = field.data
-#     beer = Beer.query.filter(Beer.name == name).first()
-#     if beer:
-#         raise ValidationError('This Beer name already exists.')
 
 class BeerForm(FlaskForm):
 
