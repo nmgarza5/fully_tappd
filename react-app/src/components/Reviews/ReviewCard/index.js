@@ -3,12 +3,12 @@ import { useSelector, useDispatch} from "react-redux";
 import { showModal, setCurrentModal } from '../../../store/modal';
 import defaultProfileImage from "../../../images/default_profile_image.png"
 import defaultImage from "../../../images/default_image.png"
-import { hideModal } from "../../../store/modal"
 import RatingsBar from "../../RatingsBar";
 import { UpdateReview } from "../UpdateReview"
 import { DeleteReview } from "../DeleteReview"
 import styles from "./ReviewCard.module.css"
 import { useHistory } from "react-router-dom";
+import ImageModal from "../../Modal/ImageModal";
 
 
 const ReviewCard = ({review}) => {
@@ -32,18 +32,6 @@ const ReviewCard = ({review}) => {
         history.push(`/beer/${beer_id}`);
     };
 
-    const closeModal = () => {
-        dispatch(hideModal())
-    }
-
-    const ImageModal = ({image}) => {
-        return (
-            <div>
-                <h3 className={styles.image_header}>Image Preview<i className="fa-solid fa-rectangle-xmark" onClick={closeModal}></i></h3>
-                <img src={image} alt=""className={styles.image} onError={addDefaultImage}/>
-            </div>
-        )
-    }
 
     const imagePreview = (image) => {
         dispatch(setCurrentModal(() => (<ImageModal image={image} />)));
@@ -76,7 +64,7 @@ const ReviewCard = ({review}) => {
                 </p>
             </div>
             <div className={styles.end_container}>
-                <img src={review.brewery_image} alt="" className={styles.brewery_image} onError={addDefaultImage}></img>
+                <img src={review.beer_image} alt="" className={styles.image_preview} onError={addDefaultImage}  onClick={()=>imagePreview(review.beer_image)}></img>
                 {sessionUser && review.user_id === sessionUser.id &&
                     <div className={styles.review_buttons}>
                         <UpdateReview review={review} beer_id={review.beer_id} brewery_id={review.brewery_id} />

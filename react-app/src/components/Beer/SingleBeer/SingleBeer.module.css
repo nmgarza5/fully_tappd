@@ -40,6 +40,9 @@
 	object-fit:contain;
 	margin-top: 10px;
 }
+.card_img img {
+	cursor: pointer;
+}
 
 .middle {
 	margin-top: 10px;
@@ -70,6 +73,7 @@
 .end {
 	margin: 0 auto;
 	margin-top: 10px;
+	margin-right: 0PX;;
 	width: 200px;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -135,9 +139,6 @@
     justify-content: space-evenly;
 }
 
-.row_end i {
-	color: gold;
-}
 
 .row-section {
 	justify-content: center;

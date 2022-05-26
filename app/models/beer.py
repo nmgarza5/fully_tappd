@@ -7,7 +7,7 @@ class Beer(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     brewery_id = db.Column(db.Integer, db.ForeignKey('breweries.id'), nullable=False)
-    # beer_image = db.Column(db.String(2048), nullable=False)
+    beer_image = db.Column(db.String(2048), nullable=False)
     name = db.Column(db.String(255), nullable=False)
     style = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
@@ -21,7 +21,7 @@ class Beer(db.Model):
 
     brewery = db.relationship("Brewery", back_populates="beers")
     reviews = db.relationship("Review", back_populates="beer", cascade="all, delete-orphan")
-    likes = db.relationship('Like', back_populates='beers', cascade='all, delete-orphan')
+    likes = db.relationship('BeerLike', back_populates='beer', cascade='all, delete-orphan')
 
     def rating(self):
         sum = 0
@@ -50,7 +50,7 @@ class Beer(db.Model):
             'name': self.name,
             'brewery_id': self.brewery_id,
             'brewery_name': self.brewery.name,
-            'beer_image': self.brewery.profile_image,
+            'beer_image': self.beer_image,
         }
 
     def to_dict(self):
@@ -60,14 +60,14 @@ class Beer(db.Model):
             'brewery_id': self.brewery_id,
             'owner_id': self.brewery.owner_id,
             'brewery_name': self.brewery.name,
-            'beer_image': self.brewery.profile_image,
+            'beer_image': self.beer_image,
             'description': self.description,
             'style': self.style,
             # 'price': self.price,
             'abv': self.abv,
             'ibu': self.ibu,
             "rating": self.rating(),
-            'likes': {like.id: like.to_dict() for like in self.likes},
+            'likes': {like.beer_id: like.to_dict() for like in self.likes},
             "similar_beers": { b.id: b.similar_to_dict() for b in self.similar_beers() },
             "reviews": {review.id: review.to_dict() for review in self.reviews},
             'created_at': self.created_at

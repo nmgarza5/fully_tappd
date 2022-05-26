@@ -18,12 +18,11 @@ class Review(db.Model):
         db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
     brewery = db.relationship("Brewery", backref="reviews")
-    user = db.relationship("User", backref="reviews")
+    user = db.relationship("User", back_populates="reviews")
     beer = db.relationship("Beer", back_populates="reviews")
     # images = db.relationship('Image', secondary=review_images, back_populates="reviews")
 
 
-    '''Define rating property here. Will need to use reviews'''
 
     def to_dict(self):
         return {
@@ -36,6 +35,7 @@ class Review(db.Model):
             'beer_id': self.beer_id,
             "beer_name": self.beer.name,
             "brewery_image": self.brewery.profile_image,
+            "beer_image": self.beer.beer_image,
             'owner_id': self.brewery.owner_id,
             'content': self.content,
             "image_url": self.image_url,
