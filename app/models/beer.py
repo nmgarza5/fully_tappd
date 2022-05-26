@@ -50,7 +50,7 @@ class Beer(db.Model):
             'name': self.name,
             'brewery_id': self.brewery_id,
             'brewery_name': self.brewery.name,
-            'beer_image': self.brewery.profile_image,
+            'beer_image': self.beer_image,
         }
 
     def to_dict(self):
