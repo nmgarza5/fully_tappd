@@ -166,13 +166,14 @@
 	justify-content: center;
 }
 
-.third_info h3{
+.third_info h4{
 	text-align: center;
 	margin-bottom: 0;;
 }
 
 .show{
 	padding: 10px;
+    font-size: 13px;
 }
 
 .show div {

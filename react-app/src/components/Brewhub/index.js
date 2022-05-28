@@ -174,7 +174,7 @@ const Brewhub = () => {
                                         <p><RatingsBar rating={userBrewery.rating} /></p>
                                     </div>
                                     <div className={styles.row}>
-                                        {reviewsList.length} Ratings
+                                        {totalBreweryReviews.length} Ratings
                                     </div>
                                     <div className={styles.row}>
                                          {userBeers.length} Beers
@@ -185,9 +185,9 @@ const Brewhub = () => {
                             </div>
                         <div>
                             <div className={styles.third_info}>
-                                <h3>
+                                <h4>
                                     {userBrewery.header}
-                                </h3>
+                                </h4>
                                 {!showMoreBrewery && userBrewery.description.length > 150 ?
                                     <div className={styles.show}>
                                         {userBrewery.description.slice(0,150)}...
@@ -306,73 +306,6 @@ const Brewhub = () => {
 						</div >
 					</div>
 				</div>
-					{/* {userBeers &&
-					<div className={styles.beer_container}>
-						<div className={styles.button_container}>
-							<div role='button' onClick={showNewBeerForm} className={styles.button}>Create New Beer</div>
-							{selectedBeer && <div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div> }
-							{selectedBeer && <div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div> }
-						</div>
-						<div className={styles.outer_container}>
-							<div className={styles.select_container}>
-										<div htmlFor="currentBeerId">Beer List</div>
-										{currentBeerId ? userBeers.map((beer) => (
-											<div className={styles.one_beer} key={beer.id} value={beer.id} onClick={(e)=> setCurrentBeerId(beer.id)}>
-												{beer.name}
-												</div>
-											))
-										: <div>- No Beers Created Yet</div>}
-							</div >
-							<div className={styles.selected_container} >
-								{selectedBeer && <div className={styles.infoBeer}>
-									<div className={styles.first_info} >
-										<div className={styles.card_img}>
-											<img src={selectedBeer?.beer_image} alt="beer" onError={addDefaultImage}/>
-										</div>
-										<div className={styles.middle}>
-											<h2>{selectedBeer?.name}</h2>
-											<h4>{selectedBeer?.brewery_name}</h4>
-											<div>Beer Style: {selectedBeer?.style}</div>
-										</div>
-										<div className={styles.second_info}>
-												<div  className={styles.row}>
-													{selectedBeer?.abv}% ABV
-												</div>
-												<div className={styles.row}>
-													{selectedBeer?.ibu} IBU
-												</div>
-												<div className={styles.row}>
-													Rating: {avgRating()}
-												</div>
-												<div className={styles.beer_link} onClick={() => goToBeer(selectedBeer.id)}>
-													Go To Beer <i className="fa-solid fa-angle-right"></i>
-												</div>
-										</div>
-									</div>
-									<div>
-										<div className={styles.third_info}>
-												{!showMoreBeer && selectedBeer?.description?.length > 140 ?
-
-												<div className={styles.no_showBeer}>
-													{selectedBeer?.description?.slice(0,140)}...
-													<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show more</div>
-												</div>
-
-												: !showMoreBeer && selectedBeer?.description?.length < 140 ?
-
-												<div className={styles.showBeer}>{selectedBeer?.description}</div>
-												:
-												<div className={styles.showBeer}>
-													{selectedBeer?.description}
-													<div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show Less</div>
-												</div> }
-										</div>
-									</div>
-								</div> }
-							</div>
-						</div>
-					</div> } */}
-				{/* </div> */}
 			</div>
 		</PageContainer>
 	);
