@@ -1,5 +1,4 @@
 .button {
-  margin-left: 20px;
   height: 35px;
   width: 120px;
   font-size: 12px;
@@ -12,7 +11,8 @@
   border-radius: 5px;
   font-weight: 600;
   transition: all 0.5s ease 0s;
-  /* margin-right: 20px; */
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .button:hover {
