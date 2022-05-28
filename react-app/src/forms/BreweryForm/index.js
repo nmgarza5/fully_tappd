@@ -19,9 +19,7 @@ export const BreweryForm = ({brewery}) => {
 	const [postal_code, setPostalCode] = useState(brewery?.postal_code || "");
 	const [country, setCountry] = useState(brewery?.country || "");
 	const [phone, setPhone] = useState(brewery?.phone || "");
-	// const [website_url, setWebsiteUrl] = useState(brewery?.website_url || "");
 	const [profile_image, setProfileImage] = useState(brewery?.profile_image || "");
-	// const [banner_image, setBannerImage] = useState(brewery?.banner_image || "");
 	const [errors, setErrors] = useState([]);
 
 
@@ -38,21 +36,9 @@ export const BreweryForm = ({brewery}) => {
 			postal_code,
 			country,
 			phone,
-			// website_url,
 			profile_image
 		}
 
-		// !name
-		// 	? setErrors(["Please provide your Brewery name."])
-		// 	: !profile_image
-		// 	? setErrors(["Please provide a url for your image."])
-		// 	: !phone
-		// 	? setErrors(["Please provide your phone number."])
-		// 	: !street
-		// 	? setErrors(["Please provide your street address."])
-		// 	: setErrors([]);
-
-		// conditional checking if there is a restaurant already created. If so, send a put request. Else send a post request.
 		if (brewery) {
 			const id = brewery?.id;
 			const updateData = { formData, id };
@@ -97,9 +83,8 @@ export const BreweryForm = ({brewery}) => {
 							</li>
 						))}
 				</ul>
-				<form>
-				<div className={styles.small_text}>All fields below are required.</div>
-					<div className={styles.input_container}>
+					<div className={styles.small_text}>All fields below are required.</div>
+					<div className={styles.upper_input_container}>
 						<label htmlFor="name">Name</label>
 						<input
 							name="name"
@@ -110,159 +95,139 @@ export const BreweryForm = ({brewery}) => {
 							onChange={(e) => setName(e.target.value)}
 						></input>
 					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="header">Header</label>
-						<input
-							name="header"
-							type="text"
-							placeholder="Catch the people's attention!."
-							value={header}
-							required
-							onChange={(e) => setHeader(e.target.value)}
-						></input>
+					<div className={styles.textareas}>
+						<div className={styles.upper_input_container}>
+							<label htmlFor="header">Header</label>
+							<textarea
+								name="header"
+								type="text"
+								placeholder="Catch the people's attention!."
+								value={header}
+								required
+								onChange={(e) => setHeader(e.target.value)}
+							></textarea>
+						</div>
+						<div className={styles.upper_input_container}>
+							<label htmlFor="description">Description</label>
+							<textarea
+								name="description"
+								value={description}
+								placeholder="Tell us what makes your brewery special."
+								onChange={(e) =>
+									setDescription(e.target.value)
+								}
+							></textarea>
+						</div>
 					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="description">Description</label>
-						<textarea
-							name="description"
-							value={description}
-							placeholder="Tell us what makes your brewery special."
-							onChange={(e) =>
-								setDescription(e.target.value)
-							}
-						></textarea>
+					<div className={styles.lower}>
+						<div className={styles.left}>
+							<div className={styles.input_container}>
+								<label htmlFor="street">
+									Street Address
+								</label>
+								<input
+									type="text"
+									name="street"
+									value={street}
+									placeholder="Example: 342 E 6th St, 10003"
+									required
+									onChange={(e) =>
+										setStreet(e.target.value)
+									}
+								></input>
+							</div>
+							<div className={styles.input_container}>
+								<label htmlFor="city">City</label>
+								<input
+									name="city"
+									type="text"
+									placeholder="What city are you in?."
+									value={city}
+									required
+									onChange={(e) => setCity(e.target.value)}
+								></input>
+							</div>
+							<div className={styles.input_container}>
+								<label htmlFor="state">State</label>
+								<input
+									name="state"
+									type="text"
+									placeholder="What state are you in?."
+									value={state}
+									required
+									onChange={(e) => setState(e.target.value)}
+								></input>
+							</div>
+							<div className={styles.input_container}>
+								<label htmlFor="postal_code">
+									Zip Code
+								</label>
+								<input
+									type="text"
+									name="postal_code"
+									value={postal_code}
+									placeholder="Please enter 5 digit. Example: 94124"
+									required
+									onChange={(e) =>
+										setPostalCode(e.target.value)
+									}
+								></input>
+							</div>
+							<div className={styles.input_container}>
+								<label htmlFor="country">Country</label>
+								<input
+									name="country"
+									type="text"
+									placeholder="What country are you in?."
+									value={country}
+									required
+									onChange={(e) => setCountry(e.target.value)}
+								></input>
+							</div>
+						</div>
+						<div className={styles.right}>
+							<div className={styles.input_container}>
+								<label htmlFor="brewery_type">Brewery Type</label>
+								<select
+									name="brewery_type"
+									value={brewery_type}
+									selected={brewery_type}
+									onChange={(e) => setBreweryType(e.target.value)}
+								>
+									<option value="micro">micro</option>
+									<option value="brewpub">brewPub</option>
+									<option value="regional">regional</option>
+									<option value="large">large</option>
+								</select>
+							</div>
+							<div className={styles.input_container}>
+								<label htmlFor="phone">
+									Phone Number
+								</label>
+								<input
+									type="text"
+									name="phone"
+									value={phone}
+									placeholder="Please enter 10 numbers. No special characters."
+									required
+									onChange={(e) => setPhone(e.target.value)}
+								></input>
+							</div>
+							<div className={styles.input_container}>
+								<label htmlFor="profile_image">Profile Image</label>
+								<input
+									type="profile_image"
+									name="profile_image"
+									placeholder='Image format must be ".jpg" ".jpeg" or ".png" or ".gif".'
+									value={profile_image}
+									required
+									onChange={(e) =>
+										setProfileImage(e.target.value)
+									}
+								></input>
+							</div>
+						</div>
 					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="brewery_type">Brewery Type</label>
-						{/* <Select
-							value = {brewery_types.value}
-							options = {brewery_types}
-							defaultValue={brewery_types[0]}
-							onChange={(e) => setBreweryType(e.target.value)}
-							/> */}
-						<select
-							name="brewery_type"
-							value={brewery_type}
-							selected={brewery_type}
-							onChange={(e) => setBreweryType(e.target.value)}
-						>
-							<option value="micro">micro</option>
-							<option value="brewpub">brewPub</option>
-							<option value="regional">regional</option>
-							<option value="large">large</option>
-						</select>
-					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="street">
-							Street Address
-						</label>
-						<input
-							type="text"
-							name="street"
-							value={street}
-							placeholder="Example: 342 E 6th St, 10003"
-							required
-							onChange={(e) =>
-								setStreet(e.target.value)
-							}
-						></input>
-					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="city">City</label>
-						<input
-							name="city"
-							type="text"
-							placeholder="What city are you in?."
-							value={city}
-							required
-							onChange={(e) => setCity(e.target.value)}
-						></input>
-					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="state">State</label>
-						<input
-							name="state"
-							type="text"
-							placeholder="What state are you in?."
-							value={state}
-							required
-							onChange={(e) => setState(e.target.value)}
-						></input>
-					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="postal_code">
-							Zip Code
-						</label>
-						<input
-							type="text"
-							name="postal_code"
-							value={postal_code}
-							placeholder="Please enter 5 digit. Example: 94124"
-							required
-							onChange={(e) =>
-								setPostalCode(e.target.value)
-							}
-						></input>
-					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="country">Country</label>
-						<input
-							name="country"
-							type="text"
-							placeholder="What country are you in?."
-							value={country}
-							required
-							onChange={(e) => setCountry(e.target.value)}
-						></input>
-					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="phone">
-							Phone Number
-						</label>
-						<input
-							type="text"
-							name="phone"
-							value={phone}
-							placeholder="Please enter 10 numbers. No special characters."
-							required
-							onChange={(e) => setPhone(e.target.value)}
-						></input>
-					</div>
-					{/* <div className={styles.input_container}>
-						<label htmlFor="website_url">Website</label>
-						<input
-							type="text"
-							name="website_url"
-							value={website_url}
-							placeholder="Enter your website's name."
-							onChange={(e) => setWebsiteUrl(e.target.value)}
-						></input>
-					</div> */}
-					<div className={styles.input_container}>
-						<label htmlFor="profile_image">Profile Image</label>
-						<input
-							type="profile_image"
-							name="profile_image"
-							placeholder='Image format must be ".jpg" ".jpeg" or ".png" or ".gif".'
-							value={profile_image}
-							required
-							onChange={(e) =>
-								setProfileImage(e.target.value)
-							}
-						></input>
-					</div>
-					{/* <div className={styles.input_container}>
-						<label htmlFor="banner_image">Banner Image</label>
-						<input
-							type="banner_image"
-							name="banner_image"
-							placeholder='Image format must be ".jpg" ".jpeg" or ".png" or ".gif".'
-							value={banner_image}
-							onChange={(e) =>
-								setBannerImage(e.target.value)
-							}
-						></input>
-					</div> */}
 					<div className={styles.button_container}>
 						<div onClick={onSubmit} className={styles.button}>
 							Submit
@@ -284,10 +249,7 @@ export const BreweryForm = ({brewery}) => {
 
 						 )}
 					</div>
-				</form>
 			</div>
 		</div>
 	)
 }
-
-// export default BreweryForm
