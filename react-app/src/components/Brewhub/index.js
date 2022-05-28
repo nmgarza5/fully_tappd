@@ -124,7 +124,17 @@ const Brewhub = () => {
                             </div>
                             <div className={styles.middle}>
                                 <h2>{userBrewery.name}</h2>
-                                <h4>{userBrewery.city}, {userBrewery.state} {userBrewery.country}</h4>
+                                <h4>{userBrewery?.street}</h4>
+								<h4>{userBrewery?.city}, {userBrewery?.state} {userBrewery?.country}</h4>
+								<h4>{userBrewery?.country}</h4>
+								<h4>{`(${userBrewery?.phone.slice(
+										0,
+										3
+									)}) ${userBrewery?.phone.slice(
+										3,
+										6
+									)}-${userBrewery?.phone.slice(6)}`}
+								</h4>
                                 <p>{breweryType(userBrewery.brewery_type)} Brewery</p>
                             </div>
                             {/* <div className={styles.end}>
@@ -157,10 +167,10 @@ const Brewhub = () => {
                                     <div className={styles.row}>
                                          {userBeers.length} Beers
                                     </div>
-                                    <div className={styles.row_end}>
+                                    {/* <div className={styles.row_end}>
 
                                         Sign in to Interact
-                                    </div>
+                                    </div> */}
 
                             </div>
                         <div>
