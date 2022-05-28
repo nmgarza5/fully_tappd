@@ -201,7 +201,7 @@ const SearchResults = () => {
 					<div className={styles.right_container}>
 						<h3>Top Breweries</h3>
 						{topTenBreweries.map(brewery => (
-							<div key={brewery.id} className={styles.beer_link} onClick={() => sendToBeer(brewery.id)}>
+							<div key={brewery.id} className={styles.beer_link} onClick={() => sendToBrewery(brewery.id)}>
 								<img className={styles.right_image} src={brewery.profile_image} alt='brewery image' onError={addDefaultImage}/>
 								<div className={styles.text_container}>
 									<h4>{brewery.name}</h4>

@@ -267,3 +267,20 @@
 .beer_link:hover {
 	cursor: pointer;
 	}
+
+
+	.join_us {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.join_us h3 {
+		color: rgb(109, 108, 108);
+		margin: 0;
+		margin-bottom: 5px;;
+	}
+	.join_us P {
+		color: rgb(109, 108, 108);
+		font-size: 12px;
+		margin: 0;
+	}

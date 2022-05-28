@@ -203,6 +203,20 @@ export const SingleBrewery = () => {
                                 </div>
                         ))}
                     </div>
+                    <div className={styles.join_us}>
+                        <h3>Come Join Us!</h3>
+                        <p>{brewery?.street}</p>
+                        <p>{brewery?.city}, {brewery?.state} {brewery?.country}</p>
+                        <p>{brewery?.country}</p>
+                        <p>{`(${brewery?.phone.slice(
+                                0,
+                                3
+                            )}) ${brewery?.phone.slice(
+                                3,
+                                6
+                            )}-${brewery?.phone.slice(6)}`}
+                        </p>
+                </div>
                 </div>
             </div>
         </PageContainer>
