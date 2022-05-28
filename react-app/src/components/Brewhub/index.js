@@ -18,12 +18,14 @@ import defaultImage from "../../images/default_image.png"
 import { authenticate } from "../../store/session";
 
 import RatingsBar from "../RatingsBar";
+import ImageModal from "../Modal/ImageModal";
 
 
 const Brewhub = () => {
 	const dispatch = useDispatch()
 	const history = useHistory();
 
+	const sessionUser = useSelector((state) => Object.values(state.session.user))
 	const userBrewery = useSelector((state) => Object.values(state.session.user.breweries)[0])
 	const userBeers = Object.values(userBrewery.beers)
 	const [currentBeerId, setCurrentBeerId] = useState(userBeers[0]?.id || null)
@@ -58,24 +60,45 @@ const Brewhub = () => {
 		}
 	}
 
-	// const getNextBeerId = () => {
-	// 	const currentIndex = userBeers.indexOf(selectedBeer);
-	// 	if (userBeers[currentIndex+1]) {
-	// 		const nextBeer = userBeers[currentIndex+1]
-	// 		return nextBeer.id
-	// 	}
-	// }
+    let beersList;
+    let likes;
+    let numLikes;
+
+
+    if (userBrewery) {
+        beersList = Object.values(userBrewery?.beers)
+        likes = Object.values(userBrewery?.likes)
+        numLikes = likes.length;
+    }
+
+
+    let totalBreweryReviews = [];
+    beersList.map(beer => {
+        let beerReviews = Object.values(beer?.reviews)
+        totalBreweryReviews = [...totalBreweryReviews, ...beerReviews]
+    })
 
 
 	let reviewsList;
 	currentBeerId ? reviewsList = Object.values(selectedBeer?.reviews) : reviewsList = null
 
-    const avgRating = () => {
-        let sum = 0;
-        reviewsList.forEach(review => sum += review.rating)
-        let avg = sum / reviewsList.length;
-        if (avg) return `${avg.toFixed(2)}/5`
-        else return "No Ratings"
+	let uniqueReviews;
+	let reviewerSet = new Set();
+
+	if (reviewsList.length > 0) {
+		reviewsList.forEach(review=> {
+			reviewerSet.add(review.user_id)
+		})
+		uniqueReviews = reviewerSet.size
+
+	}
+
+	const userReviews = () => {
+        let count = 0;
+        reviewsList?.forEach(review => {
+            if (review?.user_id === sessionUser?.id) count+=1;
+        })
+        return count;
     }
 
 	const goToBeer = async (id) => {
@@ -111,13 +134,21 @@ const Brewhub = () => {
         e.target.src = defaultImage
     }
 
+	const imagePreview = (image) => {
+        dispatch(setCurrentModal(() => (<ImageModal image={image} />)));
+        dispatch(showModal());
+    }
+
+	const goToBrewery = async (id) => {
+        await history.push(`/breweries/${id}`)
+    }
 
 	return (
 		<PageContainer>
 			<h1>Welcome to the Brewhub!</h1>
 			<div className={styles.page}>
                 <div className={styles.left}>
-				<div className={styles.info}>
+					<div className={styles.info}>
                         <div className={styles.first_info} >
                             <div className={styles.card_img}>
                                 <img src={userBrewery.profile_image} alt="brewery" onError={addDefaultImage}/>
@@ -137,25 +168,6 @@ const Brewhub = () => {
 								</h4>
                                 <p>{breweryType(userBrewery.brewery_type)} Brewery</p>
                             </div>
-                            {/* <div className={styles.end}>
-                                <div>
-                                    <p>TOTAL</p>
-                                    {reviewsList.length}
-                                </div>
-                                <div>
-                                    <p>UNIQUE</p>
-                                    {uniqueReviews}
-                                </div>
-                                <div>
-                                    <p>YOU</p>
-                                    {sessionUser ? userReviews(): 0}
-                                </div>
-
-                                <div>
-                                    <p>LIKES</p>
-                                    {numLikes ? numLikes : 0}
-                                </div>
-                            </div> */}
                         </div>
                         <div className={styles.second_info}>
                                     <div  className={styles.row}>
@@ -167,11 +179,9 @@ const Brewhub = () => {
                                     <div className={styles.row}>
                                          {userBeers.length} Beers
                                     </div>
-                                    {/* <div className={styles.row_end}>
-
-                                        Sign in to Interact
-                                    </div> */}
-
+                                    <div className={styles.row_end}>
+										{numLikes > 1 ? `${numLikes} Likes` : `${numLikes} Like`}
+                                    </div>
                             </div>
                         <div>
                             <div className={styles.third_info}>
@@ -196,7 +206,7 @@ const Brewhub = () => {
 				<div className={styles.right}>
 					<div className={styles.right_container}>
 						<div className={styles.brewery_button_container}>
-							<h3>Wanna make a change?</h3>
+							<h2>Brewery Settings</h2>
 							<UpdateBrewery brewery={userBrewery}/>
 							<DeleteBrewery brewery_id={userBrewery.id}/>
 						</div>
@@ -205,7 +215,98 @@ const Brewhub = () => {
 			</div>
 			<div className={styles.page}>
                 <div className={styles.left}>
-					{userBeers &&
+					{ selectedBeer ?
+					<div className={styles.info}>
+                        <div className={styles.first_info} >
+                            <div className={styles.card_img}>
+                                <img src={selectedBeer.beer_image} alt="beer" onError={addDefaultImage} onClick={()=>imagePreview(selectedBeer.beer_image)}/>
+                            </div>
+                            <div className={styles.middle}>
+                                <h2>{selectedBeer.name}</h2>
+                                <h4 onClick={() => goToBrewery(selectedBeer.brewery_id)}>{selectedBeer.brewery_name}</h4>
+                                <p>{selectedBeer.style}</p>
+                            </div>
+                            <div className={styles.end}>
+                                <div>
+                                    <p>TOTAL</p>
+                                    {reviewsList.length}
+                                </div>
+                                <div>
+                                    <p>UNIQUE</p>
+                                    {uniqueReviews}
+                                </div>
+                                {sessionUser
+                                ?
+                                <div>
+                                    <p>YOU</p>
+                                    {userReviews()}
+                                </div>
+                                :
+                                <div>
+                                    <p>YOU</p>
+                                    0
+                                </div>}
+                                <div>
+                                    <p>LIKES</p>
+                                    {numLikes}
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.second_info}>
+                                <div  className={styles.row}>
+                                    {selectedBeer.abv}% ABV
+                                </div>
+                                <div className={styles.row}>
+                                    {selectedBeer.ibu} IBU
+                                </div>
+                                <div className={styles.row}>
+                                    <p><RatingsBar rating={selectedBeer.rating} /></p>
+                                </div>
+								<div className={styles.row_end_beer} onClick={() => goToBeer(selectedBeer.id)}>
+									Go to Beer <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                        </div>
+                        <div>
+                            <div className={styles.third_info}>
+                                {!showMoreBeer && selectedBeer.description.length > 150 ?
+                                    <div className={styles.show}>
+                                        {selectedBeer.description.slice(0,150)}...
+                                        <div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show more</div>
+                                     </div>
+                                    : !showMoreBeer && selectedBeer.description.length < 150 ?
+                                                <div className={styles.show}>{selectedBeer.description}</div> :
+                                    <div className={styles.show}>
+                                        {selectedBeer.description}
+                                        <div onClick={() => setShowMoreBeer(!showMoreBeer)}>Show Less</div>
+                                    </div> }
+                            </div>
+                        </div>
+                    </div>
+					:
+					<div className={styles.info}>
+						No beers created yet
+					</div> }
+                </div>
+				<div className={styles.right}>
+					<div className={styles.right_container}>
+						<div className={styles.brewery_button_container}>
+							<h2>Beer Settings</h2>
+							<div role='button' onClick={showNewBeerForm} className={styles.button}>Create New Beer</div>
+							{selectedBeer && <div role='button' onClick={showEditBeerForm} className={styles.button}>Edit Beer</div> }
+							{selectedBeer && <div role='button' onClick={showDeleteBeerForm} className={styles.button}>Delete Beer</div> }
+						</div>
+						<div className={styles.select_container}>
+							<h3 >Beer List</h3>
+							{currentBeerId ? userBeers.map((beer) => (
+								<div className={styles.one_beer} key={beer.id} value={beer.id} onClick={(e)=> setCurrentBeerId(beer.id)}>
+									{beer.name}
+									</div>
+								))
+							: <div>- No Beers Created Yet</div>}
+						</div >
+					</div>
+				</div>
+					{/* {userBeers &&
 					<div className={styles.beer_container}>
 						<div className={styles.button_container}>
 							<div role='button' onClick={showNewBeerForm} className={styles.button}>Create New Beer</div>
@@ -215,7 +316,6 @@ const Brewhub = () => {
 						<div className={styles.outer_container}>
 							<div className={styles.select_container}>
 										<div htmlFor="currentBeerId">Beer List</div>
-
 										{currentBeerId ? userBeers.map((beer) => (
 											<div className={styles.one_beer} key={beer.id} value={beer.id} onClick={(e)=> setCurrentBeerId(beer.id)}>
 												{beer.name}
@@ -271,8 +371,8 @@ const Brewhub = () => {
 								</div> }
 							</div>
 						</div>
-					</div> }
-				</div>
+					</div> } */}
+				{/* </div> */}
 			</div>
 		</PageContainer>
 	);
