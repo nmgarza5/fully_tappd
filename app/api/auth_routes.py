@@ -9,7 +9,7 @@ from app.s3_helpers import (
 auth_routes = Blueprint('auth', __name__)
 
 
-def validation_errors_to_error_messages(validation_errors):
+def error_generator(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
     """
@@ -47,7 +47,7 @@ def login():
         login_user(user)
         return user.to_dict()
     # print("\n\n", form.errors, "\n\n")
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': error_generator(form.errors)}, 401
 
 
 @auth_routes.route('/logout')
@@ -67,12 +67,12 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if "image" not in request.files:
-        return {"errors": validation_errors_to_error_messages({"profile image": ["image required"]})}, 400
+        return {"errors": error_generator({"profile image": ["image required"]})}, 400
 
     image = request.files["image"]
     print("\n image \n", image, '\n')
     if not allowed_file(image.filename):
-        return {"errors": validation_errors_to_error_messages({"image": ["file type not permitted"]})}, 400
+        return {"errors": error_generator({"image": ["file type not permitted"]})}, 400
 
     image.filename = get_unique_filename(image.filename)
 
@@ -85,7 +85,7 @@ def sign_up():
         return upload, 400
 
     url = upload["url"]
-    print("\n URL \n", url, '\n')
+
 
 
     if form.validate_on_submit():
@@ -106,7 +106,7 @@ def sign_up():
         db.session.commit()
         login_user(user)
         return user.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': error_generator(form.errors)}, 401
 
 
 @auth_routes.route('/unauthorized')

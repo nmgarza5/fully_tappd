@@ -7,8 +7,6 @@
 
   width: 500px;
 	margin: 0 auto;
-  /* padding: 15px; */
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,8 +18,6 @@
   margin: 0;
   color: white;
   background-color: #000000;
-  border-top-left-radius: 5px;
-  border-top-RIGHT-radius: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -135,4 +131,10 @@
     background-color: #ffffff;
     border: #000000 solid;
     color: black;
+  }
+
+
+  .image_text {
+    color: rgb(138, 138, 138);
+    font-size: 12px;
   }

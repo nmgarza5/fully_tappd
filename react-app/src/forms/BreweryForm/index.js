@@ -166,7 +166,7 @@ export const BreweryForm = ({brewery}) => {
 									type="text"
 									name="postal_code"
 									value={postal_code}
-									placeholder="Please enter 5 digit. Example: 94124"
+									placeholder="Please enter 5 digits. Example: 94124"
 									required
 									onChange={(e) =>
 										setPostalCode(e.target.value)
@@ -208,7 +208,7 @@ export const BreweryForm = ({brewery}) => {
 									type="text"
 									name="phone"
 									value={phone}
-									placeholder="Please enter 10 numbers. No special characters."
+									placeholder="10 numbers. No special characters."
 									required
 									onChange={(e) => setPhone(e.target.value)}
 								></input>

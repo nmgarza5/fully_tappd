@@ -5,9 +5,9 @@ import { createBeer, updateBeer} from "../../store/beer"
 import styles from "./BeerForm.module.css"
 import { hideModal } from "../../store/modal"
 import { authenticate } from "../../store/session"
+import defaultImage from "../../images/default_image.png"
 
 export const BeerForm = ({beer, breweryId}) => {
-
 	const dispatch = useDispatch();
 	const history = useHistory();
     const [name, setName] = useState(beer?.name || "");
@@ -16,7 +16,9 @@ export const BeerForm = ({beer, breweryId}) => {
 	// const [price, setPrice] = useState(beer?.price || "0");
 	const [abv, setAbv] = useState(beer?.abv || "0");
 	const [ibu, setIbu] = useState(beer?.ibu || "0");
-	const brewery_id = breweryId
+	const [image, setImage] = useState(beer?.beer_image || null);
+	console.log("image", image)
+    const [imageLoading, setImageLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
 
 	// const userBreweries = useSelector((state) => state?.session?.user.breweries);
@@ -32,23 +34,25 @@ export const BeerForm = ({beer, breweryId}) => {
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		const formData = {
-			name,
-			description,
-			style,
-			// price,
-			abv,
-			ibu,
-			brewery_id
-		}
 
-		// !name
-		// 	? setErrors([...errors, "Please provide your beer name."])
-		// 	: !price
-		// 	? setErrors([...errors, "Please provide your price."])
-		// 	: setErrors([]);
-
-		// conditional checking if there is a restaurant already created. If so, send a put request. Else send a post request.
+		const formData = new FormData();
+        // const reviewData = {
+        //     beer_id,
+        //     brewery_id,
+        //     rating,
+        //     content,
+        //     image_url
+        // }
+        formData.append('name', name)
+        formData.append('description', description)
+        formData.append('style', style)
+        formData.append('abv', abv)
+        formData.append('ibu', ibu)
+        formData.append('brewery_id', breweryId)
+        formData.append('ibu', ibu)
+		formData.append('image', image)
+        setImageLoading(true);
+		console.log("hit", formData.entries)
 		if (beer) {
 			const id = beer?.id;
 			const updateData = { formData, id };
@@ -56,6 +60,7 @@ export const BeerForm = ({beer, breweryId}) => {
 				updateBeer(updateData)
 			);
 			if (updatedBeer.errors) {
+				setImageLoading(false);
 				setErrors(updatedBeer.errors);
 			} else {
 				await dispatch(authenticate())
@@ -65,9 +70,11 @@ export const BeerForm = ({beer, breweryId}) => {
 		} else {
 			const newBeer = await dispatch(createBeer(formData));
 			if (newBeer.errors) {
+				setImageLoading(false);
 				setErrors(newBeer.errors);
 			} else {
 				await dispatch(authenticate())
+				setImageLoading(false);
 				dispatch(hideModal());
 				history.push(`/beer/${newBeer.id}`);
 			}
@@ -84,6 +91,14 @@ export const BeerForm = ({beer, breweryId}) => {
         dispatch(hideModal())
     }
 
+	const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+    }
+
+    const addDefaultImage = (e) => {
+        e.target.src = defaultImage
+    }
 
 	return (
 			<div className={styles.form_entries}>
@@ -110,18 +125,7 @@ export const BeerForm = ({beer, breweryId}) => {
 							onChange={(e) => setName(e.target.value)}
 						></input>
 					</div>
-					{/* <div className={styles.input_container}>
-						<label htmlFor="brewery">Brewery</label>
-						<select
-							name="brewery"
-							value={brewery_id}
-							selected={brewery_id}
-							onChange={(e) => setBreweryId(e.target.value)}
-						>
-						{Object.entries(userBreweries).map(([key, brew]) => (
-							<option  key={key} value={key}>{brew.name}</option>
-						))}
-						</select> */}
+
 					<div className={styles.input_container}>
 						<label htmlFor="style">Beer Style</label>
 						<select
@@ -153,13 +157,28 @@ export const BeerForm = ({beer, breweryId}) => {
 						<label htmlFor="price">Price</label>
 						<input style={{width: '150px'}} type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
 					</div> */}
-					<div className={styles.input_container}>
-						<label htmlFor="price">ABV</label>
-						<input style={{width: '150px'}} type="number" value={abv} onChange={(e) => setAbv(e.target.value)}/>
-					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="price">IBUs</label>
-						<input style={{width: '150px'}} type="number" value={ibu} onChange={(e) => setIbu(e.target.value)}/>
+					<div className={styles.lower_container}>
+						<div className={styles.left_container}>
+							<div className={styles.input_container}>
+								<label htmlFor="price">ABV</label>
+								<input style={{width: '150px'}} type="number" value={abv} onChange={(e) => setAbv(e.target.value)}/>
+							</div>
+							<div className={styles.input_container}>
+								<label htmlFor="price">IBUs</label>
+								<input style={{width: '150px'}} type="number" value={ibu} onChange={(e) => setIbu(e.target.value)}/>
+							</div>
+						</div>
+						<div className={styles.input_container}>
+							<label>Image</label>
+								<input
+									className={styles.lower_input}
+									type="file"
+									accept="image/*"
+									onChange={updateImage}
+									/>
+								{image && <p className={styles.image_text}> Select a new photo if you wish to change your previous selection.</p> }
+								{(imageLoading)&& <p>Loading...</p>}
+						</div>
 					</div>
 					<div className={styles.button_container}>
 						<div onClick={onSubmit} className={styles.button}>
@@ -186,5 +205,3 @@ export const BeerForm = ({beer, breweryId}) => {
 			</div>
 	)
 }
-
-// export default BreweryForm

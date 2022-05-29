@@ -17,8 +17,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
     const [content, setContent] = useState(review?.content || "")
     // const [image_url, setImage] = useState(review?.image_url || "")
     const [image, setImage] = useState(review?.image_url || null);
-    console.log("review", review)
-    console.log("IMAGE", image)
     const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
 
@@ -60,9 +58,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
             }
         } else {
             const newReview = await dispatch(createReview(formData));
-            console.log("newReview", newReview)
             if (newReview.errors) {
-                console.log("newReview.errors", newReview.errors)
                 setImageLoading(false);
                 setErrors(newReview.errors);
             } else {
@@ -76,10 +72,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
 
         }
 
-    // const addDefaultImage = async (e) => {
-    //     e.target.src = defaultImage
-    // }
-
     const closeModal = () => {
         dispatch(hideModal())
     }
@@ -87,6 +79,10 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
     const updateImage = (e) => {
         const file = e.target.files[0];
         setImage(file);
+    }
+
+    const addDefaultImage = (e) => {
+        e.target.src = defaultImage
     }
 
     return (
@@ -112,34 +108,17 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                             onChange={(e) => setContent(e.target.value)}
                         ></textarea>
                     </div>
-                    {!image &&  <div className={styles.lower_field}>
-                        <label>Image
-                        </label>
-                        {/* <input
-                        className={styles.lower_input}
-                            type="text"
-                            name="header"
-                            placeholder="Your image url"
-                            value={image_url}
-                            onChange={(e) => setImage(e.target.value)}
-                            ></input> */}
+                    <div className={styles.lower_field}>
+                        <label>Image</label>
                             <input
                                 className={styles.lower_input}
                                 type="file"
                                 accept="image/*"
                                 onChange={updateImage}
                                 />
-
-                                {(imageLoading)&& <p>Loading...</p>}
-                        {/* <div className={styles.images_container}>
-                        {image &&
-                            <div className={styles.single_image}>
-                                <img src={image} alt="" className={styles.image_preview} onError={addDefaultImage}/>
-                                <i onClick={() => setImage(null)} className="fa-solid fa-square-minus"></i>
-                            </div>
-                                }
-                                </div> */}
-                    </div> }
+                            {image && <p className={styles.image_text}> Select a new photo if you wish to change your previous selection.</p> }
+                            {(imageLoading)&& <p>Loading...</p>}
+                    </div>
                 </div>
                 <div className={styles.lower_half}>
                     <div className={styles.rating_container}>
