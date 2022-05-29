@@ -40,7 +40,7 @@
 	object-fit:contain;
 	margin-top: 10px;
 }
-.card_img img {
+.card_img img:hover {
 	cursor: pointer;
 }
 
@@ -154,6 +154,7 @@
 
 .show{
 	padding: 10px;
+    font-size: 13px;
 }
 
 .show div {

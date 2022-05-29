@@ -39,7 +39,7 @@
 .input_container {
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    width: 300px;
     margin: 5px;
 }
 

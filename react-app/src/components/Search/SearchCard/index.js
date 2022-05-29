@@ -3,10 +3,14 @@ import { useHistory } from "react-router-dom";
 import styles from "./SearchCard.module.css";
 import defaultImage from "../../../images/default_image.png"
 import RatingsBar from "../../RatingsBar";
+import ImageModal from "../../Modal/ImageModal";
+import { useDispatch } from "react-redux";
+import { setCurrentModal, showModal } from "../../../store/modal";
 
 
 
 const SearchCard = ({type, content}) => {
+    const dispatch = useDispatch()
     const history = useHistory()
 
 	const goToBeer = (id) => {
@@ -42,6 +46,11 @@ const SearchCard = ({type, content}) => {
         reviewsCount = calculateRatingsCount()
     }
 
+    const imagePreview = (image) => {
+        dispatch(setCurrentModal(() => (<ImageModal image={image} />)));
+        dispatch(showModal());
+    }
+
     return (
         <>
         {type === "beer"
@@ -49,7 +58,7 @@ const SearchCard = ({type, content}) => {
             <div className={styles.infoBeer}>
                 <div className={styles.first_info} >
                     <div className={styles.card_img}>
-                        <img src={content?.beer_image} alt="beer" onError={addDefaultImage}/>
+                        <img src={content?.beer_image} alt="beer" onError={addDefaultImage} onClick={()=>imagePreview(content?.beer_image)}/>
                     </div>
                     <div className={styles.middle}>
                         <h3 onClick={() => goToBeer(content?.id)}>{content?.name}</h3>

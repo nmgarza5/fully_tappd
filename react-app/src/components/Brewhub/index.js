@@ -151,7 +151,7 @@ const Brewhub = () => {
 					<div className={styles.info}>
                         <div className={styles.first_info} >
                             <div className={styles.card_img}>
-                                <img src={userBrewery.profile_image} alt="brewery" onError={addDefaultImage}/>
+                                <img src={userBrewery.profile_image} alt="brewery" onError={addDefaultImage} onClick={()=>imagePreview(userBrewery.profile_image)}/>
                             </div>
                             <div className={styles.middle}>
                                 <h2>{userBrewery.name}</h2>

@@ -30,11 +30,11 @@ def reviews():
 @review_routes.route('/', methods=['POST'])
 def create_review():
   if "image" not in request.files:
-        return {"errors": "image required"}, 400
+        return {"errors": error_generator({"profile image": ["image required"]})}, 400
 
   image = request.files["image"]
   if not allowed_file(image.filename):
-      return {"errors": "file type not permitted"}, 400
+        return {"errors": error_generator({"image": ["file type not permitted"]})}, 400
 
   image.filename = get_unique_filename(image.filename)
 
@@ -47,6 +47,7 @@ def create_review():
       return upload, 400
 
   url = upload["url"]
+  print("\n URL \n", url, '\n')
 
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
@@ -75,6 +76,30 @@ def reviewUpdate(id):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     review = Review.query.get(id)
+
+    # print("\n image \n", request.files["image"], '\n')
+
+
+    if "image" in request.files:
+      image = request.files["image"]
+      if not allowed_file(image.filename):
+            return {"errors": error_generator({"image": ["file type not permitted"]})}, 400
+
+      image.filename = get_unique_filename(image.filename)
+
+      upload = upload_file_to_s3(image)
+
+      if "url" not in upload:
+          # if the dictionary doesn't have a url key
+          # it means that there was an error when we tried to upload
+          # so we send back that error message
+          return upload, 400
+
+      url = upload["url"]
+    else:
+      url = review.image_url
+
+    print("\n URL \n", url, '\n')
     print("\n FORM", form.data)
     print("\n review", review.to_dict())
     if form.validate_on_submit():
@@ -83,7 +108,7 @@ def reviewUpdate(id):
         review.beer_id = form.data['beer_id']
         review.rating = form.data['rating']
         review.content = form.data['content']
-
+        review.image_url = url
         db.session.commit()
         return review.to_dict()
     else:

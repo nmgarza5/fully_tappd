@@ -42,8 +42,6 @@
     margin: 0;
     color: white;
     background-color: #000000;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

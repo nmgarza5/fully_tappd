@@ -93,9 +93,6 @@ export const SingleBeer = () => {
         history.push(`/beer/${beer_id}`);
     };
 
-    const closeModal = () => {
-        dispatch(hideModal())
-    }
 
     const imagePreview = (image) => {
         dispatch(setCurrentModal(() => (<ImageModal image={image} />)));
