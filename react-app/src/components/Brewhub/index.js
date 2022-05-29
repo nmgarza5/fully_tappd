@@ -82,6 +82,10 @@ const Brewhub = () => {
 	let reviewsList;
 	currentBeerId ? reviewsList = Object.values(selectedBeer?.reviews) : reviewsList = null
 
+    const beerLikes = Object.values(selectedBeer?.likes).length
+
+    console.log("beerLikes", beerLikes)
+
 	let uniqueReviews;
 	let reviewerSet = new Set();
 
@@ -180,7 +184,7 @@ const Brewhub = () => {
                                          {userBeers.length} Beers
                                     </div>
                                     <div className={styles.row_end}>
-										{numLikes > 1 ? `${numLikes} Likes` : `${numLikes} Like`}
+										{numLikes === 1 ? `${numLikes} Like` : `${numLikes} Likes`}
                                     </div>
                             </div>
                         <div>
@@ -248,7 +252,7 @@ const Brewhub = () => {
                                 </div>}
                                 <div>
                                     <p>LIKES</p>
-                                    {numLikes}
+                                    {beerLikes}
                                 </div>
                             </div>
                         </div>

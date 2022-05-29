@@ -47,7 +47,6 @@ def create_review():
       return upload, 400
 
   url = upload["url"]
-  print("\n URL \n", url, '\n')
 
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
@@ -99,9 +98,6 @@ def reviewUpdate(id):
     else:
       url = review.image_url
 
-    print("\n URL \n", url, '\n')
-    print("\n FORM", form.data)
-    print("\n review", review.to_dict())
     if form.validate_on_submit():
         review.user_id = current_user.id,
         review.brewery_id = form.data['brewery_id']

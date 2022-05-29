@@ -8,7 +8,6 @@ import { authenticate } from "../../store/session"
 import defaultImage from "../../images/default_image.png"
 
 export const BeerForm = ({beer, breweryId}) => {
-
 	const dispatch = useDispatch();
 	const history = useHistory();
     const [name, setName] = useState(beer?.name || "");
@@ -17,7 +16,8 @@ export const BeerForm = ({beer, breweryId}) => {
 	// const [price, setPrice] = useState(beer?.price || "0");
 	const [abv, setAbv] = useState(beer?.abv || "0");
 	const [ibu, setIbu] = useState(beer?.ibu || "0");
-	const [image, setImage] = useState(review?.image_url || null);
+	const [image, setImage] = useState(beer?.beer_image || null);
+	console.log("image", image)
     const [imageLoading, setImageLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
 
@@ -48,11 +48,11 @@ export const BeerForm = ({beer, breweryId}) => {
         formData.append('style', style)
         formData.append('abv', abv)
         formData.append('ibu', ibu)
-        formData.append('breweryId', breweryId)
+        formData.append('brewery_id', breweryId)
         formData.append('ibu', ibu)
 		formData.append('image', image)
         setImageLoading(true);
-
+		console.log("hit", formData.entries)
 		if (beer) {
 			const id = beer?.id;
 			const updateData = { formData, id };
@@ -157,13 +157,28 @@ export const BeerForm = ({beer, breweryId}) => {
 						<label htmlFor="price">Price</label>
 						<input style={{width: '150px'}} type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
 					</div> */}
-					<div className={styles.input_container}>
-						<label htmlFor="price">ABV</label>
-						<input style={{width: '150px'}} type="number" value={abv} onChange={(e) => setAbv(e.target.value)}/>
-					</div>
-					<div className={styles.input_container}>
-						<label htmlFor="price">IBUs</label>
-						<input style={{width: '150px'}} type="number" value={ibu} onChange={(e) => setIbu(e.target.value)}/>
+					<div className={styles.lower_container}>
+						<div className={styles.left_container}>
+							<div className={styles.input_container}>
+								<label htmlFor="price">ABV</label>
+								<input style={{width: '150px'}} type="number" value={abv} onChange={(e) => setAbv(e.target.value)}/>
+							</div>
+							<div className={styles.input_container}>
+								<label htmlFor="price">IBUs</label>
+								<input style={{width: '150px'}} type="number" value={ibu} onChange={(e) => setIbu(e.target.value)}/>
+							</div>
+						</div>
+						<div className={styles.input_container}>
+							<label>Image</label>
+								<input
+									className={styles.lower_input}
+									type="file"
+									accept="image/*"
+									onChange={updateImage}
+									/>
+								{image && <p className={styles.image_text}> Select a new photo if you wish to change your previous selection.</p> }
+								{(imageLoading)&& <p>Loading...</p>}
+						</div>
 					</div>
 					<div className={styles.button_container}>
 						<div onClick={onSubmit} className={styles.button}>
