@@ -51,11 +51,9 @@ export const receiveBeer = () => async (dispatch) => {
 export const createBeer = (data) => async (dispatch) => {
 	const res = await fetch("/api/beer/", {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(data),
+		body: data,
 	});
 	const newBeer = await res.json();
-	// console.log("NEW BEER", newBeer)
 	if (newBeer.errors) {
 		return newBeer;
 	} else {
@@ -65,10 +63,8 @@ export const createBeer = (data) => async (dispatch) => {
 };
 
 export const receiveOneBeer = (beerId) => async (dispatch) => {
-	// console.log("beerid", beerId)
 	const res = await fetch(`/api/beer/${beerId}`);
 		const beer = await res.json();
-		// console.log("beer store", beer)
 		if (beer.errors) {
 			return beer
 		} else {
@@ -82,8 +78,7 @@ export const updateBeer =
 	async (dispatch) => {
 		const res = await fetch(`/api/beer/${id}`, {
 			method: "PUT",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(formData),
+			body: formData,
 		});
 
 		const beer = await res.json();

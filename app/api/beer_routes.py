@@ -3,6 +3,8 @@ from flask import Blueprint, request
 from flask_login import current_user
 from app.models import Brewery, db, User, Beer
 from app.forms import BeerForm
+from app.s3_helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 beer_routes = Blueprint('beer', __name__)
 
@@ -29,6 +31,24 @@ def singleBeer(id):
 def create_brewery():
   form = BeerForm()
   form['csrf_token'].data = request.cookies['csrf_token']
+  if "image" not in request.files:
+      return {"errors": error_generator({"image": ["image required"]})}, 400
+
+  image = request.files["image"]
+  if not allowed_file(image.filename):
+        return {"errors": error_generator({"image": ["file type not permitted"]})}, 400
+
+  image.filename = get_unique_filename(image.filename)
+
+  upload = upload_file_to_s3(image)
+
+  if "url" not in upload:
+      # if the dictionary doesn't have a url key
+      # it means that there was an error when we tried to upload
+      # so we send back that error message
+      return upload, 400
+
+  url = upload["url"]
 
   if form.validate_on_submit():
     new_beer = Beer(
@@ -38,7 +58,8 @@ def create_brewery():
       description = form.data['description'],
       # price = form.data['price'],
       abv = form.data['abv'],
-      ibu = form.data['ibu']
+      ibu = form.data['ibu'],
+      beer_image = url
       )
     db.session.add(new_beer)
     db.session.commit()
@@ -53,7 +74,25 @@ def breweryUpdate(id):
     form = BeerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     beer = Beer.query.get(id)
-    # print("\n\n FORMDATA\n", form.data)
+    if "image" in request.files:
+      image = request.files["image"]
+      if not allowed_file(image.filename):
+            return {"errors": error_generator({"image": ["file type not permitted"]})}, 400
+
+      image.filename = get_unique_filename(image.filename)
+
+      upload = upload_file_to_s3(image)
+
+      if "url" not in upload:
+          # if the dictionary doesn't have a url key
+          # it means that there was an error when we tried to upload
+          # so we send back that error message
+          return upload, 400
+
+      url = upload["url"]
+    else:
+      url = beer.beer_image
+
     if form.validate_on_submit():
         beer.name = form.data['name'],
         beer.brewery_id = form.data['brewery_id'],
@@ -61,7 +100,8 @@ def breweryUpdate(id):
         beer.description = form.data['description'],
         # beer.price = form.data['price'],
         beer.abv = form.data['abv'],
-        beer.ibu = form.data['ibu']
+        beer.ibu = form.data['ibu'],
+        beer.beer_image = url
         db.session.commit()
         return beer.to_dict()
     else:

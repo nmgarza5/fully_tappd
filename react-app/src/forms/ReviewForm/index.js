@@ -6,7 +6,6 @@ import { createReview } from "../../store/reviews";
 import { updateReview } from "../../store/reviews";
 import { hideModal } from "../../store/modal";
 import { receiveOneBeer } from "../../store/beer";
-import defaultImage from "../../images/default_image.png"
 
 
 export const ReviewForm = ({review, brewery_id, beer_id}) => {
@@ -15,10 +14,7 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
 
     const [rating, setRating] = useState(review?.rating || 1)
     const [content, setContent] = useState(review?.content || "")
-    // const [image_url, setImage] = useState(review?.image_url || "")
     const [image, setImage] = useState(review?.image_url || null);
-    console.log("review", review)
-    console.log("IMAGE", image)
     const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
 
@@ -26,13 +22,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData();
-        // const reviewData = {
-        //     beer_id,
-        //     brewery_id,
-        //     rating,
-        //     content,
-        //     image_url
-        // }
         formData.append('beer_id', beer_id)
         formData.append('brewery_id', brewery_id)
         formData.append('rating', rating)
@@ -45,7 +34,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
         if (review) {
             const id = review?.id;
             const updateData = { formData, id };
-            console.log("updateData", updateData)
             const updatedReview = await dispatch(
                 updateReview(updateData)
             );
@@ -60,13 +48,10 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
             }
         } else {
             const newReview = await dispatch(createReview(formData));
-            console.log("newReview", newReview)
             if (newReview.errors) {
-                console.log("newReview.errors", newReview.errors)
                 setImageLoading(false);
                 setErrors(newReview.errors);
             } else {
-                // await dispatch(authenticate())
                 await dispatch(receiveOneBeer(beer_id))
                 setImageLoading(false);
                 dispatch(hideModal());
@@ -75,10 +60,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
         };
 
         }
-
-    // const addDefaultImage = async (e) => {
-    //     e.target.src = defaultImage
-    // }
 
     const closeModal = () => {
         dispatch(hideModal())
@@ -112,34 +93,17 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                             onChange={(e) => setContent(e.target.value)}
                         ></textarea>
                     </div>
-                    {!image &&  <div className={styles.lower_field}>
-                        <label>Image
-                        </label>
-                        {/* <input
-                        className={styles.lower_input}
-                            type="text"
-                            name="header"
-                            placeholder="Your image url"
-                            value={image_url}
-                            onChange={(e) => setImage(e.target.value)}
-                            ></input> */}
+                    <div className={styles.lower_field}>
+                        <label>Image</label>
                             <input
                                 className={styles.lower_input}
                                 type="file"
                                 accept="image/*"
                                 onChange={updateImage}
                                 />
-
-                                {(imageLoading)&& <p>Loading...</p>}
-                        {/* <div className={styles.images_container}>
-                        {image &&
-                            <div className={styles.single_image}>
-                                <img src={image} alt="" className={styles.image_preview} onError={addDefaultImage}/>
-                                <i onClick={() => setImage(null)} className="fa-solid fa-square-minus"></i>
-                            </div>
-                                }
-                                </div> */}
-                    </div> }
+                            {image && <p className={styles.image_text}> Select a new photo if you wish to change your previous selection.</p> }
+                            {(imageLoading)&& <p>Loading...</p>}
+                    </div>
                 </div>
                 <div className={styles.lower_half}>
                     <div className={styles.rating_container}>

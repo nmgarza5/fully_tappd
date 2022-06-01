@@ -31,7 +31,7 @@ export const DeleteBeer = ({ beer_id }) => {
 				))}
 			</div> */}
 			<div className={styles.text_container}>
-				<h2>Are you sure you want to Delete your Brewery?</h2>
+				<h2>Are you sure you want to Delete your Beer?</h2>
 				<h3>
 					This will delete all of its information from our records.
 				</h3>
