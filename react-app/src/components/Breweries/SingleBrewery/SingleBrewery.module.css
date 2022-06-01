@@ -111,6 +111,7 @@
 .row {
 	align-items: center;
 	width: 25%;
+	height: 40px;
     display: flex;
     border-right: rgb(197, 197, 197) solid thin;
     justify-content: center;
@@ -118,7 +119,7 @@
 	margin: 0;
 }
 
-.row p {
+.ratings_bar {
 	font-size: 13px;
 }
 

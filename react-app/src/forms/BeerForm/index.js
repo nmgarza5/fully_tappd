@@ -5,7 +5,6 @@ import { createBeer, updateBeer} from "../../store/beer"
 import styles from "./BeerForm.module.css"
 import { hideModal } from "../../store/modal"
 import { authenticate } from "../../store/session"
-import defaultImage from "../../images/default_image.png"
 
 export const BeerForm = ({beer, breweryId}) => {
 	const dispatch = useDispatch();
@@ -83,10 +82,6 @@ export const BeerForm = ({beer, breweryId}) => {
         setImage(file);
     }
 
-    const addDefaultImage = (e) => {
-        e.target.src = defaultImage
-    }
-
 	return (
 			<div className={styles.form_entries}>
 				{beer ? <h3 className={styles.beer_header}>Edit: {beer.name} <i className="fa-solid fa-rectangle-xmark" onClick={closeModal}></i></h3>
@@ -140,10 +135,6 @@ export const BeerForm = ({beer, breweryId}) => {
 							}
 						></textarea>
 					</div>
-					{/* <div className={styles.input_container}>
-						<label htmlFor="price">Price</label>
-						<input style={{width: '150px'}} type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
-					</div> */}
 					<div className={styles.lower_container}>
 						<div className={styles.left_container}>
 							<div className={styles.input_container}>

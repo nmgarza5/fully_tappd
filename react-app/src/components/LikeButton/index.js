@@ -4,11 +4,9 @@ import styles from "./LikeButton.module.css";
 import { addBeerLike, removeBeerLike, removeBreweryLike, addBreweryLike } from "../../store/session";
 import { receiveOneBeer } from "../../store/beer";
 import { receiveOneBrewery } from "../../store/breweries";
-import { useHistory } from "react-router-dom";
 
 const LikeButton = ({id, type, isLike, likeId}) => {
     const dispatch = useDispatch();
-    const history = useHistory();
 
 	const [likeToggle, setLikeToggle] = useState(null);
 

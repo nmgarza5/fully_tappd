@@ -5,19 +5,14 @@ import { useSelector, useDispatch} from "react-redux";
 import styles from "./SingleBeer.module.css";
 import { PageContainer } from "../../PageContainer";
 import { CreateReview } from "../../Reviews/CreateReview"
-import { UpdateReview } from "../../Reviews/UpdateReview"
 import { showModal, setCurrentModal } from '../../../store/modal';
 import { authenticate } from "../../../store/session";
 import { receiveOneBeer } from "../../../store/beer";
-import { DeleteReview } from "../../Reviews/DeleteReview";
-import defaultProfileImage from "../../../images/default_profile_image.png"
 import defaultImage from "../../../images/default_image.png"
-import { hideModal } from "../../../store/modal"
 import RatingsBar from "../../RatingsBar";
 import ReviewCard from "../../Reviews/ReviewCard";
 import LikeButton from "../../LikeButton";
 import ImageModal from "../../Modal/ImageModal";
-import { BeerForm } from "../../../forms/BeerForm";
 
 export const SingleBeer = () => {
     const history = useHistory();
@@ -48,7 +43,6 @@ export const SingleBeer = () => {
     let recentReviewers;
     let similarBeerList;
     let review_updated_sort;
-    let numLikes;
 
 
     if (beer) {
@@ -147,7 +141,7 @@ export const SingleBeer = () => {
                                     {beer.ibu} IBU
                                 </div>
                                 <div className={styles.row}>
-                                    <p><RatingsBar rating={beer.rating} /></p>
+                                    <div className={styles.ratings_bar}><RatingsBar rating={beer.rating} /></div>
                                 </div>
                                 <div className={styles.row_end}>
                                     {sessionUser ?
@@ -191,7 +185,7 @@ export const SingleBeer = () => {
                     <div className={styles.right_container}>
                         <h3>Loyal Drinkers</h3>
                         {recentReviewers.map((user, idx) => (
-                            <img key={user} className={styles.loyal_reviewers} src={user} alt='user image' onError={addDefaultImage}/>
+                            <img key={user} className={styles.loyal_reviewers} src={user} alt='user' onError={addDefaultImage}/>
                         ))}
                     </div>
                     <div className={styles.right_container}>
@@ -201,7 +195,7 @@ export const SingleBeer = () => {
                         <>
                             {similarBeerList.map(beer => (
                                 <div key={beer.id} className={styles.beer_link} onClick={() => sendToBeer(beer.id)}>
-                                    <img className={styles.right_image} src={beer.beer_image} alt='beer image' onError={addDefaultImage}/>
+                                    <img className={styles.right_image} src={beer.beer_image} alt='beer' onError={addDefaultImage}/>
                                     <div className={styles.text_container}>
                                         <h4>{beer.name}</h4>
                                         <p>{beer.brewery_name}</p>

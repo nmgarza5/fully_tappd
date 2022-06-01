@@ -190,7 +190,7 @@ const SearchResults = () => {
 						<h3>Top Beers</h3>
 						{topTenBeers.map(beer => (
 							<div key={beer.id} className={styles.beer_link} onClick={() => sendToBeer(beer.id)}>
-								<img className={styles.right_image} src={beer.beer_image} alt='beer image' onError={addDefaultImage}/>
+								<img className={styles.right_image} src={beer.beer_image} alt='beer' onError={addDefaultImage}/>
 								<div className={styles.text_container}>
 									<h4>{beer.name}</h4>
 									<p>{beer.brewery_name}</p>
@@ -202,7 +202,7 @@ const SearchResults = () => {
 						<h3>Top Breweries</h3>
 						{topTenBreweries.map(brewery => (
 							<div key={brewery.id} className={styles.beer_link} onClick={() => sendToBrewery(brewery.id)}>
-								<img className={styles.right_image} src={brewery.profile_image} alt='brewery image' onError={addDefaultImage}/>
+								<img className={styles.right_image} src={brewery.profile_image} alt='brewery' onError={addDefaultImage}/>
 								<div className={styles.text_container}>
 									<h4>{brewery.name}</h4>
 									<p><RatingsBar rating={brewery.rating}/></p>
