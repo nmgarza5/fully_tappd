@@ -4,14 +4,6 @@ from faker import Faker
 from random import randint
 fake = Faker()
 
-
-# now = func.now();
-# birthdate = '2022-04-15T16:29:17.000Z'
-
-# print(now)
-# print(birthdate)
-
-
 images = [
     {
         "image": "https://cdn.drawception.com/images/avatars/647493-B9E.png",

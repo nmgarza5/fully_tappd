@@ -9,8 +9,6 @@ beer_choices = [
     "Lager", "Lambic", "Oktoberfestbier", "Pale Ale", "Pilsner", "Porter", "Red Ale", "Saison", "Stout", "Witbier",
 ]
 
-# print(len(beer_choices))
-
 beer_list = [
   {
     "name": "Mt Nelson",
@@ -259,9 +257,6 @@ beer_list = [
   }
 ]
 
-# randomImage = fake.image.abstract(200, 200, True)
-
-# print(randomImage)
 
 def seed_beer():
     for beer in beer_list:

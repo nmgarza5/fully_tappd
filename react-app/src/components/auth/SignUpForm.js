@@ -8,14 +8,10 @@ import styles from "./SignUpForm.module.css"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-// import ActivityPage from "../ActivityPage";
-// import { Route} from "react-router-dom";
-// import BreweriesList from "../BreweriesList";
+
 
 const SignUpForm = () => {
     const history = useHistory()
-    // const user = useSelector((state) => state.session.user);
-
     const [errors, setErrors] = useState([]);
     const [business_user, setBusinessUser] = useState(false);
     const [username, setUsername] = useState("");
@@ -27,8 +23,6 @@ const SignUpForm = () => {
     const [confirm_password, setConfirmPassword] = useState("");
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
-    // const [header, setHeader] = useState("");
-    // const [bio, setBio] = useState("");
     const dispatch = useDispatch();
 
     const handleClick = async (e) => {
@@ -45,22 +39,6 @@ const SignUpForm = () => {
         formData.append('confirm_password', confirm_password)
         formData.append('image', image)
         setImageLoading(true);
-
-        // console.log("formDATA SIGNUP", formData.get('username'))
-        // console.log("formDATA SIGNUP", formData.get('name'))
-        // const userData = {
-        //     username,
-        //     first_name,
-        //     last_name,
-        //     business_user,
-        //     birthdate,
-        //     email,
-        //     password,
-        //     confirm_password,
-        //     // header,
-        //     // bio,
-        //     profile_image,
-        // };
 
         if (password === confirm_password) {
             const data = await dispatch(signUp(formData));

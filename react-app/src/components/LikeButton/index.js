@@ -24,7 +24,6 @@ const LikeButton = ({id, type, isLike, likeId}) => {
 
     const handleLike = async () => {
 		setLikeToggle(!likeToggle);
-        console.log("type", type)
         if (type === "beer") {
             if (!likeToggle) {
                 showBoxTimer()
@@ -37,7 +36,6 @@ const LikeButton = ({id, type, isLike, likeId}) => {
             }
         }
         if (type === "brewery") {
-            console.log("HIT")
             if (!likeToggle) {
                 showBoxTimer()
                 await dispatch(addBreweryLike(id));

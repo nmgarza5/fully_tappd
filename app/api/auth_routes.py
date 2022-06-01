@@ -14,7 +14,6 @@ def error_generator(validation_errors):
     Simple function that turns the WTForms validation errors into a simple list
     """
     errorMessages = []
-    print("\n", validation_errors, '\n')
     for field in validation_errors:
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
@@ -46,7 +45,6 @@ def login():
             User.username == form.data['username']).first()
         login_user(user)
         return user.to_dict()
-    # print("\n\n", form.errors, "\n\n")
     return {'errors': error_generator(form.errors)}, 401
 
 
@@ -70,7 +68,6 @@ def sign_up():
         return {"errors": error_generator({"profile image": ["image required"]})}, 400
 
     image = request.files["image"]
-    print("\n image \n", image, '\n')
     if not allowed_file(image.filename):
         return {"errors": error_generator({"image": ["file type not permitted"]})}, 400
 

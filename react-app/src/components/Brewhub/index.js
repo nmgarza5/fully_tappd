@@ -26,12 +26,10 @@ const Brewhub = () => {
 	const history = useHistory();
 
     const sessionUser = useSelector((state) => state?.session?.user);
-    console.log(sessionUser)
 	const userBrewery = useSelector((state) => Object.values(state.session.user.breweries)[0])
 	const userBeers = Object.values(userBrewery.beers)
 	const [currentBeerId, setCurrentBeerId] = useState(userBeers[0]?.id || null)
 	const selectedBeer = userBeers.find(beer => beer.id === +currentBeerId)
-	// const [display, setDisplay] = useState("")
 	const [showMoreBrewery, setShowMoreBrewery] = useState(false)
 	const [showMoreBeer, setShowMoreBeer] = useState(false)
 
@@ -40,7 +38,6 @@ const Brewhub = () => {
     useEffect(() => {
         (async () => {
 			await dispatch(authenticate())
-            // await dispatch(receiveBeer())
             setLoaded(true);
         })();
     }, [dispatch]);

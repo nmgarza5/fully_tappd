@@ -50,7 +50,6 @@ def create_review():
 
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  # print("\n FORM", form.data)
   if form.validate_on_submit():
     new_review = Review(
       user_id = current_user.id,
@@ -75,9 +74,6 @@ def reviewUpdate(id):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     review = Review.query.get(id)
-
-    # print("\n image \n", request.files["image"], '\n')
-
 
     if "image" in request.files:
       image = request.files["image"]
@@ -113,7 +109,6 @@ def reviewUpdate(id):
 
 @review_routes.route('/<int:id>', methods=['DELETE'])
 def reviewDelete(id):
-  # print('\n\n req --', request.json, '\n\n')
   data = {}
   review = Review.query.get(id)
   data['review'] = review.to_dict()

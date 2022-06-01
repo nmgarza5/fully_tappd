@@ -8,7 +8,6 @@ like_routes = Blueprint('likes', __name__)
 @like_routes.route('/beer_likes', methods=['POST'])
 def addBeerLike():
   id = request.json
-  print("\n id ---", id, "\n")
   like = BeerLike()
   like.user_id = current_user.id
   like.beer_id = id

@@ -27,7 +27,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
         formData.append('rating', rating)
         formData.append('content', content)
         formData.append('image', image)
-        console.log("formData", formData)
         setImageLoading(true);
 
         // conditional checking if there is a review already created. If so, send a put request. Else send a post request.
