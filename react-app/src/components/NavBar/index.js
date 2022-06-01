@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../auth/SignUpForm";
 import styles from "./NavBar.module.css";
-import SearchSection from "..//Search/SearchSection";
 
 import { showModal, setCurrentModal } from "../../store/modal";
 import ProfileDropdown from "../ProfileDropdown"
@@ -45,10 +44,6 @@ const NavBar = () => {
         dispatch(showModal());
     };
 
-    const showSearchForm = () => {
-        dispatch(setCurrentModal(SearchSection));
-        dispatch(showModal());
-    };
 
     const handleKeyPress = (e) => {
 		if (e.key === "Enter") {

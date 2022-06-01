@@ -6,7 +6,6 @@ import { createReview } from "../../store/reviews";
 import { updateReview } from "../../store/reviews";
 import { hideModal } from "../../store/modal";
 import { receiveOneBeer } from "../../store/beer";
-import defaultImage from "../../images/default_image.png"
 
 
 export const ReviewForm = ({review, brewery_id, beer_id}) => {
@@ -15,7 +14,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
 
     const [rating, setRating] = useState(review?.rating || 1)
     const [content, setContent] = useState(review?.content || "")
-    // const [image_url, setImage] = useState(review?.image_url || "")
     const [image, setImage] = useState(review?.image_url || null);
     const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
@@ -24,13 +22,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData();
-        // const reviewData = {
-        //     beer_id,
-        //     brewery_id,
-        //     rating,
-        //     content,
-        //     image_url
-        // }
         formData.append('beer_id', beer_id)
         formData.append('brewery_id', brewery_id)
         formData.append('rating', rating)
@@ -43,7 +34,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
         if (review) {
             const id = review?.id;
             const updateData = { formData, id };
-            console.log("updateData", updateData)
             const updatedReview = await dispatch(
                 updateReview(updateData)
             );
@@ -62,7 +52,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
                 setImageLoading(false);
                 setErrors(newReview.errors);
             } else {
-                // await dispatch(authenticate())
                 await dispatch(receiveOneBeer(beer_id))
                 setImageLoading(false);
                 dispatch(hideModal());
@@ -79,10 +68,6 @@ export const ReviewForm = ({review, brewery_id, beer_id}) => {
     const updateImage = (e) => {
         const file = e.target.files[0];
         setImage(file);
-    }
-
-    const addDefaultImage = (e) => {
-        e.target.src = defaultImage
     }
 
     return (

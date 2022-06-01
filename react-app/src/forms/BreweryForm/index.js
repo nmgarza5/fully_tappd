@@ -48,6 +48,7 @@ export const BreweryForm = ({brewery}) => {
 				updateBrewery(updateData)
 			);
 			if (updatedBrewery.errors) {
+				setImageLoading(false);
 				setErrors(updatedBrewery.errors);
 			} else {
 				await dispatch(authenticate())
@@ -56,9 +57,11 @@ export const BreweryForm = ({brewery}) => {
 		} else {
 			const newBrewery = await dispatch(createBrewery(formData));
 			if (newBrewery.errors) {
+				setImageLoading(false);
 				setErrors(newBrewery.errors);
 			} else {
 				await dispatch(authenticate())
+				setImageLoading(false);
 				history.push(`/brewhub`);
 			}
 		};

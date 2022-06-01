@@ -74,7 +74,7 @@ const Brewhub = () => {
 
 
     let totalBreweryReviews = [];
-    beersList.map(beer => {
+    beersList.forEach(beer => {
         let beerReviews = Object.values(beer?.reviews)
         totalBreweryReviews = [...totalBreweryReviews, ...beerReviews]
     })

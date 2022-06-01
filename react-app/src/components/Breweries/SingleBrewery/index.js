@@ -41,7 +41,6 @@ export const SingleBrewery = () => {
     let likes;
     let numLikes;
     let uniqueReviews;
-    let recentReviewers;
 
     if (brewery) {
         beersList = Object.values(brewery?.beers)
@@ -51,7 +50,7 @@ export const SingleBrewery = () => {
 
 
     let reviewsList = [];
-    beersList.map(beer => {
+    beersList.forEach(beer => {
         let beerReviews = Object.values(beer?.reviews)
         reviewsList = [...reviewsList, ...beerReviews]
     })
@@ -69,7 +68,6 @@ export const SingleBrewery = () => {
         userImageSet.add(review.user_image)
     })
     uniqueReviews = reviewerSet.size
-    recentReviewers = Array.from(userImageSet).slice(0, 12);
 
 
     // let type = brewery.brewery_type;
@@ -134,7 +132,7 @@ export const SingleBrewery = () => {
                         </div>
                         <div className={styles.second_info}>
                                     <div  className={styles.row}>
-                                        <p><RatingsBar rating={brewery.rating} /></p>
+                                        <div className={styles.ratings_bar}><RatingsBar rating={brewery.rating} /></div>
                                     </div>
                                     <div className={styles.row}>
                                         {reviewsList.length} Ratings
@@ -187,14 +185,14 @@ export const SingleBrewery = () => {
                         <h2>{numLikes ? numLikes : 0}</h2>
                         <h4 className={styles.like_header}>PEOPLE LIKE THIS BREWERY</h4>
                         {likes.map((like) => (
-                            <img key={like.id} className={styles.loyal_reviewers} src={like.user_image} alt='user image' onError={addDefaultImage}/>
+                            <img key={like.id} className={styles.loyal_reviewers} src={like.user_image} alt='user' onError={addDefaultImage}/>
                         ))}
                     </div>
                     <div className={styles.right_container}>
                         <h3>Beer List</h3>
                         {beersList && beersList.map(beer => (
                             <div key={beer.id} className={styles.beer_link} onClick={() => goToBeer(beer.id)}>
-                                    <img className={styles.right_image} src={beer.beer_image} alt='beer image' onError={addDefaultImage}/>
+                                    <img className={styles.right_image} src={beer.beer_image} alt='beer' onError={addDefaultImage}/>
                                     <div className={styles.text_container}>
                                         <h4>{beer.name}</h4>
                                         <p>{beer.style}</p>
