@@ -93,7 +93,6 @@ def breweryUpdate(id):
     else:
       url = beer.beer_image
 
-    # print("\n\n FORMDATA\n", form.data)
     if form.validate_on_submit():
         beer.name = form.data['name'],
         beer.brewery_id = form.data['brewery_id'],

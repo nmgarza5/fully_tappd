@@ -2,6 +2,9 @@ from flask import Blueprint, request
 from flask_login import current_user
 from app.models import Brewery, db, User
 from app.forms import BreweryForm
+from app.s3_helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
+
 
 brewery_routes = Blueprint('breweries', __name__)
 
@@ -29,13 +32,30 @@ def my_brewery():
 @brewery_routes.route('/<int:id>', methods=["GET"])
 def brewery(id):
   brewery = Brewery.query.get(id)
-  print("\\n\n", brewery, "\n\n")
   return brewery.to_dict()
 
 @brewery_routes.route('/', methods=['POST'])
 def create_brewery():
   form = BreweryForm()
   form['csrf_token'].data = request.cookies['csrf_token']
+  if "image" not in request.files:
+      return {"errors": error_generator({"image": ["image required"]})}, 400
+
+  image = request.files["image"]
+  if not allowed_file(image.filename):
+        return {"errors": error_generator({"image": ["file type not permitted"]})}, 400
+
+  image.filename = get_unique_filename(image.filename)
+
+  upload = upload_file_to_s3(image)
+
+  if "url" not in upload:
+      # if the dictionary doesn't have a url key
+      # it means that there was an error when we tried to upload
+      # so we send back that error message
+      return upload, 400
+
+  url = upload["url"]
 
   if form.validate_on_submit():
     new_brewery =Brewery(
@@ -50,9 +70,7 @@ def create_brewery():
       postal_code = form.data['postal_code'],
       country = form.data['country'],
       phone = form.data['phone'],
-      # website_url = form.data['website_url'],
-      profile_image = form.data['profile_image'])
-    # current_user.user_status()
+      profile_image = url)
     db.session.add(new_brewery)
     db.session.commit()
     return new_brewery.to_dict()
@@ -66,6 +84,25 @@ def breweryUpdate(id):
     form = BreweryForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     brewery = Brewery.query.get(id)
+    if "image" in request.files:
+      image = request.files["image"]
+      if not allowed_file(image.filename):
+            return {"errors": error_generator({"image": ["file type not permitted"]})}, 400
+
+      image.filename = get_unique_filename(image.filename)
+
+      upload = upload_file_to_s3(image)
+
+      if "url" not in upload:
+          # if the dictionary doesn't have a url key
+          # it means that there was an error when we tried to upload
+          # so we send back that error message
+          return upload, 400
+
+      url = upload["url"]
+    else:
+      url = brewery.profile_image
+
     if form.validate_on_submit():
         brewery.owner_id = current_user.id,
         brewery.name = form.data['name'],
@@ -79,7 +116,7 @@ def breweryUpdate(id):
         brewery.country = form.data['country'],
         brewery.phone = form.data['phone'],
         # brewery.website_url = form.data['website_url']
-        brewery.profile_image = form.data['profile_image']
+        brewery.profile_image = url
         db.session.commit()
         return brewery.to_dict()
     else:

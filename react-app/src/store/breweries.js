@@ -51,8 +51,7 @@ export const receiveBreweries = () => async (dispatch) => {
 export const createBrewery = (data) => async (dispatch) => {
 	const res = await fetch("/api/breweries/", {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(data),
+		body: data,
 	});
 	const newBrewery = await res.json();
 	if (newBrewery.errors) {
@@ -79,10 +78,8 @@ export const updateBrewery =
 	async (dispatch) => {
 		const res = await fetch(`/api/breweries/${id}`, {
 			method: "PUT",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(formData),
+			body: formData,
 		});
-
 		const update = await res.json();
 		if (update.errors) {
 			return update

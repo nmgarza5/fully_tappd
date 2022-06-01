@@ -17,6 +17,7 @@ import RatingsBar from "../../RatingsBar";
 import ReviewCard from "../../Reviews/ReviewCard";
 import LikeButton from "../../LikeButton";
 import ImageModal from "../../Modal/ImageModal";
+import { BeerForm } from "../../../forms/BeerForm";
 
 export const SingleBeer = () => {
     const history = useHistory();
@@ -54,8 +55,6 @@ export const SingleBeer = () => {
 
         //find reviews list
         reviewsList = Object.values(beer?.reviews)
-        numLikes = Object.values(beer?.likes).length
-
         //sort reviews by updated_at
         review_updated_sort = reviewsList.sort((a,b) => (new Date(b.updated_at) - new Date(a.updated_at)));
 
@@ -136,7 +135,7 @@ export const SingleBeer = () => {
                                 </div>}
                                 <div>
                                     <p>LIKES</p>
-                                    {numLikes}
+                                    {beer.likes}
                                 </div>
                             </div>
                         </div>

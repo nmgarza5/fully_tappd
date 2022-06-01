@@ -25,7 +25,8 @@ const Brewhub = () => {
 	const dispatch = useDispatch()
 	const history = useHistory();
 
-	const sessionUser = useSelector((state) => Object.values(state.session.user))
+    const sessionUser = useSelector((state) => state?.session?.user);
+    console.log(sessionUser)
 	const userBrewery = useSelector((state) => Object.values(state.session.user.breweries)[0])
 	const userBeers = Object.values(userBrewery.beers)
 	const [currentBeerId, setCurrentBeerId] = useState(userBeers[0]?.id || null)
@@ -80,16 +81,16 @@ const Brewhub = () => {
 
 
 	let reviewsList;
+    let beerLikes;
 	currentBeerId ? reviewsList = Object.values(selectedBeer?.reviews) : reviewsList = null
+	currentBeerId ? beerLikes = selectedBeer?.likes : beerLikes = null
 
-    const beerLikes = Object.values(selectedBeer?.likes).length
 
-    console.log("beerLikes", beerLikes)
 
 	let uniqueReviews;
 	let reviewerSet = new Set();
 
-	if (reviewsList.length > 0) {
+	if (reviewsList) {
 		reviewsList.forEach(review=> {
 			reviewerSet.add(review.user_id)
 		})

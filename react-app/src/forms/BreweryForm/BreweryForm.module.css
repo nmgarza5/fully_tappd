@@ -101,3 +101,8 @@
     color: black;
     border: #000000 solid thin;
   }
+
+  .image_text {
+    color: rgb(138, 138, 138);
+    font-size: 12px;
+  }

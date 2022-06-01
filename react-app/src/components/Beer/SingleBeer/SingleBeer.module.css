@@ -36,7 +36,6 @@
 .card_img img {
 	width: 90px;
 	height: 90px;
-	border-radius: 10px;
 	object-fit:contain;
 	margin-top: 10px;
 }
@@ -73,7 +72,7 @@
 .end {
 	margin: 0 auto;
 	margin-top: 10px;
-	margin-right: 0PX;;
+	margin-right: 0px;
 	width: 200px;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);

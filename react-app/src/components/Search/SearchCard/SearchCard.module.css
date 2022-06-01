@@ -2,9 +2,7 @@
 .card_img img {
   width: 70px;
 	height: 70px;
-	border-radius: 10px;
 	object-fit:contain;
-	/* border-radius: 10%; */
 }
 
 .card_img img:hover {

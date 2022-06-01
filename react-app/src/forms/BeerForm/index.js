@@ -13,22 +13,17 @@ export const BeerForm = ({beer, breweryId}) => {
     const [name, setName] = useState(beer?.name || "");
 	const [style, setStyle] = useState(beer?.style || "Pale Ale")
 	const [description, setDescription] = useState(beer?.description || "");
-	// const [price, setPrice] = useState(beer?.price || "0");
 	const [abv, setAbv] = useState(beer?.abv || "0");
 	const [ibu, setIbu] = useState(beer?.ibu || "0");
 	const [image, setImage] = useState(beer?.beer_image || null);
-	console.log("image", image)
     const [imageLoading, setImageLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
-
-	// const userBreweries = useSelector((state) => state?.session?.user.breweries);
 
 	const handleClick_Edit = () => {
 		dispatch(hideModal());
 	};
 
 	const handleClick_New = () => {
-		// history.push("/beer");
 		dispatch(hideModal());
 	};
 
@@ -36,13 +31,6 @@ export const BeerForm = ({beer, breweryId}) => {
 		e.preventDefault();
 
 		const formData = new FormData();
-        // const reviewData = {
-        //     beer_id,
-        //     brewery_id,
-        //     rating,
-        //     content,
-        //     image_url
-        // }
         formData.append('name', name)
         formData.append('description', description)
         formData.append('style', style)
@@ -52,7 +40,6 @@ export const BeerForm = ({beer, breweryId}) => {
         formData.append('ibu', ibu)
 		formData.append('image', image)
         setImageLoading(true);
-		console.log("hit", formData.entries)
 		if (beer) {
 			const id = beer?.id;
 			const updateData = { formData, id };
@@ -83,7 +70,7 @@ export const BeerForm = ({beer, breweryId}) => {
 
 	const beerChoices = [
 		"Altbier", "Amber Ale", "Barley Wine", "Berliner Weisse", "Blonde Ale", "Bock", "Brown Ale", "Cream Ale", "Dopplebock",
-		"English Bitter", "English Mild", "Gose", "Gueze", "Hefeweizen", "Helles Bock", "India Pale Ale", "Kolsch",
+		"English Bitter", "English Mild", "Gose", "Gueze", "Hefeweizen", "Helles Bock", "IPA", "Kolsch",
 		"Lager", "Lambic", "Oktoberfestbier", "Pale Ale", "Pilsner", "Porter", "Red Ale", "Saison", "Stout", "Witbier",
 	]
 

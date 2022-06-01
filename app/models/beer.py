@@ -32,6 +32,12 @@ class Beer(db.Model):
         except:
             return 0
 
+    def like_count(self):
+        count = 0;
+        for like in self.likes:
+            count += 1
+        return count
+
     def similar_beers(self):
         all_beer = Beer.query.all()
         similar_beers = [];
@@ -54,6 +60,7 @@ class Beer(db.Model):
         }
 
     def to_dict(self):
+        print("\n\n\n\n\n\n\n\n\n likes", self.like_count(), "\n\n\n\n\n\n\n\n\n\n")
         return {
             'id': self.id,
             'name': self.name,
@@ -67,7 +74,7 @@ class Beer(db.Model):
             'abv': self.abv,
             'ibu': self.ibu,
             "rating": self.rating(),
-            'likes': {like.beer_id: like.to_dict() for like in self.likes},
+            'likes': self.like_count(),
             "similar_beers": { b.id: b.similar_to_dict() for b in self.similar_beers() },
             "reviews": {review.id: review.to_dict() for review in self.reviews},
             'created_at': self.created_at

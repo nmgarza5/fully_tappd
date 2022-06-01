@@ -5,6 +5,7 @@ from .breweries import seed_breweries, undo_breweries
 from .users import seed_users, undo_users
 from .beer import seed_beer, undo_beer
 from .reviews import seed_reviews, undo_reviews
+from .likes import seed_likes, undo_likes
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -18,6 +19,7 @@ def seed():
     seed_breweries()
     seed_beer()
     seed_reviews()
+    seed_likes()
     # Add other seed functions here
 
 # Creates the `flask seed undo` command
@@ -30,4 +32,5 @@ def undo():
     undo_users()
     undo_beer()
     undo_reviews()
+    undo_likes()
     # Add other undo functions here

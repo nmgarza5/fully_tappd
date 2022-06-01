@@ -19,25 +19,27 @@ export const BreweryForm = ({brewery}) => {
 	const [postal_code, setPostalCode] = useState(brewery?.postal_code || "");
 	const [country, setCountry] = useState(brewery?.country || "");
 	const [phone, setPhone] = useState(brewery?.phone || "");
-	const [profile_image, setProfileImage] = useState(brewery?.profile_image || "");
+	const [image, setImage] = useState(brewery?.profile_image || null);
+    const [imageLoading, setImageLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
 
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		const formData = {
-			name,
-			header,
-			description,
-			brewery_type,
-			street,
-			city,
-			state,
-			postal_code,
-			country,
-			phone,
-			profile_image
-		}
+
+		const formData = new FormData();
+		formData.append('name', name)
+		formData.append('header', header)
+		formData.append('description', description)
+		formData.append('brewery_type', brewery_type)
+		formData.append('street', street)
+		formData.append('city', city)
+		formData.append('state', state)
+		formData.append('postal_code', postal_code)
+		formData.append('country', country)
+		formData.append('phone', phone)
+		formData.append('image', image)
+
 
 		if (brewery) {
 			const id = brewery?.id;
@@ -71,6 +73,11 @@ export const BreweryForm = ({brewery}) => {
 		dispatch(hideModal());
 	};
 
+	const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+    }
+
 	return (
 		<div className={styles.container}>
 			{!brewery && <h1 className={styles.header}>Create Your New Brewery</h1>}
@@ -101,7 +108,7 @@ export const BreweryForm = ({brewery}) => {
 							<textarea
 								name="header"
 								type="text"
-								placeholder="Catch the people's attention!."
+								placeholder="Catch the people's attention!"
 								value={header}
 								required
 								onChange={(e) => setHeader(e.target.value)}
@@ -141,7 +148,7 @@ export const BreweryForm = ({brewery}) => {
 								<input
 									name="city"
 									type="text"
-									placeholder="What city are you in?."
+									placeholder="What city are you in?"
 									value={city}
 									required
 									onChange={(e) => setCity(e.target.value)}
@@ -152,7 +159,7 @@ export const BreweryForm = ({brewery}) => {
 								<input
 									name="state"
 									type="text"
-									placeholder="What state are you in?."
+									placeholder="What state are you in?"
 									value={state}
 									required
 									onChange={(e) => setState(e.target.value)}
@@ -178,7 +185,7 @@ export const BreweryForm = ({brewery}) => {
 								<input
 									name="country"
 									type="text"
-									placeholder="What country are you in?."
+									placeholder="What country are you in?"
 									value={country}
 									required
 									onChange={(e) => setCountry(e.target.value)}
@@ -214,17 +221,15 @@ export const BreweryForm = ({brewery}) => {
 								></input>
 							</div>
 							<div className={styles.input_container}>
-								<label htmlFor="profile_image">Profile Image</label>
-								<input
-									type="profile_image"
-									name="profile_image"
-									placeholder='Image format must be ".jpg" ".jpeg" or ".png" or ".gif".'
-									value={profile_image}
-									required
-									onChange={(e) =>
-										setProfileImage(e.target.value)
-									}
-								></input>
+								<label>Image</label>
+									<input
+										className={styles.lower_input}
+										type="file"
+										accept="image/*"
+										onChange={updateImage}
+										/>
+									{image && <p className={styles.image_text}> Select a new photo if you wish to change your previous selection.</p> }
+									{(imageLoading)&& <p>Loading...</p>}
 							</div>
 						</div>
 					</div>
