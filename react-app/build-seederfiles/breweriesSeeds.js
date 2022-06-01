@@ -669,5 +669,3 @@ breweries = [
         website_url: "http://floodcraftbrewing.com/",
     },
 ];
-
-// console.log(breweries.length);

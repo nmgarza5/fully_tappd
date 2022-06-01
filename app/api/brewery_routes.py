@@ -125,7 +125,6 @@ def breweryUpdate(id):
 
 @brewery_routes.route('/<int:id>', methods=['DELETE'])
 def breweryDelete(id):
-  # print('\n\n req --', request.json, '\n\n')
   data = {}
   brewery = Brewery.query.get(id)
   data['brewery'] = brewery.to_dict()

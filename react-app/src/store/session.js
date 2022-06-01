@@ -93,18 +93,10 @@ export const logout = () => async (dispatch) => {
 
 export const signUp = (formData) => async (dispatch) => {
 
-    console.log("formData", formData.get("username"))
     const response = await fetch("/api/auth/signup", {
         method: "POST",
-        // headers: {
-        //     "Content-Type": "application/json",
-        // },
-        // headers: {
-        //     "Content-Type": "multipart/form-data",
-        // },
         body: formData,
     });
-    console.log("response", response)
     if (response.ok) {
         const data = await response.json();
         const newUser = await dispatch(setUser(data));
@@ -112,7 +104,6 @@ export const signUp = (formData) => async (dispatch) => {
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            // console.log("data.ERRORS", data.errors)
             return data
         }
     } else {

@@ -60,7 +60,6 @@ class Beer(db.Model):
         }
 
     def to_dict(self):
-        print("\n\n\n\n\n\n\n\n\n likes", self.like_count(), "\n\n\n\n\n\n\n\n\n\n")
         return {
             'id': self.id,
             'name': self.name,
@@ -70,7 +69,6 @@ class Beer(db.Model):
             'beer_image': self.beer_image,
             'description': self.description,
             'style': self.style,
-            # 'price': self.price,
             'abv': self.abv,
             'ibu': self.ibu,
             "rating": self.rating(),

@@ -1063,5 +1063,3 @@ brewery_data.forEach((brewery) => {
         website_url: brewery.website_url,
     });
 });
-
-// console.log(breweries);
