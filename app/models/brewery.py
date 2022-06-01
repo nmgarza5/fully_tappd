@@ -37,7 +37,6 @@ class Brewery(db.Model):
         except:
             return 0
 
-
     def to_dict(self):
         return {
             'id': self.id,

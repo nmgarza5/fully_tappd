@@ -83,7 +83,7 @@ export const BeerForm = ({beer, breweryId}) => {
 
 	const beerChoices = [
 		"Altbier", "Amber Ale", "Barley Wine", "Berliner Weisse", "Blonde Ale", "Bock", "Brown Ale", "Cream Ale", "Dopplebock",
-		"English Bitter", "English Mild", "Gose", "Gueze", "Hefeweizen", "Helles Bock", "India Pale Ale", "Kolsch",
+		"English Bitter", "English Mild", "Gose", "Gueze", "Hefeweizen", "Helles Bock", "IPA", "Kolsch",
 		"Lager", "Lambic", "Oktoberfestbier", "Pale Ale", "Pilsner", "Porter", "Red Ale", "Saison", "Stout", "Witbier",
 	]
 

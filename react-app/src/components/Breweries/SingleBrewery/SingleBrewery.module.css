@@ -35,7 +35,6 @@
 .card_img img {
 	width: 90px;
 	height: 90px;
-	border-radius: 10px;
 	object-fit:contain;
 	margin-top: 10px;
 }
