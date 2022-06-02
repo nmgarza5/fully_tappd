@@ -13,14 +13,14 @@ This project has been a testament to my pursuit of building upon my previous kno
    - Breweries
    - Beers
    - Reviews
-   - 
+   - Likes
+   - Search
+   - Likes
+   
 Upcoming features: 
-- Favorites
 - User Profiles
 - Friends
-- Search 
 - Badges
-- AWS
 - Google Maps
 
 
@@ -31,25 +31,35 @@ Upcoming features:
 - Python
 - PostgreSQL
 - Flask SQLAlchemy
+- HTML5
+- CSS3
 
 
 # Splash page
-From the splash page, users can to choose to create an account, log into an existing account, or log in as a demo user. It features a preview of the BreweryHub to entice Brewery Owners to sign up and add their brewery to the application.
-![splashpage1](https://user-images.githubusercontent.com/90273783/165002745-1506da0e-af00-4242-b781-4b8206918e43.png)
-![splashpage2](https://user-images.githubusercontent.com/90273783/165002758-d1213f7a-66b4-42f6-9bfe-829fd8b48bc2.png)
+From the splash page, users can to choose to create an account, log into an existing account, or log in as a demo user. It demonstrates a few of the platforms features and a preview of the BrewHub to entice Brewery Owners to sign up and add their brewery to the application.
+![image](https://user-images.githubusercontent.com/90273783/171720202-1f0bfec6-38c8-4cc1-97b5-dac4ae68629a.png)
+![image](https://user-images.githubusercontent.com/90273783/171720451-7baee5e9-8b33-4a19-88f6-bac1611a17c0.png)
 
 
 # Breweries
-From the Breweries Lists page, users can view all breweries listed on the site. They can select "Go To Brewery" to be directed to a single  brewery's profile page. From the single brewery page, users can view some specific information pertaining to that brewery as well as navigate to the specific page's of that brewery's beers. 
-![brewerylist](https://user-images.githubusercontent.com/90273783/165002868-d7ad197a-c2ac-434d-9aae-780a8c18dbc5.png)
-![single-brewery](https://user-images.githubusercontent.com/90273783/165002872-8d95e2c9-cc9a-4e95-94ce-93560c66e66e.png)
+From the Breweries Lists page, users can view all breweries listed on the site. They can hover over and click on a brewery's name to be directed to that brewery's respective profile page. From the single brewery page, users can view some specific information pertaining to that brewery as well as navigate to the beer pages that are offered from that specific brewery. 
+![image](https://user-images.githubusercontent.com/90273783/171722343-baf7652a-23a9-433b-8bba-b97793a9bb7a.png)
+![image](https://user-images.githubusercontent.com/90273783/171723257-bcb5893a-d709-462a-8d05-4f24db14e640.png)
 
 
 # Beers
-From the Beer List page, users can view all beers listed on the site. They can select "Go To Beer" to be directed to a single  beer's profile page or they can go directly to page of the brewery that created that beer. From the single beer page, users can view some specific information pertaining to that beer as well as recent reviews on that beer. 
-![beerlist](https://user-images.githubusercontent.com/90273783/165002932-a82ea4ce-a626-49af-b148-7c75ad633426.png)
-![single-beer](https://user-images.githubusercontent.com/90273783/165002936-ab5876e2-b561-4ec6-8aaf-10001e2222b1.png)
+From the Beer List page, users can view all beers listed on the site. They can hover over and click on a beer's name to be directed to to that beer's profile page or they can go directly to page of the brewery that created that beer by clicking on the brewery name. From the single beer page, users can view some specific information pertaining to that beer, reviews on that beer, and similar beers by style and from the same brewery. 
+![image](https://user-images.githubusercontent.com/90273783/171723364-9afc5a5f-b0dd-4710-8bd8-029f83793df7.png)
+![image](https://user-images.githubusercontent.com/90273783/171723712-f9d8d422-a03b-45af-966e-e1584353f1ef.png)
 
 # Reviews
 From the single beer page, users can view all recent reviews on a single beer as well as post their own review if the user is logged in. If the user created a review, edit and delete buttons will appear on that review.
-![reviews](https://user-images.githubusercontent.com/90273783/165003017-a92ff4f3-8e8f-4a40-88cf-0fa452cc5f80.png)
+![image](https://user-images.githubusercontent.com/90273783/171723978-0b197942-f0c8-4986-9d4e-fe5cc0a3444c.png)
+
+# Search 
+Located on the splashpage and in the navbar when logged in, users will find a search bar where they can search the platfrom for breweries, beer, or beer styles that match their search entry. After hitting enter, the user will be directed to a seach results page where they can view the results for beer and breweries by switching between tabs. On the right hand side, users will find the highest rated beers and breweries. 
+![image](https://user-images.githubusercontent.com/90273783/171724479-da1adead-4493-4e36-a1fa-568ccc9d4e39.png)
+![image](https://user-images.githubusercontent.com/90273783/171724557-f1ddcd31-cbbf-4fa3-8f92-02d2dce829d6.png)
+
+
+
