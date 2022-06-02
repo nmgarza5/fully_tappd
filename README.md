@@ -13,9 +13,10 @@ This project has been a testament to my pursuit of building upon my previous kno
    - Breweries
    - Beers
    - Reviews
+- Create, view, delete
    - Likes
-   - Search
-   - Likes
+- Search
+- AWS
    
 Upcoming features: 
 - User Profiles
