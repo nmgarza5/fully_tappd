@@ -16,7 +16,7 @@ import { BeerForm } from "../../forms/BeerForm";
 // import { receiveUserBrewery } from "../../store/session";
 import defaultImage from "../../images/default_image.png"
 import { authenticate } from "../../store/session";
-
+import loadingImage from "../../images/cheers-beer.gif"
 import RatingsBar from "../RatingsBar";
 import ImageModal from "../Modal/ImageModal";
 
@@ -43,7 +43,13 @@ const Brewhub = () => {
     }, [dispatch]);
 
     if (!loaded) {
-        return null;
+        return (
+			<PageContainer>
+				<div className={styles.container}>
+					<img src={loadingImage} alt="loading" />
+				</div>
+			</PageContainer>
+		);
     }
 
 	const getNextBeerId = () => {

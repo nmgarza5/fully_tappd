@@ -6,6 +6,8 @@ import { receiveBeer } from "../../../store/beer";
 import { authenticate } from "../../../store/session";
 import SearchCard from "../../Search/SearchCard";
 
+import loadingImage from "../../../images/cheers-beer.gif"
+
 const BeerList = () => {
     const allBeer = useSelector((state) => Object.values(state.beer))
 	const [loaded, setLoaded] = useState(false);
@@ -20,7 +22,13 @@ const BeerList = () => {
     }, [dispatch]);
 
     if (!loaded) {
-        return null;
+        return (
+			<PageContainer>
+				<div className={styles.container}>
+					<img src={loadingImage} alt="loading" />
+				</div>
+			</PageContainer>
+		);
     }
 
 
