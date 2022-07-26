@@ -8,6 +8,7 @@ import defaultImage from "../../../images/default_image.png"
 import { receiveBreweries } from "../../../store/breweries";
 import { receiveBeer } from "../../../store/beer";
 import RatingsBar from "../../RatingsBar";
+import loadingImage from "../../../images/cheers-beer.gif"
 
 const SearchResults = () => {
 	const { searchWord } = useParams();
@@ -33,7 +34,13 @@ const SearchResults = () => {
     }, [dispatch]);
 
     if (!loaded) {
-        return null;
+        return (
+			<PageContainer>
+				<div className={styles.container}>
+					<img src={loadingImage} alt="loading" />
+				</div>
+			</PageContainer>
+		);
     }
 
 
