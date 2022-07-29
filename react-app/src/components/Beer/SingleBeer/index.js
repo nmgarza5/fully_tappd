@@ -13,6 +13,7 @@ import RatingsBar from "../../RatingsBar";
 import ReviewCard from "../../Reviews/ReviewCard";
 import LikeButton from "../../LikeButton";
 import ImageModal from "../../Modal/ImageModal";
+import loadingImage from "../../../images/cheers-beer.gif"
 
 export const SingleBeer = () => {
     const history = useHistory();
@@ -35,7 +36,13 @@ export const SingleBeer = () => {
     }, [dispatch, id]);
 
     if (!loaded) {
-        return null;
+        return (
+			<PageContainer>
+				<div className={styles.container}>
+					<img src={loadingImage} alt="loading" />
+				</div>
+			</PageContainer>
+		);
     }
 
     let reviewsList;

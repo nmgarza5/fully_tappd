@@ -8,12 +8,12 @@ export const Footer = () => {
             <div className={styles.container}>
                 <section className={styles.links}>
                     <div className={styles.devicons}>
+                        <i className="devicon-javascript-plain"></i>
                         <i className="devicon-python-plain-wordmark"></i>
-                        <i className="devicon-flask-original-wordmark"></i>
-                        <i className="devicon-postgresql-plain-wordmark"></i>
                         <i className="devicon-react-original-wordmark"></i>
                         <i className="devicon-redux-original"></i>
                         <i className="devicon-postgresql-plain"></i>
+                        <i class="devicon-flask-original"></i>
                         <i className="devicon-html5-plain-wordmark"></i>
                         <i className="devicon-css3-plain-wordmark"></i>
                         <i className="devicon-heroku-plain"></i>
