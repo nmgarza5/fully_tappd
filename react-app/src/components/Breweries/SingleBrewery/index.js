@@ -10,6 +10,7 @@ import defaultImage from "../../../images/default_image.png"
 import RatingsBar from "../../RatingsBar";
 import ReviewCard from "../../Reviews/ReviewCard";
 import LikeButton from "../../LikeButton";
+import loadingImage from "../../../images/cheers-beer.gif"
 
 export const SingleBrewery = () => {
 
@@ -34,7 +35,13 @@ export const SingleBrewery = () => {
     }, [dispatch, id]);
 
     if (!loaded) {
-        return null;
+        return (
+			<PageContainer>
+				<div className={styles.container}>
+					<img src={loadingImage} alt="loading" />
+				</div>
+			</PageContainer>
+		);
     }
 
     let beersList;
