@@ -4,7 +4,7 @@ Fullytappd is a loose clone of Untappd, a beer reviewing web application. Users 
 
 There are two kinds of users: business and standard. A standard user is able to create a profile, view all beers and breweries while navigating the site, and leave a reviews on beers they are currently drinking. In addition to the latter, a business user can also create a brewery and beers associated to that brewery. If a user is not logged in, they only have the ability to view beers and breweries.
 
-This project has been a testament to my pursuit of building upon my previous knowledge. Prior to my enrollment in App Academy, I spent time working in the beer and wine industries. This project proved to be an extension of those passions and I throughly enjoyed building out this application. I look forward to spending more time further developing out additional feature such as user profiles, friends, likes, and badges. I also plan on integrating AWS for image uploads and google maps api to find beer and breweries local to each user.
+This project has been a testament to my pursuit of building upon my previous knowledge. Prior to my enrollment in App Academy, I spent time working in the beer and wine industries. This project proved to be an extension of those passions and I throughly enjoyed building out this application. I look forward to spending more time further developing out additional features such as user profiles, friends, likes, and badges. I also plan on integrating AWS for image uploads and google maps api to find beer and breweries local to each user.
 
 
 ## Features
@@ -26,6 +26,17 @@ Upcoming features:
 
 
 ## Technologies Used
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="70px" width="70px"/>&#160;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg" height="70px" width="70px"/>&#160;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" height="70px" width="70px"/>&#160;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original-wordmark.svg" height="70px" width="70px"/>&#160;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" height="70px" width="70px"/>&#160;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg" height="70px" width="70px"/>&#160;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sequelize/sequelize-original.svg" height="70px" width="70px"/>&#160;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="70px" width="70px"/>&#160;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="70px" width="70px"/>&#160;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original-wordmark.svg" height="70px" width="70px"/>&#160;
+
 - Javascript
 - React
 - Redux 
@@ -62,5 +73,70 @@ Located on the splashpage and in the navbar when logged in, users will find a se
 ![image](https://user-images.githubusercontent.com/90273783/171724479-da1adead-4493-4e36-a1fa-568ccc9d4e39.png)
 ![image](https://user-images.githubusercontent.com/90273783/171724557-f1ddcd31-cbbf-4fa3-8f92-02d2dce829d6.png)
 
+## Getting starterd
+### Dev Containers (M1 Users, follow this guide)
+1. Make sure you have the [Microsoft Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed.
+2. Make sure you have [Docker](https://www.docker.com/products/docker-desktop/) installed on your computer.
+3. Clone the repository.
+4. Open the repo in VS Code.
+5. Click "Open in Container" when VS Code prompts to open container in the bottom right hand corner.
+6. **Be Patient!** The initial install will take a LONG time, it's building a container that has postgres preconfigured and even installing all your project dependencies. (For both flask and react!)
+7. Once everything is up, be sure to make a `.env` file based on `.env.example` in both the root directory and the *react-app* directory before running your app.
+8. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+9. Get into your pipenv, migrate your database, seed your database, and run your flask app
 
+   ```bash
+   pipenv shell
+   ```
+
+   ```bash
+   flask db upgrade
+   ```
+
+   ```bash
+   flask seed all
+   ```
+
+   ```bash
+   flask run
+   ```
+
+10. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+
+<br>
+
+### Standard (Traditional)
+
+1. Clone this repository.
+2. Install dependencies
+
+      ```bash
+      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
+      ```
+
+3. Create a **.env** file based on the example with proper settings for your
+   development environment
+4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+
+5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+
+   ```bash
+   pipenv shell
+   ```
+
+   ```bash
+   flask db upgrade
+   ```
+
+   ```bash
+   flask seed all
+   ```
+
+   ```bash
+   flask run
+   ```
+
+6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+
+***
 
