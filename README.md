@@ -37,15 +37,6 @@ Upcoming features:
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="70px" width="70px"/>&#160;
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original-wordmark.svg" height="70px" width="70px"/>&#160;
 
-- Javascript
-- React
-- Redux 
-- Python
-- PostgreSQL
-- Flask SQLAlchemy
-- HTML5
-- CSS3
-
 
 # Splash page
 From the splash page, users can to choose to create an account, log into an existing account, or log in as a demo user. It demonstrates a few of the platforms features and a preview of the BrewHub to entice Brewery Owners to sign up and add their brewery to the application.
